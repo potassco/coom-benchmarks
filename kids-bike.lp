@@ -1,5 +1,3 @@
-% product.
-% structure(":root",Clothing,)
 feature(":root",color,color).
 feature(":root",bool,wheelSupport).
 feature(":root",wheel,frontWheel).
@@ -19,4 +17,17 @@ value(wheel,w14,size,14).
 value(wheel,w16,size,16).
 value(wheel,w18,size,18).
 value(wheel,w20,size,20).
+
+
+%%% Constraints
+behavior(":root",0,"requires").
+condition(":root",0,color,yellow).
+require(":root",0,(size,(frontWheel,())))
+
+
+
+behavior(":root",1,"combination").
+path(":root",1,0,wheelSupport).
+path(":root",1,1,rearWheel).
+allow
 

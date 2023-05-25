@@ -1,3 +1,10 @@
+feature(":root",num,totalWeight).
+feature(":root",num,maxWeight).
+range(":root",maxWeight,1000,100000).
+
+feature(":root",totalVolume).
+range(":root",totalVolume,0,200).
+
 feature(":root",num,requestedVolume).
 range(":root",requestedVolume,0,200).
 
