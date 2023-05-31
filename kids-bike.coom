@@ -31,8 +31,8 @@ behavior {
 
 behavior {
 	combinations  (wheelSupport	 rearWheel)
-	allow         (Yes           (W14, W16))
-	allow         (No             W18)
+	allow         (True          (W14, W16))
+	allow         (False         (W18, W20))
 }
 
 behavior  {
