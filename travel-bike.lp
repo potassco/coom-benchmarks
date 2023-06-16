@@ -56,3 +56,16 @@ value(wheel,w26,size,26).
 value(wheel,w26,weight,900).
 value(wheel,w28,size,28).
 value(wheel,w28,weight,1000).
+
+%%% Constraints
+behavior(":root",0,"requires").
+require(":root",0,count((bags,(carrier,())))).
+% TODO
+
+behavior(":root",1,"imply").
+imply(":root",1,totalWeight).
+
+
+behavior(bag,0,"default").
+condition(bag,0,material,leather).
+default(bag,0,capacity,b10).

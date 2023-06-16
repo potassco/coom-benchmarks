@@ -34,6 +34,6 @@ allow(":root",1,(0,1),false).
 allow(":root",1,(1,2),(w18;w20)).
 
 
-behiaviour(":root",2,"requires").
+behiavior(":root",2,"requires").
 require(":root",2,(size,(frontWheel,())),"==",(size,(rearWheel,()))).
 
