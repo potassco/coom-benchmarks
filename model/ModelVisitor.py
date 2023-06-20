@@ -71,7 +71,7 @@ class ModelVisitor(ParseTreeVisitor):
         field: ModelParser.FieldContext = ctx.field()
         field_name = '"' + field.fieldName.getText() + '"'
         print(f'attribute({parent_name},{field_name}).')
-        return self.visitChildren(ctx)
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ModelParser#option.
     def visitOption(self, ctx: ModelParser.OptionContext):
@@ -80,6 +80,18 @@ class ModelVisitor(ParseTreeVisitor):
         parent_name = '"' + self.parent_enum.name().getText() + '"'
         option_name = '"' + ctx.name().getText() + '"'
         print(f"option({parent_name}, {option_name}).")
+
+        constant: ModelParser.ConstantContext = ctx.constant()
+        if constant != []:
+            parent_attr: ModelParser.AttributeContext = self.parent_enum.attribute(
+            )
+            for a, c in zip(parent_attr, constant):
+                field: ModelParser.FieldContext = a.field()
+                attr_name = '"' + field.fieldName.getText() + '"'
+                option_value = c.floating().getText()
+                print(
+                    f'value({parent_name},{option_name},{attr_name},{option_value}).'
+                )
         # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ModelParser#field.

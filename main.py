@@ -1,5 +1,5 @@
 from sys import argv
-from typing import Optional
+from typing import List, Optional
 
 from antlr4 import FileStream, CommonTokenStream
 from model.ModelLexer import ModelLexer
@@ -12,6 +12,7 @@ class ASPVisitor(ModelVisitor):
     def __init__(self):
         super().__init__()
         self.parent_enum: Optional[ModelParser.EnumerationContext] = None
+        # self.parent_attr: Optional[List[ModelParser.AttributeContext]] = None
 
 
 # def visitProduct(self, ctx:ModelParser.ProductContext):
