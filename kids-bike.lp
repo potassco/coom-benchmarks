@@ -21,13 +21,17 @@ value(wheel,w20,size,20).
 
 %%% Constraints
 behavior(":root",0,"requires").
-condition(":root",0,color,yellow).
+condition(":root",0,formula1).
+formula(formula1,).
+% path(0,0,frontWheel). path(0,1,size).
 require(":root",0,(size,(frontWheel,())),">",16).
 
 
 behavior(":root",1,"combination").
-path(":root",1,0,wheelSupport).
-path(":root",1,1,rearWheel).
+header(":root",1,0,path1).
+path(path1,0,wheelSupport).
+header(":root",1,1,path2).
+path(path2,0,rearWheel).
 allow(":root",1,(0,0),true).
 allow(":root",1,(1,0),(w14;w16)).
 allow(":root",1,(0,1),false).
