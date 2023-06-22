@@ -16,20 +16,15 @@ class ModelVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by ModelParser#product.
     def visitProduct(self, ctx: ModelParser.ProductContext):
-        print("structure(\":root\").")
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ModelParser#structure.
     def visitStructure(self, ctx: ModelParser.StructureContext):
-        print(f"structure({ctx.name().getText()}).")
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ModelParser#enumeration.
     def visitEnumeration(self, ctx: ModelParser.EnumerationContext):
-        self.parent_enum = ctx
-        print(f"enumeration(\"{ctx.name().getText()}\").")
-        self.visitChildren(ctx)
-        self.parent_enum = None
+        return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ModelParser#behavior.
     def visitBehavior(self, ctx: ModelParser.BehaviorContext):
@@ -41,23 +36,7 @@ class ModelVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by ModelParser#feature.
     def visitFeature(self, ctx: ModelParser.FeatureContext):
-        field: ModelParser.FieldContext = ctx.field()
-        if field.number_def() is not None:
-            type_name = "num"
-        elif field.string_def() is not None:
-            type_name = "text"
-        else:
-            # this seems hacky, I couldn't figure out how to do it better on the hurry
-            try:
-                type_name = '"' + field.type_ref().name().getText() + '"'
-            except TypeError:
-                type_name = '":root"'
-        feature_name = '"' + field.fieldName.getText() + '"'
-        cardinality: ModelParser.CardinalityContext = ctx.cardinality()
-        c_min = 1 if cardinality is None else cardinality.min
-        c_max = 1 if cardinality is None else cardinality.max
-        print(f"feature({type_name}, {feature_name}, {c_min}, {c_max}).")
-        # return self.visitChildren(ctx)
+        return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ModelParser#cardinality.
     def visitCardinality(self, ctx: ModelParser.CardinalityContext):
@@ -65,34 +44,11 @@ class ModelVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by ModelParser#attribute.
     def visitAttribute(self, ctx: ModelParser.AttributeContext):
-        if self.parent_enum is None:
-            raise ValueError("illegal option")
-        parent_name = '"' + self.parent_enum.name().getText() + '"'
-        field: ModelParser.FieldContext = ctx.field()
-        field_name = '"' + field.fieldName.getText() + '"'
-        print(f'attribute({parent_name},{field_name}).')
-        # return self.visitChildren(ctx)
+        return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ModelParser#option.
     def visitOption(self, ctx: ModelParser.OptionContext):
-        if self.parent_enum is None:
-            raise ValueError("illegal option")
-        parent_name = '"' + self.parent_enum.name().getText() + '"'
-        option_name = '"' + ctx.name().getText() + '"'
-        print(f"option({parent_name}, {option_name}).")
-
-        constant: ModelParser.ConstantContext = ctx.constant()
-        if constant != []:
-            parent_attr: ModelParser.AttributeContext = self.parent_enum.attribute(
-            )
-            for a, c in zip(parent_attr, constant):
-                field: ModelParser.FieldContext = a.field()
-                attr_name = '"' + field.fieldName.getText() + '"'
-                option_value = c.floating().getText()
-                print(
-                    f'value({parent_name},{option_name},{attr_name},{option_value}).'
-                )
-        # return self.visitChildren(ctx)
+        return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ModelParser#field.
     def visitField(self, ctx: ModelParser.FieldContext):
