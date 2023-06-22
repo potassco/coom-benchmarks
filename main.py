@@ -15,7 +15,7 @@ class ASPVisitor(ModelVisitor):
         # self.parent_behavior: Optional[ModelParser.BehaviorContext] = None
         self.behavior_name: str = '":root"'
         self.constraint_idx: int = 0
-        self.path_idx: int = 0
+        # self.path_idx: int = 0
 
     def visitProduct(self, ctx: ModelParser.ProductContext):
         print("structure(\":root\").")
@@ -104,12 +104,23 @@ class ASPVisitor(ModelVisitor):
 
     def visitCombinations(self, ctx: ModelParser.CombinationsContext):
         for f in ctx.formula():
+            p = f'"{f.getText()}"'
             print(
-                f'combinations({self.behavior_name},{self.constraint_idx},path{self.path_idx}).'
+                f'combinations({self.behavior_name},{self.constraint_idx},{p}).'
             )
-            print(f.formula_add().formula_sub(0).formula_mul(0).getText())
-            self.path_idx += 1
         super().visitCombinations(ctx)
+
+    def visitCombination_row(self, ctx: ModelParser.Combination_rowContext):
+        type = ctx.rowType.text
+        for i in ctx.combination_item():
+            print(i.getText())
+        return super().visitCombination_row(ctx)
+
+    def visitPath(self, ctx: ModelParser.PathContext):
+        full_path = f'"{ctx.getText()}"'
+        # for i, p in enumerate(ctx.path_item()):
+        #     path = f'"{p.getText()}"'
+        #     print(f'path({full_path},{i},{path}).')
 
 
 if __name__ == "__main__":
