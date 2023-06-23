@@ -16,6 +16,7 @@ class ASPVisitor(ModelVisitor):
         self.behavior_name: str = '":root"'
         self.constraint_idx: int = 0
         # self.path_idx: int = 0
+        self.row_idx: int = 0
 
     def visitProduct(self, ctx: ModelParser.ProductContext):
         print("structure(\":root\").")
@@ -33,7 +34,7 @@ class ASPVisitor(ModelVisitor):
 
     def visitBehavior(self, ctx: ModelParser.BehaviorContext):
         if ctx.name() is not None:
-            self.parent_behavior = ctx.name().getText()
+            self.behavior_name = ctx.name().getText()
         # behavior_block: ModelParser.Behavior_blockContext = ctx.behavior_block(
         # )
         # try:
@@ -48,7 +49,7 @@ class ASPVisitor(ModelVisitor):
         #         0).condition_not(0).condition_compare().condition_part(
         #             0).getText())
         super().visitBehavior(ctx)
-        self.parent_behavior = '":root"'
+        self.behavior_name = '":root"'
 
     def visitFeature(self, ctx: ModelParser.FeatureContext):
         field: ModelParser.FieldContext = ctx.field()
@@ -103,24 +104,29 @@ class ASPVisitor(ModelVisitor):
         self.constraint_idx += 1
 
     def visitCombinations(self, ctx: ModelParser.CombinationsContext):
-        for f in ctx.formula():
+        constraint_id = f'({self.behavior_name},{self.constraint_idx})'
+        for i, f in enumerate(ctx.formula()):
             p = f'"{f.getText()}"'
-            print(
-                f'combinations({self.behavior_name},{self.constraint_idx},{p}).'
-            )
+            print(f'combinations({constraint_id},{i},{p}).')
         super().visitCombinations(ctx)
+        self.row_idx = 0
 
     def visitCombination_row(self, ctx: ModelParser.Combination_rowContext):
+        constraint_id = f'({self.behavior_name},{self.constraint_idx})'
         type = ctx.rowType.text
-        for i in ctx.combination_item():
-            print(i.getText())
-        return super().visitCombination_row(ctx)
+        for col_idx, item in enumerate(ctx.combination_item()):
+            value = item.getText().replace(',', ';')  # Is this operation safe?
+            print(
+                f'{type}({constraint_id},({col_idx},{self.row_idx}),{value}).')
+        super().visitCombination_row(ctx)
+        self.row_idx += 1
 
     def visitPath(self, ctx: ModelParser.PathContext):
+        # Only do this for actual paths? Not formulas
         full_path = f'"{ctx.getText()}"'
         # for i, p in enumerate(ctx.path_item()):
-        #     path = f'"{p.getText()}"'
-        #     print(f'path({full_path},{i},{path}).')
+        # path = f'"{p.getText()}"'
+        # print(f'path({full_path},{i},{path}).')
 
 
 if __name__ == "__main__":
