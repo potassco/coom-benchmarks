@@ -17,6 +17,8 @@ class ASPVisitor(ModelVisitor):
         self.constraint_idx: int = 0
         # self.path_idx: int = 0
         self.row_idx: int = 0
+        self.cond_idx: int = 0
+        self.print_path: bool = True
 
     def visitProduct(self, ctx: ModelParser.ProductContext):
         print("structure(\":root\").")
@@ -98,8 +100,8 @@ class ASPVisitor(ModelVisitor):
                 )
 
     def visitConditioned(self, ctx: ModelParser.ConditionedContext):
-        # name = self.behavior_name if self.behavior_name is not None else '":root"'
-        print(f'behavior({self.behavior_name},{self.constraint_idx}).')
+        constraint_id = f'({self.behavior_name},{self.constraint_idx})'
+        print(f'\nbehavior({constraint_id}).')
         super().visitConditioned(ctx)
         self.constraint_idx += 1
 
@@ -114,19 +116,102 @@ class ASPVisitor(ModelVisitor):
     def visitCombination_row(self, ctx: ModelParser.Combination_rowContext):
         constraint_id = f'({self.behavior_name},{self.constraint_idx})'
         type = ctx.rowType.text
+        print(ctx.getText())
         for col_idx, item in enumerate(ctx.combination_item()):
-            value = item.getText().replace(',', ';')  # Is this operation safe?
-            print(
-                f'{type}({constraint_id},({col_idx},{self.row_idx}),{value}).')
+            values = item.getText()
+            # Removing brackets around the values. Is this safe?
+            if ',' in values:
+                values = values[1:-1]
+            for v in values.split(','):
+                print(
+                    f'{type}({constraint_id},({col_idx},{self.row_idx}),{v}).')
+        self.print_path = False
         super().visitCombination_row(ctx)
+        self.print_path = True
         self.row_idx += 1
+
+    def visitPrecondition(self, ctx: ModelParser.PreconditionContext):
+        constraint_id = f'({self.behavior_name},{self.constraint_idx})'
+        condition = f'"{ctx.condition().getText()}"'
+        print(f'condition({constraint_id},{condition}).')
+        super().visitPrecondition(ctx)
+
+    def visitRequire(self, ctx: ModelParser.RequireContext):
+        constraint_id = f'({self.behavior_name},{self.constraint_idx})'
+        condition = f'"{ctx.condition().getText()}"'
+        print(f'require({constraint_id},{condition}).')
+        super().visitRequire(ctx)
+        self.cond_idx = 0
+
+    def visitCondition_compare(self,
+                               ctx: ModelParser.Condition_compareContext):
+        constraint_id = f'({self.behavior_name},{self.constraint_idx})'
+        # condition = f'"{ctx.condition().getText()}"'
+        # print(ctx.formula().getText())
+        # for p in ctx.condition_part():
+        #     print(p.getText())
+        # print(ctx.condition_part(0).getText())
+        super().visitCondition_compare(ctx)
 
     def visitPath(self, ctx: ModelParser.PathContext):
         # Only do this for actual paths? Not formulas
-        full_path = f'"{ctx.getText()}"'
-        # for i, p in enumerate(ctx.path_item()):
-        # path = f'"{p.getText()}"'
-        # print(f'path({full_path},{i},{path}).')
+        if self.print_path:
+            full_path = f'"{ctx.getText()}"'
+            for i, p in enumerate(ctx.path_item()):
+                path = f'"{p.getText()}"'
+                print(f'path({full_path},{i},{path}).')
+
+    # def visitFormula_atom(self, ctx: ModelParser.Formula_atomContext):
+    #     print('\n')
+    #     print(ctx.getText())
+    #     if ctx.atom_path is not None:
+    #         print(ctx.atom_path.getText())
+    #     # print(ctx.atom_path)
+    #     print(ctx.atom_num)
+    #     print(ctx.atom_true)
+    #     print(ctx.atom_false)
+    #     # print(ctx.path().getText())
+    #     super().visitFormula_atom(ctx)
+
+    # def visitFormula(self, ctx: ModelParser.FormulaContext):
+    #     print("formula")
+    #     print(ctx.getText())
+    #     print(ctx.formula_add().getText())
+    #     # print(ctx.getText())
+    #     # print(f'add().')
+    #     super().visitFormula(ctx)
+
+    # def visitFormula_add(self, ctx: ModelParser.Formula_addContext):
+    #     print("add")
+    #     formula = f'"{ctx.getText()}"'
+    #     print(formula)
+    #     for summand in ctx.formula_sub():
+    #         print(summand.getText())
+    #         # print(f'add({formula},{self.behavior_name},{term1}).')
+    #     super().visitFormula_add(ctx)
+
+    # def visitFormula_sub(self, ctx: ModelParser.Formula_subContext):
+    #     print("sub")
+    #     print(ctx.getText())
+    #     super().visitFormula_sub(ctx)
+
+    # def visitFormula_mul(self, ctx: ModelParser.Formula_mulContext):
+    #     print("mul")
+    #     print(ctx.getText())
+    #     super().visitFormula_mul(ctx)
+
+    # def visitFormula_div(self, ctx: ModelParser.Formula_divContext):
+    #     print("div")
+    #     print(ctx.getText())
+    #     super().visitFormula_div(ctx)
+
+    # def visitFormula_pow(self, ctx: ModelParser.Formula_powContext):
+    #     print("pow")
+    #     print(ctx.getText())
+    #     super().visitFormula_pow(ctx)
+
+    # def visitFormula_func(self, ctx: ModelParser.Formula_funcContext):
+    #     super().visitFormula_func(ctx)
 
 
 if __name__ == "__main__":

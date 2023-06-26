@@ -40,4 +40,3 @@ allow(":root",1,(1,2),(w18;w20)).
 
 behiavior(":root",2,"requires").
 require(":root",2,(size,(frontWheel,())),"==",(size,(rearWheel,()))).
-

@@ -22,8 +22,6 @@ enumeration Wheel {
 	W20	= (	 20	)
 }
 
-
-
 behavior {
 	condition color = Yellow
 	require frontWheel.size > 16
@@ -35,6 +33,6 @@ behavior {
 	allow         (False         (W18, W20))
 }
 
-behavior  {
+behavior {
 	require frontWheel.size = rearWheel.size
 }
