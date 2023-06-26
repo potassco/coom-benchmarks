@@ -32,14 +32,12 @@ combinations((":root",1),0,"wheelSupport").
 combinations((":root",1),1,"rearWheel").
 path("wheelSupport",0,"wheelSupport").
 path("rearWheel",0,"rearWheel").
-allow(True(W14,W16))
-allow((":root",1),(0,0),True).
-allow((":root",1),(1,0),W14).
-allow((":root",1),(1,0),W16).
-allow(False(W18,W20))
-allow((":root",1),(0,1),False).
-allow((":root",1),(1,1),W18).
-allow((":root",1),(1,1),W20).
+allow((":root",1),(0,0),"True").
+allow((":root",1),(1,0),"W14").
+allow((":root",1),(1,0),"W16").
+allow((":root",1),(0,1),"False").
+allow((":root",1),(1,1),"W18").
+allow((":root",1),(1,1),"W20").
 
 behavior((":root",2)).
 require((":root",2),"frontWheel.size=rearWheel.size").
