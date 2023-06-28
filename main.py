@@ -157,8 +157,8 @@ class ASPVisitor(ModelVisitor):
         for i in range(len(cond_and) - 1):
             left = cond_and[i].getText()
             right = '||'.join([a.getText() for a in cond_and[i + 1:]])
-            condition = left + '||' + right
-            print(f'binary("{condition}","{left}","||","{right}").')
+            complete = left + '||' + right
+            print(f'binary("{complete}","{left}","||","{right}").')
         super().visitCondition_or(ctx)
 
     def visitCondition_and(self, ctx: ModelParser.Condition_andContext):
@@ -166,8 +166,8 @@ class ASPVisitor(ModelVisitor):
         for i in range(len(cond_not) - 1):
             left = cond_not[i].getText()
             right = '&&'.join([a.getText() for a in cond_not[i + 1:]])
-            condition = left + '&&' + right
-            print(f'binary("{condition}","{left}","&&","{right}").')
+            complete = left + '&&' + right
+            print(f'binary("{complete}","{left}","&&","{right}").')
         super().visitCondition_and(ctx)
 
     def visitCondition_not(self, ctx: ModelParser.Condition_notContext):
@@ -190,8 +190,8 @@ class ASPVisitor(ModelVisitor):
             # Binary atom for compare
             right = parts[i].formula().getText()
             compare = parts[i].compare().getText()
-            condition = left + compare + right
-            print(f'binary("{condition}","{left}","{compare}","{right}").')
+            complete = left + compare + right
+            print(f'binary("{complete}","{left}","{compare}","{right}").')
             left = right
 
             # For multiple comparisons rewrite as propositional formulas connected by &&
@@ -200,18 +200,18 @@ class ASPVisitor(ModelVisitor):
                 for l, r in (zip(parts[i:], parts[i + 1:]))
             ])
             if right_prop != '':
-                complete_prop = condition + '&&' + right_prop
+                complete_prop = complete + '&&' + right_prop
                 print(
-                    f'binary("{complete_prop}","{condition}","&&","{right_prop}").'
+                    f'binary("{complete_prop}","{complete}","&&","{right_prop}").'
                 )
         super().visitCondition_compare(ctx)
 
-    def visitPath(self, ctx: ModelParser.PathContext):
-        # Only do this for actual paths? Not formulas
-        if self.print_path:
-            full_path = f'"{ctx.getText()}"'
-            for i, p in enumerate(ctx.path_item()):
-                print(f'path({full_path},{i},"{p.getText()}").')
+    # def visitPath(self, ctx: ModelParser.PathContext):
+    #     # Only do this for actual paths? Not formulas
+    #     if self.print_path:
+    #         full_path = f'"{ctx.getText()}"'
+    #         for i, p in enumerate(ctx.path_item()):
+    #             print(f'path({full_path},{i},"{p.getText()}").')
 
     # def visitFormula_atom(self, ctx: ModelParser.Formula_atomContext):
     #     print('\n')
@@ -233,37 +233,58 @@ class ASPVisitor(ModelVisitor):
     #     # print(f'add().')
     #     super().visitFormula(ctx)
 
-    # def visitFormula_add(self, ctx: ModelParser.Formula_addContext):
-    #     print("add")
-    #     formula = f'"{ctx.getText()}"'
-    #     print(formula)
-    #     for summand in ctx.formula_sub():
-    #         print(summand.getText())
-    #         # print(f'add({formula},"{self.behavior_name}"",{term1}).')
-    #     super().visitFormula_add(ctx)
+    def visitFormula_add(self, ctx: ModelParser.Formula_addContext):
+        form_sub: ModelParser.Formula_subContext = ctx.formula_sub()
+        for i in range(len(form_sub) - 1):
+            left = form_sub[i].getText()
+            right = '+'.join([a.getText() for a in form_sub[i + 1:]])
+            complete = left + '+' + right
+            print(f'binary("{complete}","{left}","+","{right}").')
+        super().visitFormula_add(ctx)
 
-    # def visitFormula_sub(self, ctx: ModelParser.Formula_subContext):
-    #     print("sub")
-    #     print(ctx.getText())
-    #     super().visitFormula_sub(ctx)
+    def visitFormula_sub(self, ctx: ModelParser.Formula_subContext):
+        form_mul: ModelParser.Formula_mulContext = ctx.formula_mul()
+        for i in range(len(form_mul) - 1):
+            left = form_mul[i].getText()
+            right = '-'.join([a.getText() for a in form_mul[i + 1:]])
+            complete = left + '-' + right
+            print(f'binary("{complete}","{left}","-","{right}").')
+        super().visitFormula_sub(ctx)
 
-    # def visitFormula_mul(self, ctx: ModelParser.Formula_mulContext):
-    #     print("mul")
-    #     print(ctx.getText())
-    #     super().visitFormula_mul(ctx)
+    def visitFormula_mul(self, ctx: ModelParser.Formula_mulContext):
+        form_div: ModelParser.Formula_divContext = ctx.formula_div()
+        for i in range(len(form_div) - 1):
+            left = form_div[i].getText()
+            right = '*'.join([a.getText() for a in form_div[i + 1:]])
+            complete = left + '*' + right
+            print(f'binary("{complete}","{left}","*","{right}").')
+        super().visitFormula_mul(ctx)
 
-    # def visitFormula_div(self, ctx: ModelParser.Formula_divContext):
-    #     print("div")
-    #     print(ctx.getText())
-    #     super().visitFormula_div(ctx)
+    def visitFormula_div(self, ctx: ModelParser.Formula_divContext):
+        form_pow: ModelParser.Formula_powContext = ctx.formula_pow()
+        for i in range(len(form_pow) - 1):
+            left = form_pow[i].getText()
+            right = '/'.join([a.getText() for a in form_pow[i + 1:]])
+            complete = left + '/' + right
+            print(f'binary("{complete}","{left}","/","{right}").')
+        super().visitFormula_div(ctx)
 
-    # def visitFormula_pow(self, ctx: ModelParser.Formula_powContext):
-    #     print("pow")
-    #     print(ctx.getText())
-    #     super().visitFormula_pow(ctx)
+    def visitFormula_pow(self, ctx: ModelParser.Formula_powContext):
+        form_sign: ModelParser.Formula_signContext = ctx.formula_sign()
+        for i in range(len(form_sign) - 1):
+            left = form_sign[i].getText()
+            right = '^'.join([a.getText() for a in form_sign[i + 1:]])
+            complete = left + '^' + right
+            print(f'binary("{complete}","{left}","^","{right}").')
+        super().visitFormula_pow(ctx)
 
-    # def visitFormula_func(self, ctx: ModelParser.Formula_funcContext):
-    #     super().visitFormula_func(ctx)
+    def visitFormula_sign(self, ctx: ModelParser.Formula_signContext):
+        # TODO
+        super().visitFormula_sign(ctx)
+
+    def visitFormula_func(self, ctx: ModelParser.Formula_funcContext):
+        # TODO
+        super().visitFormula_func(ctx)
 
 
 if __name__ == "__main__":
