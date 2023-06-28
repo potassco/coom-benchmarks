@@ -1,20 +1,24 @@
 structure(":root").
-feature("num", "totalWeight", 1, 1).
-feature("num", "maxWeight", 1, 1).
-feature("num", "totalVolume", 1, 1).
-feature("num", "requestedVolume", 1, 1).
-feature(":root", "frontWheel", 1, 1).
-feature(":root", "rearWheel", 1, 1).
-feature(":root", "frame", 1, 1).
-feature(":root", "carrier", 1, 1).
-feature(":root", "color", 1, 1).
+feature(":root","totalWeight","num",1,1).
+range(":root","totalWeight",#inf,#sup).
+feature(":root","maxWeight","num",1,1).
+range(":root","maxWeight",1,100).
+feature(":root","totalVolume","num",1,1).
+range(":root","totalVolume",0,200).
+feature(":root","requestedVolume","num",1,1).
+range(":root","requestedVolume",0,200).
+feature(":root","frontWheel","Wheel",1,1).
+feature(":root","rearWheel","Wheel",1,1).
+feature(":root","frame","Frame",1,1).
+feature(":root","carrier","Carrier",1,1).
+feature(":root","color","Color",1,1).
 structure("Carrier").
-feature(":root", "bags", [@61,263:263='0',<73>,14:1], [@63,266:266='3',<73>,14:4]).
+feature("Carrier","bags","Bag",0,3).
 structure("Frame").
-feature(":root", "bags", [@73,307:307='0',<73>,18:1], [@75,310:310='2',<73>,18:4]).
+feature("Frame","bags","Bag",0,2).
 structure("Bag").
-feature(":root", "capacity", 1, 1).
-feature(":root", "material", 1, 1).
+feature("Bag","capacity","Capacity",1,1).
+feature("Bag","material","Material",1,1).
 enumeration("Capacity").
 attribute("Capacity","volume").
 attribute("Capacity","weight").

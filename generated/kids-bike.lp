@@ -1,8 +1,8 @@
 structure(":root").
-feature(":root", "color", 1, 1).
-feature(":root", "wheelSupport", 1, 1).
-feature(":root", "frontWheel", 1, 1).
-feature(":root", "rearWheel", 1, 1).
+feature(":root","color","Color",1,1).
+feature(":root","wheelSupport","bool",1,1).
+feature(":root","frontWheel","Wheel",1,1).
+feature(":root","rearWheel","Wheel",1,1).
 enumeration("Color").
 option("Color", "Red").
 option("Color", "Green").

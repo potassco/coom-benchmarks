@@ -12,7 +12,7 @@ class ASPVisitor(ModelVisitor):
     def __init__(self):
         super().__init__()
         self.parent_enum: Optional[ModelParser.EnumerationContext] = None
-        # self.parent_behavior: Optional[ModelParser.BehaviorContext] = None
+        self.structure_name: str = ':root'
         self.behavior_name: str = ':root'
         self.constraint_idx: int = 0
         # self.path_idx: int = 0
@@ -25,8 +25,10 @@ class ASPVisitor(ModelVisitor):
         super().visitProduct(ctx)
 
     def visitStructure(self, ctx: ModelParser.StructureContext):
-        print(f'structure("{ctx.name().getText()}").')
+        self.structure_name = ctx.name().getText()
+        print(f'structure("{self.structure_name}").')
         super().visitStructure(ctx)
+        self.structure_name = ':root'
 
     def visitEnumeration(self, ctx: ModelParser.EnumerationContext):
         self.parent_enum = ctx
@@ -37,39 +39,44 @@ class ASPVisitor(ModelVisitor):
     def visitBehavior(self, ctx: ModelParser.BehaviorContext):
         if ctx.name() is not None:
             self.behavior_name = ctx.name().getText()
-        # behavior_block: ModelParser.Behavior_blockContext = ctx.behavior_block(
-        # )
-        # try:
-        #     print(behavior_block.conditioned(0).precondition(0).getText())
-        # except AttributeError:
-        #     pass
-        # require: ModelParser.RequireContext = behavior_block.conditioned(
-        #     0).require()
-        # if require is not None:
-        #     print(require.getText())
-        #     print(require.condition().condition_or().condition_and(
-        #         0).condition_not(0).condition_compare().condition_part(
-        #             0).getText())
         super().visitBehavior(ctx)
         self.behavior_name = ':root'
 
     def visitFeature(self, ctx: ModelParser.FeatureContext):
+        # TODO: Implement reference keyword and priorities
         field: ModelParser.FieldContext = ctx.field()
+        feature_name = field.fieldName.getText()
+
         if field.number_def() is not None:
             type_name = 'num'
+
         elif field.string_def() is not None:
             type_name = 'text'
+        elif field.type_ref is not None:
+            type_name = field.type_ref.NAME()
         else:
-            # this seems hacky, I couldn't figure out how to do it better on the hurry
-            try:
-                type_name = field.type_ref().name().getText()
-            except TypeError:
-                type_name = ':root'
-        feature_name = field.fieldName.getText()
+            type_name = feature_name
+
         cardinality: ModelParser.CardinalityContext = ctx.cardinality()
-        c_min = 1 if cardinality is None else cardinality.min
-        c_max = 1 if cardinality is None else cardinality.max
-        print(f'feature("{type_name}", "{feature_name}", {c_min}, {c_max}).')
+        c_min = 1
+        c_max = 1
+        if cardinality is not None:
+            c_min = cardinality.min.text.replace('x', '')
+            c_max = c_min
+            if cardinality.max is not None:
+                c_max = cardinality.max.text.replace('x',
+                                                     '').replace('*', '#sup')
+
+        print(
+            f'feature("{self.structure_name}","{feature_name}","{type_name}",{c_min},{c_max}).'
+        )
+        if type_name == 'num':
+            num: ModelParser.Number_defContext = field.number_def()
+            r_min = '#inf' if num.min is None else num.min.INTEGER()
+            r_max = '#sup' if num.max is None else num.max.INTEGER()
+            print(
+                f'range("{self.structure_name}","{feature_name}",{r_min},{r_max}).'
+            )
 
     def visitAttribute(self, ctx: ModelParser.AttributeContext):
         if self.parent_enum is None:
@@ -199,12 +206,12 @@ class ASPVisitor(ModelVisitor):
                 )
         super().visitCondition_compare(ctx)
 
-    # def visitPath(self, ctx: ModelParser.PathContext):
-    #     # Only do this for actual paths? Not formulas
-    #     if self.print_path:
-    #         full_path = f'"{ctx.getText()}"'
-    #         for i, p in enumerate(ctx.path_item()):
-    #             print(f'path({full_path},{i},"{p.getText()}").')
+    def visitPath(self, ctx: ModelParser.PathContext):
+        # Only do this for actual paths? Not formulas
+        if self.print_path:
+            full_path = f'"{ctx.getText()}"'
+            for i, p in enumerate(ctx.path_item()):
+                print(f'path({full_path},{i},"{p.getText()}").')
 
     # def visitFormula_atom(self, ctx: ModelParser.Formula_atomContext):
     #     print('\n')
