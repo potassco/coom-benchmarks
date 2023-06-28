@@ -115,6 +115,20 @@ class ASPVisitor(ModelVisitor):
         super().visitConditioned(ctx)
         self.constraint_idx += 1
 
+    def visitAssign_default(self, ctx: ModelParser.Assign_defaultContext):
+        constraint_id = f'("{self.behavior_name}",{self.constraint_idx})'
+        path = ctx.path().getText()
+        formula = ctx.formula().getText()
+        print(f'default({constraint_id},"{path}","{formula}").')
+        super().visitAssign_default(ctx)
+
+    def visitAssign_imply(self, ctx: ModelParser.Assign_implyContext):
+        constraint_id = f'("{self.behavior_name}",{self.constraint_idx})'
+        path = ctx.path().getText()
+        formula = ctx.formula().getText()
+        print(f'imply({constraint_id},"{path}","{formula}").')
+        super().visitAssign_imply(ctx)
+
     def visitCombinations(self, ctx: ModelParser.CombinationsContext):
         constraint_id = f'("{self.behavior_name}",{self.constraint_idx})'
         for i, f in enumerate(ctx.formula()):
@@ -280,12 +294,12 @@ class ASPVisitor(ModelVisitor):
                 print(f'function("{complete}","{func}","{f.getText()}").')
         super().visitFormula_sign(ctx)
 
-    def visitPath(self, ctx: ModelParser.PathContext):
-        # Only do this for actual paths? Not formulas
-        if self.print_path:
-            full_path = f'"{ctx.getText()}"'
-            for i, p in enumerate(ctx.path_item()):
-                print(f'path({full_path},{i},"{p.getText()}").')
+    # def visitPath(self, ctx: ModelParser.PathContext):
+    #     # Only do this for actual paths? Not formulas
+    #     if self.print_path:
+    #         full_path = f'"{ctx.getText()}"'
+    #         for i, p in enumerate(ctx.path_item()):
+    #             print(f'path({full_path},{i},"{p.getText()}").')
 
 
 if __name__ == "__main__":
