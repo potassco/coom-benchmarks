@@ -145,14 +145,60 @@ class ASPVisitor(ModelVisitor):
         super().visitRequire(ctx)
         self.cond_idx = 0
 
+    def visitCondition_or(self, ctx: ModelParser.Condition_orContext):
+        cond_and: ModelParser.condition_andContext = ctx.condition_and()
+        for i in range(len(cond_and) - 1):
+            left = cond_and[i].getText()
+            right = '||'.join([a.getText() for a in cond_and[i + 1:]])
+            condition = left + '||' + right
+            print(f'binary("{condition}","{left}","||","{right}").')
+        super().visitCondition_or(ctx)
+
+    def visitCondition_and(self, ctx: ModelParser.Condition_andContext):
+        cond_not: ModelParser.condition_notContext = ctx.condition_not()
+        for i in range(len(cond_not) - 1):
+            left = cond_not[i].getText()
+            right = '&&'.join([a.getText() for a in cond_not[i + 1:]])
+            condition = left + '&&' + right
+            print(f'binary("{condition}","{left}","&&","{right}").')
+        super().visitCondition_and(ctx)
+
+    def visitCondition_not(self, ctx: ModelParser.Condition_notContext):
+        # TODO
+
+        # cond_not: ModelParser.condition_notContext = ctx.condition_not()
+        # if len(cond_not) > 1:
+        #     for i in range(len(cond_not) - 1):
+        #         left = cond_not[i].getText()
+        #         right = '&&'.join([a.getText() for a in cond_not[i + 1:]])
+        #         condition = left + '&&' + right
+        #         print(f'binary("{condition}","{left}","&&","{right}").')
+        super().visitCondition_not(ctx)
+
     def visitCondition_compare(self,
                                ctx: ModelParser.Condition_compareContext):
-        # constraint_id = f'("{self.behavior_name}"",{self.constraint_idx})'
-        # condition = f'"{ctx.condition().getText()}"'
-        # print(ctx.formula().getText())
-        # for p in ctx.condition_part():
-        #     print(p.getText())
-        # print(ctx.condition_part(0).getText())
+        formula: ModelParser.FormulaContext = ctx.formula()
+        parts: ModelParser.Condition_partContext = ctx.condition_part()
+
+        left = formula.getText()
+        for i in range(len(parts)):
+            # Binary atom for compare
+            right = parts[i].formula().getText()
+            compare = parts[i].compare().getText()
+            condition = left + compare + right
+            print(f'binary("{condition}","{left}","{compare}","{right}").')
+            left = right
+
+            # For multiple comparisons rewrite as propositional formulas connected by &&
+            right_prop = '&&'.join([
+                f'{l.formula().getText()}{r.getText()}'
+                for l, r in (zip(parts[i:], parts[i + 1:]))
+            ])
+            if right_prop != '':
+                complete_prop = condition + '&&' + right_prop
+                print(
+                    f'binary("{complete_prop}","{condition}","&&","{right_prop}").'
+                )
         super().visitCondition_compare(ctx)
 
     def visitPath(self, ctx: ModelParser.PathContext):
