@@ -164,15 +164,13 @@ class ASPVisitor(ModelVisitor):
         super().visitCondition_and(ctx)
 
     def visitCondition_not(self, ctx: ModelParser.Condition_notContext):
-        # TODO
-
-        # cond_not: ModelParser.condition_notContext = ctx.condition_not()
-        # if len(cond_not) > 1:
-        #     for i in range(len(cond_not) - 1):
-        #         left = cond_not[i].getText()
-        #         right = '&&'.join([a.getText() for a in cond_not[i + 1:]])
-        #         condition = left + '&&' + right
-        #         print(f'binary("{condition}","{left}","&&","{right}").')
+        complete = ctx.getText()
+        if ctx.condition_not() is not None:
+            negated = ctx.condition_not().getText()
+            print(f'unary("{complete}","!","{negated}").')
+        elif ctx.condition() is not None:
+            in_brackets = ctx.condition().getText()
+            print(f'unary("{complete}","()","{in_brackets}").')
         super().visitCondition_not(ctx)
 
     def visitCondition_compare(self,
@@ -201,12 +199,12 @@ class ASPVisitor(ModelVisitor):
                 )
         super().visitCondition_compare(ctx)
 
-    def visitPath(self, ctx: ModelParser.PathContext):
-        # Only do this for actual paths? Not formulas
-        if self.print_path:
-            full_path = f'"{ctx.getText()}"'
-            for i, p in enumerate(ctx.path_item()):
-                print(f'path({full_path},{i},"{p.getText()}").')
+    # def visitPath(self, ctx: ModelParser.PathContext):
+    #     # Only do this for actual paths? Not formulas
+    #     if self.print_path:
+    #         full_path = f'"{ctx.getText()}"'
+    #         for i, p in enumerate(ctx.path_item()):
+    #             print(f'path({full_path},{i},"{p.getText()}").')
 
     # def visitFormula_atom(self, ctx: ModelParser.Formula_atomContext):
     #     print('\n')
