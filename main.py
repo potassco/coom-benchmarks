@@ -206,33 +206,6 @@ class ASPVisitor(ModelVisitor):
                 )
         super().visitCondition_compare(ctx)
 
-    # def visitPath(self, ctx: ModelParser.PathContext):
-    #     # Only do this for actual paths? Not formulas
-    #     if self.print_path:
-    #         full_path = f'"{ctx.getText()}"'
-    #         for i, p in enumerate(ctx.path_item()):
-    #             print(f'path({full_path},{i},"{p.getText()}").')
-
-    # def visitFormula_atom(self, ctx: ModelParser.Formula_atomContext):
-    #     print('\n')
-    #     print(ctx.getText())
-    #     if ctx.atom_path is not None:
-    #         print(ctx.atom_path.getText())
-    #     # print(ctx.atom_path)
-    #     print(ctx.atom_num)
-    #     print(ctx.atom_true)
-    #     print(ctx.atom_false)
-    #     # print(ctx.path().getText())
-    #     super().visitFormula_atom(ctx)
-
-    # def visitFormula(self, ctx: ModelParser.FormulaContext):
-    #     print("formula")
-    #     print(ctx.getText())
-    #     print(ctx.formula_add().getText())
-    #     # print(ctx.getText())
-    #     # print(f'add().')
-    #     super().visitFormula(ctx)
-
     def visitFormula_add(self, ctx: ModelParser.Formula_addContext):
         form_sub: ModelParser.Formula_subContext = ctx.formula_sub()
         for i in range(len(form_sub) - 1):
@@ -278,13 +251,41 @@ class ASPVisitor(ModelVisitor):
             print(f'binary("{complete}","{left}","^","{right}").')
         super().visitFormula_pow(ctx)
 
+    # def visitCondition_not(self, ctx: ModelParser.Condition_notContext):
+    #     complete = ctx.getText()
+    #     if ctx.condition_not() is not None:
+    #         negated = ctx.condition_not().getText()
+    #         print(f'unary("{complete}","!","{negated}").')
+    #     elif ctx.condition() is not None:
+    #         in_brackets = ctx.condition().getText()
+    #         print(f'unary("{complete}","()","{in_brackets}").')
+    #     super().visitCondition_not(ctx)
+
     def visitFormula_sign(self, ctx: ModelParser.Formula_signContext):
-        # TODO
+        complete = ctx.getText()
+        if ctx.formula_sign() is not None:
+            if ctx.neg is not None:
+                negated = ctx.formula_sign().getText()
+                print(f'unary("{complete}","-","{negated}").')
+            else:
+                # Is this really necessary?
+                positive = ctx.formula_sign().getText()
+                print(f'unary("{complete}","+","{positive}").')
+        elif ctx.formula() is not None:
+            in_brackets = ctx.formula().getText()
+            print(f'unary("{complete}","()","{in_brackets}").')
+        elif ctx.formula_func() is not None:
+            func = ctx.formula_func().FUNCTION()
+            for f in ctx.formula_func().formula():
+                print(f'function("{complete}","{func}","{f.getText()}").')
         super().visitFormula_sign(ctx)
 
-    def visitFormula_func(self, ctx: ModelParser.Formula_funcContext):
-        # TODO
-        super().visitFormula_func(ctx)
+    def visitPath(self, ctx: ModelParser.PathContext):
+        # Only do this for actual paths? Not formulas
+        if self.print_path:
+            full_path = f'"{ctx.getText()}"'
+            for i, p in enumerate(ctx.path_item()):
+                print(f'path({full_path},{i},"{p.getText()}").')
 
 
 if __name__ == "__main__":

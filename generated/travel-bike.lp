@@ -60,21 +60,29 @@ value("Wheel","W28","weight",1000).
 behavior((":root",0)).
 require((":root",0),"count(carrier.bags)+count(frame.bags)<=4").
 binary("count(carrier.bags)+count(frame.bags)<=4","count(carrier.bags)+count(frame.bags)","<=","4").
+binary("count(carrier.bags)+count(frame.bags)","count(carrier.bags)","+","count(frame.bags)").
+function("count(carrier.bags)","count","carrier.bags").
 path("carrier.bags",0,"carrier").
 path("carrier.bags",1,"bags").
+function("count(frame.bags)","count","frame.bags").
 path("frame.bags",0,"frame").
 path("frame.bags",1,"bags").
 
 behavior((":root",1)).
 path("totalWeight",0,"totalWeight").
+binary("frontWheel.weight+rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","frontWheel.weight","+","rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
+binary("rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","rearWheel.weight","+","sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
+binary("sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","sum(carrier.bags.capacity.weight)","+","sum(frame.bags.capacity.weight)").
 path("frontWheel.weight",0,"frontWheel").
 path("frontWheel.weight",1,"weight").
 path("rearWheel.weight",0,"rearWheel").
 path("rearWheel.weight",1,"weight").
+function("sum(carrier.bags.capacity.weight)","sum","carrier.bags.capacity.weight").
 path("carrier.bags.capacity.weight",0,"carrier").
 path("carrier.bags.capacity.weight",1,"bags").
 path("carrier.bags.capacity.weight",2,"capacity").
 path("carrier.bags.capacity.weight",3,"weight").
+function("sum(frame.bags.capacity.weight)","sum","frame.bags.capacity.weight").
 path("frame.bags.capacity.weight",0,"frame").
 path("frame.bags.capacity.weight",1,"bags").
 path("frame.bags.capacity.weight",2,"capacity").
@@ -88,10 +96,13 @@ path("maxWeight",0,"maxWeight").
 
 behavior((":root",3)).
 path("totalVolume",0,"totalVolume").
+binary("sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)","sum(carrier.bags.capacity.volume)","+","sum(frame.bags.capacity.volume)").
+function("sum(carrier.bags.capacity.volume)","sum","carrier.bags.capacity.volume").
 path("carrier.bags.capacity.volume",0,"carrier").
 path("carrier.bags.capacity.volume",1,"bags").
 path("carrier.bags.capacity.volume",2,"capacity").
 path("carrier.bags.capacity.volume",3,"volume").
+function("sum(frame.bags.capacity.volume)","sum","frame.bags.capacity.volume").
 path("frame.bags.capacity.volume",0,"frame").
 path("frame.bags.capacity.volume",1,"bags").
 path("frame.bags.capacity.volume",2,"capacity").
