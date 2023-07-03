@@ -59,31 +59,31 @@ value("Wheel","W28","weight",1000).
 
 behavior((":root",0)).
 require((":root",0),"count(carrier.bags)+count(frame.bags)<=4").
-binary("count(carrier.bags)+count(frame.bags)<=4","count(carrier.bags)+count(frame.bags)","<=","4").
-binary("count(carrier.bags)+count(frame.bags)","count(carrier.bags)","+","count(frame.bags)").
-function("count(carrier.bags)","count","carrier.bags").
+binary(":root","count(carrier.bags)+count(frame.bags)<=4","count(carrier.bags)+count(frame.bags)","<=","4").
+binary(":root","count(carrier.bags)+count(frame.bags)","count(carrier.bags)","+","count(frame.bags)").
+function(":root","count(carrier.bags)","count","carrier.bags").
 path("carrier.bags",0,"carrier").
 path("carrier.bags",1,"bags").
-function("count(frame.bags)","count","frame.bags").
+function(":root","count(frame.bags)","count","frame.bags").
 path("frame.bags",0,"frame").
 path("frame.bags",1,"bags").
 
 behavior((":root",1)).
 imply((":root",1),"totalWeight","frontWheel.weight+rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
 path("totalWeight",0,"totalWeight").
-binary("frontWheel.weight+rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","frontWheel.weight","+","rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
-binary("rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","rearWheel.weight","+","sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
-binary("sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","sum(carrier.bags.capacity.weight)","+","sum(frame.bags.capacity.weight)").
+binary(":root","frontWheel.weight+rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","frontWheel.weight","+","rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
+binary(":root","rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","rearWheel.weight","+","sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
+binary(":root","sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","sum(carrier.bags.capacity.weight)","+","sum(frame.bags.capacity.weight)").
 path("frontWheel.weight",0,"frontWheel").
 path("frontWheel.weight",1,"weight").
 path("rearWheel.weight",0,"rearWheel").
 path("rearWheel.weight",1,"weight").
-function("sum(carrier.bags.capacity.weight)","sum","carrier.bags.capacity.weight").
+function(":root","sum(carrier.bags.capacity.weight)","sum","carrier.bags.capacity.weight").
 path("carrier.bags.capacity.weight",0,"carrier").
 path("carrier.bags.capacity.weight",1,"bags").
 path("carrier.bags.capacity.weight",2,"capacity").
 path("carrier.bags.capacity.weight",3,"weight").
-function("sum(frame.bags.capacity.weight)","sum","frame.bags.capacity.weight").
+function(":root","sum(frame.bags.capacity.weight)","sum","frame.bags.capacity.weight").
 path("frame.bags.capacity.weight",0,"frame").
 path("frame.bags.capacity.weight",1,"bags").
 path("frame.bags.capacity.weight",2,"capacity").
@@ -91,20 +91,20 @@ path("frame.bags.capacity.weight",3,"weight").
 
 behavior((":root",2)).
 require((":root",2),"totalWeight<=maxWeight").
-binary("totalWeight<=maxWeight","totalWeight","<=","maxWeight").
+binary(":root","totalWeight<=maxWeight","totalWeight","<=","maxWeight").
 path("totalWeight",0,"totalWeight").
 path("maxWeight",0,"maxWeight").
 
 behavior((":root",3)).
 imply((":root",3),"totalVolume","sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)").
 path("totalVolume",0,"totalVolume").
-binary("sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)","sum(carrier.bags.capacity.volume)","+","sum(frame.bags.capacity.volume)").
-function("sum(carrier.bags.capacity.volume)","sum","carrier.bags.capacity.volume").
+binary(":root","sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)","sum(carrier.bags.capacity.volume)","+","sum(frame.bags.capacity.volume)").
+function(":root","sum(carrier.bags.capacity.volume)","sum","carrier.bags.capacity.volume").
 path("carrier.bags.capacity.volume",0,"carrier").
 path("carrier.bags.capacity.volume",1,"bags").
 path("carrier.bags.capacity.volume",2,"capacity").
 path("carrier.bags.capacity.volume",3,"volume").
-function("sum(frame.bags.capacity.volume)","sum","frame.bags.capacity.volume").
+function(":root","sum(frame.bags.capacity.volume)","sum","frame.bags.capacity.volume").
 path("frame.bags.capacity.volume",0,"frame").
 path("frame.bags.capacity.volume",1,"bags").
 path("frame.bags.capacity.volume",2,"capacity").
@@ -112,7 +112,7 @@ path("frame.bags.capacity.volume",3,"volume").
 
 behavior((":root",4)).
 require((":root",4),"totalVolume>=requestedVolume").
-binary("totalVolume>=requestedVolume","totalVolume",">=","requestedVolume").
+binary(":root","totalVolume>=requestedVolume","totalVolume",">=","requestedVolume").
 path("totalVolume",0,"totalVolume").
 path("requestedVolume",0,"requestedVolume").
 
@@ -126,17 +126,17 @@ path("Red",0,"Red").
 
 behavior((":root",7)).
 condition((":root",7),"color=Red").
-binary("color=Red","color","=","Red").
+binary(":root","color=Red","color","=","Red").
 path("color",0,"color").
 path("Red",0,"Red").
 require((":root",7),"frontWheel.size=20").
-binary("frontWheel.size=20","frontWheel.size","=","20").
+binary(":root","frontWheel.size=20","frontWheel.size","=","20").
 path("frontWheel.size",0,"frontWheel").
 path("frontWheel.size",1,"size").
 
 behavior(("Bag",8)).
 condition(("Bag",8),"material=Leather").
-binary("material=Leather","material","=","Leather").
+binary("Bag","material=Leather","material","=","Leather").
 path("material",0,"material").
 path("Leather",0,"Leather").
 default(("Bag",8),"capacity","B10").

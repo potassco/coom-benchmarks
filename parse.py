@@ -13,7 +13,7 @@ class ASPVisitor(ModelVisitor):
         super().__init__()
         self.parent_enum: Optional[ModelParser.EnumerationContext] = None
         self.structure_name: str = ':root'
-        self.behavior_name: str = ':root'
+        self.behavior: str = ':root'
         self.constraint_idx: int = 0
         # self.path_idx: int = 0
         self.row_idx: int = 0
@@ -38,9 +38,9 @@ class ASPVisitor(ModelVisitor):
 
     def visitBehavior(self, ctx: ModelParser.BehaviorContext):
         if ctx.name() is not None:
-            self.behavior_name = ctx.name().getText()
+            self.behavior = ctx.name().getText()
         super().visitBehavior(ctx)
-        self.behavior_name = ':root'
+        self.behavior = ':root'
 
     def visitFeature(self, ctx: ModelParser.FeatureContext):
         # TODO: Implement reference keyword and priorities
@@ -110,34 +110,34 @@ class ASPVisitor(ModelVisitor):
                 )
 
     def visitConditioned(self, ctx: ModelParser.ConditionedContext):
-        constraint_id = f'("{self.behavior_name}",{self.constraint_idx})'
+        constraint_id = f'("{self.behavior}",{self.constraint_idx})'
         print(f'\nbehavior({constraint_id}).')
         super().visitConditioned(ctx)
         self.constraint_idx += 1
 
     def visitAssign_default(self, ctx: ModelParser.Assign_defaultContext):
-        constraint_id = f'("{self.behavior_name}",{self.constraint_idx})'
+        constraint_id = f'("{self.behavior}",{self.constraint_idx})'
         path = ctx.path().getText()
         formula = ctx.formula().getText()
         print(f'default({constraint_id},"{path}","{formula}").')
         super().visitAssign_default(ctx)
 
     def visitAssign_imply(self, ctx: ModelParser.Assign_implyContext):
-        constraint_id = f'("{self.behavior_name}",{self.constraint_idx})'
+        constraint_id = f'("{self.behavior}",{self.constraint_idx})'
         path = ctx.path().getText()
         formula = ctx.formula().getText()
         print(f'imply({constraint_id},"{path}","{formula}").')
         super().visitAssign_imply(ctx)
 
     def visitCombinations(self, ctx: ModelParser.CombinationsContext):
-        constraint_id = f'("{self.behavior_name}",{self.constraint_idx})'
+        constraint_id = f'("{self.behavior}",{self.constraint_idx})'
         for i, f in enumerate(ctx.formula()):
             print(f'combinations({constraint_id},{i},"{f.getText()}").')
         super().visitCombinations(ctx)
         self.row_idx = 0
 
     def visitCombination_row(self, ctx: ModelParser.Combination_rowContext):
-        constraint_id = f'("{self.behavior_name}",{self.constraint_idx})'
+        constraint_id = f'("{self.behavior}",{self.constraint_idx})'
         type = ctx.rowType.text
         for col_idx, item in enumerate(ctx.combination_item()):
             values = item.getText()
@@ -154,13 +154,13 @@ class ASPVisitor(ModelVisitor):
         self.row_idx += 1
 
     def visitPrecondition(self, ctx: ModelParser.PreconditionContext):
-        constraint_id = f'("{self.behavior_name}",{self.constraint_idx})'
+        constraint_id = f'("{self.behavior}",{self.constraint_idx})'
         condition = f'"{ctx.condition().getText()}"'
         print(f'condition({constraint_id},{condition}).')
         super().visitPrecondition(ctx)
 
     def visitRequire(self, ctx: ModelParser.RequireContext):
-        constraint_id = f'("{self.behavior_name}",{self.constraint_idx})'
+        constraint_id = f'("{self.behavior}",{self.constraint_idx})'
         condition = f'"{ctx.condition().getText()}"'
         print(f'require({constraint_id},{condition}).')
         super().visitRequire(ctx)
@@ -172,7 +172,9 @@ class ASPVisitor(ModelVisitor):
             left = cond_and[i].getText()
             right = '||'.join([a.getText() for a in cond_and[i + 1:]])
             complete = left + '||' + right
-            print(f'binary("{complete}","{left}","||","{right}").')
+            print(
+                f'binary("{self.behavior}","{complete}","{left}","||","{right}").'
+            )
         super().visitCondition_or(ctx)
 
     def visitCondition_and(self, ctx: ModelParser.Condition_andContext):
@@ -181,17 +183,20 @@ class ASPVisitor(ModelVisitor):
             left = cond_not[i].getText()
             right = '&&'.join([a.getText() for a in cond_not[i + 1:]])
             complete = left + '&&' + right
-            print(f'binary("{complete}","{left}","&&","{right}").')
+            print(
+                f'binary("{self.behavior}","{complete}","{left}","&&","{right}").'
+            )
         super().visitCondition_and(ctx)
 
     def visitCondition_not(self, ctx: ModelParser.Condition_notContext):
         complete = ctx.getText()
         if ctx.condition_not() is not None:
             negated = ctx.condition_not().getText()
-            print(f'unary("{complete}","!","{negated}").')
+            print(f'unary("{self.behavior}","{complete}","!","{negated}").')
         elif ctx.condition() is not None:
             in_brackets = ctx.condition().getText()
-            print(f'unary("{complete}","()","{in_brackets}").')
+            print(
+                f'unary("{self.behavior}","{complete}","()","{in_brackets}").')
         super().visitCondition_not(ctx)
 
     def visitCondition_compare(self,
@@ -205,7 +210,9 @@ class ASPVisitor(ModelVisitor):
             right = parts[i].formula().getText()
             compare = parts[i].compare().getText()
             complete = left + compare + right
-            print(f'binary("{complete}","{left}","{compare}","{right}").')
+            print(
+                f'binary("{self.behavior}","{complete}","{left}","{compare}","{right}").'
+            )
             left = right
 
             # For multiple comparisons rewrite as propositional formulas connected by &&
@@ -226,7 +233,9 @@ class ASPVisitor(ModelVisitor):
             left = form_sub[i].getText()
             right = '+'.join([a.getText() for a in form_sub[i + 1:]])
             complete = left + '+' + right
-            print(f'binary("{complete}","{left}","+","{right}").')
+            print(
+                f'binary("{self.behavior}","{complete}","{left}","+","{right}").'
+            )
         super().visitFormula_add(ctx)
 
     def visitFormula_sub(self, ctx: ModelParser.Formula_subContext):
@@ -235,7 +244,9 @@ class ASPVisitor(ModelVisitor):
             left = form_mul[i].getText()
             right = '-'.join([a.getText() for a in form_mul[i + 1:]])
             complete = left + '-' + right
-            print(f'binary("{complete}","{left}","-","{right}").')
+            print(
+                f'binary("{self.behavior}","{complete}","{left}","-","{right}").'
+            )
         super().visitFormula_sub(ctx)
 
     def visitFormula_mul(self, ctx: ModelParser.Formula_mulContext):
@@ -244,7 +255,9 @@ class ASPVisitor(ModelVisitor):
             left = form_div[i].getText()
             right = '*'.join([a.getText() for a in form_div[i + 1:]])
             complete = left + '*' + right
-            print(f'binary("{complete}","{left}","*","{right}").')
+            print(
+                f'binary("{self.behavior}","{complete}","{left}","*","{right}").'
+            )
         super().visitFormula_mul(ctx)
 
     def visitFormula_div(self, ctx: ModelParser.Formula_divContext):
@@ -253,7 +266,9 @@ class ASPVisitor(ModelVisitor):
             left = form_pow[i].getText()
             right = '/'.join([a.getText() for a in form_pow[i + 1:]])
             complete = left + '/' + right
-            print(f'binary("{complete}","{left}","/","{right}").')
+            print(
+                f'binary("{self.behavior}","{complete}","{left}","/","{right}").'
+            )
         super().visitFormula_div(ctx)
 
     def visitFormula_pow(self, ctx: ModelParser.Formula_powContext):
@@ -270,18 +285,22 @@ class ASPVisitor(ModelVisitor):
         if ctx.formula_sign() is not None:
             if ctx.neg is not None:
                 negated = ctx.formula_sign().getText()
-                print(f'unary("{complete}","-","{negated}").')
+                print(
+                    f'unary("{self.behavior}","{complete}","-","{negated}").')
             else:
                 # Is this really necessary?
                 positive = ctx.formula_sign().getText()
-                print(f'unary("{complete}","+","{positive}").')
+                print(
+                    f'unary("{self.behavior}","{complete}","+","{positive}").')
         elif ctx.formula() is not None:
             in_brackets = ctx.formula().getText()
             print(f'unary("{complete}","()","{in_brackets}").')
         elif ctx.formula_func() is not None:
             func = ctx.formula_func().FUNCTION()
             for f in ctx.formula_func().formula():
-                print(f'function("{complete}","{func}","{f.getText()}").')
+                print(
+                    f'function("{self.behavior}","{complete}","{func}","{f.getText()}").'
+                )
         super().visitFormula_sign(ctx)
 
     def visitPath(self, ctx: ModelParser.PathContext):
