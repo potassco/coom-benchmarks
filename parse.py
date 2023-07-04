@@ -42,6 +42,16 @@ class ASPVisitor(ModelVisitor):
         super().visitBehavior(ctx)
         self.behavior = ':root'
 
+    def visitBehavior_block(self, ctx: ModelParser.Behavior_blockContext):
+        # for d in ctx.define():
+        #     print(d.getText())
+        super().visitBehavior_block(ctx)
+        # TODO
+
+    def visitDefine(self, ctx: ModelParser.DefineContext):
+        # TODO
+        super().visitDefine(ctx)
+
     def visitFeature(self, ctx: ModelParser.FeatureContext):
         # TODO: Implement reference keyword and priorities
         field: ModelParser.FieldContext = ctx.field()

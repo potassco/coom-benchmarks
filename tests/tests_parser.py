@@ -20,6 +20,18 @@ class TestMain(unittest.TestCase):
             'feature(":root","frame","Frame",1,1).'
         ])
 
+        self.assertEqual(
+            parse_coom('structure Carrier {0..3 Bag bags}'),
+            ['structure("Carrier").', 'feature("Carrier","bags","Bag",0,3).'])
+
+        self.assertEqual(parse_coom('structure Carrier {2..* Bag bags}'), [
+            'structure("Carrier").', 'feature("Carrier","bags","Bag",2,#sup).'
+        ])
+
+        self.assertEqual(
+            parse_coom('structure Carrier {5x Bag bags}'),
+            ['structure("Carrier").', 'feature("Carrier","bags","Bag",5,5).'])
+
     def test_enumeration(self):
         self.assertEqual(
             parse_coom('enumeration Color {Red Green Yellow Blue}'), [
@@ -172,7 +184,66 @@ class TestMain(unittest.TestCase):
 
         self.assertEqual(parse_coom('behavior{readonly totalWeight}'), [])
 
-    def test_multiplicity(self):
+        # TODO: Test Define statement (needs to be implemented)
+
+    def test_condition(self):
+        self.assertEqual(parse_coom('behavior{require a = b || a = c}'), [
+            'behavior((":root",0)).', 'require((":root",0),"a=b||a=c").',
+            'binary(":root","a=b||a=c","a=b","||","a=c").',
+            'binary(":root","a=b","a","=","b").', 'path("a",0,"a").',
+            'path("b",0,"b").', 'binary(":root","a=c","a","=","c").',
+            'path("a",0,"a").', 'path("c",0,"c").'
+        ])
+
+        self.assertEqual(
+            parse_coom('behavior{require a = b || a = c || a = d}'), [
+                'behavior((":root",0)).',
+                'require((":root",0),"a=b||a=c||a=d").',
+                'binary(":root","a=b||a=c||a=d","a=b","||","a=c||a=d").',
+                'binary(":root","a=c||a=d","a=c","||","a=d").',
+                'binary(":root","a=b","a","=","b").', 'path("a",0,"a").',
+                'path("b",0,"b").', 'binary(":root","a=c","a","=","c").',
+                'path("a",0,"a").', 'path("c",0,"c").',
+                'binary(":root","a=d","a","=","d").', 'path("a",0,"a").',
+                'path("d",0,"d").'
+            ])
+
+        self.assertEqual(parse_coom('behavior{require a = b && a = c}'), [
+            'behavior((":root",0)).', 'require((":root",0),"a=b&&a=c").',
+            'binary(":root","a=b&&a=c","a=b","&&","a=c").',
+            'binary(":root","a=b","a","=","b").', 'path("a",0,"a").',
+            'path("b",0,"b").', 'binary(":root","a=c","a","=","c").',
+            'path("a",0,"a").', 'path("c",0,"c").'
+        ])
+
+        self.assertEqual(
+            parse_coom('behavior{require a = b && a = c && a = d}'), [
+                'behavior((":root",0)).',
+                'require((":root",0),"a=b&&a=c&&a=d").',
+                'binary(":root","a=b&&a=c&&a=d","a=b","&&","a=c&&a=d").',
+                'binary(":root","a=c&&a=d","a=c","&&","a=d").',
+                'binary(":root","a=b","a","=","b").', 'path("a",0,"a").',
+                'path("b",0,"b").', 'binary(":root","a=c","a","=","c").',
+                'path("a",0,"a").', 'path("c",0,"c").',
+                'binary(":root","a=d","a","=","d").', 'path("a",0,"a").',
+                'path("d",0,"d").'
+            ])
+
+        self.assertEqual(parse_coom('behavior{require ! a = b }'), [
+            'behavior((":root",0)).', 'require((":root",0),"!a=b").',
+            'unary(":root","!a=b","!","a=b").',
+            'binary(":root","a=b","a","=","b").', 'path("a",0,"a").',
+            'path("b",0,"b").'
+        ])
+
+        self.assertEqual(parse_coom('behavior{require (a = b) }'), [
+            'behavior((":root",0)).', 'require((":root",0),"(a=b)").',
+            'unary(":root","(a=b)","()","a=b").',
+            'binary(":root","a=b","a","=","b").', 'path("a",0,"a").',
+            'path("b",0,"b").'
+        ])
+
+    def test_formula(self):
         pass
 
 
