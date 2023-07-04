@@ -288,7 +288,9 @@ class ASPVisitor(ModelVisitor):
             left = form_sign[i].getText()
             right = '^'.join([a.getText() for a in form_sign[i + 1:]])
             complete = left + '^' + right
-            print(f'binary("{complete}","{left}","^","{right}").')
+            print(
+                f'binary("{self.behavior}","{complete}","{left}","^","{right}").'
+            )
         super().visitFormula_pow(ctx)
 
     def visitFormula_sign(self, ctx: ModelParser.Formula_signContext):
@@ -305,7 +307,8 @@ class ASPVisitor(ModelVisitor):
                     f'unary("{self.behavior}","{complete}","+","{positive}").')
         elif ctx.formula() is not None:
             in_brackets = ctx.formula().getText()
-            print(f'unary("{complete}","()","{in_brackets}").')
+            print(
+                f'unary("{self.behavior}","{complete}","()","{in_brackets}").')
         elif ctx.formula_func() is not None:
             func = ctx.formula_func().FUNCTION()
             for f in ctx.formula_func().formula():
