@@ -111,7 +111,7 @@ class ASPVisitor(ModelVisitor):
 
     def visitConditioned(self, ctx: ModelParser.ConditionedContext):
         constraint_id = f'("{self.behavior}",{self.constraint_idx})'
-        print(f'\nbehavior({constraint_id}).')
+        print(f'behavior({constraint_id}).')
         super().visitConditioned(ctx)
         self.constraint_idx += 1
 
