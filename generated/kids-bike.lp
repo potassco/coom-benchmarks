@@ -18,7 +18,6 @@ option("Wheel", "W18").
 value("Wheel","W18","size",18).
 option("Wheel", "W20").
 value("Wheel","W20","size",20).
-
 behavior((":root",0)).
 condition((":root",0),"color=Yellow").
 binary(":root","color=Yellow","color","=","Yellow").
@@ -28,7 +27,6 @@ require((":root",0),"frontWheel.size>16").
 binary(":root","frontWheel.size>16","frontWheel.size",">","16").
 path("frontWheel.size",0,"frontWheel").
 path("frontWheel.size",1,"size").
-
 behavior((":root",1)).
 combinations((":root",1),0,"wheelSupport").
 combinations((":root",1),1,"rearWheel").
@@ -40,7 +38,6 @@ allow((":root",1),(1,0),"W16").
 allow((":root",1),(0,1),"False").
 allow((":root",1),(1,1),"W18").
 allow((":root",1),(1,1),"W20").
-
 behavior((":root",2)).
 require((":root",2),"frontWheel.size=rearWheel.size").
 binary(":root","frontWheel.size=rearWheel.size","frontWheel.size","=","rearWheel.size").
