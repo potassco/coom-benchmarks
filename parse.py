@@ -15,9 +15,7 @@ class ASPVisitor(ModelVisitor):
         self.structure_name: str = ':root'
         self.behavior: str = ':root'
         self.constraint_idx: int = 0
-        # self.path_idx: int = 0
         self.row_idx: int = 0
-        self.cond_idx: int = 0
         self.print_path: bool = True
 
     def visitProduct(self, ctx: ModelParser.ProductContext):
@@ -37,19 +35,19 @@ class ASPVisitor(ModelVisitor):
         self.parent_enum = None
 
     def visitBehavior(self, ctx: ModelParser.BehaviorContext):
+        # TODO: Implement support for nested behavior blocks
         if ctx.name() is not None:
             self.behavior = ctx.name().getText()
         super().visitBehavior(ctx)
         self.behavior = ':root'
 
     def visitBehavior_block(self, ctx: ModelParser.Behavior_blockContext):
-        # for d in ctx.define():
-        #     print(d.getText())
+        # TODO: Implement support for nested behavior blocks
         super().visitBehavior_block(ctx)
-        # TODO
 
     def visitDefine(self, ctx: ModelParser.DefineContext):
-        # TODO
+        # TODO: Implement define translation
+        # print(ctx.getText())
         super().visitDefine(ctx)
 
     def visitFeature(self, ctx: ModelParser.FeatureContext):
@@ -175,7 +173,6 @@ class ASPVisitor(ModelVisitor):
         condition = f'"{ctx.condition().getText()}"'
         print(f'require({constraint_id},{condition}).')
         super().visitRequire(ctx)
-        self.cond_idx = 0
 
     def visitCondition_or(self, ctx: ModelParser.Condition_orContext):
         cond_and: ModelParser.condition_andContext = ctx.condition_and()

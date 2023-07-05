@@ -144,6 +144,7 @@ class TestMain(unittest.TestCase):
         self.assertEqual(parse_coom('behavior{readonly totalWeight}'), [])
 
         # TODO: Test Define statement (needs to be implemented)
+        # self.assertEqeual(parse_coom('behavior{define a = b}'), []) # TODO
 
     def test_condition(self):
         self.assertEqual(parse_coom('behavior{require a = b || a = c}'), [
