@@ -1,11 +1,12 @@
 instance((),":root") :- structure(":root").
 
+% TODO: Incorporate cardinalities
 variable(Instance,Feature,Type) :- instance(Instance,Context), feature(Context,Feature,Type,_,_), enumeration(Type).
 {  value(Instance,Feature,Option) : option(Type,Option) } :- variable(Instance,Feature,Type).
 :-  {  value(Instance,Feature,Option) : option(Type,Option) } != 1, variable(Instance,Feature,Type).
 
 % % Derive associated attribute values
-value(Instance,Attr,V):- variable(Instance,Feature,Type), attr_value(Type,Option,Attr,V), value(Instance,Feature,Option).
+value((Feature,Instance),Attr,V):- variable(Instance,Feature,Type), attr_value(Type,Option,Attr,V), value(Instance,Feature,Option).
 
 %%% Constraints
 constraint(Instance,(Context,Idx)) :- behavior((Context,Idx)), instance(Instance,Context).
@@ -21,19 +22,24 @@ binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"!=",V2), V1 !
 % etc...
 
 % Also needed for first argument?
-% path_value(Instance,Path,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).
-% path_value(Instance,Path,N) :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
+path_value(Instance,Path,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).
+path_value(Instance,Path,N) :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
 
-path(Instance,Path) :- binary(Context,_,Path,_,_), path(Path,0,Name), instance(Instance,Context).
-path(Instance,Path) :- binary(Context,_,_,_,Path), path(Path,0,Name), instance(Instance,Context).
-% path_value(Instance,Path,V) :- binary(Context,_,Path,_,_), path(Path,0,Name), instance(Instance,Context), value(Instance,Name,V).
-% path_value(Instance,Path,V) :- binary(Context,_,_,_,Path), path(Path,0,Name), instance(Instance,Context), value(Instance,Name,V).
+% Assume that a path only points to one instance at the moment
+path(Instance,Path) :- binary(Context,_,Path,_,_), path(Path,0,_), instance(Instance,Context).
+path(Instance,Path) :- binary(Context,_,_,_,Path), path(Path,0,_), instance(Instance,Context).
+
+path_value(Instance,Path,V)    :- path(Instance,Path), path(Path,0,Name), not path(Path,1,_), value(Instance,Name,V).
+path_value(Instance,Path,0,(Name,Instance)) :- path(Instance,Path), path(Path,0,Name), path(Path,1,_).
+
+path_value(Instance,Path,V)    :- path_value(Instance,Path,N-1,Name0), path(Path,N,Name1), not path(Path,N+1,_), value(Name0,Name1,V).
+path_value(Instance,Path,N,(Name1,Name0)) :- path_value(Instance,Path,N-1,Name0), path(Path,N,Name1), path(Path,N+1,_).
 
 
-#show instance/2.
-#show value/3.
+% #show instance/2.
+% #show value/3.
 
-#show path/2.
+#show path_value/3.
 
 behavior((":root",0)).
 condition((":root",0),"color=Yellow").
