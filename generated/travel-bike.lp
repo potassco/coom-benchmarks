@@ -23,17 +23,17 @@ enumeration("Capacity").
 attribute("Capacity","volume").
 attribute("Capacity","weight").
 option("Capacity", "B10").
-value("Capacity","B10","volume",10).
-value("Capacity","B10","weight",100).
+attr_value("Capacity","B10","volume",10).
+attr_value("Capacity","B10","weight",100).
 option("Capacity", "B20").
-value("Capacity","B20","volume",20).
-value("Capacity","B20","weight",250).
+attr_value("Capacity","B20","volume",20).
+attr_value("Capacity","B20","weight",250).
 option("Capacity", "B50").
-value("Capacity","B50","volume",50).
-value("Capacity","B50","weight",600).
+attr_value("Capacity","B50","volume",50).
+attr_value("Capacity","B50","weight",600).
 option("Capacity", "B100").
-value("Capacity","B100","volume",100).
-value("Capacity","B100","weight",1200).
+attr_value("Capacity","B100","volume",100).
+attr_value("Capacity","B100","weight",1200).
 enumeration("Material").
 option("Material", "Cotton").
 option("Material", "Leather").
@@ -42,20 +42,20 @@ enumeration("Wheel").
 attribute("Wheel","size").
 attribute("Wheel","weight").
 option("Wheel", "W20").
-value("Wheel","W20","size",20).
-value("Wheel","W20","weight",650).
+attr_value("Wheel","W20","size",20).
+attr_value("Wheel","W20","weight",650).
 option("Wheel", "W22").
-value("Wheel","W22","size",22).
-value("Wheel","W22","weight",700).
+attr_value("Wheel","W22","size",22).
+attr_value("Wheel","W22","weight",700).
 option("Wheel", "W24").
-value("Wheel","W24","size",24).
-value("Wheel","W24","weight",800).
+attr_value("Wheel","W24","size",24).
+attr_value("Wheel","W24","weight",800).
 option("Wheel", "W26").
-value("Wheel","W26","size",26).
-value("Wheel","W26","weight",900).
+attr_value("Wheel","W26","size",26).
+attr_value("Wheel","W26","weight",900).
 option("Wheel", "W28").
-value("Wheel","W28","size",28).
-value("Wheel","W28","weight",1000).
+attr_value("Wheel","W28","size",28).
+attr_value("Wheel","W28","weight",1000).
 behavior((":root",0)).
 require((":root",0),"count(carrier.bags)+count(frame.bags)<=4").
 binary(":root","count(carrier.bags)+count(frame.bags)<=4","count(carrier.bags)+count(frame.bags)","<=","4").

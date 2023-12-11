@@ -12,6 +12,11 @@ pip install antlr4-python-runtime
 
 The `model` directory contains is provided by denkbares and represents the current state of the COOM DSL language.
 
+
+More information on the ANTLR4 python target can be found here:
+https://github.com/antlr/antlr4/blob/master/doc/python-target.md
+
+
 ## Usage
 ### Parser
 

@@ -114,7 +114,7 @@ class ASPVisitor(ModelVisitor):
                 elif c.name() is not None:
                     option_value = f'"{c.name().getText()}"'
                 print(
-                    f'value("{parent_name}","{option_name}","{attr_name}",{option_value}).'
+                    f'attr_value("{parent_name}","{option_name}","{attr_name}",{option_value}).'
                 )
 
     def visitConditioned(self, ctx: ModelParser.ConditionedContext):

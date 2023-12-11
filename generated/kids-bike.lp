@@ -11,13 +11,13 @@ option("Color", "Blue").
 enumeration("Wheel").
 attribute("Wheel","size").
 option("Wheel", "W14").
-value("Wheel","W14","size",14).
+attr_value("Wheel","W14","size",14).
 option("Wheel", "W16").
-value("Wheel","W16","size",16).
+attr_value("Wheel","W16","size",16).
 option("Wheel", "W18").
-value("Wheel","W18","size",18).
+attr_value("Wheel","W18","size",18).
 option("Wheel", "W20").
-value("Wheel","W20","size",20).
+attr_value("Wheel","W20","size",20).
 behavior((":root",0)).
 condition((":root",0),"color=Yellow").
 binary(":root","color=Yellow","color","=","Yellow").
