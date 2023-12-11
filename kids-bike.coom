@@ -12,7 +12,6 @@ enumeration Color {
 	Blue
 }
 
-
 enumeration Wheel {
 	attribute	num/inch	size
 

@@ -1,13 +1,70 @@
 instance((),":root") :- structure(":root").
 
-variable(Path,Feature,Type) :- instance(Path,Context), feature(Context,Feature,Type,_,_), enumeration(Type).
-{  value(Path,Feature,Option) : option(Type,Option) } :- variable(Path,Feature,Type).
-:-  {  value(Path,Feature,Option) : option(Type,Option) } != 1, variable(Path,Feature,Type).
+variable(Instance,Feature,Type) :- instance(Instance,Context), feature(Context,Feature,Type,_,_), enumeration(Type).
+{  value(Instance,Feature,Option) : option(Type,Option) } :- variable(Instance,Feature,Type).
+:-  {  value(Instance,Feature,Option) : option(Type,Option) } != 1, variable(Instance,Feature,Type).
 
 % % Derive associated attribute values
-value(Path,Type,Option,Attr,V):- variable(Path,Feature,Type), attr_value(Type,Option,Attr,V), value(Path,Feature,Option).
+value(Instance,Attr,V):- variable(Instance,Feature,Type), attr_value(Type,Option,Attr,V), value(Instance,Feature,Option).
+
+%%% Constraints
+constraint(Instance,(Context,Idx)) :- behavior((Context,Idx)), instance(Instance,Context).
+
+unsat(Instance, Constraint) :- condition_sat(Instance,Constraint,Condition), not require_sat(Instance,Constraint,_).
+condition_sat(Instance,Constraint,Condition) :- constraint(Instance,Constraint), condition(Constraint,Condition), binary_sat(Instance,Constraint,Condition).
+
+binary_values(Instance,Formula,V1,Operator,V2) :- binary(Context,Formula,Path1,Operator,Path2), instance(Instance,Context),
+                                                path_value(Instance,Path1,V1),
+                                                path_value(Instance,Path2,V2).
+binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"=",V2), V1 = V2.
+binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"!=",V2), V1 != V2.
+% etc...
+
+% Also needed for first argument?
+% path_value(Instance,Path,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).
+% path_value(Instance,Path,N) :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
+
+path(Instance,Path) :- binary(Context,_,Path,_,_), path(Path,0,Name), instance(Instance,Context).
+path(Instance,Path) :- binary(Context,_,_,_,Path), path(Path,0,Name), instance(Instance,Context).
+% path_value(Instance,Path,V) :- binary(Context,_,Path,_,_), path(Path,0,Name), instance(Instance,Context), value(Instance,Name,V).
+% path_value(Instance,Path,V) :- binary(Context,_,_,_,Path), path(Path,0,Name), instance(Instance,Context), value(Instance,Name,V).
 
 
+#show instance/2.
+#show value/3.
+
+#show path/2.
+
+behavior((":root",0)).
+condition((":root",0),"color=Yellow").
+binary(":root","color=Yellow","color","=","Yellow").
+path("color",0,"color").
+constant("Yellow").
+require((":root",0),"frontWheel.size>16").
+binary(":root","frontWheel.size>16","frontWheel.size",">","16").
+path("frontWheel.size",0,"frontWheel").
+path("frontWheel.size",1,"size").
+number("16",16).
+
+behavior((":root",1)).
+combinations((":root",1),0,"wheelSupport").
+combinations((":root",1),1,"rearWheel").
+path("wheelSupport",0,"wheelSupport").
+path("rearWheel",0,"rearWheel").
+allow((":root",1),(0,0),"True").
+allow((":root",1),(1,0),"W14").
+allow((":root",1),(1,0),"W16").
+allow((":root",1),(0,1),"False").
+allow((":root",1),(1,1),"W18").
+allow((":root",1),(1,1),"W20").
+
+behavior((":root",2)).
+require((":root",2),"frontWheel.size=rearWheel.size").
+binary(":root","frontWheel.size=rearWheel.size","frontWheel.size","=","rearWheel.size").
+path("frontWheel.size",0,"frontWheel").
+path("frontWheel.size",1,"size").
+path("rearWheel.size",0,"rearWheel").
+path("rearWheel.size",1,"size").
 
 
 
@@ -16,7 +73,4 @@ enumeration("bool").
 option("bool", "True").
 option("bool", "False").
 
-#show instance/2.
-#show value/3.
-#show value/5.
 
