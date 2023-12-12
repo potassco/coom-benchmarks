@@ -7,7 +7,7 @@ plus a corresponding encoding.
 For the parser install ANTLR4 for python
 ```
 pip install antlr4-tools
-pip install antlr4-python-runtime
+pip install antlr4-python3-runtime
 ```
 
 The `model` directory contains is provided by denkbares and represents the current state of the COOM DSL language.
