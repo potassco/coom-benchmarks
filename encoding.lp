@@ -19,7 +19,8 @@ constraint(Instance,(Context,Idx)) :- behavior((Context,Idx)), instance(Instance
 unsat(Instance,Constraint) :- condition_sat(Instance,Constraint), not require_sat(Instance,Constraint).
 % TODO: Is this correct?
 unsat(Instance,Constraint) :- constraint(Instance,Constraint), require(Constraint,_), not condition(Constraint,_), not require_sat(Instance,Constraint).
-
+% Combinations Table (only for allow)
+unsat(Instance,Constraint) :- constraint(Instance,Constraint), combinations(Constraint,_,_), not hit_row(Instance,Constraint,_).
 
 % Satisfaction atoms for different constraint types
 condition_sat(Instance,Constraint) :- constraint(Instance,Constraint), condition(Constraint,Formula), binary_sat(Instance,Formula).
@@ -44,6 +45,7 @@ path_value(Instance,Path,N) :- binary(Context,_,_,_,Path), instance(Instance,Con
 % Assume that a path only points to one instance at the moment
 path(Instance,Path) :- binary(Context,_,Path,_,_), path(Path,0,_), instance(Instance,Context).
 path(Instance,Path) :- binary(Context,_,_,_,Path), path(Path,0,_), instance(Instance,Context).
+path(Instance,Path) :- combinations((Context,_),_,Path), path(Path,0,_), instance(Instance,Context).
 
 path_value(Instance,Path,V)    :- path(Instance,Path), path(Path,0,Name), not path(Path,1,_), value(Instance,Name,V).
 path_value(Instance,Path,0,(Name,Instance)) :- path(Instance,Path), path(Path,0,Name), path(Path,1,_).
@@ -51,32 +53,19 @@ path_value(Instance,Path,0,(Name,Instance)) :- path(Instance,Path), path(Path,0,
 path_value(Instance,Path,V)    :- path_value(Instance,Path,N-1,Name0), path(Path,N,Name1), not path(Path,N+1,_), value(Name0,Name1,V).
 path_value(Instance,Path,N,(Name1,Name0)) :- path_value(Instance,Path,N-1,Name0), path(Path,N,Name1), path(Path,N+1,_).
 
+%%% Check combinations
+% TODO: Currently assumes that there is only one possible attribute at end of path
+% TODO: Only checks forbid
+hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path), 
+                                            constraint(Instance,Constraint), path_value(Instance,Path,V).
+hit_row(Instance,Constraint,Row) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
+                                    0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_); -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.
 
-% #show instance/2.
+
+
+#show instance/2.
 #show value/3.
 
-
-
-
-% behavior((":root",1)).
-% combinations((":root",1),0,"wheelSupport").
-% combinations((":root",1),1,"rearWheel").
-% path("wheelSupport",0,"wheelSupport").
-% path("rearWheel",0,"rearWheel").
-% allow((":root",1),(0,0),"True").
-% allow((":root",1),(1,0),"W14").
-% allow((":root",1),(1,0),"W16").
-% allow((":root",1),(0,1),"False").
-% allow((":root",1),(1,1),"W18").
-% allow((":root",1),(1,1),"W20").
-
-% behavior((":root",2)).
-% require((":root",2),"frontWheel.size=rearWheel.size").
-% binary(":root","frontWheel.size=rearWheel.size","frontWheel.size","=","rearWheel.size").
-% path("frontWheel.size",0,"frontWheel").
-% path("frontWheel.size",1,"size").
-% path("rearWheel.size",0,"rearWheel").
-% path("rearWheel.size",1,"size").
 
 
 
