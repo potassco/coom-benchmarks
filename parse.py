@@ -317,9 +317,19 @@ class ASPVisitor(ModelVisitor):
     def visitPath(self, ctx: ModelParser.PathContext):
         # Only do this for actual paths? Not formulas
         if self.print_path:
-            full_path = f'"{ctx.getText()}"'
-            for i, p in enumerate(ctx.path_item()):
-                print(f'path({full_path},{i},"{p.getText()}").')
+            full_path = f'{ctx.getText()}'
+
+            if full_path[0].isupper():
+                print(f'constant("{full_path}").')
+            else:
+                for i, p in enumerate(ctx.path_item()):
+                    print(f'path("{full_path}",{i},"{p.getText()}").')
+
+    def visitFloating(self, ctx: ModelParser.FloatingContext):
+        if ctx.FLOATING() is not None:
+            pass
+        if ctx.INTEGER() is not None:
+            print(f'number("{ctx.INTEGER()}",{ctx.INTEGER()}).')
 
 
 if __name__ == "__main__":
