@@ -23,9 +23,9 @@ value((Attr,(Instance,0)),V):- attr_value(Type,Option,Attr,V), instance(Instance
 
 %%% Constraints
 constraint(Instance,(Context,Idx)) :- behavior((Context,Idx)), instance(Instance,Context).
-% :- constraint(Instance,Constraint), unsat(Instance,Constraint).
+:- constraint(Instance,Constraint), unsat(Instance,Constraint).
 
-% TODO: Need to check for multiple conditions or requires (or nested), converto propositional formula? or use unsat atoms?
+% TODO: Need to check for multiple conditions or requires (or nested), convert to propositional formula? or use unsat atoms?
 unsat(Instance,Constraint) :- condition_sat(Instance,Constraint), not require_sat(Instance,Constraint).
 % TODO: Is this correct?
 unsat(Instance,Constraint) :- constraint(Instance,Constraint), require(Constraint,_), not condition(Constraint,_), not require_sat(Instance,Constraint).
@@ -37,9 +37,10 @@ condition_sat(Instance,Constraint) :- constraint(Instance,Constraint), condition
 require_sat(Instance,Constraint)   :- constraint(Instance,Constraint), require(Constraint,Formula), binary_sat(Instance,Formula).
 
 % Satisfaction atoms for binary relations
+% TODO: Assumes that a path points to one value only
 binary_values(Instance,Formula,V1,Operator,V2) :- binary(Context,Formula,Path1,Operator,Path2), instance(Instance,Context),
-                                                path_value(Instance,Path1,V1),
-                                                path_value(Instance,Path2,V2).
+                                                value(Instance,Path1,V1),
+                                                value(Instance,Path2,V2).
 binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"=",V2), V1 = V2.
 binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"!=",V2), V1 != V2.
 binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,">",V2), V1 > V2.
@@ -59,36 +60,34 @@ path_instance(Instance,Path,0,Instance2)   :- path_instance(Instance,Path), path
 
 path_value(Instance,Path,Instance3,V)      :- path_instance(Instance,Path,N-1,Instance2), path(Path,N,Name), not path(Path,N+1,_), value(Instance3,V)   , Instance3=(Name,(Instance2,_)).
 path_value(Instance,Path,Instance3,object) :- path_instance(Instance,Path,N-1,Instance2), path(Path,N,Name), not path(Path,N+1,_), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
-path_instance(Instance,Path,N-1,Instance3) :- path_instance(Instance,Path,N  ,Instance2), path(Path,N,Name),     path(Path,N+1,_), instance(Instance3,_), Instance3=(Name,(Instance,_)).
+path_instance(Instance,Path,N,Instance3)   :- path_instance(Instance,Path,N-1,Instance2), path(Path,N,Name),     path(Path,N+1,_), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
 
 % Constants and numbers
-% Also needed for first argument?
+% TODO: Also needed for first argument?
 path_value(Instance,Path,constant,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).
 path_value(Instance,Path,number,N)      :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
 
 %%% Check combinations
 % TODO: Currently assumes that there is only one possible attribute at end of path
 % TODO: Only checks allow. Add forbid statements
+% TODO: Does this check for wildcards?
 hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path), 
                                             constraint(Instance,Constraint), path_value(Instance,Path,V).
 hit_row(Instance,Constraint,Row) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
                                     0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_); -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.
 
+% Evaluate functions and formulas
+% Assumes that every function and every term in an arithmetic expression points to a single path
+value(Instance,Path,V)     :- path_value(Instance,Path,_,V), V != object.
+value(Instance,Function,V) :- function(Context,Function,"count",Path), instance(Instance,Context), V = #count{ V',Instance2: path_value(Instance,Path,Instance2,V') }.
+value(Instance,Function,V) :- function(Context,Function,"sum",Path),   instance(Instance,Context), V = #sum  { V',Instance2: path_value(Instance,Path,Instance2,V') }.
 
+value(Instance,Formula,V1+V2) :- binary(Context,Formula,Left,"+",Right), instance(Instance,Context), value(Instance,Left,V1), value(Instance,Right,V2).
+value(Instance,Formula,V1-V2) :- binary(Context,Formula,Left,"-",Right), instance(Instance,Context), value(Instance,Left,V1), value(Instance,Right,V2).
+% TODO: Add more arithmetics
 
-
-
-behavior((":root",0)).
-require((":root",0),"count(carrier.bags)+count(frame.bags)<=4").
-binary(":root","count(carrier.bags)+count(frame.bags)<=4","count(carrier.bags)+count(frame.bags)","<=","4").
-binary(":root","count(carrier.bags)+count(frame.bags)","count(carrier.bags)","+","count(frame.bags)").
-function(":root","count(carrier.bags)","count","carrier.bags").
-path("carrier.bags",0,"carrier").
-path("carrier.bags",1,"bags").
-function(":root","count(frame.bags)","count","frame.bags").
-path("frame.bags",0,"frame").
-path("frame.bags",1,"bags").
-number("4",4).
+% Imply statements
+value((Name,(Instance,0)),V) :- imply((Context,Idx),Name,Formula), instance(Instance,Context), value(Instance,Formula,V).
 
 #show instance/2.
 #show value/2.
