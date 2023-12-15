@@ -17,7 +17,7 @@ instance((Feature,(Instance,0..Min-1)),Type)      :- feature(Context,Feature,Typ
 
 % Derive associated attribute values
 % TODO: Is an index needed in the path for the sake of uniformity?
-value((Attr,Instance),V):- attr_value(Type,Option,Attr,V), instance(Instance,Type), value(Instance,Option).
+value((Attr,(Instance,0)),V):- attr_value(Type,Option,Attr,V), instance(Instance,Type), value(Instance,Option).
 
 
 
@@ -48,30 +48,47 @@ binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"<",V2), V1 < 
 binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"<=",V2), V1 <= V2.
 
 %%% Get values of path expressions
+path_instance(Instance,Path) :- binary(Context,_,Path,_,_),       path(Path,0,_), instance(Instance,Context).
+path_instance(Instance,Path) :- binary(Context,_,_,_,Path),       path(Path,0,_), instance(Instance,Context).
+path_instance(Instance,Path) :- combinations((Context,_),_,Path), path(Path,0,_), instance(Instance,Context).
+path_instance(Instance,Path) :- function(Context,_,_,Path),       path(Path,0,_), instance(Instance,Context).
+
+path_value(Instance,Path,Instance2,V)      :- path_instance(Instance,Path), path(Path,0,Name), not path(Path,1,_), value(Instance2,V),    Instance2=(Name,(Instance,_)).
+path_value(Instance,Path,Instance2,object) :- path_instance(Instance,Path), path(Path,0,Name), not path(Path,1,_), instance(Instance2,_), Instance2=(Name,(Instance,_)).
+path_instance(Instance,Path,0,Instance2)   :- path_instance(Instance,Path), path(Path,0,Name),     path(Path,1,_), instance(Instance2,_), Instance2=(Name,(Instance,_)).
+
+path_value(Instance,Path,Instance3,V)      :- path_instance(Instance,Path,N-1,Instance2), path(Path,N,Name), not path(Path,N+1,_), value(Instance3,V)   , Instance3=(Name,(Instance2,_)).
+path_value(Instance,Path,Instance3,object) :- path_instance(Instance,Path,N-1,Instance2), path(Path,N,Name), not path(Path,N+1,_), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
+path_instance(Instance,Path,N-1,Instance3) :- path_instance(Instance,Path,N  ,Instance2), path(Path,N,Name),     path(Path,N+1,_), instance(Instance3,_), Instance3=(Name,(Instance,_)).
+
+% Constants and numbers
 % Also needed for first argument?
-path_value(Instance,Path,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).
-path_value(Instance,Path,N) :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
-
-% Assume that a path only points to one instance at the moment
-path(Instance,Path) :- binary(Context,_,Path,_,_), path(Path,0,_), instance(Instance,Context).
-path(Instance,Path) :- binary(Context,_,_,_,Path), path(Path,0,_), instance(Instance,Context).
-path(Instance,Path) :- combinations((Context,_),_,Path), path(Path,0,_), instance(Instance,Context).
-
-path_value(Instance,Path,V)    :- path(Instance,Path), path(Path,0,Name), not path(Path,1,_), value(Instance,Name,V).
-path_value(Instance,Path,0,(Name,Instance)) :- path(Instance,Path), path(Path,0,Name), path(Path,1,_).
-
-path_value(Instance,Path,V)    :- path_value(Instance,Path,N-1,Name0), path(Path,N,Name1), not path(Path,N+1,_), value(Name0,Name1,V).
-path_value(Instance,Path,N,(Name1,Name0)) :- path_value(Instance,Path,N-1,Name0), path(Path,N,Name1), path(Path,N+1,_).
+path_value(Instance,Path,constant,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).
+path_value(Instance,Path,number,N)      :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
 
 %%% Check combinations
 % TODO: Currently assumes that there is only one possible attribute at end of path
-% TODO: Only checks forbid
+% TODO: Only checks allow. Add forbid statements
 hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path), 
                                             constraint(Instance,Constraint), path_value(Instance,Path,V).
 hit_row(Instance,Constraint,Row) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
                                     0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_); -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.
 
 
+
+
+
+behavior((":root",0)).
+require((":root",0),"count(carrier.bags)+count(frame.bags)<=4").
+binary(":root","count(carrier.bags)+count(frame.bags)<=4","count(carrier.bags)+count(frame.bags)","<=","4").
+binary(":root","count(carrier.bags)+count(frame.bags)","count(carrier.bags)","+","count(frame.bags)").
+function(":root","count(carrier.bags)","count","carrier.bags").
+path("carrier.bags",0,"carrier").
+path("carrier.bags",1,"bags").
+function(":root","count(frame.bags)","count","frame.bags").
+path("frame.bags",0,"frame").
+path("frame.bags",1,"bags").
+number("4",4).
 
 #show instance/2.
 #show value/2.

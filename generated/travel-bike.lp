@@ -17,7 +17,7 @@ structure("Carrier").
 feature("Carrier","bags","Bag",0,3).
 
 structure("Frame").
-feature("Frame","bags","Bag",0,2).
+feature("Frame","bags","Bag",2,2).
 
 structure("Bag").
 feature("Bag","capacity","Capacity",1,1).
@@ -63,18 +63,23 @@ option("Wheel", "W28").
 attr_value("Wheel","W28","size",28).
 attr_value("Wheel","W28","weight",1000).
 
+enumeration("Color").
+option("Color", "Red").
+option("Color", "Green").
+option("Color", "Yellow").
+option("Color", "Blue").
 
-% behavior((":root",0)).
-% require((":root",0),"count(carrier.bags)+count(frame.bags)<=4").
-% binary(":root","count(carrier.bags)+count(frame.bags)<=4","count(carrier.bags)+count(frame.bags)","<=","4").
-% binary(":root","count(carrier.bags)+count(frame.bags)","count(carrier.bags)","+","count(frame.bags)").
-% function(":root","count(carrier.bags)","count","carrier.bags").
-% path("carrier.bags",0,"carrier").
-% path("carrier.bags",1,"bags").
-% function(":root","count(frame.bags)","count","frame.bags").
-% path("frame.bags",0,"frame").
-% path("frame.bags",1,"bags").
-% number("4",4).
+behavior((":root",0)).
+require((":root",0),"count(carrier.bags)+count(frame.bags)<=4").
+binary(":root","count(carrier.bags)+count(frame.bags)<=4","count(carrier.bags)+count(frame.bags)","<=","4").
+binary(":root","count(carrier.bags)+count(frame.bags)","count(carrier.bags)","+","count(frame.bags)").
+function(":root","count(carrier.bags)","count","carrier.bags").
+path("carrier.bags",0,"carrier").
+path("carrier.bags",1,"bags").
+function(":root","count(frame.bags)","count","frame.bags").
+path("frame.bags",0,"frame").
+path("frame.bags",1,"bags").
+number("4",4).
 
 % behavior((":root",1)).
 % imply((":root",1),"totalWeight","frontWheel.weight+rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").

@@ -50,6 +50,12 @@ enumeration Wheel {
 	W28	= (	 28	   1000	)
 }
 
+enumeration Color {
+	Red
+	Green
+	Yellow
+	Blue
+}
 
 behavior {
     require count(carrier.bags) + count(frame.bags) <= 4
@@ -64,7 +70,7 @@ behavior {
 
 	require totalVolume >= requestedVolume
 
-	readonly totalWeight
+	// readonly totalWeight
 
 	// default color = Red
 
