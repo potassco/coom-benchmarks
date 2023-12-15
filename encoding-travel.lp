@@ -1,14 +1,23 @@
 instance((),":root") :- structure(":root").
-{ instance((Feature,Instance),Structure) } :- feature(Context,Feature,Structure,Min,Max), structure(Structure), instance(Instance,Context).
 
-% TODO: Incorporate cardinalities
-variable(Instance,Feature,Type) :- instance(Instance,Context), feature(Context,Feature,Type,_,_), enumeration(Type).
-{  value(Instance,Feature,Option) : option(Type,Option) } :- variable(Instance,Feature,Type).
-:-  {  value(Instance,Feature,Option) : option(Type,Option) } != 1, variable(Instance,Feature,Type).
+% Always generate minimal number of objects
+instance((Feature,(Instance,0..Min-1)),Structure) :- feature(Context,Feature,Structure,Min,_), structure(Structure), instance(Instance,Context).
+instance((Feature,(Instance,0..Min-1)),Type)      :- feature(Context,Feature,Type,Min,_),      enumeration(Type),    instance(Instance,Context).
 
-% % Derive associated attribute values
-value((Feature,Instance),Attr,V):- variable(Instance,Feature,Type), attr_value(Type,Option,Attr,V), value(Instance,Feature,Option).
+% Optionally generate additional objects
+{ instance((Feature,(Instance,Idx)),Structure) : Idx = Min..Max-1 } :- feature(Context,Feature,Structure,Min,Max), structure(Structure), instance(Instance,Context).
+{ instance((Feature,(Instance,Idx)),Type)      : Idx = Min..Max-1 } :- feature(Context,Feature,Type,Min,Max),      enumeration(Type),    instance(Instance,Context).
 
+% Indices in ascending order
+:- instance((Feature,(Instance,Idx)),_), not instance((Feature,(Instance,Idx-1)),_), Idx > 0.
+
+% Generate enumeration and attribute values
+{  value(Instance,Option) : option(Type,Option) } :- instance(Instance,Type).
+:-  {  value(Instance,Option) : option(Type,Option) } != 1, enumeration(Type), instance(Instance,Type).
+
+% Derive associated attribute values
+% TODO: Is an index needed in the path for the sake of uniformity?
+value((Attr,Instance),V):- attr_value(Type,Option,Attr,V), instance(Instance,Type), value(Instance,Option).
 
 
 
@@ -65,7 +74,7 @@ hit_row(Instance,Constraint,Row) :- allow(Constraint,(_,Row),_), constraint(Inst
 
 
 #show instance/2.
-% #show value/3.
+#show value/2.
 
 
 

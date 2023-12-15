@@ -66,7 +66,7 @@ behavior {
 
 	readonly totalWeight
 
-	default color = Red
+	// default color = Red
 
 	condition color = Red
 	require frontWheel.size = 20

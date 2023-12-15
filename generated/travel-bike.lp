@@ -64,65 +64,71 @@ attr_value("Wheel","W28","size",28).
 attr_value("Wheel","W28","weight",1000).
 
 
-behavior((":root",0)).
-require((":root",0),"count(carrier.bags)+count(frame.bags)<=4").
-binary(":root","count(carrier.bags)+count(frame.bags)<=4","count(carrier.bags)+count(frame.bags)","<=","4").
-binary(":root","count(carrier.bags)+count(frame.bags)","count(carrier.bags)","+","count(frame.bags)").
-function(":root","count(carrier.bags)","count","carrier.bags").
-path("carrier.bags",0,"carrier").
-path("carrier.bags",1,"bags").
-function(":root","count(frame.bags)","count","frame.bags").
-path("frame.bags",0,"frame").
-path("frame.bags",1,"bags").
-number("4",4).
-behavior((":root",1)).
-imply((":root",1),"totalWeight","frontWheel.weight+rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
-path("totalWeight",0,"totalWeight").
-binary(":root","frontWheel.weight+rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","frontWheel.weight","+","rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
-binary(":root","rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","rearWheel.weight","+","sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
-binary(":root","sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","sum(carrier.bags.capacity.weight)","+","sum(frame.bags.capacity.weight)").
-path("frontWheel.weight",0,"frontWheel").
-path("frontWheel.weight",1,"weight").
-path("rearWheel.weight",0,"rearWheel").
-path("rearWheel.weight",1,"weight").
-function(":root","sum(carrier.bags.capacity.weight)","sum","carrier.bags.capacity.weight").
-path("carrier.bags.capacity.weight",0,"carrier").
-path("carrier.bags.capacity.weight",1,"bags").
-path("carrier.bags.capacity.weight",2,"capacity").
-path("carrier.bags.capacity.weight",3,"weight").
-function(":root","sum(frame.bags.capacity.weight)","sum","frame.bags.capacity.weight").
-path("frame.bags.capacity.weight",0,"frame").
-path("frame.bags.capacity.weight",1,"bags").
-path("frame.bags.capacity.weight",2,"capacity").
-path("frame.bags.capacity.weight",3,"weight").
-behavior((":root",2)).
-require((":root",2),"totalWeight<=maxWeight").
-binary(":root","totalWeight<=maxWeight","totalWeight","<=","maxWeight").
-path("totalWeight",0,"totalWeight").
-path("maxWeight",0,"maxWeight").
-behavior((":root",3)).
-imply((":root",3),"totalVolume","sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)").
-path("totalVolume",0,"totalVolume").
-binary(":root","sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)","sum(carrier.bags.capacity.volume)","+","sum(frame.bags.capacity.volume)").
-function(":root","sum(carrier.bags.capacity.volume)","sum","carrier.bags.capacity.volume").
-path("carrier.bags.capacity.volume",0,"carrier").
-path("carrier.bags.capacity.volume",1,"bags").
-path("carrier.bags.capacity.volume",2,"capacity").
-path("carrier.bags.capacity.volume",3,"volume").
-function(":root","sum(frame.bags.capacity.volume)","sum","frame.bags.capacity.volume").
-path("frame.bags.capacity.volume",0,"frame").
-path("frame.bags.capacity.volume",1,"bags").
-path("frame.bags.capacity.volume",2,"capacity").
-path("frame.bags.capacity.volume",3,"volume").
-behavior((":root",4)).
-require((":root",4),"totalVolume>=requestedVolume").
-binary(":root","totalVolume>=requestedVolume","totalVolume",">=","requestedVolume").
-path("totalVolume",0,"totalVolume").
-path("requestedVolume",0,"requestedVolume").
-behavior((":root",5)).
-default((":root",5),"color","Red").
-path("color",0,"color").
-constant("Red").
+% behavior((":root",0)).
+% require((":root",0),"count(carrier.bags)+count(frame.bags)<=4").
+% binary(":root","count(carrier.bags)+count(frame.bags)<=4","count(carrier.bags)+count(frame.bags)","<=","4").
+% binary(":root","count(carrier.bags)+count(frame.bags)","count(carrier.bags)","+","count(frame.bags)").
+% function(":root","count(carrier.bags)","count","carrier.bags").
+% path("carrier.bags",0,"carrier").
+% path("carrier.bags",1,"bags").
+% function(":root","count(frame.bags)","count","frame.bags").
+% path("frame.bags",0,"frame").
+% path("frame.bags",1,"bags").
+% number("4",4).
+
+% behavior((":root",1)).
+% imply((":root",1),"totalWeight","frontWheel.weight+rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
+% path("totalWeight",0,"totalWeight").
+% binary(":root","frontWheel.weight+rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","frontWheel.weight","+","rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
+% binary(":root","rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","rearWheel.weight","+","sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
+% binary(":root","sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","sum(carrier.bags.capacity.weight)","+","sum(frame.bags.capacity.weight)").
+% path("frontWheel.weight",0,"frontWheel").
+% path("frontWheel.weight",1,"weight").
+% path("rearWheel.weight",0,"rearWheel").
+% path("rearWheel.weight",1,"weight").
+% function(":root","sum(carrier.bags.capacity.weight)","sum","carrier.bags.capacity.weight").
+% path("carrier.bags.capacity.weight",0,"carrier").
+% path("carrier.bags.capacity.weight",1,"bags").
+% path("carrier.bags.capacity.weight",2,"capacity").
+% path("carrier.bags.capacity.weight",3,"weight").
+% function(":root","sum(frame.bags.capacity.weight)","sum","frame.bags.capacity.weight").
+% path("frame.bags.capacity.weight",0,"frame").
+% path("frame.bags.capacity.weight",1,"bags").
+% path("frame.bags.capacity.weight",2,"capacity").
+% path("frame.bags.capacity.weight",3,"weight").
+
+% behavior((":root",2)).
+% require((":root",2),"totalWeight<=maxWeight").
+% binary(":root","totalWeight<=maxWeight","totalWeight","<=","maxWeight").
+% path("totalWeight",0,"totalWeight").
+% path("maxWeight",0,"maxWeight").
+
+% behavior((":root",3)).
+% imply((":root",3),"totalVolume","sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)").
+% path("totalVolume",0,"totalVolume").
+% binary(":root","sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)","sum(carrier.bags.capacity.volume)","+","sum(frame.bags.capacity.volume)").
+% function(":root","sum(carrier.bags.capacity.volume)","sum","carrier.bags.capacity.volume").
+% path("carrier.bags.capacity.volume",0,"carrier").
+% path("carrier.bags.capacity.volume",1,"bags").
+% path("carrier.bags.capacity.volume",2,"capacity").
+% path("carrier.bags.capacity.volume",3,"volume").
+% function(":root","sum(frame.bags.capacity.volume)","sum","frame.bags.capacity.volume").
+% path("frame.bags.capacity.volume",0,"frame").
+% path("frame.bags.capacity.volume",1,"bags").
+% path("frame.bags.capacity.volume",2,"capacity").
+% path("frame.bags.capacity.volume",3,"volume").
+
+% behavior((":root",4)).
+% require((":root",4),"totalVolume>=requestedVolume").
+% binary(":root","totalVolume>=requestedVolume","totalVolume",">=","requestedVolume").
+% path("totalVolume",0,"totalVolume").
+% path("requestedVolume",0,"requestedVolume").
+
+% behavior((":root",5)).
+% default((":root",5),"color","Red").
+% path("color",0,"color").
+% constant("Red").
+
 behavior((":root",6)).
 condition((":root",6),"color=Red").
 binary(":root","color=Red","color","=","Red").
@@ -133,11 +139,12 @@ binary(":root","frontWheel.size=20","frontWheel.size","=","20").
 path("frontWheel.size",0,"frontWheel").
 path("frontWheel.size",1,"size").
 number("20",20).
-behavior(("Bag",7)).
-condition(("Bag",7),"material=Leather").
-binary("Bag","material=Leather","material","=","Leather").
-path("material",0,"material").
-constant("Leather").
-default(("Bag",7),"capacity","B10").
-path("capacity",0,"capacity").
-constant("B10").
+
+% behavior(("Bag",7)).
+% condition(("Bag",7),"material=Leather").
+% binary("Bag","material=Leather","material","=","Leather").
+% path("material",0,"material").
+% constant("Leather").
+% default(("Bag",7),"capacity","B10").
+% path("capacity",0,"capacity").
+% constant("B10").
