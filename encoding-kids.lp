@@ -9,8 +9,6 @@ variable(Instance,Feature,Type) :- instance(Instance,Context), feature(Context,F
 value((Feature,Instance),Attr,V):- variable(Instance,Feature,Type), attr_value(Type,Option,Attr,V), value(Instance,Feature,Option).
 
 
-
-
 %%% Constraints
 constraint(Instance,(Context,Idx)) :- behavior((Context,Idx)), instance(Instance,Context).
 :- constraint(Instance,Constraint), unsat(Instance,Constraint).
@@ -56,7 +54,7 @@ path_value(Instance,Path,N,(Name1,Name0)) :- path_value(Instance,Path,N-1,Name0)
 %%% Check combinations
 % TODO: Currently assumes that there is only one possible attribute at end of path
 % TODO: Only checks forbid
-hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path), 
+hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path),
                                             constraint(Instance,Constraint), path_value(Instance,Path,V).
 hit_row(Instance,Constraint,Row) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
                                     0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_); -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.

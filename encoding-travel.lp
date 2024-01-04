@@ -16,8 +16,8 @@ instance((Feature,(Instance,0..Min-1)),Type)      :- feature(Context,Feature,Typ
 :-  {  value(Instance,Option) : option(Type,Option) } != 1, enumeration(Type), instance(Instance,Type).
 
 % Derive associated attribute values
-% TODO: Is an index needed in the path for the sake of uniformity?
-value((Attr,(Instance,0)),V):- attr_value(Type,Option,Attr,V), instance(Instance,Type), value(Instance,Option).
+% TODO: Is an index (0) needed in the path for the sake of uniformity?
+value((Attr,(Instance,0)),V) :- attr_value(Type,Option,Attr,V), instance(Instance,Type), value(Instance,Option).
 
 
 
@@ -34,7 +34,7 @@ unsat(Instance,Constraint) :- constraint(Instance,Constraint), combinations(Cons
 
 % Satisfaction atoms for different constraint types
 condition_sat(Instance,Constraint) :- constraint(Instance,Constraint), condition(Constraint,Formula), binary_sat(Instance,Formula).
-require_sat(Instance,Constraint)   :- constraint(Instance,Constraint), require(Constraint,Formula), binary_sat(Instance,Formula).
+require_sat(Instance,Constraint)   :- constraint(Instance,Constraint), require(Constraint,Formula),   binary_sat(Instance,Formula).
 
 % Satisfaction atoms for binary relations
 % TODO: Assumes that a path points to one value only
@@ -71,7 +71,7 @@ path_value(Instance,Path,number,N)      :- binary(Context,_,_,_,Path), instance(
 % TODO: Currently assumes that there is only one possible attribute at end of path
 % TODO: Only checks allow. Add forbid statements
 % TODO: Does this check for wildcards?
-hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path), 
+hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path),
                                             constraint(Instance,Constraint), path_value(Instance,Path,V).
 hit_row(Instance,Constraint,Row) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
                                     0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_); -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.
