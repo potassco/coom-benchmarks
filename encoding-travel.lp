@@ -81,6 +81,7 @@ hit_row(Instance,Constraint,Row) :- allow(Constraint,(_,Row),_), constraint(Inst
 value(Instance,Path,V)     :- path_value(Instance,Path,_,V), V != object.
 value(Instance,Function,V) :- function(Context,Function,"count",Path), instance(Instance,Context), V = #count{ V',Instance2: path_value(Instance,Path,Instance2,V') }.
 value(Instance,Function,V) :- function(Context,Function,"sum",Path),   instance(Instance,Context), V = #sum  { V',Instance2: path_value(Instance,Path,Instance2,V') }.
+% TODO: Add more functions
 
 value(Instance,Formula,V1+V2) :- binary(Context,Formula,Left,"+",Right), instance(Instance,Context), value(Instance,Left,V1), value(Instance,Right,V2).
 value(Instance,Formula,V1-V2) :- binary(Context,Formula,Left,"-",Right), instance(Instance,Context), value(Instance,Left,V1), value(Instance,Right,V2).
