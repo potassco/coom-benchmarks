@@ -40,7 +40,7 @@ unsat(Instance,Constraint) :- constraint(Instance,Constraint), combinations(Cons
 
 % Satisfaction atoms for different constraint types
 condition_sat(Instance,Constraint) :- constraint(Instance,Constraint), condition(Constraint,Formula), binary_sat(Instance,Formula).
-require_sat(Instance,Constraint)   :- constraint(Instance,Constraint), require(Constraint,Formula),   binary_sat(Instance,Formula).
+require_sat(Instance,Constraint)   :- constraint(Instance,Constraint), require(Constraint,Formula), binary_sat(Instance,Formula).
 
 % Satisfaction atoms for binary relations
 % TODO: Assumes that a path points to one value only
@@ -78,7 +78,7 @@ path_value(Instance,Path,number,N)      :- binary(Context,_,_,_,Path), instance(
 % TODO: Only checks allow. Add forbid statements
 % TODO: Does this check for wildcards?
 hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path),
-                                            constraint(Instance,Constraint), path_value(Instance,Path,V).
+                                            constraint(Instance,Constraint), value(Instance,Path,V).
 hit_row(Instance,Constraint,Row) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
                                     0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_); -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.
 
@@ -123,6 +123,3 @@ option("bool", "False").
 #defined path/3.
 #defined constant/1.
 #defined number/2.
-
-
-
