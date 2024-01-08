@@ -33,3 +33,6 @@ To test the parser run (the Python `unittest` package needs to be installed)
 ```
 python -m unittest tests/tests_parser.py
 ```
+
+## Documentation
+For a documentation of the fact format see `FactFormat.md`.
