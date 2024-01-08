@@ -11,9 +11,15 @@ instance((Feature,(Instance,0..Min-1)),Type)      :- feature(Context,Feature,Typ
 % Indices in ascending order
 :- instance((Feature,(Instance,Idx)),_), not instance((Feature,(Instance,Idx-1)),_), Idx > 0.
 
+% Assign numeric feature a value
+{ value((Feature,(Instance,0)),V) : V = Min..Max }
+                                                  :- feature(Context,Feature,"num",_,_), range(Context,Feature,Min,Max), instance(Instance,Context).
+:- { value((Feature,(Instance,0)),V) } != 1, feature(Context,Feature,"num",_,_), instance(Instance,Context).
+
+
 % Generate enumeration and attribute values
-{  value(Instance,Option) : option(Type,Option) } :- instance(Instance,Type).
-:-  {  value(Instance,Option) : option(Type,Option) } != 1, enumeration(Type), instance(Instance,Type).
+{ value(Instance,Option) : option(Type,Option) } :- instance(Instance,Type).
+:-  { value(Instance,Option) : option(Type,Option) } != 1, enumeration(Type), instance(Instance,Type).
 
 % Derive associated attribute values
 % TODO: Is an index (0) needed in the path for the sake of uniformity?
@@ -85,20 +91,38 @@ value(Instance,Function,V) :- function(Context,Function,"sum",Path),   instance(
 
 value(Instance,Formula,V1+V2) :- binary(Context,Formula,Left,"+",Right), instance(Instance,Context), value(Instance,Left,V1), value(Instance,Right,V2).
 value(Instance,Formula,V1-V2) :- binary(Context,Formula,Left,"-",Right), instance(Instance,Context), value(Instance,Left,V1), value(Instance,Right,V2).
+value(Instance,Formula,V1*V2) :- binary(Context,Formula,Left,"*",Right), instance(Instance,Context), value(Instance,Left,V1), value(Instance,Right,V2).
 % TODO: Add more arithmetics
 
 % Imply statements
 value((Name,(Instance,0)),V) :- imply((Context,Idx),Name,Formula), instance(Instance,Context), value(Instance,Formula,V).
 
-#show instance/2.
-#show value/2.
-
-
-
-
 % Always include boolean enumeration
 enumeration("bool").
 option("bool", "True").
 option("bool", "False").
+
+#show instance/2.
+#show value/2.
+
+#defined structure/1.
+#defined feature/5.
+#defined range/4.
+#defined enumeration/1.
+#defined option/2.
+#defined attribute/2.
+#defined attr_value/4.
+#defined behavior/1.
+#defined require/2.
+#defined condition/2.
+#defined imply/3.
+#defined combinations/3.
+#defined allow/3.
+#defined binary/5.
+#defined function/4.
+#defined path/3.
+#defined constant/1.
+#defined number/2.
+
 
 

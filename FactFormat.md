@@ -246,14 +246,15 @@ imply((":root",3),"totalVolume","sum(carrier.bags.capacity.volume)+sum(frame.bag
 ### Combinations
 A combinations table describes valid combinations of one or more fields in the context of a structure.
 Any combination that fulfills some 'allow'-line in the table is valid.
-The predicate `combinations/2` declares the columns of the table by specifying a path to some attribute.
+The predicate `combinations/3` declares the columns of the table by specifying a path to some attribute.
 
 ```prolog
-combinations(ConstraintID,Path)
+combinations(ConstraintID,Column,Path)
 ```
 
 Parameters:
 - `ConstraintID` - ID of the constraint to which the combination belongs
+- `Column`       - ID of current column
 - `Path`         - Path to an attribute of the product
 
 Examples:
