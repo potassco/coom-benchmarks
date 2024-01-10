@@ -12,25 +12,26 @@ class ASPVisitor(ModelVisitor):
     def __init__(self):
         super().__init__()
         self.parent_enum: Optional[ModelParser.EnumerationContext] = None
-        self.structure_name: str = ':root'
-        self.behavior: str = ':root'
+        self.root_name: str = ':root'
+        self.structure_name: str = self.root_name
+        self.behavior: str = self.root_name
         self.constraint_idx: int = 0
         self.row_idx: int = 0
         self.print_path: bool = True
 
     def visitProduct(self, ctx: ModelParser.ProductContext):
-        print('structure(":root").')
+        print(f'structure("{self.root_name}").')
         super().visitProduct(ctx)
 
     def visitStructure(self, ctx: ModelParser.StructureContext):
         self.structure_name = ctx.name().getText()
-        print(f'structure("{self.structure_name}").')
+        print(f'\nstructure("{self.structure_name}").')
         super().visitStructure(ctx)
-        self.structure_name = ':root'
+        self.structure_name = self.root_name
 
     def visitEnumeration(self, ctx: ModelParser.EnumerationContext):
         self.parent_enum = ctx
-        print(f'enumeration("{ctx.name().getText()}").')
+        print(f'\nenumeration("{ctx.name().getText()}").')
         super().visitEnumeration(ctx)
         self.parent_enum = None
 
@@ -39,7 +40,7 @@ class ASPVisitor(ModelVisitor):
         if ctx.name() is not None:
             self.behavior = ctx.name().getText()
         super().visitBehavior(ctx)
-        self.behavior = ':root'
+        self.behavior = self.root_name
 
     def visitBehavior_block(self, ctx: ModelParser.Behavior_blockContext):
         # TODO: Implement support for nested behavior blocks
@@ -120,7 +121,7 @@ class ASPVisitor(ModelVisitor):
     def visitConditioned(self, ctx: ModelParser.ConditionedContext):
         constraint_id = f'("{self.behavior}",{self.constraint_idx})'
         if ctx.interaction() is None:
-            print(f'behavior({constraint_id}).')
+            print(f'\nbehavior({constraint_id}).')
             super().visitConditioned(ctx)
             self.constraint_idx += 1
 
