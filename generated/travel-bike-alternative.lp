@@ -12,13 +12,17 @@ feature(":root","rearWheel","Wheel",1,1).
 feature(":root","frame","Frame",1,1).
 feature(":root","carrier","Carrier",1,1).
 feature(":root","color","Color",1,1).
+
 structure("Carrier").
 feature("Carrier","bags","Bag",0,3).
+
 structure("Frame").
 feature("Frame","bags","Bag",0,2).
+
 structure("Bag").
 feature("Bag","capacity","Capacity",1,1).
 feature("Bag","material","Material",1,1).
+
 enumeration("Capacity").
 attribute("Capacity","volume").
 attribute("Capacity","weight").
@@ -34,10 +38,12 @@ attr_value("Capacity","B50","weight",600).
 option("Capacity", "B100").
 attr_value("Capacity","B100","volume",100).
 attr_value("Capacity","B100","weight",1200).
+
 enumeration("Material").
 option("Material", "Cotton").
 option("Material", "Leather").
 option("Material", "Polyester").
+
 enumeration("Wheel").
 attribute("Wheel","size").
 attribute("Wheel","weight").
@@ -56,6 +62,7 @@ attr_value("Wheel","W26","weight",900).
 option("Wheel", "W28").
 attr_value("Wheel","W28","size",28).
 attr_value("Wheel","W28","weight",1000).
+
 enumeration("Color").
 option("Color", "Red").
 option("Color", "Green").
@@ -123,6 +130,7 @@ require((":root",4),"totalVolume>=requestedVolume").
 binary(":root","totalVolume>=requestedVolume","totalVolume",">=","requestedVolume").
 path("totalVolume",0,"totalVolume").
 path("requestedVolume",0,"requestedVolume").
+
 behavior((":root",5)).
 condition((":root",5),"color=Red").
 binary(":root","color=Red","color","=","Red").

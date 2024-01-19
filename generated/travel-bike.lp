@@ -1,8 +1,8 @@
 structure(":root").
 feature(":root","totalWeight","num",1,1).
-range(":root","totalWeight",1,50).
+range(":root","totalWeight",#inf,#sup).
 feature(":root","maxWeight","num",1,1).
-range(":root","maxWeight",1,50).
+range(":root","maxWeight",1,100).
 feature(":root","totalVolume","num",1,1).
 range(":root","totalVolume",0,200).
 feature(":root","requestedVolume","num",1,1).
@@ -17,7 +17,7 @@ structure("Carrier").
 feature("Carrier","bags","Bag",0,3).
 
 structure("Frame").
-feature("Frame","bags","Bag",2,2).
+feature("Frame","bags","Bag",0,2).
 
 structure("Bag").
 feature("Bag","capacity","Capacity",1,1).
@@ -102,11 +102,11 @@ path("frame.bags.capacity.weight",1,"bags").
 path("frame.bags.capacity.weight",2,"capacity").
 path("frame.bags.capacity.weight",3,"weight").
 
-% behavior((":root",2)).
-% require((":root",2),"totalWeight<=maxWeight").
-% binary(":root","totalWeight<=maxWeight","totalWeight","<=","maxWeight").
-% path("totalWeight",0,"totalWeight").
-% path("maxWeight",0,"maxWeight").
+behavior((":root",2)).
+require((":root",2),"totalWeight<=maxWeight").
+binary(":root","totalWeight<=maxWeight","totalWeight","<=","maxWeight").
+path("totalWeight",0,"totalWeight").
+path("maxWeight",0,"maxWeight").
 
 behavior((":root",3)).
 imply((":root",3),"totalVolume","sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)").
@@ -129,27 +129,22 @@ binary(":root","totalVolume>=requestedVolume","totalVolume",">=","requestedVolum
 path("totalVolume",0,"totalVolume").
 path("requestedVolume",0,"requestedVolume").
 
-% behavior((":root",5)).
-% default((":root",5),"color","Red").
-% path("color",0,"color").
-% constant("Red").
-
-behavior((":root",6)).
-condition((":root",6),"color=Red").
+behavior((":root",5)).
+condition((":root",5),"color=Red").
 binary(":root","color=Red","color","=","Red").
 path("color",0,"color").
 constant("Red").
-require((":root",6),"frontWheel.size=20").
+require((":root",5),"frontWheel.size=20").
 binary(":root","frontWheel.size=20","frontWheel.size","=","20").
 path("frontWheel.size",0,"frontWheel").
 path("frontWheel.size",1,"size").
 number("20",20).
 
-% behavior(("Bag",7)).
-% condition(("Bag",7),"material=Leather").
-% binary("Bag","material=Leather","material","=","Leather").
-% path("material",0,"material").
-% constant("Leather").
-% default(("Bag",7),"capacity","B10").
-% path("capacity",0,"capacity").
-% constant("B10").
+behavior(("Bag",6)).
+condition(("Bag",6),"material=Leather").
+binary("Bag","material=Leather","material","=","Leather").
+path("material",0,"material").
+constant("Leather").
+default(("Bag",6),"capacity","B10").
+path("capacity",0,"capacity").
+constant("B10").
