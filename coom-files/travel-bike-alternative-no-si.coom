@@ -64,7 +64,7 @@ behavior {
 						+ sum(carrier.bags.capacity.weight)
 						+ sum(frame.bags.capacity.weight)
 
-	require totalWeight <= maxWeight
+	require totalWeight <= maxWeight * 1000
 
 	imply totalVolume = sum(carrier.bags.capacity.volume) + sum(frame.bags.capacity.volume)
 

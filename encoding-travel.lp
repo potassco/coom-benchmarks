@@ -36,7 +36,7 @@ unsat(Instance,Constraint) :- condition_sat(Instance,Constraint), not require_sa
 % TODO: Is this correct?
 unsat(Instance,Constraint) :- constraint(Instance,Constraint), require(Constraint,_), not condition(Constraint,_), not require_sat(Instance,Constraint).
 % Combinations Table (only for allow)
-unsat(Instance,Constraint) :- constraint(Instance,Constraint), combinations(Constraint,_,_), not hit_row(Instance,Constraint,_).
+unsat(Instance,Constraint) :- constraint(Instance,Constraint), combinations(Constraint,_,_), not hit_row(Instance,Constraint).
 
 % Satisfaction atoms for different constraint types
 condition_sat(Instance,Constraint) :- constraint(Instance,Constraint), condition(Constraint,Formula), binary_sat(Instance,Formula).
@@ -79,7 +79,7 @@ path_value(Instance,Path,number,N)      :- binary(Context,_,_,_,Path), instance(
 % TODO: Does this check for wildcards?
 hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path),
                                             constraint(Instance,Constraint), value(Instance,Path,V).
-hit_row(Instance,Constraint,Row) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
+hit_row(Instance,Constraint) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
                                     0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_); -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.
 
 % Evaluate functions and formulas
@@ -95,7 +95,7 @@ value(Instance,Formula,V1*V2) :- binary(Context,Formula,Left,"*",Right), instanc
 % TODO: Add more arithmetics
 
 % Imply statements
-value((Name,(Instance,0)),V) :- imply((Context,Idx),Name,Formula), instance(Instance,Context), value(Instance,Formula,V).
+value((Name,(Instance,0)),V) :- imply((Context,_),Name,Formula), instance(Instance,Context), value(Instance,Formula,V).
 
 % Always include boolean enumeration
 enumeration("bool").

@@ -27,7 +27,7 @@ unsat(Instance,Constraint) :- condition_sat(Instance,Constraint), not require_sa
 % TODO: Is this correct?
 unsat(Instance,Constraint) :- constraint(Instance,Constraint), require(Constraint,_), not condition(Constraint,_), not require_sat(Instance,Constraint).
 % Combinations Table (only for allow)
-unsat(Instance,Constraint) :- constraint(Instance,Constraint), combinations(Constraint,_,_), not hit_row(Instance,Constraint,_).
+unsat(Instance,Constraint) :- constraint(Instance,Constraint), combinations(Constraint,_,_), not hit_row(Instance,Constraint).
 
 % Satisfaction atoms for different constraint types
 condition_sat(Instance,Constraint) :- constraint(Instance,Constraint), condition(Constraint,Formula), binary_sat(Instance,Formula).
@@ -72,7 +72,7 @@ value(Instance,Path,V) :- path_value(Instance,Path,_,V), V != object.
 % TODO: Does this check for wildcards?
 hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path),
                                             constraint(Instance,Constraint), value(Instance,Path,V).
-hit_row(Instance,Constraint,Row) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
+hit_row(Instance,Constraint) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
                                     0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_); -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.
 
 
