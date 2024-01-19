@@ -54,3 +54,11 @@ clingo encoding-travel.lp generated/travel-bike.lp
 
 ## Documentation
 For a documentation of the fact format see `FactFormat.md`.
+
+## Design decisions and open topics
+
+- How to handle SI units?
+    - Should there be a conversion by the parser to some base unit? Simple to implement but maybe an advanced feature which we do not want in the paper
+    - Or should all numerics be specified without SI units, thus in the same unit?
+    - Or allow different units and user has to build in conversion into constraint, e.g., for travel bike?
+- COOM allows nesting of conditions and requires. This is not supported by parser and encoding currently.
