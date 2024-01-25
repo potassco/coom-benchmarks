@@ -11,7 +11,7 @@ value((Attr,(Instance,0)),V) :- attr_value(Type,Option,Attr,V), instance(Instanc
 %%% Constraints
 % Instantiate constraint for each instance
 constraint(Instance,(Context,Idx)) :- behavior((Context,Idx)), instance(Instance,Context).
-% :- constraint(Instance,Constraint), unsat(Instance,Constraint).
+:- constraint(Instance,Constraint), unsat(Instance,Constraint).
 
 % Require without condition
 unsat(Instance,Constraint) :- condition(Constraint,CBinary),     require(Constraint,RBinary),
