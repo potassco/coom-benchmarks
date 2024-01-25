@@ -9,11 +9,8 @@ instance((Feature,(Instance,0..Min-1)),Structure) :- feature(Context,Feature,Str
 % Indices in ascending order
 :- instance((Feature,(Instance,Idx)),_), not instance((Feature,(Instance,Idx-1)),_), Idx > 0.
 
-% Assign a value to a numeric feature
-{ val((Feature,(Instance,0)),V) : V = Min..Max }
-        :- feature(Context,Feature,"num",_,_), range(Context,Feature,Min,Max), instance(Instance,Context).
-:- { val((Feature,(Instance,0)),V) } != 1, feature(Context,Feature,"num",_,_), instance(Instance,Context).
-
+% Assign numeric feature to a value
+&in{Min..Max} =: (Feature,(Instance,0)) :- feature(Context,Feature,"num",_,_), range(Context,Feature,Min,Max), instance(Instance,Context).
 
 % Paths which point to instances (not attributes)
 path_instance(Instance,Path) :- function(Context,_,_,Path), path(Path,0,_), instance(Instance,Context).
@@ -37,7 +34,11 @@ path_value(Instance,Formula,V1*V2) :- binary(Context,Formula,Left,"*",Right), in
 % TODO: Add more arithmetics
 
 % Imply statements
-val((Name,(Instance,0)),V) :- imply((Context,_),Name,Formula), instance(Instance,Context), path_value(Instance,Formula,V).
+&in{V..V} =: (Name,(Instance,0)) :- imply((Context,_),Name,Formula),
+                                 instance(Instance,Context), path_value(Instance,Formula,V).
+
+
+&show {(Feature,(Instance,0)) : feature(Context,Feature,"num",_,_), instance(Instance,Context)}.
 
 #defined range/4.
 #defined imply/3.

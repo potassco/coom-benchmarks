@@ -77,14 +77,14 @@ class ASPVisitor(ModelVisitor):
                                                      '').replace('*', '#sup')
 
         print(
-            f'feature("{self.structure_name}","{feature_name}","{type_name}",{c_min},{c_max}).'
+            f'feature("{self.structure_name}",{feature_name},"{type_name}",{c_min},{c_max}).'
         )
         if type_name == 'num':
             num: ModelParser.Number_defContext = field.number_def()
             r_min = '#inf' if num.min is None else num.min.INTEGER()
             r_max = '#sup' if num.max is None else num.max.INTEGER()
             print(
-                f'range("{self.structure_name}","{feature_name}",{r_min},{r_max}).'
+                f'range("{self.structure_name}",{feature_name},{r_min},{r_max}).'
             )
 
     def visitAttribute(self, ctx: ModelParser.AttributeContext):
@@ -93,7 +93,7 @@ class ASPVisitor(ModelVisitor):
         parent_name = self.parent_enum.name().getText()
         field: ModelParser.FieldContext = ctx.field()
         field_name = field.fieldName.getText()
-        print(f'attribute("{parent_name}","{field_name}").')
+        print(f'attribute("{parent_name}",{field_name}).')
         super().visitAttribute(ctx)
 
     def visitOption(self, ctx: ModelParser.OptionContext):
@@ -115,7 +115,7 @@ class ASPVisitor(ModelVisitor):
                 elif c.name() is not None:
                     option_value = f'"{c.name().getText()}"'
                 print(
-                    f'attr_value("{parent_name}","{option_name}","{attr_name}",{option_value}).'
+                    f'attr_value("{parent_name}","{option_name}",{attr_name},{option_value}).'
                 )
 
     def visitConditioned(self, ctx: ModelParser.ConditionedContext):
@@ -136,7 +136,7 @@ class ASPVisitor(ModelVisitor):
         constraint_id = f'("{self.behavior}",{self.constraint_idx})'
         path = ctx.path().getText()
         formula = ctx.formula().getText()
-        print(f'imply({constraint_id},"{path}","{formula}").')
+        print(f'imply({constraint_id},{path},"{formula}").')
         super().visitAssign_imply(ctx)
 
     def visitCombinations(self, ctx: ModelParser.CombinationsContext):
@@ -324,7 +324,7 @@ class ASPVisitor(ModelVisitor):
                 print(f'constant("{full_path}").')
             else:
                 for i, p in enumerate(ctx.path_item()):
-                    print(f'path("{full_path}",{i},"{p.getText()}").')
+                    print(f'path("{full_path}",{i},{p.getText()}).')
 
     def visitFloating(self, ctx: ModelParser.FloatingContext):
         if ctx.FLOATING() is not None:
