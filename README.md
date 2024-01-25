@@ -62,3 +62,11 @@ For a documentation of the fact format see `FactFormat.md`.
     - Or should all numerics be specified without SI units, thus in the same unit?
     - Or allow different units and user has to build in conversion into constraint, e.g., for travel bike?
 - COOM allows nesting of conditions and requires. This is not supported by parser and encoding currently.
+- COOM allows pointing to specific instances (e.g., first bag of carrier), although,
+    this is not documented in the Quick Guide I found.
+    Currently, the parser does not support this feature.
+- Use of wildcards in tables is not supported
+- forbid statement in tables is not supported
+- Encoding assumes that there is one possible attribute at the end of a path / paths point only to one value
+- Assumes that enumeration features have cardinality 1
+- Assumes that constant and numbers appear only on the right hand side of a binary relation
