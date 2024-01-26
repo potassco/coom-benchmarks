@@ -92,8 +92,12 @@ class ASPVisitor(ModelVisitor):
             raise ValueError("illegal option")
         parent_name = self.parent_enum.name().getText()
         field: ModelParser.FieldContext = ctx.field()
+        if field.number_def() is not None:
+            type = 'num'
+        else:
+            type = 'str'
         field_name = field.fieldName.getText()
-        print(f'attribute("{parent_name}",{field_name}).')
+        print(f'attribute("{parent_name}",{field_name},"{type}").')
         super().visitAttribute(ctx)
 
     def visitOption(self, ctx: ModelParser.OptionContext):

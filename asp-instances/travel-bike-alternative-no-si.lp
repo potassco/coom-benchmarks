@@ -24,8 +24,8 @@ feature("Bag",capacity,"Capacity",1,1).
 feature("Bag",material,"Material",1,1).
 
 enumeration("Capacity").
-attribute("Capacity",volume).
-attribute("Capacity",weight).
+attribute("Capacity",volume,"num").
+attribute("Capacity",weight,"num").
 option("Capacity", "B10").
 attr_value("Capacity","B10",volume,10).
 attr_value("Capacity","B10",weight,100).
@@ -45,8 +45,8 @@ option("Material", "Leather").
 option("Material", "Polyester").
 
 enumeration("Wheel").
-attribute("Wheel",size).
-attribute("Wheel",weight).
+attribute("Wheel",size,"num").
+attribute("Wheel",weight,"num").
 option("Wheel", "W20").
 attr_value("Wheel","W20",size,20).
 attr_value("Wheel","W20",weight,650).

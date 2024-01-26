@@ -11,7 +11,7 @@ option("Color", "Yellow").
 option("Color", "Blue").
 
 enumeration("Wheel").
-attribute("Wheel",size).
+attribute("Wheel",size,"num").
 option("Wheel", "W14").
 attr_value("Wheel","W14",size,14).
 option("Wheel", "W16").

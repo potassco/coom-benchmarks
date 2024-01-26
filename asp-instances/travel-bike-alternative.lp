@@ -1,8 +1,8 @@
 structure(":root").
 feature(":root",totalWeight,"num",1,1).
-range(":root",totalWeight,1,50000).
+range(":root",totalWeight,1,50).
 feature(":root",maxWeight,"num",1,1).
-range(":root",maxWeight,1,50000).
+range(":root",maxWeight,1,50).
 feature(":root",totalVolume,"num",1,1).
 range(":root",totalVolume,0,200).
 feature(":root",requestedVolume,"num",1,1).
@@ -24,8 +24,8 @@ feature("Bag",capacity,"Capacity",1,1).
 feature("Bag",material,"Material",1,1).
 
 enumeration("Capacity").
-attribute("Capacity",volume).
-attribute("Capacity",weight).
+attribute("Capacity",volume,"num").
+attribute("Capacity",weight,"num").
 option("Capacity", "B10").
 attr_value("Capacity","B10",volume,10).
 attr_value("Capacity","B10",weight,100).
@@ -45,8 +45,8 @@ option("Material", "Leather").
 option("Material", "Polyester").
 
 enumeration("Wheel").
-attribute("Wheel",size).
-attribute("Wheel",weight).
+attribute("Wheel",size,"num").
+attribute("Wheel",weight,"num").
 option("Wheel", "W20").
 attr_value("Wheel","W20",size,20).
 attr_value("Wheel","W20",weight,650).
@@ -83,7 +83,7 @@ number("4",4).
 
 behavior((":root",1)).
 imply((":root",1),totalWeight,"frontWheel.weight+rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
-% path("totalWeight",0,totalWeight).
+path("totalWeight",0,totalWeight).
 binary(":root","frontWheel.weight+rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","frontWheel.weight","+","rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
 binary(":root","rearWheel.weight+sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","rearWheel.weight","+","sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)").
 binary(":root","sum(carrier.bags.capacity.weight)+sum(frame.bags.capacity.weight)","sum(carrier.bags.capacity.weight)","+","sum(frame.bags.capacity.weight)").
@@ -111,7 +111,7 @@ path("maxWeight",0,maxWeight).
 number("1000",1000).
 
 behavior((":root",3)).
-imply((":root",3),"totalVolume","sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)").
+imply((":root",3),totalVolume,"sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)").
 path("totalVolume",0,totalVolume).
 binary(":root","sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)","sum(carrier.bags.capacity.volume)","+","sum(frame.bags.capacity.volume)").
 function(":root","sum(carrier.bags.capacity.volume)","sum","carrier.bags.capacity.volume").

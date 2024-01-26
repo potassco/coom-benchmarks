@@ -38,8 +38,8 @@ Parameters:
 - `MinCardinality`   - Minimum cardinality of the feature
 - `MaxCardinality`   - Maximum cardinality of the feature
 
-> **Note:** A feature can be either another structure, an enumeration of attribute values (see below)
-or a numeric attribute. This is specified by the field `TypeOfFeature` which either refers to another object or is `"num"`.
+> **Note:** A feature can be either another structure, an enumeration (see below) or a numeric value.
+This is specified by the field `TypeOfFeature` which either refers to another object or is `"num"`.
 Numeric features are accompanied by a `range/4` predicate.
 
 Examples:
@@ -60,8 +60,8 @@ range(ContextStructure,NameOfFeature,MinValue,MaxValue).
 Parameters:
 - `ContextStructure` - Structure at which the numeric feature is declared
 - `NameOfFeature`    - Name of the feature
-- `MinValue`         - Minimum value of the attribute
-- `MaxValue`         - Maximum value of the attribute
+- `MinValue`         - Minimum value of the feature
+- `MaxValue`         - Maximum value of the feature
 
 
 Examples:
@@ -80,7 +80,7 @@ Enumerations represent features with a finite domain of predefined choices.
 The predicate `enumeration/1` declares an enumeration field and
 is always accompanied at least by `option/2` predicates specifying the possible choices.
 Optionally, enumerations can also contain attributes such that each option comes along with a fixed set of values.
-These are specified by predicates `attribute/2` and `attr_value/4`.
+These are specified by predicates `attribute/3` and `attr_value/4`.
 
 
 ```prolog
@@ -118,17 +118,18 @@ option("Capacity", "B100").
 Declares an attribute inside an enumeration.
 
 ```prolog
-attribute(NameOfEnumeration,NameOfAttribute)
+attribute(NameOfEnumeration,NameOfAttribute,TypeOfAttribute)
 ```
 
 Parameters:
 - `NameOfEnumeration` - Name of the enumeration to which the attribute belongs
 - `NameOfAttribute`   - Name of the attribute
+- `TypeOfAttribute`   - Type of the attribute
 
 Examples:
 ```prolog
-attribute("Capacity","volume").
-attribute("Capacity","weight").
+attribute("Capacity","volume","num").
+attribute("Capacity","weight","num").
 ```
 
 #### Attribute values
