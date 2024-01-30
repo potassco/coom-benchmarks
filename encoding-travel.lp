@@ -9,23 +9,22 @@ instance((Feature,(Instance,0..Min-1)),Structure) :- feature(Context,Feature,Str
 % Indices in ascending order
 :- instance((Feature,(Instance,Idx)),_), not instance((Feature,(Instance,Idx-1)),_), Idx > 0.
 
-% Assign numeric feature to a value
-{ value((Feature,(Instance,0)),V) : V = Min..Max }
+% Assign a value to a numeric feature
+{ val((Feature,(Instance,0)),V) : V = Min..Max }
         :- feature(Context,Feature,"num",_,_), range(Context,Feature,Min,Max), instance(Instance,Context).
-:- { value((Feature,(Instance,0)),V) } != 1, feature(Context,Feature,"num",_,_), instance(Instance,Context).
+:- { val((Feature,(Instance,0)),V) } != 1, feature(Context,Feature,"num",_,_), instance(Instance,Context).
+
+% Create auxiliary instance predicate for paths
+instance((Feature,(Instance,0)),Feature) :- feature(Context,Feature,"num",_,_), instance(Instance,Context).
 
 
 % Paths which point to instances (not attributes)
 path_instance(Instance,Path) :- function(Context,_,_,Path), path(Path,0,_), instance(Instance,Context).
-
-path_value(Instance,Path,Instance2,object) :- path(Path,0,Name), not path(Path,1,_),
-                                              path_instance(Instance,Path),               instance(Instance2,_), Instance2=(Name,(Instance,_)).
-path_value(Instance,Path,Instance3,object) :- path(Path,N,Name), not path(Path,N+1,_),
-                                              path_instance(Instance,Path,N-1,Instance2), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
+path_object(Instance,Path,Instance2) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2), not val(Instance2,_).
 
 % Evaluate functions (aggregates)
 % Assumes that every function and every term in an arithmetic expression points to a single path
-path_value(Instance,Function,V) :- function(Context,Function,"count",Path), instance(Instance,Context), V = #count{ V',Instance2: path_value(Instance,Path,Instance2,V') }.
+path_value(Instance,Function,V) :- function(Context,Function,"count",Path), instance(Instance,Context), V = #count{ Instance2: path_object(Instance,Path,Instance2) }.
 path_value(Instance,Function,V) :- function(Context,Function,"sum",Path),   instance(Instance,Context), V = #sum  { V',Instance2: path_value(Instance,Path,Instance2,V') }.
 path_value(Instance,Function,V) :- function(Context,Function,"min",Path),   instance(Instance,Context), V = #min  { V',Instance2: path_value(Instance,Path,Instance2,V') }.
 path_value(Instance,Function,V) :- function(Context,Function,"max",Path),   instance(Instance,Context), V = #max  { V',Instance2: path_value(Instance,Path,Instance2,V') }.
@@ -37,7 +36,7 @@ path_value(Instance,Formula,V1*V2) :- binary(Context,Formula,Left,"*",Right), in
 % TODO: Add more arithmetics
 
 % Imply statements
-value((Name,(Instance,0)),V) :- imply((Context,_),Name,Formula), instance(Instance,Context), path_value(Instance,Formula,V).
+val((Name,(Instance,0)),V) :- imply((Context,_),Name,Formula), instance(Instance,Context), path_value(Instance,Formula,V).
 
 #defined range/4.
 #defined imply/3.

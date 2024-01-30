@@ -2,11 +2,14 @@ instance((),":root") :- structure(":root").
 
 % Generate enumeration and attribute values
 instance((Feature,(Instance,0)),Type) :- feature(Context,Feature,Type,Min,_), enumeration(Type), instance(Instance,Context).
-{ value((Instance),Option) : option(Type,Option) } :- instance(Instance,Type).
-:-  { value(Instance,Option) : option(Type,Option) } != 1, enumeration(Type), instance(Instance,Type).
+{ val((Instance),Option) : option(Type,Option) } :- instance(Instance,Type).
+:-  { val(Instance,Option) : option(Type,Option) } != 1, enumeration(Type), instance(Instance,Type).
 
 % Derive associated attribute values (the index 0 is needed for the sake of uniformity)
-value((Attr,(Instance,0)),V) :- attr_value(Type,Option,Attr,V), instance(Instance,Type), value(Instance,Option).
+val((Attr,(Instance,0)),V) :- attr_value(Type,Option,Attr,V), instance(Instance,Type), val(Instance,Option).
+
+% Create auxiliary instance predicate for paths
+instance((Attr,(Instance,0)),Attr) :- attr_value(Type,_,Attr,_), instance(Instance,Type).
 
 %%% Constraints
 % Instantiate constraint for each instance
@@ -41,18 +44,18 @@ path_instance(Instance,Path) :- binary(Context,_,Path,_,_),       path(Path,0,_)
 path_instance(Instance,Path) :- binary(Context,_,_,_,Path),       path(Path,0,_), instance(Instance,Context).
 path_instance(Instance,Path) :- combinations((Context,_),_,Path), path(Path,0,_), instance(Instance,Context).
 
-path_value(Instance,Path,Instance2,V)    :- path_instance(Instance,Path), path(Path,0,Name), not path(Path,1,_), value(Instance2,V), Instance2=(Name,(Instance,_)).
-path_instance(Instance,Path,0,Instance2) :- path_instance(Instance,Path), path(Path,0,Name),     path(Path,1,_), instance(Instance2,_), Instance2=(Name,(Instance,_)).
-
-path_value(Instance,Path,Instance3,V)    :- path_instance(Instance,Path,N-1,Instance2), path(Path,N,Name), not path(Path,N+1,_), value(Instance3,V)   , Instance3=(Name,(Instance2,_)).
-path_instance(Instance,Path,N,Instance3) :- path_instance(Instance,Path,N-1,Instance2), path(Path,N,Name),     path(Path,N+1,_), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
+path_instance(Instance,Path,0,Instance2) :- path(Path,0,Name),
+                                            path_instance(Instance,Path), instance(Instance2,_), Instance2=(Name,(Instance,_)).
+path_instance(Instance,Path,N,Instance3) :- path(Path,N,Name),
+                                            path_instance(Instance,Path,N-1,Instance2), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
 
 % Constants and numbers
 % TODO: Also needed for first argument?
 path_value(Instance,Path,constant,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).
 path_value(Instance,Path,number,N)      :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
 
-path_value(Instance,Path,V) :- path_value(Instance,Path,_,V), V != object.
+path_value(Instance,Path,Instance2,V) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2), val(Instance2,V).
+path_value(Instance,Path,V) :- path_value(Instance,Path,Instance2,V).
 
 %%% Check combinations
 hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path),
@@ -66,13 +69,13 @@ option("bool", "True").
 option("bool", "False").
 
 #show instance(I,S) : instance(I,S), structure(S).
-#show value/2.
+#show val/2.
 
 #defined structure/1.
 #defined feature/5.
 #defined enumeration/1.
 #defined option/2.
-#defined attribute/2.
+#defined attribute/3.
 #defined attr_value/4.
 #defined behavior/1.
 #defined require/2.

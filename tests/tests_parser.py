@@ -47,8 +47,9 @@ class TestMain(unittest.TestCase):
                         B10  = ( 10,  100)
                         B20  = ( 20,  250)
                     }'''), [
-                'enumeration("Capacity").', 'attribute("Capacity","volume").',
-                'attribute("Capacity","weight").',
+                'enumeration("Capacity").',
+                'attribute("Capacity","volume","num").',
+                'attribute("Capacity","weight","num").',
                 'option("Capacity", "B10").',
                 'value("Capacity","B10","volume",10).',
                 'value("Capacity","B10","weight",100).',
