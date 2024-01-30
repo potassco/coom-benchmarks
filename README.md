@@ -57,6 +57,19 @@ clingo encoding-travel.lp asp-instances/travel-bike.lp
 > *Note:* The encodings are downward compatible, i.e., you can solve the kids bike
 with the travel bike encoding as well.
 
+#### fclingo
+The software fclingo is a solver which allows hybrid ASP reasoning
+combined with founded conditional linear constraints.
+This makes it possible to reason over (large) numeric domains
+which are frequent in configuration problems.
+To install fclingo follow the instructions in the corresponding [repository](https://github.com/potassco/fclingo).
+
+There is one fclingo encoding which works with both instances.
+```
+fclingo encoding-fclingo.lp asp-instances/kids-bike.lp 0
+fclingo encoding-fclingo.lp asp-instances/travel-bike-alternative.lp
+```
+
 ## Documentation
 For a documentation of the fact format see `FactFormat.md`.
 
@@ -75,3 +88,10 @@ For a documentation of the fact format see `FactFormat.md`.
 - Encoding assumes that there is one possible attribute at the end of a path / paths point only to one value
 - Assumes that enumeration features have cardinality 1
 - Assumes that constant and numbers appear only on the right hand side of a binary relation
+
+### fclingo
+- Currently no division. Is this supported in fclingo?
+- fclingo only supports linear constraints, so multiplication is only allowed
+  if one of the terms is a  constant number
+- Only if attributes are marked as numeric, fclingo will use treat them as such.
+  Outside of tables it is not possible to compare non-numeric with numeric attributes.

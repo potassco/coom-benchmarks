@@ -1,6 +1,6 @@
 structure(":root").
 feature(":root",totalWeight,"num",1,1).
-range(":root",totalWeight,1,50).
+range(":root",totalWeight,1,50000).
 feature(":root",maxWeight,"num",1,1).
 range(":root",maxWeight,1,50).
 feature(":root",totalVolume,"num",1,1).

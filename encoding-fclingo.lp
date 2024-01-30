@@ -57,12 +57,12 @@ binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,">=",V2), V1 >
 binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"<",V2),  V1 < V2.
 binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"<=",V2), V1 <= V2.
 
-binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"=",Path2), &sum{path_value(Instance,Path1)} =  path_value(Instance,Path2).
-binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"!=",Path2) &sum{path_value(Instance,Path1)} != path_value(Instance,Path2).
-binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,">",Path2), &sum{path_value(Instance,Path1)} >  path_value(Instance,Path2).
-binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,">=",Path2) &sum{path_value(Instance,Path1)} >= path_value(Instance,Path2).
-binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"<",Path2), &sum{path_value(Instance,Path1)} <  path_value(Instance,Path2).
-binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"<=",Path2) &sum{path_value(Instance,Path1)} <= path_value(Instance,Path2).
+binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"=",Path2),  &sum{path_value(Instance,Path1)} =  path_value(Instance,Path2).
+binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"!=",Path2), &sum{path_value(Instance,Path1)} != path_value(Instance,Path2).
+binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,">",Path2),  &sum{path_value(Instance,Path1)} >  path_value(Instance,Path2).
+binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,">=",Path2), &sum{path_value(Instance,Path1)} >= path_value(Instance,Path2).
+binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"<",Path2),  &sum{path_value(Instance,Path1)} <  path_value(Instance,Path2).
+binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"<=",Path2), &sum{path_value(Instance,Path1)} <= path_value(Instance,Path2).
 
 %%% Get values of path expressions
 path_instance(Instance,Path) :- binary(Context,_,Path,_,_),       path(Path,0,_), instance(Instance,Context).
@@ -75,11 +75,13 @@ path_instance(Instance,Path,0,Instance2) :- path(Path,0,Name),
 path_instance(Instance,Path,N,Instance3) :- path(Path,N,Name),
                                             path_instance(Instance,Path,N-1,Instance2), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
 
-path_value(Instance,Path,Instance2,V) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2), val(Instance2,V).
+path_instance(Instance,Path,Instance2) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2).
+
+path_value(Instance,Path,Instance2,V) :- path_instance(Instance,Path,Instance2), val(Instance2,V).
 path_value(Instance,Path,V) :- path_value(Instance,Path,Instance2,V).
 
-&sus{ Instance2 } =: path_value(Instance,Path,Instance2) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2).
-&sus{ Instance2 } =: path_value(Instance,Path) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2).
+&sus{ Instance2 } =: path_value(Instance,Path,Instance2) :- path_instance(Instance,Path,Instance2).
+&sus{ Instance2 } =: path_value(Instance,Path)           :- path_instance(Instance,Path,Instance2).
 
 % Paths which point to instances (not attributes)
 path_object(Instance,Path,Instance2) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2), not val(Instance2,_).
@@ -97,44 +99,43 @@ hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combin
 hit_row(Instance,Constraint) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
                                     0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_); -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.
 
-% % Evaluate functions (aggregates)
-% % Assumes that every function and every term in an arithmetic expression points to a single path
-% % path_value(Instance,Function,V) :- function(Context,Function,"count",Path), instance(Instance,Context), V = #count{ V',Instance2: path_value(Instance,Path,Instance2,V') }.
+% Evaluate functions (aggregates)
+% Assumes that every function and every term in an arithmetic expression points to a single path
+&sus{ 1,Instance2 : path_object(Instance,Path,Instance2) } =: path_value(Instance,Function)
+                        :- function(Context,Function,"count",Path), instance(Instance,Context).
 
-% &sus{ 1,Instance2: path_object(Instance,Path,Instance2) } =: path_value(Instance,Function)
-%                         :- function(Context,Function,"count",Path), instance(Instance,Context).
+&sus{ Instance2 : path_instance(Instance,Path,Instance2) } =: path_value(Instance,Function)
+                        :- function(Context,Function,"sum",Path), instance(Instance,Context).
 
-% &sus{ Instance2 : path_instance(Instance,Path,Instance2) } =: path_value(Instance,Function)
-%                         :- function(Context,Function,"sum",Path), instance(Instance,Context).
+&min{ Instance2 : path_instance(Instance,Path,Instance2) } =: path_value(Instance,Function)
+                        :- function(Context,Function,"min",Path), instance(Instance,Context).
 
-% path_value(Instance,Function,V) :- function(Context,Function,"min",Path),   instance(Instance,Context), V = #min  { V',Instance2: path_value(Instance,Path,Instance2,V') }.
-% path_value(Instance,Function,V) :- function(Context,Function,"max",Path),   instance(Instance,Context), V = #max  { V',Instance2: path_value(Instance,Path,Instance2,V') }.
+&max{ Instance2 : path_instance(Instance,Path,Instance2) } =: path_value(Instance,Function)
+                        :- function(Context,Function,"max",Path), instance(Instance,Context).
 
-% % Arithmetics
-% % path_value(Instance,Formula,V1+V2) :- binary(Context,Formula,Left,"+",Right), instance(Instance,Context), path_value(Instance,Left,V1), path_value(Instance,Right,V2).
-% &sus{ path_value(Instance,Left); path_value(Instance,Right) } =: path_value(Instance,Formula) :- binary(Context,Formula,Left,"+",Right),
-%                                                 instance(Instance,Context), path_instance(Instance,Left,LI), path_instance(Instance,Right,RI).
+% Arithmetics
+&sus{ path_value(Instance,Left);  path_value(Instance,Right) } =: path_value(Instance,Formula) :- binary(Context,Formula,Left,"+",Right), instance(Instance,Context).
+&sus{ path_value(Instance,Left); -path_value(Instance,Right) } =: path_value(Instance,Formula) :- binary(Context,Formula,Left,"-",Right), instance(Instance,Context).
 
-% path_value(Instance,Formula,V1-V2) :- binary(Context,Formula,Left,"-",Right), instance(Instance,Context), path_value(Instance,Left,V1), path_value(Instance,Right,V2).
-% path_value(Instance,Formula,V1*V2) :- binary(Context,Formula,Left,"*",Right), instance(Instance,Context), path_value(Instance,Left,V1), path_value(Instance,Right,V2).
-% % TODO: Add more arithmetics
+% Only linear constraints are supported
+&sus{ path_value(Instance,Left) *N } =: path_value(Instance,Formula) :- binary(Context,Formula,Left,"*",Right), number(Right,N), instance(Instance,Context).
+&sus{ path_value(Instance,Right)*N } =: path_value(Instance,Formula) :- binary(Context,Formula,Left,"*",Right), number(Left, N), instance(Instance,Context).
+% TODO: Is division possible in fclingo?
 
-% % Imply statements
-% &sus{ path_value(Instance,Formula) } =: (Name,(Instance,0)) :- imply((Context,_),Name,Formula), instance(Instance,Context).
-
+% Imply statements
+&sus{ path_value(Instance,Formula) } =: (Name,(Instance,0)) :- imply((Context,_),Name,Formula), instance(Instance,Context).
 
 % Always include boolean enumeration
 enumeration("bool").
 option("bool", "True").
 option("bool", "False").
 
-% #show instance(I,S) : instance(I,S), structure(S).
-% #show instance/2.
+% Show statements
+#show instance(I,S) : instance(I,S), structure(S).
 #show val/2.
-#show.
+
 % &show { (Feature,(Instance,0)) : feature(Context,Feature,"num",_,_), instance(Instance,Context) }.
 % &show { (Attr,(Instance,0))    : attribute(Type,Attr,"num"),         instance(Instance,Type) }.
-
 
 #defined structure/1.
 #defined feature/5.
