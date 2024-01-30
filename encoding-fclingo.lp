@@ -1,6 +1,5 @@
 instance((),":root") :- structure(":root").
 
-
 % Always generate minimal number of objects
 instance((Feature,(Instance,0..Min-1)),Structure) :- feature(Context,Feature,Structure,Min,_), structure(Structure), instance(Instance,Context).
 
@@ -24,10 +23,14 @@ val((Attr,(Instance,0)),V)       :- attribute(Type,Attr,"str"), attr_value(Type,
 % Assign numeric feature to a value
 &in{Min..Max} =: (Feature,(Instance,0)) :- feature(Context,Feature,"num",_,_), range(Context,Feature,Min,Max), instance(Instance,Context).
 
+% Create auxiliary instance predicate for paths
+instance((Attr,(Instance,0)),Attr) :- attr_value(Type,_,Attr,_), instance(Instance,Type).
+instance((Feature,(Instance,0)),Feature) :- feature(Context,Feature,"num",_,_), instance(Instance,Context).
+
 %%% Constraints
 % Instantiate constraint for each instance
 constraint(Instance,(Context,Idx)) :- behavior((Context,Idx)), instance(Instance,Context).
-% :- constraint(Instance,Constraint), unsat(Instance,Constraint).
+:- constraint(Instance,Constraint), unsat(Instance,Constraint).
 
 % Require without condition
 unsat(Instance,Constraint) :- condition(Constraint,CBinary),     require(Constraint,RBinary),
@@ -42,89 +45,82 @@ unsat(Instance,Constraint) :- combinations(Constraint,_,_),
 
 
 % Satisfaction of binary relations
-binary_values(Instance,Formula,V1,Operator,V2) :- binary(Context,Formula,Path1,Operator,Path2), instance(Instance,Context),
+binary_instance(Instance,Formula,Path1,Operator,Path2) :- binary(Context,Formula,Path1,Operator,Path2), instance(Instance,Context).
+binary_values(Instance,Formula,V1,Operator,V2) :- binary_instance(Instance,Formula,Path1,Operator,Path2),
                                                 path_value(Instance,Path1,V1),
                                                 path_value(Instance,Path2,V2).
-binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"=",V2), V1 = V2.
+
+binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"=",V2),  V1 = V2.
 binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"!=",V2), V1 != V2.
-binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,">",V2), V1 > V2.
+binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,">",V2),  V1 > V2.
 binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,">=",V2), V1 >= V2.
-binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"<",V2), V1 < V2.
+binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"<",V2),  V1 < V2.
 binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"<=",V2), V1 <= V2.
 
-% %%% Get values of path expressions
+binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"=",Path2), &sum{path_value(Instance,Path1)} =  path_value(Instance,Path2).
+binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"!=",Path2) &sum{path_value(Instance,Path1)} != path_value(Instance,Path2).
+binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,">",Path2), &sum{path_value(Instance,Path1)} >  path_value(Instance,Path2).
+binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,">=",Path2) &sum{path_value(Instance,Path1)} >= path_value(Instance,Path2).
+binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"<",Path2), &sum{path_value(Instance,Path1)} <  path_value(Instance,Path2).
+binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"<=",Path2) &sum{path_value(Instance,Path1)} <= path_value(Instance,Path2).
+
+%%% Get values of path expressions
 path_instance(Instance,Path) :- binary(Context,_,Path,_,_),       path(Path,0,_), instance(Instance,Context).
 path_instance(Instance,Path) :- binary(Context,_,_,_,Path),       path(Path,0,_), instance(Instance,Context).
 path_instance(Instance,Path) :- combinations((Context,_),_,Path), path(Path,0,_), instance(Instance,Context).
+path_instance(Instance,Path) :- function(Context,_,_,Path), path(Path,0,_), instance(Instance,Context).
 
-% path_value(Instance,Path,Instance2,V)    :- path_instance(Instance,Path), path(Path,0,Name), not path(Path,1,_), val(Instance2,V), Instance2=(Name,(Instance,_)).
-% path_instance(Instance,Path,0,Instance2) :- path_instance(Instance,Path), path(Path,0,Name),     path(Path,1,_), instance(Instance2,_), Instance2=(Name,(Instance,_)).
+path_instance(Instance,Path,0,Instance2) :- path(Path,0,Name),
+                                            path_instance(Instance,Path), instance(Instance2,_), Instance2=(Name,(Instance,_)).
+path_instance(Instance,Path,N,Instance3) :- path(Path,N,Name),
+                                            path_instance(Instance,Path,N-1,Instance2), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
 
-% path_value(Instance,Path,Instance3,V)    :- path_instance(Instance,Path,N-1,Instance2), path(Path,N,Name), not path(Path,N+1,_), val(Instance3,V)   , Instance3=(Name,(Instance2,_)).
-% path_instance(Instance,Path,N,Instance3) :- path_instance(Instance,Path,N-1,Instance2), path(Path,N,Name),     path(Path,N+1,_), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
+path_value(Instance,Path,Instance2,V) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2), val(Instance2,V).
+path_value(Instance,Path,V) :- path_value(Instance,Path,Instance2,V).
+
+&sus{ Instance2 } =: path_value(Instance,Path,Instance2) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2).
+&sus{ Instance2 } =: path_value(Instance,Path) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2).
+
+% Paths which point to instances (not attributes)
+path_object(Instance,Path,Instance2) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2), not val(Instance2,_).
 
 % Constants and numbers
-% % TODO: Also needed for first argument?
-% path_value(Instance,Path,constant,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).
-% path_value(Instance,Path,number,N)      :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
-
-% path_value(Instance,Path,V) :- path_value(Instance,Path,_,V), V != object.
+% TODO: Also needed for first argument?
+path_value(Instance,Path,constant,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).
+&in{N..N} =: path_value(Instance,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
 
 %%% Check combinations
 hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path),
                                             constraint(Instance,Constraint), path_value(Instance,Path,V).
+hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path),
+                                            constraint(Instance,Constraint), &sum{path_value(Instance,Path)} = V.
 hit_row(Instance,Constraint) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
                                     0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_); -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.
 
+% % Evaluate functions (aggregates)
+% % Assumes that every function and every term in an arithmetic expression points to a single path
+% % path_value(Instance,Function,V) :- function(Context,Function,"count",Path), instance(Instance,Context), V = #count{ V',Instance2: path_value(Instance,Path,Instance2,V') }.
 
-% Paths which point to instances (not attributes)
-path_instance(Instance,Path) :- function(Context,_,_,Path), path(Path,0,_), instance(Instance,Context).
+% &sus{ 1,Instance2: path_object(Instance,Path,Instance2) } =: path_value(Instance,Function)
+%                         :- function(Context,Function,"count",Path), instance(Instance,Context).
 
-path_value(Instance,Path,Instance2,object) :- path(Path,0,Name), not path(Path,1,_),
-                                              path_instance(Instance,Path),               instance(Instance2,_), Instance2=(Name,(Instance,_)).
-path_value(Instance,Path,Instance3,object) :- path(Path,N,Name), not path(Path,N+1,_),
-                                              path_instance(Instance,Path,N-1,Instance2), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
+% &sus{ Instance2 : path_instance(Instance,Path,Instance2) } =: path_value(Instance,Function)
+%                         :- function(Context,Function,"sum",Path), instance(Instance,Context).
 
-%%% Everything numeric...
-% Paths
-% path_instance(Instance,Path,Instance2)    :- path_instance(Instance,Path), path(Path,0,Name), not path(Path,1,_), Instance2=(Name,(Instance,_)).
-path_instance(Instance,Path,0,Instance2) :- path(Path,0,Name),
-                                            path_instance(Instance,Path), instance(Instance0,_), Instance2=(Name,(Instance,_)).
-% path_instance(Instance,Path,Instance3)    :- path_instance(Instance,Path,N-1,Instance2), path(Path,N,Name), not path(Path,N+1,_), Instance3=(Name,(Instance2,_)).
-path_instance(Instance,Path,N,Instance3) :- path(Path,N,Name),
-                                            path_instance(Instance,Path,N-1,Instance2), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
+% path_value(Instance,Function,V) :- function(Context,Function,"min",Path),   instance(Instance,Context), V = #min  { V',Instance2: path_value(Instance,Path,Instance2,V') }.
+% path_value(Instance,Function,V) :- function(Context,Function,"max",Path),   instance(Instance,Context), V = #max  { V',Instance2: path_value(Instance,Path,Instance2,V') }.
 
-% Constant numbers
-&in{N..N} =: path_value(Instance,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
-
-
-% Evaluate functions (aggregates)
-% Assumes that every function and every term in an arithmetic expression points to a single path
-% path_value(Instance,Function,V) :- function(Context,Function,"count",Path), instance(Instance,Context), V = #count{ V',Instance2: path_value(Instance,Path,Instance2,V') }.
-
-&sus{ 1,Instance2: path_value(Instance,Path,Instance2,object) } =: path_value(Instance,Function)
-                        :- function(Context,Function,"count",Path), instance(Instance,Context).
-
-&sus{ V',Instance2: path_value(Instance,Path,Instance2,V') } =: path_value(Instance,Function)
-                        :- function(Context,Function,"sum",Path), instance(Instance,Context).
-
-path_value(Instance,Function,V) :- function(Context,Function,"min",Path),   instance(Instance,Context), V = #min  { V',Instance2: path_value(Instance,Path,Instance2,V') }.
-path_value(Instance,Function,V) :- function(Context,Function,"max",Path),   instance(Instance,Context), V = #max  { V',Instance2: path_value(Instance,Path,Instance2,V') }.
-
-#show path_instance/4.
-
-% Arithmetics
-% path_value(Instance,Formula,V1+V2) :- binary(Context,Formula,Left,"+",Right), instance(Instance,Context), path_value(Instance,Left,V1), path_value(Instance,Right,V2).
-% &sus{V1; V2} =: path_value(Instance,Formula) :- binary(Context,Formula,Left,"+",Right),
+% % Arithmetics
+% % path_value(Instance,Formula,V1+V2) :- binary(Context,Formula,Left,"+",Right), instance(Instance,Context), path_value(Instance,Left,V1), path_value(Instance,Right,V2).
+% &sus{ path_value(Instance,Left); path_value(Instance,Right) } =: path_value(Instance,Formula) :- binary(Context,Formula,Left,"+",Right),
 %                                                 instance(Instance,Context), path_instance(Instance,Left,LI), path_instance(Instance,Right,RI).
 
-path_value(Instance,Formula,V1-V2) :- binary(Context,Formula,Left,"-",Right), instance(Instance,Context), path_value(Instance,Left,V1), path_value(Instance,Right,V2).
-path_value(Instance,Formula,V1*V2) :- binary(Context,Formula,Left,"*",Right), instance(Instance,Context), path_value(Instance,Left,V1), path_value(Instance,Right,V2).
-% TODO: Add more arithmetics
+% path_value(Instance,Formula,V1-V2) :- binary(Context,Formula,Left,"-",Right), instance(Instance,Context), path_value(Instance,Left,V1), path_value(Instance,Right,V2).
+% path_value(Instance,Formula,V1*V2) :- binary(Context,Formula,Left,"*",Right), instance(Instance,Context), path_value(Instance,Left,V1), path_value(Instance,Right,V2).
+% % TODO: Add more arithmetics
 
-% Imply statements
-&in{V..V} =: (Name,(Instance,0)) :- imply((Context,_),Name,Formula),
-                                 instance(Instance,Context), path_value(Instance,Formula,V).
+% % Imply statements
+% &sus{ path_value(Instance,Formula) } =: (Name,(Instance,0)) :- imply((Context,_),Name,Formula), instance(Instance,Context).
 
 
 % Always include boolean enumeration
@@ -134,7 +130,7 @@ option("bool", "False").
 
 % #show instance(I,S) : instance(I,S), structure(S).
 % #show instance/2.
-% #show val/2.
+#show val/2.
 #show.
 % &show { (Feature,(Instance,0)) : feature(Context,Feature,"num",_,_), instance(Instance,Context) }.
 % &show { (Attr,(Instance,0))    : attribute(Type,Attr,"num"),         instance(Instance,Type) }.
