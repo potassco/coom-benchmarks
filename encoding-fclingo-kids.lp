@@ -64,7 +64,6 @@ path_instance(Instance,Path,N,Instance3) :- path(Path,N,Name),
 
 path_instance(Instance,Path,Instance2) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2).
 
-
 path_value(Instance,Path,V)                     :- path_instance(Instance,Path,Instance2), val(Instance2,V).
 &sus{ Instance2 } =: path_value(Instance,Path)  :- path_instance(Instance,Path,Instance2).
 
@@ -89,7 +88,6 @@ option("bool", "False").
 % Show statements
 #show instance(I,S) : instance(I,S), structure(S).
 #show val/2.
-#show instance/2.
 % &show { (Attr,(Instance,0))    : attribute(Context,Attr,"num"), instance(Instance,Context) }.
 
 #defined structure/1.

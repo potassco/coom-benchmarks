@@ -9,12 +9,14 @@ instance((Feature,(Instance,0..Min-1)),Structure) :- feature(Context,Feature,Str
 % Indices in ascending order
 :- instance((Feature,(Instance,Idx)),_), not instance((Feature,(Instance,Idx-1)),_), Idx > 0.
 
-% Assign numeric feature to a value
+% Assign a value to a numeric feature
 &in{Min..Max} =: (Feature,(Instance,0)) :- feature(Context,Feature,"num",_,_), range(Context,Feature,Min,Max), instance(Instance,Context).
 
 % Create auxiliary instance predicate for paths
 instance((Feature,(Instance,0)),Feature) :- feature(Context,Feature,"num",_,_), instance(Instance,Context).
 
+
+% Paths which point to instances (not attributes)
 path_instance(Instance,Path) :- function(Context,_,_,Path), path(Path,0,_), instance(Instance,Context).
 
 % Evaluate functions (aggregates)

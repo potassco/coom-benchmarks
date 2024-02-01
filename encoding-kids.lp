@@ -32,11 +32,11 @@ unsat(Instance,Constraint) :- combinations(Constraint,_,_),
 binary_values(Instance,Formula,V1,Operator,V2) :- binary(Context,Formula,Path1,Operator,Path2), instance(Instance,Context),
                                                 path_value(Instance,Path1,V1),
                                                 path_value(Instance,Path2,V2).
-binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"=",V2), V1 = V2.
+binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"=",V2),  V1 = V2.
 binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"!=",V2), V1 != V2.
-binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,">",V2), V1 > V2.
+binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,">",V2),  V1 > V2.
 binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,">=",V2), V1 >= V2.
-binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"<",V2), V1 < V2.
+binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"<",V2),  V1 < V2.
 binary_sat(Instance,Formula) :- binary_values(Instance,Formula,V1,"<=",V2), V1 <= V2.
 
 %%% Get values of path expressions
@@ -49,13 +49,14 @@ path_instance(Instance,Path,0,Instance2) :- path(Path,0,Name),
 path_instance(Instance,Path,N,Instance3) :- path(Path,N,Name),
                                             path_instance(Instance,Path,N-1,Instance2), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
 
+path_instance(Instance,Path,Instance2) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2).
+
+path_value(Instance,Path,V)                     :- path_instance(Instance,Path,Instance2), val(Instance2,V).
+
 % Constants and numbers
 % TODO: Also needed for first argument?
-path_value(Instance,Path,constant,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).
-path_value(Instance,Path,number,N)      :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
-
-path_value(Instance,Path,Instance2,V) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2), val(Instance2,V).
-path_value(Instance,Path,V) :- path_value(Instance,Path,Instance2,V).
+path_value(Instance,Path,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).
+path_value(Instance,Path,N)      :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
 
 %%% Check combinations
 hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path),
@@ -68,6 +69,7 @@ enumeration("bool").
 option("bool", "True").
 option("bool", "False").
 
+% Show statements
 #show instance(I,S) : instance(I,S), structure(S).
 #show val/2.
 
@@ -80,7 +82,6 @@ option("bool", "False").
 #defined behavior/1.
 #defined require/2.
 #defined condition/2.
-#defined imply/3.
 #defined combinations/3.
 #defined allow/3.
 #defined binary/5.
