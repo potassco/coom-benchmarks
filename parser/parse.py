@@ -338,7 +338,7 @@ class ASPVisitor(ModelVisitor):
 
 
 if __name__ == "__main__":
-    input_stream = FileStream(argv[1])
+    input_stream = FileStream(argv[1], encoding="utf-8")
     lexer = ModelLexer(input_stream)
     stream = CommonTokenStream(lexer)
     parser = ModelParser(stream)
