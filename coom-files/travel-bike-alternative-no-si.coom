@@ -1,6 +1,6 @@
 product {
-    num 	1-50    totalWeight
-	num 	1-50    maxWeight
+    num 	1-10000 totalWeight
+	num 	1-10    maxWeight
 	num     0-200   totalVolume
 	num 	0-200   requestedVolume
 	Wheel   	    frontWheel
