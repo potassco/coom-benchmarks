@@ -53,6 +53,7 @@ path_instance(Instance,Path,Instance2) :- not path(Path,N+1,_), path_instance(In
 
 path_value(Instance,Path,V)                     :- path_instance(Instance,Path,Instance2), val(Instance2,V).
 
+
 % Constants and numbers
 % TODO: Also needed for first argument?
 path_value(Instance,Path,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).

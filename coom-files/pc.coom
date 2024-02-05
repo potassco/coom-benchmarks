@@ -90,7 +90,7 @@ structure Application {
 
 behavior {
     imply price = sum(hdunit.price) + motherboard.price + sum(motherboard.cpu.price)
-                  + os.price + sum(screen.price) + sum(applications)
+                  + os.price + sum(screen.price) + sum(applications.price)
 
     require price <= maxPrice
 

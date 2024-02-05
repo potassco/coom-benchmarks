@@ -2,7 +2,7 @@ structure(":root").
 feature(":root",usage,"Usage",1,1).
 feature(":root",efficiency,"Efficiency",1,1).
 feature(":root",maxPrice,"num",1,1).
-range(":root",maxPrice,2500,2500).
+range(":root",maxPrice,0,2500).
 feature(":root",price,"num",1,1).
 range(":root",price,0,2500).
 feature(":root",internetConn,"bool",1,1).
@@ -101,13 +101,13 @@ feature("Application",price,"num",1,1).
 range("Application",price,50,50).
 
 behavior((":root",0)).
-imply((":root",0),price,"sum(hdunit.price)+motherboard.price+sum(motherboard.cpu.price)+os.price+sum(screen.price)+sum(applications)").
+imply((":root",0),price,"sum(hdunit.price)+motherboard.price+sum(motherboard.cpu.price)+os.price+sum(screen.price)+sum(applications.price)").
 path("price",0,price).
-binary(":root","sum(hdunit.price)+motherboard.price+sum(motherboard.cpu.price)+os.price+sum(screen.price)+sum(applications)","sum(hdunit.price)","+","motherboard.price+sum(motherboard.cpu.price)+os.price+sum(screen.price)+sum(applications)").
-binary(":root","motherboard.price+sum(motherboard.cpu.price)+os.price+sum(screen.price)+sum(applications)","motherboard.price","+","sum(motherboard.cpu.price)+os.price+sum(screen.price)+sum(applications)").
-binary(":root","sum(motherboard.cpu.price)+os.price+sum(screen.price)+sum(applications)","sum(motherboard.cpu.price)","+","os.price+sum(screen.price)+sum(applications)").
-binary(":root","os.price+sum(screen.price)+sum(applications)","os.price","+","sum(screen.price)+sum(applications)").
-binary(":root","sum(screen.price)+sum(applications)","sum(screen.price)","+","sum(applications)").
+binary(":root","sum(hdunit.price)+motherboard.price+sum(motherboard.cpu.price)+os.price+sum(screen.price)+sum(applications.price)","sum(hdunit.price)","+","motherboard.price+sum(motherboard.cpu.price)+os.price+sum(screen.price)+sum(applications.price)").
+binary(":root","motherboard.price+sum(motherboard.cpu.price)+os.price+sum(screen.price)+sum(applications.price)","motherboard.price","+","sum(motherboard.cpu.price)+os.price+sum(screen.price)+sum(applications.price)").
+binary(":root","sum(motherboard.cpu.price)+os.price+sum(screen.price)+sum(applications.price)","sum(motherboard.cpu.price)","+","os.price+sum(screen.price)+sum(applications.price)").
+binary(":root","os.price+sum(screen.price)+sum(applications.price)","os.price","+","sum(screen.price)+sum(applications.price)").
+binary(":root","sum(screen.price)+sum(applications.price)","sum(screen.price)","+","sum(applications.price)").
 function(":root","sum(hdunit.price)","sum","hdunit.price").
 path("hdunit.price",0,hdunit).
 path("hdunit.price",1,price).
@@ -122,8 +122,9 @@ path("os.price",1,price).
 function(":root","sum(screen.price)","sum","screen.price").
 path("screen.price",0,screen).
 path("screen.price",1,price).
-function(":root","sum(applications)","sum","applications").
-path("applications",0,applications).
+function(":root","sum(applications.price)","sum","applications.price").
+path("applications.price",0,applications).
+path("applications.price",1,price).
 
 behavior((":root",1)).
 require((":root",1),"price<=maxPrice").
