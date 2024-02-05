@@ -9,10 +9,15 @@ instance((Feature,(Instance,0..Min-1)),Structure) :- feature(Context,Feature,Str
 % Indices in ascending order
 :- instance((Feature,(Instance,Idx)),_), not instance((Feature,(Instance,Idx-1)),_), Idx > 0.
 
-% Assign a value to a numeric feature
+% Assign a value to a numeric feature which is not calculated by an imply statement
+not_imply(Context,Feature) :- range(Context,Feature,_,_), not imply((Context,_),Feature,_), instance(Instance,Context).
+
 { val((Feature,(Instance,0)),V) : V = Min..Max }
-        :- feature(Context,Feature,"num",_,_), range(Context,Feature,Min,Max), instance(Instance,Context).
+        :- range(Context,Feature,Min,Max), instance(Instance,Context), not_imply(Context,Feature).
 :- { val((Feature,(Instance,0)),V) } != 1, feature(Context,Feature,"num",_,_), instance(Instance,Context).
+
+% Check ranges
+:- range(Context,Feature,Min,Max), instance(Instance,Context), val((Feature,(Instance,0)),V), not Min <= V <= Max.
 
 % Create auxiliary instance predicate for paths
 instance((Feature,(Instance,0)),Feature) :- feature(Context,Feature,"num",_,_), instance(Instance,Context).
@@ -20,6 +25,7 @@ instance((Feature,(Instance,0)),Feature) :- feature(Context,Feature,"num",_,_), 
 
 % Paths which point to instances (not attributes)
 path_instance(Instance,Path) :- function(Context,_,_,Path), path(Path,0,_), instance(Instance,Context).
+path_instance(Instance,Path) :- imply((Context,_),_,Path), path(Path,0,_), instance(Instance,Context).
 
 % Evaluate functions (aggregates)
 % Assumes that every function and every term in an arithmetic expression points to a single path
