@@ -10,7 +10,7 @@ instance((Feature,(Instance,0..Min-1)),Structure) :- feature(Context,Feature,Str
 :- instance((Feature,(Instance,Idx)),_), not instance((Feature,(Instance,Idx-1)),_), Idx > 0.
 
 % Assign a value to a numeric feature which is not calculated by an imply statement
-not_imply(Context,Feature) :- range(Context,Feature,_,_), not imply((Context,_),Feature,_), instance(Instance,Context).
+not_imply(Context,Feature) :- range(Context,Feature,_,_), not imply((Context,_),Feature,_).
 
 { val((Feature,(Instance,0)),V) : V = Min..Max }
         :- range(Context,Feature,Min,Max), instance(Instance,Context), not_imply(Context,Feature).
