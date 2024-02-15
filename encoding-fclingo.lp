@@ -15,7 +15,6 @@ instance((Feature,(Instance,0..Min-1)),Structure) :- feature(Context,Feature,Str
 % Create auxiliary instance predicate for paths
 instance((Feature,(Instance,0)),Feature) :- feature(Context,Feature,"num",_,_), instance(Instance,Context).
 
-
 % Paths which point to instances (not attributes)
 path_instance(Instance,Path) :- function(Context,_,_,Path), path(Path,0,_), instance(Instance,Context).
 

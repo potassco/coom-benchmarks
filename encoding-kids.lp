@@ -49,21 +49,22 @@ path_instance(Instance,Path,0,Instance2) :- path(Path,0,Name),
 path_instance(Instance,Path,N,Instance3) :- path(Path,N,Name),
                                             path_instance(Instance,Path,N-1,Instance2), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
 
-path_instance(Instance,Path,Instance2) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2).
+path_instance(Instance,Path,Instance2)   :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2).
 
-path_value(Instance,Path,V)                     :- path_instance(Instance,Path,Instance2), val(Instance2,V).
+path_value(Instance,Path,V)              :- path_instance(Instance,Path,Instance2), val(Instance2,V).
 
 
 % Constants and numbers
 % TODO: Also needed for first argument?
 path_value(Instance,Path,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), constant(Path).
-path_value(Instance,Path,N)      :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
+path_value(Instance,Path,N)    :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
 
 %%% Check combinations
 hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path),
                                             constraint(Instance,Constraint), path_value(Instance,Path,V).
 hit_row(Instance,Constraint) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
-                                    0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_); -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.
+                                    0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_);
+                                             -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.
 
 % Always include boolean enumeration
 enumeration("bool").
