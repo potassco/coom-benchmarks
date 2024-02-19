@@ -14,10 +14,10 @@ feature(":root",carrier,"Carrier",1,1).
 feature(":root",color,"Color",1,1).
 
 structure("Carrier").
-feature("Carrier",bags,"Bag",1,3).
+feature("Carrier",bags,"Bag",0,3).
 
 structure("Frame").
-feature("Frame",bags,"Bag",1,2).
+feature("Frame",bags,"Bag",0,2).
 
 structure("Bag").
 feature("Bag",capacity,"Capacity",1,1).
