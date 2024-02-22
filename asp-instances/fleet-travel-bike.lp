@@ -1,8 +1,8 @@
 structure(":root").
-% feature(":root",totalPrice,"num",1,1).
-% range(":root",totalPrice,0,2000).
-% feature(":root",maxPrice,"num",1,1).
-% range(":root",maxPrice,0,20000).
+feature(":root",totalPrice,"num",1,1).
+range(":root",totalPrice,0,20000).
+feature(":root",maxPrice,"num",1,1).
+range(":root",maxPrice,0,20000).
 feature(":root",bikes,"Bike",1,10).
 
 structure("Bike").
@@ -95,18 +95,18 @@ option("Color", "Green").
 option("Color", "Yellow").
 option("Color", "Blue").
 
-% behavior((":root",0)).
-% imply((":root",0),totalPrice,"sum(bikes.price)").
-% path("totalPrice",0,totalPrice).
-% function(":root","sum(bikes.price)","sum","bikes.price").
-% path("bikes.price",0,bikes).
-% path("bikes.price",1,price).
+behavior((":root",0)).
+imply((":root",0),totalPrice,"sum(bikes.price)").
+path("totalPrice",0,totalPrice).
+function(":root","sum(bikes.price)","sum","bikes.price").
+path("bikes.price",0,bikes).
+path("bikes.price",1,price).
 
-% behavior((":root",1)).
-% require((":root",1),"totalPrice<=maxPrice").
-% binary(":root","totalPrice<=maxPrice","totalPrice","<=","maxPrice").
-% path("totalPrice",0,totalPrice).
-% path("maxPrice",0,maxPrice).
+behavior((":root",1)).
+require((":root",1),"totalPrice<=maxPrice").
+binary(":root","totalPrice<=maxPrice","totalPrice","<=","maxPrice").
+path("totalPrice",0,totalPrice).
+path("maxPrice",0,maxPrice).
 
 behavior(("Bike",2)).
 require(("Bike",2),"count(carrier.bags)+count(frame.bags)<=4").
