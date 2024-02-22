@@ -1,0 +1,34 @@
+product {
+			1..10        BigTable bigTables
+			1..10        SmallTable smallTables
+			1..70  num   totalPlaces
+			//     num  numberOfBigTables
+			//     num  numberOfSmallTable
+			// 1..200 num  numberOfChairsAllBigTables
+			// 1..200 num  numberOfChairsAllSmallTables
+			}
+			structure BigTable {
+				// num index
+				3..5 Chair chairs
+			}
+			structure SmallTable {
+				// num index
+				1..2 Chair chairs
+			}
+			structure Chair {
+				// num index
+			}
+			behavior {
+				// imply INSTANCES = %2$s
+				require totalPlaces = 70
+
+				imply totalPlaces = count(bigTables.chairs) + count(smallTables.chairs)
+
+				// imply numberOfBigTables = count(bigTables)
+
+				// imply numberOfSmallTable = count(smallTables)
+
+				// imply numberOfChairsAllBigTables = count(bigTables.chairs)
+
+				// imply numberOfChairsAllSmallTables = count(smallTables.chairs)
+			}
