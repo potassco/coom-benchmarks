@@ -1,7 +1,7 @@
 product {
     num         0-20000  totalPrice
     num         0-20000  maxPrice
-    1..10 Bike           bikes
+    1..6 Bike           bikes
 }
 
 structure Bike {
@@ -26,7 +26,7 @@ structure Frame {
 }
 
 structure Bag {
-    Capacity	        capacity
+    // Capacity	        capacity
 	Material	        material
     num         0-200   price
 }

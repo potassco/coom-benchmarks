@@ -1,6 +1,6 @@
 #!/bin/bash
 
-name=restaurant
+name=instance
 outdir=coom
 
 
@@ -9,14 +9,8 @@ then
     mkdir $outdir
 fi
 
-for numtable in $(seq 5 5 50)
+for numbikes in $(seq 1 10)
 do
-    maxplaces=$(($numtable*7))
-    init=$(($numtable*2))
-    for totalplaces in $(seq $init 10 $maxplaces)
-    do
-        outfile=$outdir/${name}_${numtable}_${totalplaces}.coom
-        echo $outfile
-        sed -e "s/NUMTABLE/${numtable}/g" -e "s/TOTALPLACES/${totalplaces}/g" ${name}.coom > $outfile
-    done
+    outfile=$outdir/${name}_${numbikes}.coom
+    sed -e "s/NUMBIKES/${numbikes}/g" ${name}.coom > $outfile
 done
