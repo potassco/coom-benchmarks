@@ -35,4 +35,5 @@ build
 _build
 _autosummary
 
-model/__pycache__
+# ANTLR4
+.antlr

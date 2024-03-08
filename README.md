@@ -32,7 +32,7 @@ If you get exception `Exception: Could not deserialize ATN with version  (expect
 ### Testing
 To test the parser run (the Python `unittest` package needs to be installed)
 ```
-python -m unittest tests/tests_parser.py
+python -m unittest tests/test_parser.py
 ```
 TODO: Fix testing with new folder structure
 
