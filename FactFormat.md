@@ -181,6 +181,7 @@ behavior(("Bag",7)).
 ### Require
 The predicate `require/2` declares 'requires' constraints, i.e., logical statements
 that need to be satisfied in a valid product configuration state.
+A require statement must not be false to be satisfied (but can be undefined)
 
 > **Note:** Optionally requirements can have a condition. See below for further information.
 
@@ -205,7 +206,8 @@ require((":root",6),"frontWheel.size=20").
 
 
 ### Condition
-The predicate `condition/2` declares a condition which is usually followed by a 'requires' statement.
+The predicate `condition/2` declares a condition which is followed by a 'requires' statement.
+A condition statement has to be true to become active (thus must not be undefined).
 
 > **Note:** In the COOM language it is possible to nest one or more conditions and requirements.
 This is not supported in the current state of the encoding.
