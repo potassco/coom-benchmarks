@@ -13,8 +13,7 @@ pip install antlr4-python3-runtime==4.9.3
 The `model` directory contains is provided by denkbares and represents the current state of the COOM DSL language.
 The specific version requirement stems from the fact that these files were created with ANTLR4 4.9.3.
 
-More information on the ANTLR4 python target can be found here:
-https://github.com/antlr/antlr4/blob/master/doc/python-target.md
+More information on the ANTLR4 python target can be found [here](https://github.com/antlr/antlr4/blob/master/doc/python-target.md).
 
 ## Usage
 ### Parser
@@ -27,10 +26,10 @@ This will automatically save the file as an ASP instance in the `asp-instances` 
 
 The script makes use of the python script `parser/parse.py` which itself just prints the ASP facts to the console.
 
-If you get exception `Exception: Could not deserialize ATN with version  (expected 4).' check that you have the correct antlr4-python-runtime version installed (currently 4.9.3).
+> If you get the following error `Exception: Could not deserialize ATN with version  (expected 4).', check that you have the correct antlr4-python-runtime version installed (currently 4.9.3).
 
 ### Testing
-To test the parser run (the Python `unittest` package needs to be installed)
+To test the parser run
 ```
 python -m unittest tests/test_parser.py
 ```
@@ -58,7 +57,7 @@ clingo encoding-travel.lp asp-instances/travel-bike.lp
 with the travel bike encoding as well.
 
 #### fclingo
-The software fclingo is a solver which allows hybrid ASP reasoning
+The fclingo solver allows hybrid ASP reasoning
 combined with founded conditional linear constraints.
 This makes it possible to reason over (large) numeric domains
 which are frequent in configuration problems.
@@ -71,7 +70,7 @@ fclingo encoding-fclingo.lp asp-instances/travel-bike-alternative.lp
 ```
 
 ## Documentation
-For a documentation of the fact format see `FactFormat.md`.
+For a documentation of the fact format see [FactFormat.md](FactFormat.md).
 
 ## Design decisions and open topics
 
