@@ -72,11 +72,12 @@ condition((":root",1),"storageNeeded=True").
 binary(":root","storageNeeded=True","storageNeeded","=","True").
 path("storageNeeded",0,storageNeeded).
 constant("True").
-require((":root",1),"carrier.bag.volume>=50").
-binary(":root","carrier.bag.volume>=50","carrier.bag.volume",">=","50").
-path("carrier.bag.volume",0,carrier).
-path("carrier.bag.volume",1,bag).
-path("carrier.bag.volume",2,volume).
+require((":root",1),"carrier.bag.capacity.volume>=50").
+binary(":root","carrier.bag.capacity.volume>=50","carrier.bag.capacity.volume",">=","50").
+path("carrier.bag.capacity.volume",0,carrier).
+path("carrier.bag.capacity.volume",1,bag).
+path("carrier.bag.capacity.volume",2,capacity).
+path("carrier.bag.capacity.volume",3,volume).
 number("50",50).
 
 behavior((":root",2)).
