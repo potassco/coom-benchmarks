@@ -1,11 +1,24 @@
 product {
-	Color    color
-    bool     basket
-    bool     storageNeeded
-    Saddle   saddle
-	Wheel	 frontWheel
-	Wheel	 rearWheel
-    Carrier  carrier
+	        Color   color
+    0..1    Basket  basket
+            Saddle  saddle
+	        Wheel   frontWheel
+	        Wheel   rearWheel
+            Carrier carrier
+}
+
+structure Basket {
+    Position    position
+    Color       color
+}
+
+structure Carrier {
+    0..2 Bag bag
+}
+
+structure Bag {
+	Capacity capacity
+	Material material
 }
 
 enumeration Color {
@@ -15,9 +28,9 @@ enumeration Color {
 	Blue
 }
 
-enumeration bool {
-    True
-    False
+enumeration Position {
+    Front
+    Back
 }
 
 enumeration Saddle {
@@ -33,15 +46,6 @@ enumeration Wheel {
 	W27	= (	 27	)
 	W28	= (	 28	)
 	W29	= (	 29	)
-}
-
-structure Carrier {
-    Bag bag
-}
-
-structure Bag {
-	Capacity capacity
-	Material material
 }
 
 enumeration Capacity {
@@ -60,27 +64,23 @@ enumeration Material {
 }
 
 behavior {
-	condition basket = True
-	require frontWheel.size < 29
-}
+    require color = basket.color
 
-behavior {
-	condition storageNeeded = True
-	require carrier.bag.capacity.volume >= 50
-}
+    condition basket.position = Front
+    require frontWheel.size < 29
 
-behavior {
-	combinations  (saddle	 carrier.bag.material)
-	allow         (Standard  Polyester         )
-    allow         (Comfort   (Polyester,Cotton))
-	allow         (Vintage   Leather           )
-}
+    condition carrier.bag.capacity.volume = 100
+    require rearWheel.size >= 28
 
-behavior {
+    condition saddle = Vintage
+    require carrier.bag.material = Leather
+
 	require frontWheel.size = rearWheel.size
 }
 
 behavior Bag {
-	condition material = Leather
-	require capacity = B10
+    combinations  (material     capacity)
+	allow         (Leather      B10             )
+    allow         (Cotton       (B20, B50)      )
+	allow         (Polyester    (B20, B50, B100))
 }
