@@ -1,5 +1,4 @@
 # COOM Parser and Encoding
-
 A parser to translate COOM DSL into ASP facts
 plus a corresponding encoding.
 
@@ -17,7 +16,6 @@ More information on the ANTLR4 python target can be found [here](https://github.
 
 ## Usage
 ### Parser
-
 To parse a `.coom` file you can run the auxiliary script
 ```
 ./parse.sh coom-files/kids-bike.coom
@@ -78,7 +76,6 @@ fclingo encoding-fclingo-travel.lp asp-instances/travel-bike.lp 0
 For a documentation of the fact format see [FactFormat.md](FactFormat.md).
 
 ## Design decisions and open topics
-
 - How to handle SI units?
     - Should there be a conversion by the parser to some base unit? Simple to implement but maybe an advanced feature which we do not want in the paper
     - Or should all numerics be specified without SI units, thus in the same unit?
