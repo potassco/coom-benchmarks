@@ -24,9 +24,9 @@ path_instance(Instance,Formula,(Instance,Formula))   :- binary(Context,Formula,_
 
 % Arithmetics
 &sus{ X1;  X2 } =: (Instance,Formula) :- binary(Context,Formula,Left,"+",Right), instance(Instance,Context),
-                                         path_instance(Instance,Left,X1), path_instance(Instance,Left,X2).
+                                         path_instance(Instance,Left,X1), path_instance(Instance,Right,X2).
 &sus{ X1; -X2 } =: (Instance,Formula) :- binary(Context,Formula,Left,"-",Right), instance(Instance,Context),
-                                         path_instance(Instance,Left,X1), path_instance(Instance,Left,X2).
+                                         path_instance(Instance,Left,X1), path_instance(Instance,Right,X2).
 
 % Only linear constraints are supported
 &sus{ X*N } =: (Instance,Formula) :- binary(Context,Formula,Left,"*",Right), number(Right,N), instance(Instance,Context), path_instance(Instance,Left,X).

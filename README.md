@@ -93,6 +93,7 @@ For a documentation of the fact format see [FactFormat.md](FactFormat.md).
 - Assumes that enumeration features have cardinality 1
 - Assumes that constant and numbers appear only on the right hand side of a binary relation
 - Paths starting with `root.foo` are not supported
+- How should arithmetics with undefined terms be handled?
 
 ### fclingo
 - Currently no division. Is this supported in fclingo?
@@ -100,3 +101,4 @@ For a documentation of the fact format see [FactFormat.md](FactFormat.md).
   if one of the terms is a  constant number
 - Only if attributes are marked as numeric, fclingo will use treat them as such.
   Outside of tables it is not possible to compare non-numeric with numeric attributes.
+- How should arithmetics with undefined terms be handled?
