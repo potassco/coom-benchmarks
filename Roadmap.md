@@ -44,7 +44,7 @@ In addition to the kids bike we have:
 
 The following COOM language keywords are allowed additionally:
 - `structure`
-- Cardinalities, e.g., `0..1` in front of a (`Structure`) feature
+- Cardinalities, e.g., `0..1` in front of a (`structure`) feature
 - `behavior PartName {}`, meaning the constraint is defined relative to part `PartName`
 
 ### Travel Bike
@@ -109,7 +109,7 @@ The following COOM language keywords are allowed additionally:
 ## Future Goals
 - Write unit tests for the ASP encodings
 - Create scalable benchmark sets for the three language features
-- Publish paper introducing the three COOM language fragments, the encodings and the benchmark results
+- Publish paper introducing the three COOM language fragments, the encodings and the benchmark results (publish benchmarks on GitHub)
 - Implement more COOM language features in the parser and the encodings
 - Add visualization option to Python package (clingraph or clinguin)
 - Add interactivity to Python package using clinguin
