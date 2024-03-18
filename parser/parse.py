@@ -1,18 +1,25 @@
 from sys import argv
 from typing import Optional
 
-from antlr4 import FileStream, CommonTokenStream
+from antlr4 import CommonTokenStream, FileStream
 from model.ModelLexer import ModelLexer
 from model.ModelParser import ModelParser
 from model.ModelVisitor import ModelVisitor
 
+# flake8: noqa
+# pylint: skip-file
+
 
 class ASPVisitor(ModelVisitor):
+    """
+    Custom visitor of the COOM Parser.
+    Generates a list of ASP facts as strings.
+    """
 
     def __init__(self):
         super().__init__()
         self.parent_enum: Optional[ModelParser.EnumerationContext] = None
-        self.root_name: str = ':root'
+        self.root_name: str = ":root"
         self.structure_name: str = self.root_name
         self.behavior: str = self.root_name
         self.constraint_idx: int = 0
@@ -57,10 +64,10 @@ class ASPVisitor(ModelVisitor):
         feature_name = field.fieldName.getText()
 
         if field.number_def() is not None:
-            type_name = 'num'
+            type_name = "num"
 
         elif field.string_def() is not None:
-            type_name = 'text'
+            type_name = "text"
         elif field.type_ref is not None:
             type_name = field.type_ref.NAME()
         else:
@@ -70,22 +77,19 @@ class ASPVisitor(ModelVisitor):
         c_min = 1
         c_max = 1
         if cardinality is not None:
-            c_min = cardinality.min.text.replace('x', '')
+            c_min = cardinality.min.text.replace("x", "")
             c_max = c_min
             if cardinality.max is not None:
-                c_max = cardinality.max.text.replace('x',
-                                                     '').replace('*', '#sup')
+                c_max = cardinality.max.text.replace("x", "").replace("*", "#sup")
 
         print(
             f'feature("{self.structure_name}",{feature_name},"{type_name}",{c_min},{c_max}).'
         )
-        if type_name == 'num':
+        if type_name == "num":
             num: ModelParser.Number_defContext = field.number_def()
-            r_min = '#inf' if num.min is None else num.min.INTEGER()
-            r_max = '#sup' if num.max is None else num.max.INTEGER()
-            print(
-                f'range("{self.structure_name}",{feature_name},{r_min},{r_max}).'
-            )
+            r_min = "#inf" if num.min is None else num.min.INTEGER()
+            r_max = "#sup" if num.max is None else num.max.INTEGER()
+            print(f'range("{self.structure_name}",{feature_name},{r_min},{r_max}).')
 
     def visitAttribute(self, ctx: ModelParser.AttributeContext):
         if self.parent_enum is None:
@@ -93,9 +97,9 @@ class ASPVisitor(ModelVisitor):
         parent_name = self.parent_enum.name().getText()
         field: ModelParser.FieldContext = ctx.field()
         if field.number_def() is not None:
-            type = 'num'
+            type = "num"
         else:
-            type = 'str'
+            type = "str"
         field_name = field.fieldName.getText()
         print(f'attribute("{parent_name}",{field_name},"{type}").')
         super().visitAttribute(ctx)
@@ -109,8 +113,7 @@ class ASPVisitor(ModelVisitor):
 
         constant: ModelParser.ConstantContext = ctx.constant()
         if constant != []:
-            parent_attr: ModelParser.AttributeContext = self.parent_enum.attribute(
-            )
+            parent_attr: ModelParser.AttributeContext = self.parent_enum.attribute()
             for a, c in zip(parent_attr, constant):
                 field: ModelParser.FieldContext = a.field()
                 attr_name = field.fieldName.getText()
@@ -125,7 +128,7 @@ class ASPVisitor(ModelVisitor):
     def visitConditioned(self, ctx: ModelParser.ConditionedContext):
         constraint_id = f'("{self.behavior}",{self.constraint_idx})'
         if ctx.interaction() is None:
-            print(f'\nbehavior({constraint_id}).')
+            print(f"\nbehavior({constraint_id}).")
             super().visitConditioned(ctx)
             self.constraint_idx += 1
 
@@ -156,12 +159,10 @@ class ASPVisitor(ModelVisitor):
         for col_idx, item in enumerate(ctx.combination_item()):
             values = item.getText()
             # Removing brackets around the values. Is this safe?
-            if ',' in values:
+            if "," in values:
                 values = values[1:-1]
-            for v in values.split(','):
-                print(
-                    f'{type}({constraint_id},({col_idx},{self.row_idx}),"{v}").'
-                )
+            for v in values.split(","):
+                print(f'{type}({constraint_id},({col_idx},{self.row_idx}),"{v}").')
         self.print_path = False
         super().visitCombination_row(ctx)
         self.print_path = True
@@ -170,35 +171,31 @@ class ASPVisitor(ModelVisitor):
     def visitPrecondition(self, ctx: ModelParser.PreconditionContext):
         constraint_id = f'("{self.behavior}",{self.constraint_idx})'
         condition = f'"{ctx.condition().getText()}"'
-        print(f'condition({constraint_id},{condition}).')
+        print(f"condition({constraint_id},{condition}).")
         super().visitPrecondition(ctx)
 
     def visitRequire(self, ctx: ModelParser.RequireContext):
         constraint_id = f'("{self.behavior}",{self.constraint_idx})'
         condition = f'"{ctx.condition().getText()}"'
-        print(f'require({constraint_id},{condition}).')
+        print(f"require({constraint_id},{condition}).")
         super().visitRequire(ctx)
 
     def visitCondition_or(self, ctx: ModelParser.Condition_orContext):
         cond_and: ModelParser.condition_andContext = ctx.condition_and()
         for i in range(len(cond_and) - 1):
             left = cond_and[i].getText()
-            right = '||'.join([a.getText() for a in cond_and[i + 1:]])
-            complete = left + '||' + right
-            print(
-                f'binary("{self.behavior}","{complete}","{left}","||","{right}").'
-            )
+            right = "||".join([a.getText() for a in cond_and[i + 1 :]])
+            complete = left + "||" + right
+            print(f'binary("{self.behavior}","{complete}","{left}","||","{right}").')
         super().visitCondition_or(ctx)
 
     def visitCondition_and(self, ctx: ModelParser.Condition_andContext):
         cond_not: ModelParser.condition_notContext = ctx.condition_not()
         for i in range(len(cond_not) - 1):
             left = cond_not[i].getText()
-            right = '&&'.join([a.getText() for a in cond_not[i + 1:]])
-            complete = left + '&&' + right
-            print(
-                f'binary("{self.behavior}","{complete}","{left}","&&","{right}").'
-            )
+            right = "&&".join([a.getText() for a in cond_not[i + 1 :]])
+            complete = left + "&&" + right
+            print(f'binary("{self.behavior}","{complete}","{left}","&&","{right}").')
         super().visitCondition_and(ctx)
 
     def visitCondition_not(self, ctx: ModelParser.Condition_notContext):
@@ -208,12 +205,10 @@ class ASPVisitor(ModelVisitor):
             print(f'unary("{self.behavior}","{complete}","!","{negated}").')
         elif ctx.condition() is not None:
             in_brackets = ctx.condition().getText()
-            print(
-                f'unary("{self.behavior}","{complete}","()","{in_brackets}").')
+            print(f'unary("{self.behavior}","{complete}","()","{in_brackets}").')
         super().visitCondition_not(ctx)
 
-    def visitCondition_compare(self,
-                               ctx: ModelParser.Condition_compareContext):
+    def visitCondition_compare(self, ctx: ModelParser.Condition_compareContext):
         formula: ModelParser.FormulaContext = ctx.formula()
         parts: ModelParser.Condition_partContext = ctx.condition_part()
 
@@ -229,70 +224,60 @@ class ASPVisitor(ModelVisitor):
             left = right
 
             # For multiple comparisons rewrite as propositional formulas connected by &&
-            right_prop = '&&'.join([
-                f'{l.formula().getText()}{r.getText()}'
-                for l, r in (zip(parts[i:], parts[i + 1:]))
-            ])
-            if right_prop != '':
-                complete_prop = complete + '&&' + right_prop
-                print(
-                    f'binary("{complete_prop}","{complete}","&&","{right_prop}").'
-                )
+            right_prop = "&&".join(
+                [
+                    f"{l.formula().getText()}{r.getText()}"
+                    for l, r in (zip(parts[i:], parts[i + 1 :]))
+                ]
+            )
+            if right_prop != "":
+                complete_prop = complete + "&&" + right_prop
+                print(f'binary("{complete_prop}","{complete}","&&","{right_prop}").')
         super().visitCondition_compare(ctx)
 
     def visitFormula_add(self, ctx: ModelParser.Formula_addContext):
         form_sub: ModelParser.Formula_subContext = ctx.formula_sub()
         for i in range(len(form_sub) - 1):
             left = form_sub[i].getText()
-            right = '+'.join([a.getText() for a in form_sub[i + 1:]])
-            complete = left + '+' + right
-            print(
-                f'binary("{self.behavior}","{complete}","{left}","+","{right}").'
-            )
+            right = "+".join([a.getText() for a in form_sub[i + 1 :]])
+            complete = left + "+" + right
+            print(f'binary("{self.behavior}","{complete}","{left}","+","{right}").')
         super().visitFormula_add(ctx)
 
     def visitFormula_sub(self, ctx: ModelParser.Formula_subContext):
         form_mul: ModelParser.Formula_mulContext = ctx.formula_mul()
         for i in range(len(form_mul) - 1):
             left = form_mul[i].getText()
-            right = '-'.join([a.getText() for a in form_mul[i + 1:]])
-            complete = left + '-' + right
-            print(
-                f'binary("{self.behavior}","{complete}","{left}","-","{right}").'
-            )
+            right = "-".join([a.getText() for a in form_mul[i + 1 :]])
+            complete = left + "-" + right
+            print(f'binary("{self.behavior}","{complete}","{left}","-","{right}").')
         super().visitFormula_sub(ctx)
 
     def visitFormula_mul(self, ctx: ModelParser.Formula_mulContext):
         form_div: ModelParser.Formula_divContext = ctx.formula_div()
         for i in range(len(form_div) - 1):
             left = form_div[i].getText()
-            right = '*'.join([a.getText() for a in form_div[i + 1:]])
-            complete = left + '*' + right
-            print(
-                f'binary("{self.behavior}","{complete}","{left}","*","{right}").'
-            )
+            right = "*".join([a.getText() for a in form_div[i + 1 :]])
+            complete = left + "*" + right
+            print(f'binary("{self.behavior}","{complete}","{left}","*","{right}").')
         super().visitFormula_mul(ctx)
 
     def visitFormula_div(self, ctx: ModelParser.Formula_divContext):
         form_pow: ModelParser.Formula_powContext = ctx.formula_pow()
         for i in range(len(form_pow) - 1):
             left = form_pow[i].getText()
-            right = '/'.join([a.getText() for a in form_pow[i + 1:]])
-            complete = left + '/' + right
-            print(
-                f'binary("{self.behavior}","{complete}","{left}","/","{right}").'
-            )
+            right = "/".join([a.getText() for a in form_pow[i + 1 :]])
+            complete = left + "/" + right
+            print(f'binary("{self.behavior}","{complete}","{left}","/","{right}").')
         super().visitFormula_div(ctx)
 
     def visitFormula_pow(self, ctx: ModelParser.Formula_powContext):
         form_sign: ModelParser.Formula_signContext = ctx.formula_sign()
         for i in range(len(form_sign) - 1):
             left = form_sign[i].getText()
-            right = '^'.join([a.getText() for a in form_sign[i + 1:]])
-            complete = left + '^' + right
-            print(
-                f'binary("{self.behavior}","{complete}","{left}","^","{right}").'
-            )
+            right = "^".join([a.getText() for a in form_sign[i + 1 :]])
+            complete = left + "^" + right
+            print(f'binary("{self.behavior}","{complete}","{left}","^","{right}").')
         super().visitFormula_pow(ctx)
 
     def visitFormula_sign(self, ctx: ModelParser.Formula_signContext):
@@ -300,17 +285,14 @@ class ASPVisitor(ModelVisitor):
         if ctx.formula_sign() is not None:
             if ctx.neg is not None:
                 negated = ctx.formula_sign().getText()
-                print(
-                    f'unary("{self.behavior}","{complete}","-","{negated}").')
+                print(f'unary("{self.behavior}","{complete}","-","{negated}").')
             else:
                 # Is this really necessary?
                 positive = ctx.formula_sign().getText()
-                print(
-                    f'unary("{self.behavior}","{complete}","+","{positive}").')
+                print(f'unary("{self.behavior}","{complete}","+","{positive}").')
         elif ctx.formula() is not None:
             in_brackets = ctx.formula().getText()
-            print(
-                f'unary("{self.behavior}","{complete}","()","{in_brackets}").')
+            print(f'unary("{self.behavior}","{complete}","()","{in_brackets}").')
         elif ctx.formula_func() is not None:
             func = ctx.formula_func().FUNCTION()
             for f in ctx.formula_func().formula():
@@ -322,7 +304,7 @@ class ASPVisitor(ModelVisitor):
     def visitPath(self, ctx: ModelParser.PathContext):
         # Only do this for actual paths? Not formulas
         if self.print_path:
-            full_path = f'{ctx.getText()}'
+            full_path = f"{ctx.getText()}"
 
             if full_path[0].isupper():
                 print(f'constant("{full_path}").')
