@@ -1,7 +1,7 @@
 instance((),":root") :- structure(":root").
 
 % Generate enumeration and attribute values
-instance((Feature,(Instance,0)),Type) :- feature(Context,Feature,Type,Min,_), enumeration(Type), instance(Instance,Context).
+instance((Feature,(Instance,0)),Type) :- feature(Context,Feature,Type,_,_), enumeration(Type), instance(Instance,Context).
 { val((Instance),Option) : option(Type,Option) } :- instance(Instance,Type).
 :-  { val(Instance,Option) : option(Type,Option) } != 1, enumeration(Type), instance(Instance,Type).
 
@@ -21,16 +21,18 @@ constraint(Instance,(Context,Idx)) :- behavior((Context,Idx)), instance(Instance
 :- constraint(Instance,Constraint), unsat(Instance,Constraint).
 
 % Require without condition
-unsat(Instance,Constraint) :- condition(Constraint,CBinary),     require(Constraint,RBinary),
-                              binary_sat(Instance,CBinary),  not binary_sat(Instance,RBinary),
+% require must not be false to be satisfies (can be undefined)
+unsat(Instance,Constraint) :- condition(Constraint,CBinary),    require(Constraint,RBinary),
+                              binary_sat(Instance,CBinary),     binary_unsat(Instance,RBinary),
                               constraint(Instance,Constraint).
 % Require with condition
+% condition has to be true to become active (must not be undefined)
 unsat(Instance,Constraint) :- not condition(Constraint,_),     require(Constraint,Binary),
-                              constraint(Instance,Constraint), not binary_sat(Instance,Binary).
+                              constraint(Instance,Constraint), binary_unsat(Instance,Binary).
 % Combinations Table (only for allow)
-unsat(Instance,Constraint) :- combinations(Constraint,_,_),
-                              constraint(Instance,Constraint), not hit_row(Instance,Constraint).
-
+% check for every possible combination of values
+unsat(Instance,Constraint) :- combinations(Constraint,_,_), constraint(Instance,Constraint),
+                              combinations_instances(Instance,Constraint,CI), not hit_row(Instance,Constraint,CI).
 
 % Satisfaction of binary relations
 binary_instance(Instance,Formula,Path1,Operator,Path2) :- binary(Context,Formula,Path1,Operator,Path2), instance(Instance,Context).
@@ -52,20 +54,24 @@ binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,">=",Path
 binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"<",Path2),  &sum{path_value(Instance,Path1)} <  path_value(Instance,Path2).
 binary_sat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,"<=",Path2), &sum{path_value(Instance,Path1)} <= path_value(Instance,Path2).
 
+binary_unsat(Instance,Formula) :- binary_instance(Instance,Formula,Path1,_,Path2), not binary_sat(Instance,Formula),
+                                  &df{path_value(Instance,Path1)}, &df{path_value(Instance,Path2)}.
+binary_unsat(Instance,Formula) :- binary_values(Instance,Formula,_,_,_), not binary_sat(Instance,Formula).
+#show binary_sat/2.
 %%% Get values of path expressions
 path_instance(Instance,Path) :- binary(Context,_,Path,_,_),       path(Path,0,_), instance(Instance,Context).
 path_instance(Instance,Path) :- binary(Context,_,_,_,Path),       path(Path,0,_), instance(Instance,Context).
 path_instance(Instance,Path) :- combinations((Context,_),_,Path), path(Path,0,_), instance(Instance,Context).
 
-path_instance(Instance,Path,0,Instance2) :- path(Path,0,Name),
-                                            path_instance(Instance,Path), instance(Instance2,_), Instance2=(Name,(Instance,_)).
-path_instance(Instance,Path,N,Instance3) :- path(Path,N,Name),
-                                            path_instance(Instance,Path,N-1,Instance2), instance(Instance3,_), Instance3=(Name,(Instance2,_)).
+path_instance(Instance,Path,0,X)  :- path(Path,0,Name),
+                                     path_instance(Instance,Path), instance(X,_), X=(Name,(Instance,_)).
+path_instance(Instance,Path,N,X') :- path(Path,N,Name),
+                                     path_instance(Instance,Path,N-1,X), instance(X',_), X'=(Name,(X,_)).
 
-path_instance(Instance,Path,Instance2) :- not path(Path,N+1,_), path_instance(Instance,Path,N,Instance2).
+path_instance(Instance,Path,X)    :- not path(Path,N+1,_), path_instance(Instance,Path,N,X).
 
-path_value(Instance,Path,V)                     :- path_instance(Instance,Path,Instance2), val(Instance2,V).
-&sus{ Instance2 } =: path_value(Instance,Path)  :- path_instance(Instance,Path,Instance2).
+path_value(Instance,Path,V)             :- path_instance(Instance,Path,X), val(X,V).
+&sus{ X } =: path_value(Instance,Path)  :- path_instance(Instance,Path,X).
 
 % Constants and numbers
 % TODO: Also needed for first argument?
@@ -73,12 +79,27 @@ path_value(Instance,Path,Path) :- binary(Context,_,_,_,Path), instance(Instance,
 &in{N..N} =: path_value(Instance,Path) :- binary(Context,_,_,_,Path), instance(Instance,Context), number(Path,N).
 
 %%% Check combinations
-hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path),
-                                            constraint(Instance,Constraint), path_value(Instance,Path,V).
-hit_cell(Instance,Constraint,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path),
-                                            constraint(Instance,Constraint), &sum{path_value(Instance,Path)} = V.
-hit_row(Instance,Constraint) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
-                                    0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_); -1,Col': hit_cell(Instance,Constraint,(Col',Row)) }.
+% Generate all possible values of combinations first
+combinations_instances(Instance,Constraint,Col,(X,())) :- constraint(Instance,Constraint),
+                                                       combinations(Constraint,Col,Path), not combinations(Constraint,Col+1,_),
+                                                       path_instance(Instance,Path,X).
+combinations_instances(Instance,Constraint,Col,(X',X)) :- combinations_instances(Instance,Constraint,Col+1,X),
+                                                       combinations(Constraint,Col,Path), Col >= 0,
+                                                       path_instance(Instance,Path,X').
+combinations_instances(Instance,Constraint,CI)          :- combinations_instances(Instance,Constraint,0,CI).
+
+in_path((V,CI'),CI',V)    :- combinations_instances(_,_,(V,CI')).
+in_path(CI,CI',V)         :- in_path(CI,(V,CI'),_).
+in_path(CI,V)             :- in_path(CI,_,V).
+
+hit_cell(Instance,Constraint,CI,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path), constraint(Instance,Constraint),
+                                              combinations_instances(Instance,Constraint,CI), in_path(CI,X), val(X,V).
+hit_cell(Instance,Constraint,CI,(Col,Row)) :- allow(Constraint,(Col,Row),V), combinations(Constraint,Col,Path), constraint(Instance,Constraint),
+                                              combinations_instances(Instance,Constraint,CI), in_path(CI,X), &sum{X} = V.
+hit_row(Instance,Constraint,CI) :- allow(Constraint,(_,Row),_), constraint(Instance,Constraint),
+                                   combinations_instances(Instance,Constraint,CI),
+                                   0 = #sum{ 1,Col: allow(Constraint,(Col,Row),_);
+                                             -1,Col': hit_cell(Instance,Constraint,CI,(Col',Row)) }.
 
 % Always include boolean enumeration
 enumeration("bool").

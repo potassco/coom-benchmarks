@@ -1,4 +1,4 @@
-#include "encoding-city.lp".
+#include "encoding-clingo-city.lp".
 
 % Assign a value to a numeric feature which is not calculated by an imply statement
 not_imply(Context,Feature) :- range(Context,Feature,_,_), not imply((Context,_),Feature,_).

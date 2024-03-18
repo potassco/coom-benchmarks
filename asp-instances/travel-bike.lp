@@ -1,8 +1,8 @@
 structure(":root").
 feature(":root",totalWeight,"num",1,1).
-range(":root",totalWeight,#inf,#sup).
+range(":root",totalWeight,1,10000).
 feature(":root",maxWeight,"num",1,1).
-range(":root",maxWeight,1,100).
+range(":root",maxWeight,1,10).
 feature(":root",totalVolume,"num",1,1).
 range(":root",totalVolume,0,200).
 feature(":root",requestedVolume,"num",1,1).
@@ -103,10 +103,12 @@ path("frame.bags.capacity.weight",2,capacity).
 path("frame.bags.capacity.weight",3,weight).
 
 behavior((":root",2)).
-require((":root",2),"totalWeight<=maxWeight").
-binary(":root","totalWeight<=maxWeight","totalWeight","<=","maxWeight").
+require((":root",2),"totalWeight<=maxWeight*1000").
+binary(":root","totalWeight<=maxWeight*1000","totalWeight","<=","maxWeight*1000").
 path("totalWeight",0,totalWeight).
+binary(":root","maxWeight*1000","maxWeight","*","1000").
 path("maxWeight",0,maxWeight).
+number("1000",1000).
 
 behavior((":root",3)).
 imply((":root",3),totalVolume,"sum(carrier.bags.capacity.volume)+sum(frame.bags.capacity.volume)").
@@ -145,6 +147,7 @@ condition(("Bag",6),"material=Leather").
 binary("Bag","material=Leather","material","=","Leather").
 path("material",0,material).
 constant("Leather").
-default(("Bag",6),"capacity","B10").
+require(("Bag",6),"capacity=B10").
+binary("Bag","capacity=B10","capacity","=","B10").
 path("capacity",0,capacity).
 constant("B10").

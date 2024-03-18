@@ -1,6 +1,6 @@
 product {
-    num .#/kg		    totalWeight
-	num .#/kg	1-100   maxWeight
+    num .#/kg	1-10000 totalWeight
+	num .#/kg	1-10    maxWeight
 	num .#/l	0-200   totalVolume
 	num .#/l	0-200   requestedVolume
 	Wheel			    frontWheel
@@ -64,23 +64,17 @@ behavior {
 						+ sum(carrier.bags.capacity.weight)
 						+ sum(frame.bags.capacity.weight)
 
-	require totalWeight <= maxWeight
+	require totalWeight <= maxWeight * 1000
 
 	imply totalVolume = sum(carrier.bags.capacity.volume) + sum(frame.bags.capacity.volume)
 
 	require totalVolume >= requestedVolume
 
-	// readonly totalWeight
-
-	// default color = Red
-
 	condition color = Red
 	require frontWheel.size = 20
-
-
 }
 
 behavior Bag {
 	condition material = Leather
-	default capacity = B10
+	require capacity = B10
 }
