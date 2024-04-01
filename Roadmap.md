@@ -12,7 +12,7 @@
 ## Supported COOM language fragments
 - better names for the three instances/language fragments?
 
-### Kids Bike
+### Kids Bike (COOM Core)
 - No partonomy (no `structure` other than root of product)
 - All features are enumerations with cardinality 1
 - Enumerations can have attributes
@@ -35,7 +35,7 @@ The following COOM language keywords are allowed:
 - `allow`
 
 
-### City Bike
+### City Bike (Core + Partonomy + Cardinalities)
 In addition to the kids bike we have:
 - Partonomy and cardinalities
     - Feature can now be Enumerations or Structures
@@ -47,7 +47,7 @@ The following COOM language keywords are allowed additionally:
 - Cardinalities, e.g., `0..1` in front of a (`structure`) feature
 - `behavior PartName {}`, meaning the constraint is defined relative to part `PartName`
 
-### Travel Bike
+### Travel Bike (core + ...)
 In addition to the city bike we have:
 - Numerical features
 - Aggregates `count`, `sum`, `min` and `max`
@@ -114,6 +114,5 @@ The following COOM language keywords are allowed additionally:
 - Add visualization option to Python package (clingraph or clinguin)
 - Add interactivity to Python package using clinguin
 - Write more encodings, e.g., order encoding for numeric values
-
-
+- Input language for user requirements
 

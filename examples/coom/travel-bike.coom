@@ -1,5 +1,5 @@
 product {
-    num .#/kg	1-10000 totalWeight
+    num .#/g	1-10000 totalWeight
 	num .#/kg	1-10    maxWeight
 	num .#/l	0-200   totalVolume
 	num .#/l	0-200   requestedVolume

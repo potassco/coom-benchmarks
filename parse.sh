@@ -1,7 +1,7 @@
 #!/bin/bash
 
 parse_file=parser/parse.py
-asp_dir=asp-instances
+asp_dir=examples/asp
 
 instance_name=$(basename $1)
 outfile=$asp_dir/${instance_name/.coom/.lp}

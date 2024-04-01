@@ -1,6 +1,6 @@
 structure(":root").
 feature(":root",color,"Color",1,1).
-feature(":root",basket,"Basket",0,1).
+feature(":root",basket,"Basket",1,1).
 feature(":root",saddle,"Saddle",1,1).
 feature(":root",frontWheel,"Wheel",1,1).
 feature(":root",rearWheel,"Wheel",1,1).

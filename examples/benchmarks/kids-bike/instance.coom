@@ -1,0 +1,36 @@
+product {
+	Color   color
+    bool    wheelSupport
+	Wheel	frontWheel
+	Wheel	rearWheel
+}
+
+COLORS
+
+enumeration Wheel {
+	attribute	num/inch	size
+
+    W13	= (	 13	)
+	W14	= (	 14	)
+    W15	= (	 15	)
+	W16	= (	 16	)
+    W17	= (	 17	)
+	W18	= (	 18	)
+    W19	= (	 19	)
+	W20	= (	 20	)
+}
+
+// behavior {
+//	condition color = Yellow
+//	require frontWheel.size > 16
+//}
+
+behavior {
+	combinations  (wheelSupport	 rearWheel)
+	allow         (True          (W13, W14, W15, W16))
+	allow         (False         (W17, W18, W19, W20))
+}
+
+behavior {
+	require frontWheel.size = rearWheel.size
+}
