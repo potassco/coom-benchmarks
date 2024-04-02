@@ -1,6 +1,6 @@
 #!/bin/bash
 
-parse_file=../parser/parse.py
+parse_file=../../parser/parse.py
 asp_dir=asp
 coom_dir=coom
 
