@@ -9,11 +9,12 @@ then
     mkdir $outdir
 fi
 
-for numcolors in $(seq 50 10 200)
+for numfeat in $(seq 5 5 100)
 do
-    outfile=$outdir/${name}_${numcolors}.coom
+    outfile=$outdir/${name}_${numfeat}.coom
 
-    colors=$(for i in $(seq 1 $numcolors); do printf "Color%d " "$i"; done)
-    enumeration=$(printf "enumeration Color { %s}" "$colors")
-    sed -e "s/COLORS/${enumeration}/g" ${name}.coom > $outfile
+    features=$(for i in $(seq 1 $numfeat); do printf "Color part%d " "$i"; done)
+    # echo $features
+    # enumeration=$(printf "enumeration Color { %s}" "$features")
+    sed -e "s/PART/${features}/g" ${name}.coom > $outfile
 done

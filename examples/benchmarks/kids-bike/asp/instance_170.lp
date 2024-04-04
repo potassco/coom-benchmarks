@@ -1,214 +1,182 @@
 structure(":root").
-feature(":root",color,"Color",1,1).
-feature(":root",wheelSupport,"bool",1,1).
-feature(":root",frontWheel,"Wheel",1,1).
-feature(":root",rearWheel,"Wheel",1,1).
+feature(":root",part1,"Color",1,1).
+feature(":root",part2,"Color",1,1).
+feature(":root",part3,"Color",1,1).
+feature(":root",part4,"Color",1,1).
+feature(":root",part5,"Color",1,1).
+feature(":root",part6,"Color",1,1).
+feature(":root",part7,"Color",1,1).
+feature(":root",part8,"Color",1,1).
+feature(":root",part9,"Color",1,1).
+feature(":root",part10,"Color",1,1).
+feature(":root",part11,"Color",1,1).
+feature(":root",part12,"Color",1,1).
+feature(":root",part13,"Color",1,1).
+feature(":root",part14,"Color",1,1).
+feature(":root",part15,"Color",1,1).
+feature(":root",part16,"Color",1,1).
+feature(":root",part17,"Color",1,1).
+feature(":root",part18,"Color",1,1).
+feature(":root",part19,"Color",1,1).
+feature(":root",part20,"Color",1,1).
+feature(":root",part21,"Color",1,1).
+feature(":root",part22,"Color",1,1).
+feature(":root",part23,"Color",1,1).
+feature(":root",part24,"Color",1,1).
+feature(":root",part25,"Color",1,1).
+feature(":root",part26,"Color",1,1).
+feature(":root",part27,"Color",1,1).
+feature(":root",part28,"Color",1,1).
+feature(":root",part29,"Color",1,1).
+feature(":root",part30,"Color",1,1).
+feature(":root",part31,"Color",1,1).
+feature(":root",part32,"Color",1,1).
+feature(":root",part33,"Color",1,1).
+feature(":root",part34,"Color",1,1).
+feature(":root",part35,"Color",1,1).
+feature(":root",part36,"Color",1,1).
+feature(":root",part37,"Color",1,1).
+feature(":root",part38,"Color",1,1).
+feature(":root",part39,"Color",1,1).
+feature(":root",part40,"Color",1,1).
+feature(":root",part41,"Color",1,1).
+feature(":root",part42,"Color",1,1).
+feature(":root",part43,"Color",1,1).
+feature(":root",part44,"Color",1,1).
+feature(":root",part45,"Color",1,1).
+feature(":root",part46,"Color",1,1).
+feature(":root",part47,"Color",1,1).
+feature(":root",part48,"Color",1,1).
+feature(":root",part49,"Color",1,1).
+feature(":root",part50,"Color",1,1).
+feature(":root",part51,"Color",1,1).
+feature(":root",part52,"Color",1,1).
+feature(":root",part53,"Color",1,1).
+feature(":root",part54,"Color",1,1).
+feature(":root",part55,"Color",1,1).
+feature(":root",part56,"Color",1,1).
+feature(":root",part57,"Color",1,1).
+feature(":root",part58,"Color",1,1).
+feature(":root",part59,"Color",1,1).
+feature(":root",part60,"Color",1,1).
+feature(":root",part61,"Color",1,1).
+feature(":root",part62,"Color",1,1).
+feature(":root",part63,"Color",1,1).
+feature(":root",part64,"Color",1,1).
+feature(":root",part65,"Color",1,1).
+feature(":root",part66,"Color",1,1).
+feature(":root",part67,"Color",1,1).
+feature(":root",part68,"Color",1,1).
+feature(":root",part69,"Color",1,1).
+feature(":root",part70,"Color",1,1).
+feature(":root",part71,"Color",1,1).
+feature(":root",part72,"Color",1,1).
+feature(":root",part73,"Color",1,1).
+feature(":root",part74,"Color",1,1).
+feature(":root",part75,"Color",1,1).
+feature(":root",part76,"Color",1,1).
+feature(":root",part77,"Color",1,1).
+feature(":root",part78,"Color",1,1).
+feature(":root",part79,"Color",1,1).
+feature(":root",part80,"Color",1,1).
+feature(":root",part81,"Color",1,1).
+feature(":root",part82,"Color",1,1).
+feature(":root",part83,"Color",1,1).
+feature(":root",part84,"Color",1,1).
+feature(":root",part85,"Color",1,1).
+feature(":root",part86,"Color",1,1).
+feature(":root",part87,"Color",1,1).
+feature(":root",part88,"Color",1,1).
+feature(":root",part89,"Color",1,1).
+feature(":root",part90,"Color",1,1).
+feature(":root",part91,"Color",1,1).
+feature(":root",part92,"Color",1,1).
+feature(":root",part93,"Color",1,1).
+feature(":root",part94,"Color",1,1).
+feature(":root",part95,"Color",1,1).
+feature(":root",part96,"Color",1,1).
+feature(":root",part97,"Color",1,1).
+feature(":root",part98,"Color",1,1).
+feature(":root",part99,"Color",1,1).
+feature(":root",part100,"Color",1,1).
+feature(":root",part101,"Color",1,1).
+feature(":root",part102,"Color",1,1).
+feature(":root",part103,"Color",1,1).
+feature(":root",part104,"Color",1,1).
+feature(":root",part105,"Color",1,1).
+feature(":root",part106,"Color",1,1).
+feature(":root",part107,"Color",1,1).
+feature(":root",part108,"Color",1,1).
+feature(":root",part109,"Color",1,1).
+feature(":root",part110,"Color",1,1).
+feature(":root",part111,"Color",1,1).
+feature(":root",part112,"Color",1,1).
+feature(":root",part113,"Color",1,1).
+feature(":root",part114,"Color",1,1).
+feature(":root",part115,"Color",1,1).
+feature(":root",part116,"Color",1,1).
+feature(":root",part117,"Color",1,1).
+feature(":root",part118,"Color",1,1).
+feature(":root",part119,"Color",1,1).
+feature(":root",part120,"Color",1,1).
+feature(":root",part121,"Color",1,1).
+feature(":root",part122,"Color",1,1).
+feature(":root",part123,"Color",1,1).
+feature(":root",part124,"Color",1,1).
+feature(":root",part125,"Color",1,1).
+feature(":root",part126,"Color",1,1).
+feature(":root",part127,"Color",1,1).
+feature(":root",part128,"Color",1,1).
+feature(":root",part129,"Color",1,1).
+feature(":root",part130,"Color",1,1).
+feature(":root",part131,"Color",1,1).
+feature(":root",part132,"Color",1,1).
+feature(":root",part133,"Color",1,1).
+feature(":root",part134,"Color",1,1).
+feature(":root",part135,"Color",1,1).
+feature(":root",part136,"Color",1,1).
+feature(":root",part137,"Color",1,1).
+feature(":root",part138,"Color",1,1).
+feature(":root",part139,"Color",1,1).
+feature(":root",part140,"Color",1,1).
+feature(":root",part141,"Color",1,1).
+feature(":root",part142,"Color",1,1).
+feature(":root",part143,"Color",1,1).
+feature(":root",part144,"Color",1,1).
+feature(":root",part145,"Color",1,1).
+feature(":root",part146,"Color",1,1).
+feature(":root",part147,"Color",1,1).
+feature(":root",part148,"Color",1,1).
+feature(":root",part149,"Color",1,1).
+feature(":root",part150,"Color",1,1).
+feature(":root",part151,"Color",1,1).
+feature(":root",part152,"Color",1,1).
+feature(":root",part153,"Color",1,1).
+feature(":root",part154,"Color",1,1).
+feature(":root",part155,"Color",1,1).
+feature(":root",part156,"Color",1,1).
+feature(":root",part157,"Color",1,1).
+feature(":root",part158,"Color",1,1).
+feature(":root",part159,"Color",1,1).
+feature(":root",part160,"Color",1,1).
+feature(":root",part161,"Color",1,1).
+feature(":root",part162,"Color",1,1).
+feature(":root",part163,"Color",1,1).
+feature(":root",part164,"Color",1,1).
+feature(":root",part165,"Color",1,1).
+feature(":root",part166,"Color",1,1).
+feature(":root",part167,"Color",1,1).
+feature(":root",part168,"Color",1,1).
+feature(":root",part169,"Color",1,1).
+feature(":root",part170,"Color",1,1).
 
 enumeration("Color").
-option("Color", "Color1").
-option("Color", "Color2").
-option("Color", "Color3").
-option("Color", "Color4").
-option("Color", "Color5").
-option("Color", "Color6").
-option("Color", "Color7").
-option("Color", "Color8").
-option("Color", "Color9").
-option("Color", "Color10").
-option("Color", "Color11").
-option("Color", "Color12").
-option("Color", "Color13").
-option("Color", "Color14").
-option("Color", "Color15").
-option("Color", "Color16").
-option("Color", "Color17").
-option("Color", "Color18").
-option("Color", "Color19").
-option("Color", "Color20").
-option("Color", "Color21").
-option("Color", "Color22").
-option("Color", "Color23").
-option("Color", "Color24").
-option("Color", "Color25").
-option("Color", "Color26").
-option("Color", "Color27").
-option("Color", "Color28").
-option("Color", "Color29").
-option("Color", "Color30").
-option("Color", "Color31").
-option("Color", "Color32").
-option("Color", "Color33").
-option("Color", "Color34").
-option("Color", "Color35").
-option("Color", "Color36").
-option("Color", "Color37").
-option("Color", "Color38").
-option("Color", "Color39").
-option("Color", "Color40").
-option("Color", "Color41").
-option("Color", "Color42").
-option("Color", "Color43").
-option("Color", "Color44").
-option("Color", "Color45").
-option("Color", "Color46").
-option("Color", "Color47").
-option("Color", "Color48").
-option("Color", "Color49").
-option("Color", "Color50").
-option("Color", "Color51").
-option("Color", "Color52").
-option("Color", "Color53").
-option("Color", "Color54").
-option("Color", "Color55").
-option("Color", "Color56").
-option("Color", "Color57").
-option("Color", "Color58").
-option("Color", "Color59").
-option("Color", "Color60").
-option("Color", "Color61").
-option("Color", "Color62").
-option("Color", "Color63").
-option("Color", "Color64").
-option("Color", "Color65").
-option("Color", "Color66").
-option("Color", "Color67").
-option("Color", "Color68").
-option("Color", "Color69").
-option("Color", "Color70").
-option("Color", "Color71").
-option("Color", "Color72").
-option("Color", "Color73").
-option("Color", "Color74").
-option("Color", "Color75").
-option("Color", "Color76").
-option("Color", "Color77").
-option("Color", "Color78").
-option("Color", "Color79").
-option("Color", "Color80").
-option("Color", "Color81").
-option("Color", "Color82").
-option("Color", "Color83").
-option("Color", "Color84").
-option("Color", "Color85").
-option("Color", "Color86").
-option("Color", "Color87").
-option("Color", "Color88").
-option("Color", "Color89").
-option("Color", "Color90").
-option("Color", "Color91").
-option("Color", "Color92").
-option("Color", "Color93").
-option("Color", "Color94").
-option("Color", "Color95").
-option("Color", "Color96").
-option("Color", "Color97").
-option("Color", "Color98").
-option("Color", "Color99").
-option("Color", "Color100").
-option("Color", "Color101").
-option("Color", "Color102").
-option("Color", "Color103").
-option("Color", "Color104").
-option("Color", "Color105").
-option("Color", "Color106").
-option("Color", "Color107").
-option("Color", "Color108").
-option("Color", "Color109").
-option("Color", "Color110").
-option("Color", "Color111").
-option("Color", "Color112").
-option("Color", "Color113").
-option("Color", "Color114").
-option("Color", "Color115").
-option("Color", "Color116").
-option("Color", "Color117").
-option("Color", "Color118").
-option("Color", "Color119").
-option("Color", "Color120").
-option("Color", "Color121").
-option("Color", "Color122").
-option("Color", "Color123").
-option("Color", "Color124").
-option("Color", "Color125").
-option("Color", "Color126").
-option("Color", "Color127").
-option("Color", "Color128").
-option("Color", "Color129").
-option("Color", "Color130").
-option("Color", "Color131").
-option("Color", "Color132").
-option("Color", "Color133").
-option("Color", "Color134").
-option("Color", "Color135").
-option("Color", "Color136").
-option("Color", "Color137").
-option("Color", "Color138").
-option("Color", "Color139").
-option("Color", "Color140").
-option("Color", "Color141").
-option("Color", "Color142").
-option("Color", "Color143").
-option("Color", "Color144").
-option("Color", "Color145").
-option("Color", "Color146").
-option("Color", "Color147").
-option("Color", "Color148").
-option("Color", "Color149").
-option("Color", "Color150").
-option("Color", "Color151").
-option("Color", "Color152").
-option("Color", "Color153").
-option("Color", "Color154").
-option("Color", "Color155").
-option("Color", "Color156").
-option("Color", "Color157").
-option("Color", "Color158").
-option("Color", "Color159").
-option("Color", "Color160").
-option("Color", "Color161").
-option("Color", "Color162").
-option("Color", "Color163").
-option("Color", "Color164").
-option("Color", "Color165").
-option("Color", "Color166").
-option("Color", "Color167").
-option("Color", "Color168").
-option("Color", "Color169").
-option("Color", "Color170").
-
-enumeration("Wheel").
-attribute("Wheel",size,"num").
-option("Wheel", "W14").
-attr_value("Wheel","W14",size,14).
-option("Wheel", "W15").
-attr_value("Wheel","W15",size,15).
-option("Wheel", "W16").
-attr_value("Wheel","W16",size,16).
-option("Wheel", "W17").
-attr_value("Wheel","W17",size,17).
-option("Wheel", "W18").
-attr_value("Wheel","W18",size,18).
-option("Wheel", "W19").
-attr_value("Wheel","W19",size,19).
-option("Wheel", "W20").
-attr_value("Wheel","W20",size,20).
-
-behavior((":root",0)).
-combinations((":root",0),0,"wheelSupport").
-combinations((":root",0),1,"rearWheel").
-path("wheelSupport",0,wheelSupport).
-path("rearWheel",0,rearWheel).
-allow((":root",0),(0,0),"True").
-allow((":root",0),(1,0),"W14").
-allow((":root",0),(1,0),"W16").
-allow((":root",0),(0,1),"False").
-allow((":root",0),(1,1),"W18").
-allow((":root",0),(1,1),"W20").
-
-behavior((":root",1)).
-require((":root",1),"frontWheel.size=rearWheel.size").
-binary(":root","frontWheel.size=rearWheel.size","frontWheel.size","=","rearWheel.size").
-path("frontWheel.size",0,frontWheel).
-path("frontWheel.size",1,size).
-path("rearWheel.size",0,rearWheel).
-path("rearWheel.size",1,size).
+option("Color", "Red").
+option("Color", "Green").
+option("Color", "Blue").
+option("Color", "Silver").
+option("Color", "Black").
+option("Color", "Yellow").
+option("Color", "Purple").
+option("Color", "Gray").
+option("Color", "Orange").

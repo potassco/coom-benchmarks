@@ -1,35 +1,15 @@
 product {
-	Color   color
-    bool    wheelSupport
-	Wheel	frontWheel
-	Wheel	rearWheel
+	Color part1 Color part2 Color part3 Color part4 Color part5 Color part6 Color part7 Color part8 Color part9 Color part10 Color part11 Color part12 Color part13 Color part14 Color part15 Color part16 Color part17 Color part18 Color part19 Color part20 Color part21 Color part22 Color part23 Color part24 Color part25 Color part26 Color part27 Color part28 Color part29 Color part30 Color part31 Color part32 Color part33 Color part34 Color part35 Color part36 Color part37 Color part38 Color part39 Color part40 Color part41 Color part42 Color part43 Color part44 Color part45 Color part46 Color part47 Color part48 Color part49 Color part50 Color part51 Color part52 Color part53 Color part54 Color part55 Color part56 Color part57 Color part58 Color part59 Color part60 Color part61 Color part62 Color part63 Color part64 Color part65 Color part66 Color part67 Color part68 Color part69 Color part70 Color part71 Color part72 Color part73 Color part74 Color part75 Color part76 Color part77 Color part78 Color part79 Color part80 Color part81 Color part82 Color part83 Color part84 Color part85 Color part86 Color part87 Color part88 Color part89 Color part90 Color part91 Color part92 Color part93 Color part94 Color part95 Color part96 Color part97 Color part98 Color part99 Color part100 Color part101 Color part102 Color part103 Color part104 Color part105 Color part106 Color part107 Color part108 Color part109 Color part110 Color part111 Color part112 Color part113 Color part114 Color part115 Color part116 Color part117 Color part118 Color part119 Color part120 Color part121 Color part122 Color part123 Color part124 Color part125 Color part126 Color part127 Color part128 Color part129 Color part130 Color part131 Color part132 Color part133 Color part134 Color part135 Color part136 Color part137 Color part138 Color part139 Color part140 
 }
 
-enumeration Color { Color1 Color2 Color3 Color4 Color5 Color6 Color7 Color8 Color9 Color10 Color11 Color12 Color13 Color14 Color15 Color16 Color17 Color18 Color19 Color20 Color21 Color22 Color23 Color24 Color25 Color26 Color27 Color28 Color29 Color30 Color31 Color32 Color33 Color34 Color35 Color36 Color37 Color38 Color39 Color40 Color41 Color42 Color43 Color44 Color45 Color46 Color47 Color48 Color49 Color50 Color51 Color52 Color53 Color54 Color55 Color56 Color57 Color58 Color59 Color60 Color61 Color62 Color63 Color64 Color65 Color66 Color67 Color68 Color69 Color70 Color71 Color72 Color73 Color74 Color75 Color76 Color77 Color78 Color79 Color80 Color81 Color82 Color83 Color84 Color85 Color86 Color87 Color88 Color89 Color90 Color91 Color92 Color93 Color94 Color95 Color96 Color97 Color98 Color99 Color100 Color101 Color102 Color103 Color104 Color105 Color106 Color107 Color108 Color109 Color110 Color111 Color112 Color113 Color114 Color115 Color116 Color117 Color118 Color119 Color120 Color121 Color122 Color123 Color124 Color125 Color126 Color127 Color128 Color129 Color130 Color131 Color132 Color133 Color134 Color135 Color136 Color137 Color138 Color139 Color140 }
-
-enumeration Wheel {
-	attribute	num/inch	size
-
-	W14	= (	 14	)
-    W15	= (	 15	)
-	W16	= (	 16	)
-    W17	= (	 17	)
-	W18	= (	 18	)
-    W19	= (	 19	)
-	W20	= (	 20	)
-}
-
-// behavior {
-//	condition color = Yellow
-//	require frontWheel.size > 16
-//}
-
-behavior {
-	combinations  (wheelSupport	 rearWheel)
-	allow         (True          (W14, W16))
-	allow         (False         (W18, W20))
-}
-
-behavior {
-	require frontWheel.size = rearWheel.size
+enumeration Color {
+    Red
+    Green
+    Blue
+    Silver
+    Black
+    Yellow
+    Purple
+    Gray
+    Orange
 }

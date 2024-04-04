@@ -1,11 +1,29 @@
 product {
-	Color   color
-    bool    wheelSupport
-	Wheel	frontWheel
-	Wheel	rearWheel
+	Color       color
+    bool        wheelSupport
+    Position    basket
+    Color       basketColor
+	Wheel	    frontWheel
+	Wheel	    rearWheel
 }
 
-enumeration Color { Color1 Color2 Color3 Color4 Color5 Color6 Color7 Color8 Color9 Color10 Color11 Color12 Color13 Color14 Color15 Color16 Color17 Color18 Color19 Color20 Color21 Color22 Color23 Color24 Color25 Color26 Color27 Color28 Color29 Color30 Color31 Color32 Color33 Color34 Color35 Color36 Color37 Color38 Color39 Color40 Color41 Color42 Color43 Color44 Color45 Color46 Color47 Color48 Color49 Color50 Color51 Color52 Color53 Color54 Color55 Color56 Color57 Color58 Color59 Color60 Color61 Color62 Color63 Color64 Color65 Color66 Color67 Color68 Color69 Color70 Color71 Color72 Color73 Color74 Color75 Color76 Color77 Color78 Color79 Color80 Color81 Color82 Color83 Color84 Color85 Color86 Color87 Color88 Color89 Color90 }
+enumeration Color {
+    Red
+    Green
+    Blue
+    Silver
+    Black
+    Yellow
+    Purple
+    Gray
+    Orange
+    White
+}
+
+enumeration Position {
+    Front
+    Rear
+}
 
 enumeration Wheel {
 	attribute	num/inch	size
@@ -19,17 +37,24 @@ enumeration Wheel {
 	W20	= (	 20	)
 }
 
-// behavior {
-//	condition color = Yellow
-//	require frontWheel.size > 16
-//}
-
 behavior {
+	condition color = Yellow
+	require frontWheel.size > 16
+
 	combinations  (wheelSupport	 rearWheel)
-	allow         (True          (W14, W16))
-	allow         (False         (W18, W20))
-}
+	allow         (True          (W14, W15, W16, W17))
+	allow         (False         (W18, W19, W20))
 
-behavior {
 	require frontWheel.size = rearWheel.size
+
+    require basketColor != Purple
+
+    require color != White
+
+    condition color = Green
+    require basketColor = Yellow
+
+    combinations    (basket     basketColor)
+    allow           (Front      (Red, Green, Blue, Silver, Black, Gray, White))
+    allow           (Rear       (Red, Green, Blue, Silver, Black, Yellow, Orange))
 }

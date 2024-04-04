@@ -1,16 +1,34 @@
 product {
-	Color   color
-    bool    wheelSupport
-	Wheel	frontWheel
-	Wheel	rearWheel
+	Color       color
+    bool        wheelSupport
+    Position    basket
+    Color       basketColor
+    Color       helmetColor
+	Wheel	    frontWheel
+	Wheel	    rearWheel
 }
 
-COLORS
+enumeration Color {
+    Red
+    Green
+    Blue
+    Silver
+    Black
+    Yellow
+    Purple
+    Gray
+    Orange
+    White
+}
+
+enumeration Position {
+    Front
+    Rear
+}
 
 enumeration Wheel {
 	attribute	num/inch	size
 
-    W13	= (	 13	)
 	W14	= (	 14	)
     W15	= (	 15	)
 	W16	= (	 16	)
@@ -20,17 +38,24 @@ enumeration Wheel {
 	W20	= (	 20	)
 }
 
-// behavior {
-//	condition color = Yellow
-//	require frontWheel.size > 16
-//}
-
 behavior {
+	condition color = Yellow
+	require frontWheel.size > 16
+
 	combinations  (wheelSupport	 rearWheel)
-	allow         (True          (W13, W14, W15, W16))
-	allow         (False         (W17, W18, W19, W20))
-}
+	allow         (True          (W14, W15, W16, W17))
+	allow         (False         (W18, W19, W20))
 
-behavior {
 	require frontWheel.size = rearWheel.size
+
+    require basketColor != Purple
+
+    require color != White
+
+    condition color = Green
+    require basketColor = Yellow
+
+    combinations    (basket     basketColor)
+    allow           (Front      (Red, Green, Blue, Silver, Black, Gray, White))
+    allow           (Rear       (Red, Green, Blue, Silver, Black, Yellow, Orange))
 }
