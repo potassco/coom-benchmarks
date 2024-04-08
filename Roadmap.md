@@ -36,7 +36,7 @@ The following COOM language keywords are allowed:
 
 
 ### City Bike (Core + Partonomy + Cardinalities)
-In addition to the kids bike we have:
+In addition to the kids bike (COOM core) we have:
 - Partonomy and cardinalities
     - Feature can now be Enumerations or Structures
     - Path expressions can thus be of arbitrary length
@@ -47,8 +47,8 @@ The following COOM language keywords are allowed additionally:
 - Cardinalities, e.g., `0..1` in front of a (`structure`) feature
 - `behavior PartName {}`, meaning the constraint is defined relative to part `PartName`
 
-### Travel Bike (core + ...)
-In addition to the city bike we have:
+### Travel Bike (Core + Partonomy + Cardinalities + Numerics)
+In addition to the city bike (COOM core + partonomy + cardinalities) we have:
 - Numerical features
 - Aggregates `count`, `sum`, `min` and `max`
     - Arguments of aggregates are a single path expression
