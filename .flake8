@@ -4,6 +4,3 @@ exclude =
     .git
     .github
 ignore = E741
-per-file-ignores =
-    parse.py: E501
-    tests/*: E501
