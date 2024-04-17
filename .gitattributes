@@ -1,0 +1,2 @@
+# Benchmark instances (.coom files)
+benchmarks/*/instances filter=lfs diff=lfs merge=lfs -text
