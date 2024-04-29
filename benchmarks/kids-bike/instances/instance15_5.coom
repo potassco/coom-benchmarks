@@ -1,0 +1,40 @@
+product{ Feat0 feat0
+Feat1 feat1
+Feat2 feat2
+Feat3 feat3
+Feat4 feat4
+Feat5 feat5
+Feat6 feat6
+Feat7 feat7
+Feat8 feat8
+Feat9 feat9
+Feat10 feat10
+Feat11 feat11
+Feat12 feat12
+Feat13 feat13
+Feat14 feat14 }
+
+enumeration Feat0{ F0 F1 F2 F3 F4 }
+enumeration Feat1{ F0 F1 F2 F3 F4 }
+enumeration Feat2{ F0 F1 F2 F3 F4 }
+enumeration Feat3{ F0 F1 F2 F3 F4 }
+enumeration Feat4{ F0 F1 F2 F3 F4 }
+enumeration Feat5{ F0 F1 F2 F3 F4 }
+enumeration Feat6{ F0 F1 F2 F3 F4 }
+enumeration Feat7{ F0 F1 F2 F3 F4 }
+enumeration Feat8{ F0 F1 F2 F3 F4 }
+enumeration Feat9{ F0 F1 F2 F3 F4 }
+enumeration Feat10{ F0 F1 F2 F3 F4 }
+enumeration Feat11{ F0 F1 F2 F3 F4 }
+enumeration Feat12{ F0 F1 F2 F3 F4 }
+enumeration Feat13{ F0 F1 F2 F3 F4 }
+enumeration Feat14{ F0 F1 F2 F3 F4 }
+
+behavior{
+combinations (feat9 feat2 feat7 feat13 feat10 feat12 feat5 feat6 feat1 feat0 feat8 feat11 feat4 feat14 feat3)
+allow (F0 F4 F2 F2 F4 F1 F4 F1 F0 F3 F0 F4 F0 F3 F0)
+allow (F3 F1 F3 F1 F1 F0 F1 F4 F4 F0 F0 F3 F0 F1 F3)
+allow (F0 F4 F2 F2 F1 F3 F3 F0 F1 F3 F2 F4 F1 F1 F4)
+allow (F2 F4 F1 F0 F0 F2 F1 F0 F1 F4 F2 F4 F2 F3 F2)
+allow (F1 F0 F0 F1 F4 F2 F4 F3 F0 F0 F1 F0 F4 F1 F2)
+}

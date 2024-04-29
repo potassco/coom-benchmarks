@@ -1,61 +1,21 @@
-product {
-	Color       color
-    bool        wheelSupport
-    Position    basket
-    Color       basketColor
-    Color       helmetColor
-	Wheel	    frontWheel
-	Wheel	    rearWheel
-}
+product{ Feat0 feat0
+Feat1 feat1
+Feat2 feat2
+Feat3 feat3
+Feat4 feat4
+Feat5 feat5
+Feat6 feat6
+Feat7 feat7
+Feat8 feat8
+Feat9 feat9 }
 
-enumeration Color {
-    Red
-    Green
-    Blue
-    Silver
-    Black
-    Yellow
-    Purple
-    Gray
-    Orange
-    White
-}
-
-enumeration Position {
-    Front
-    Rear
-}
-
-enumeration Wheel {
-	attribute	num/inch	size
-
-	W14	= (	 14	)
-    W15	= (	 15	)
-	W16	= (	 16	)
-    W17	= (	 17	)
-	W18	= (	 18	)
-    W19	= (	 19	)
-	W20	= (	 20	)
-}
-
-behavior {
-	condition color = Yellow
-	require frontWheel.size > 16
-
-	combinations  (wheelSupport	 rearWheel)
-	allow         (True          (W14, W15, W16, W17))
-	allow         (False         (W18, W19, W20))
-
-	require frontWheel.size = rearWheel.size
-
-    require basketColor != Purple
-
-    require color != White
-
-    condition color = Green
-    require basketColor = Yellow
-
-    combinations    (basket     basketColor)
-    allow           (Front      (Red, Green, Blue, Silver, Black, Gray, White))
-    allow           (Rear       (Red, Green, Blue, Silver, Black, Yellow, Orange))
-}
+enumeration Feat0{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 F15 F16 F17 F18 F19 F20 F21 F22 F23 F24 F25 F26 F27 F28 F29 }
+enumeration Feat1{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 F15 F16 F17 F18 F19 F20 F21 F22 F23 F24 F25 F26 F27 F28 F29 }
+enumeration Feat2{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 F15 F16 F17 F18 F19 F20 F21 F22 F23 F24 F25 F26 F27 F28 F29 }
+enumeration Feat3{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 F15 F16 F17 F18 F19 F20 F21 F22 F23 F24 F25 F26 F27 F28 F29 }
+enumeration Feat4{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 F15 F16 F17 F18 F19 F20 F21 F22 F23 F24 F25 F26 F27 F28 F29 }
+enumeration Feat5{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 F15 F16 F17 F18 F19 F20 F21 F22 F23 F24 F25 F26 F27 F28 F29 }
+enumeration Feat6{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 F15 F16 F17 F18 F19 F20 F21 F22 F23 F24 F25 F26 F27 F28 F29 }
+enumeration Feat7{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 F15 F16 F17 F18 F19 F20 F21 F22 F23 F24 F25 F26 F27 F28 F29 }
+enumeration Feat8{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 F15 F16 F17 F18 F19 F20 F21 F22 F23 F24 F25 F26 F27 F28 F29 }
+enumeration Feat9{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 F15 F16 F17 F18 F19 F20 F21 F22 F23 F24 F25 F26 F27 F28 F29 }
