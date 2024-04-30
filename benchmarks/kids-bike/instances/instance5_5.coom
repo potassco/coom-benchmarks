@@ -11,10 +11,43 @@ enumeration Feat3{ F0 F1 F2 F3 F4 }
 enumeration Feat4{ F0 F1 F2 F3 F4 }
 
 behavior{
-combinations (feat4 feat3 feat2 feat1 feat0)
-allow (F0 F4 F0 F0 F4)
-allow (F0 F2 F4 F3 F4)
-allow (F4 F4 F1 F2 F3)
-allow (F3 F3 F0 F2 F0)
-allow (F1 F0 F1 F1 F2)
+combinations (feat4 feat0)
+allow (F3 F4)
+allow (F3 F3)
+allow (F4 F1)
+allow (F4 F1)
+allow (F3 F0)
+allow (F2 F4)
+allow (F0 F2)
+allow (F1 F4)
+allow (F4 F3)
+allow (F4 F2)
+}
+
+behavior{
+combinations (feat2 feat4)
+allow (F4 F3)
+allow (F2 F1)
+allow (F0 F3)
+allow (F0 F0)
+allow (F0 F3)
+allow (F1 F0)
+allow (F1 F3)
+allow (F0 F1)
+allow (F0 F3)
+allow (F2 F2)
+}
+
+behavior{
+combinations (feat0 feat2)
+allow (F0 F3)
+allow (F4 F3)
+allow (F4 F0)
+allow (F1 F0)
+allow (F3 F0)
+allow (F1 F2)
+allow (F4 F4)
+allow (F1 F0)
+allow (F3 F3)
+allow (F1 F0)
 }

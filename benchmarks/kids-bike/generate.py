@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument("--features", "-f", type=int)
 parser.add_argument("--options", "-o", type=int)
+# parser.add_argument("--constraints", "-c", type=int)
 
 OUTDIR = "instances"
 
@@ -53,15 +54,16 @@ if __name__ == "__main__":
     output.append(ENUMERATIONS)
     output.append("")
 
-    output.append(
-        make_constraint(
-            args.features,
-            args.options,
-            list(range(args.features)),
-            list(range(args.options)),
+    for i in range((args.features // 2) + 1):
+        output.append(
+            make_constraint(
+                2,
+                args.options * 2,
+                list(range(args.features)),
+                list(range(args.options)),
+            )
         )
-    )
-    output.append("")
+        output.append("")
 
     # CONSTRAINTS = [sample(list(range(args.features)), 5)]
     # print(CONSTRAINTS)
