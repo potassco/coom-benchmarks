@@ -13,9 +13,10 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument("--features", "-f", type=int)
 parser.add_argument("--options", "-o", type=int)
-# parser.add_argument("--constraints", "-c", type=int)
+parser.add_argument("--constraint_size", "-c", type=int)
 
-OUTDIR = "instances"
+INSTANCE_DIR = "instances"
+NUM_CONS = 5
 
 
 def make_row(num_cols: int, options: List[str]) -> str:
@@ -38,6 +39,7 @@ def make_constraint(
 if __name__ == "__main__":
     args = parser.parse_args()
 
+    OUTDIR = os.path.join(INSTANCE_DIR, f"{args.features}_{args.options}")
     os.makedirs(OUTDIR, exist_ok=True)
 
     FEATURES = "\n".join([f"Feat{i} feat{i}" for i in range(args.features)])
@@ -46,27 +48,32 @@ if __name__ == "__main__":
         [f"enumeration Feat{i}{{ {OPTIONS} }}" for i in range(args.features)]
     )
 
-    output = []
+    instance = []
 
-    output.append(f"product{{ {FEATURES} }}")
-    output.append("")
+    instance.append(f"product{{ {FEATURES} }}")
+    instance.append("")
 
-    output.append(ENUMERATIONS)
-    output.append("")
+    instance.append(ENUMERATIONS)
 
-    for i in range((args.features // 2) + 1):
-        output.append(
+    # instance_out = os.path.join(OUTDIR, "instance.coom")
+    # with open(instance_out, "w", encoding="utf-8") as f:
+    #     f.write("\n".join(instance))
+
+    for i in range(NUM_CONS):
+        constraints = [
             make_constraint(
-                2,
+                args.constraint_size,
                 args.options * 2,
                 list(range(args.features)),
                 list(range(args.options)),
             )
-        )
-        output.append("")
+            for _ in range((args.features // args.constraint_size) + 1)
+        ]
 
-    # CONSTRAINTS = [sample(list(range(args.features)), 5)]
-    # print(CONSTRAINTS)
-    outfile = os.path.join(OUTDIR, f"instance{args.features}_{args.options}.coom")
-    with open(outfile, "w", encoding="utf-8") as f:
-        f.write("\n".join(output))
+        constraints_out = os.path.join(
+            OUTDIR, f"instance{args.constraint_size}_{i}.coom"
+        )
+        with open(constraints_out, "w", encoding="utf-8") as f:
+            f.write("\n".join(instance))
+            f.write("\n\n")
+            f.write("\n".join(constraints))
