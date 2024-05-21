@@ -16,7 +16,7 @@ parser.add_argument("--options", "-o", type=int)
 parser.add_argument("--constraint_size", "-c", type=int)
 
 INSTANCE_DIR = "instances"
-NUM_CONS = 5
+NUM_CONS = 3
 
 
 def make_row(num_cols: int, options: List[str]) -> str:

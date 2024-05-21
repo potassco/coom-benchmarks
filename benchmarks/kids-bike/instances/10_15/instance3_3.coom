@@ -1,0 +1,154 @@
+product{ Feat0 feat0
+Feat1 feat1
+Feat2 feat2
+Feat3 feat3
+Feat4 feat4
+Feat5 feat5
+Feat6 feat6
+Feat7 feat7
+Feat8 feat8
+Feat9 feat9 }
+
+enumeration Feat0{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 }
+enumeration Feat1{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 }
+enumeration Feat2{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 }
+enumeration Feat3{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 }
+enumeration Feat4{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 }
+enumeration Feat5{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 }
+enumeration Feat6{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 }
+enumeration Feat7{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 }
+enumeration Feat8{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 }
+enumeration Feat9{ F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 }
+
+behavior{
+combinations (feat4 feat3 feat9)
+allow (F14 F2 F6)
+allow (F1 F7 F9)
+allow (F11 F2 F5)
+allow (F2 F6 F6)
+allow (F13 F11 F12)
+allow (F5 F0 F6)
+allow (F3 F0 F2)
+allow (F14 F14 F4)
+allow (F4 F3 F6)
+allow (F9 F4 F10)
+allow (F4 F12 F9)
+allow (F1 F8 F8)
+allow (F13 F7 F8)
+allow (F11 F10 F13)
+allow (F11 F6 F1)
+allow (F7 F3 F11)
+allow (F14 F13 F7)
+allow (F1 F5 F3)
+allow (F8 F6 F10)
+allow (F5 F8 F1)
+allow (F6 F9 F1)
+allow (F2 F5 F10)
+allow (F8 F8 F5)
+allow (F7 F7 F7)
+allow (F6 F12 F13)
+allow (F4 F1 F0)
+allow (F2 F13 F0)
+allow (F1 F0 F10)
+allow (F13 F5 F8)
+allow (F9 F13 F14)
+}
+behavior{
+combinations (feat1 feat3 feat8)
+allow (F0 F1 F13)
+allow (F13 F9 F7)
+allow (F1 F9 F4)
+allow (F2 F9 F7)
+allow (F3 F0 F1)
+allow (F4 F11 F5)
+allow (F4 F3 F3)
+allow (F8 F12 F10)
+allow (F8 F9 F11)
+allow (F9 F9 F11)
+allow (F0 F12 F0)
+allow (F7 F3 F9)
+allow (F12 F7 F1)
+allow (F13 F0 F1)
+allow (F11 F12 F11)
+allow (F12 F2 F10)
+allow (F0 F6 F12)
+allow (F10 F13 F2)
+allow (F11 F3 F1)
+allow (F4 F3 F5)
+allow (F7 F13 F4)
+allow (F12 F2 F8)
+allow (F4 F9 F13)
+allow (F12 F9 F14)
+allow (F10 F0 F1)
+allow (F7 F9 F6)
+allow (F12 F5 F14)
+allow (F9 F2 F0)
+allow (F14 F0 F9)
+allow (F8 F5 F13)
+}
+behavior{
+combinations (feat7 feat1 feat6)
+allow (F5 F11 F3)
+allow (F6 F3 F7)
+allow (F4 F5 F14)
+allow (F8 F3 F11)
+allow (F7 F9 F7)
+allow (F5 F7 F0)
+allow (F10 F6 F7)
+allow (F11 F2 F10)
+allow (F11 F4 F4)
+allow (F7 F3 F3)
+allow (F10 F5 F0)
+allow (F1 F5 F3)
+allow (F1 F0 F10)
+allow (F10 F8 F5)
+allow (F4 F11 F10)
+allow (F11 F9 F10)
+allow (F9 F9 F9)
+allow (F4 F3 F10)
+allow (F7 F1 F9)
+allow (F3 F8 F11)
+allow (F0 F14 F14)
+allow (F5 F5 F12)
+allow (F12 F11 F10)
+allow (F7 F8 F12)
+allow (F13 F11 F13)
+allow (F5 F9 F11)
+allow (F13 F0 F2)
+allow (F2 F4 F7)
+allow (F5 F7 F10)
+allow (F14 F8 F0)
+}
+behavior{
+combinations (feat9 feat3 feat5)
+allow (F6 F12 F8)
+allow (F9 F11 F13)
+allow (F12 F2 F7)
+allow (F12 F4 F6)
+allow (F5 F2 F14)
+allow (F5 F14 F10)
+allow (F10 F5 F2)
+allow (F6 F12 F0)
+allow (F2 F7 F1)
+allow (F6 F7 F12)
+allow (F0 F7 F10)
+allow (F5 F14 F5)
+allow (F5 F14 F9)
+allow (F9 F10 F10)
+allow (F4 F12 F13)
+allow (F5 F10 F3)
+allow (F8 F13 F5)
+allow (F6 F10 F1)
+allow (F2 F1 F3)
+allow (F13 F11 F1)
+allow (F9 F7 F8)
+allow (F12 F10 F7)
+allow (F12 F0 F4)
+allow (F3 F1 F10)
+allow (F0 F3 F12)
+allow (F4 F2 F1)
+allow (F1 F3 F2)
+allow (F10 F7 F11)
+allow (F10 F5 F13)
+allow (F8 F11 F4)
+}
