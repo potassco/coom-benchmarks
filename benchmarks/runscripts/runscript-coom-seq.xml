@@ -6,8 +6,8 @@
 
 	<system name="coomsolver" version="0.1" measures="clasp" config="seq-coomsolver">
 
-		<setting name="clingo" cmdline="0 -q --solver clingo" tag="clingo" />
-		<setting name="fclingo" cmdline="0 -q --solver fclingo" tag="fclingo" />
+		<setting name="clingo" cmdline="-n=0 -q --solver clingo" tag="clingo" />
+		<setting name="fclingo" cmdline="-n=0 -q --solver fclingo" tag="fclingo" />
 
     </system>
 
