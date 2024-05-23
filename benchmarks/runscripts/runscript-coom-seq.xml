@@ -5,8 +5,8 @@
 	<config name="seq-generic" template="templates/seq-generic.sh"/>
 
 	<system name="coomsolver" version="0.1" measures="clasp" config="seq-generic">
-		<setting name="clingo" cmdline="-n=0 -q --solver clingo" tag="clingo" />
-		<setting name="fclingo" cmdline="-n=0 -q --solver fclingo" tag="fclingo" />
+		<setting name="clingo" cmdline="--models=0 -q --solver clingo" tag="clingo" />
+		<setting name="fclingo" cmdline="--models=0 -q --solver fclingo" tag="fclingo" />
     </system>
 
 	<seqjob name="seq-gen" timeout="300" runs="1" script_mode="timeout" walltime="00:50:00" parallel="1"/>
@@ -18,6 +18,10 @@
 
 	<project name="coom-clingo-py" job="seq-gen">
 		<runtag machine="komputer" benchmark="city-bike-fleet" tag="clingo"/>
+	</project>
+
+	<project name="coom-fclingo-py" job="seq-gen">
+		<runtag machine="komputer" benchmark="city-bike-fleet" tag="fclingo"/>
 	</project>
 
 </runscript>
