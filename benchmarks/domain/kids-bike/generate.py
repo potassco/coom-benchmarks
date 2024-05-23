@@ -14,9 +14,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("--features", "-f", type=int)
 parser.add_argument("--options", "-o", type=int)
 parser.add_argument("--constraint_size", "-c", type=int)
-
-INSTANCE_DIR = "instances"
-NUM_CONS = 3
+parser.add_argument("--out", type=str)
 
 
 def make_row(num_cols: int, options: List[str]) -> str:
@@ -39,8 +37,8 @@ def make_constraint(
 if __name__ == "__main__":
     args = parser.parse_args()
 
-    OUTDIR = os.path.join(INSTANCE_DIR, f"{args.features}_{args.options}")
-    os.makedirs(OUTDIR, exist_ok=True)
+    # OUTDIR = os.path.join(INSTANCE_DIR, f"{args.features}_{args.options}")
+    os.makedirs(args.out, exist_ok=True)
 
     FEATURES = "\n".join([f"Feat{i} feat{i}" for i in range(args.features)])
     OPTIONS = " ".join([f"F{i}" for i in range(args.options)])
@@ -55,25 +53,20 @@ if __name__ == "__main__":
 
     instance.append(ENUMERATIONS)
 
-    # instance_out = os.path.join(OUTDIR, "instance.coom")
-    # with open(instance_out, "w", encoding="utf-8") as f:
-    #     f.write("\n".join(instance))
-
-    for i in range(NUM_CONS):
-        constraints = [
-            make_constraint(
-                args.constraint_size,
-                args.options * 2,
-                list(range(args.features)),
-                list(range(args.options)),
-            )
-            for _ in range((args.features // args.constraint_size) + 1)
-        ]
-
-        constraints_out = os.path.join(
-            OUTDIR, f"instance{args.constraint_size}_{i}.coom"
+    constraints = [
+        make_constraint(
+            args.constraint_size,
+            args.options * 2,
+            list(range(args.features)),
+            list(range(args.options)),
         )
-        with open(constraints_out, "w", encoding="utf-8") as f:
-            f.write("\n".join(instance))
-            f.write("\n\n")
-            f.write("\n".join(constraints))
+        for _ in range((args.features // args.constraint_size) + 1)
+    ]
+
+    outfile = os.path.join(
+        args.out, f"instance{args.features}_{args.options}_{args.constraint_size}.coom"
+    )
+    with open(outfile, "w", encoding="utf-8") as f:
+        f.write("\n".join(instance))
+        f.write("\n\n")
+        f.write("\n".join(constraints))

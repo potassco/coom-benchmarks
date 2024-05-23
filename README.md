@@ -1,9 +1,15 @@
 # COOM Benchmarks
 Benchmark sets in COOM language.
 
-## How to run
+## Prerequesites
 
 Install `lxml`
-```shell
+```sh
 pip install lxml
+```
+
+## How to run
+```sh
+./benchmarks/scripts/run_bm.sh
+./benchmarks/scripts/evaluate.sh
 ```
