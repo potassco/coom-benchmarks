@@ -2,45 +2,23 @@
 
 	<machine name="komputer" cpu="24x8xE5520@2.27GHz" memory="24GB"/>
 
-	<config name="seq-coomsolver" template="templates/seq-coomsolver.sh"/>
+	<config name="seq-generic" template="templates/seq-generic.sh"/>
 
-	<system name="coomsolver" version="0.1" measures="clasp" config="seq-coomsolver">
-
+	<system name="coomsolver" version="0.1" measures="clasp" config="seq-generic">
 		<setting name="clingo" cmdline="-n=0 -q --solver clingo" tag="clingo" />
 		<setting name="fclingo" cmdline="-n=0 -q --solver fclingo" tag="fclingo" />
-
     </system>
 
 	<seqjob name="seq-gen" timeout="300" runs="1" script_mode="timeout" walltime="00:50:00" parallel="1"/>
-
-	<!-- <benchmark name="kids-bike">
-		<folder path="../domain/kids-bike/instances">
-		</folder>
-	</benchmark> -->
 
 	<benchmark name="city-bike-fleet">
 		<folder path="../domain/city-bike-fleet/instances">
 		</folder>
 	</benchmark>
 
-	<!-- <benchmark name="travel-bike-fleet">
-		<folder path="../domain/travel-bike-fleet/instances">
-		</folder>
-	</benchmark>
-
-	<benchmark name="restaurant">
-		<folder path="../domain/restaurant/instances">
-		</folder>
-	</benchmark> -->
-
 	<project name="coom-clingo-py" job="seq-gen">
 		<runtag machine="komputer" benchmark="city-bike-fleet" tag="clingo"/>
 	</project>
-
-	<!-- <project name="coom-fclingo-py" job="seq-gen">
-		<runtag machine="komputer" benchmark="city-bike-fleet" tag="fclingo"/>
-	</project> -->
-
 
 </runscript>
 
