@@ -1,16 +1,13 @@
 #!/bin/bash
 
-name=instance
-outdir=coom
+TEMPLATE=instance.coom
+OUTDIR=instances
 
-
-if [ ! -d $outdir ]
-then
-    mkdir $outdir
-fi
+rm -rf $OUTDIR
+mkdir $OUTDIR
 
 for numbikes in $(seq 1 10)
 do
-    outfile=$outdir/${name}_${numbikes}.coom
-    sed -e "s/NUMBIKES/${numbikes}/g" ${name}.coom > $outfile
+    OUTFILE=$OUTDIR/instance${numbikes}.coom
+    sed -e "s/NUMBIKES/${numbikes}/g" $TEMPLATE > $OUTFILE
 done
