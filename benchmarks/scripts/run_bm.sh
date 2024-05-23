@@ -3,6 +3,7 @@
 source benchmarks/scripts/vars.env
 
 make clean-output
+make copy-runscripts
 
 cd $BT_DIR
 ./bgen $RUNSCRIPT_PATH

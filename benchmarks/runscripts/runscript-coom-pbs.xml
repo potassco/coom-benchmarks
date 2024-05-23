@@ -9,8 +9,7 @@
 		<setting name="fclingo" cmdline="--models=0 -q --solver fclingo" tag="fclingo" />
     </system>
 
-	<seqjob name="seq-gen" timeout="600" runs="1" script_mode="timeout" walltime="15:00:00" parallel="1"/>
-
+	<pbsjob name="pbs-gen" timeout="600" runs="1" script_mode="timeout" walltime="15:00:00" cpt="4"/>
 
 	<benchmark name="kids-bike">
 		<folder path="../domain/kids-bike/instances">
@@ -33,35 +32,35 @@
 	</benchmark>
 
 
-	<project name="kids-bike-clingo" job="seq-gen">
+	<project name="kids-bike-clingo" job="pbs-gen">
 		<runtag machine="komputer" benchmark="kids-bike" tag="clingo"/>
 	</project>
 
-	<project name="kids-bike-fclingo" job="seq-gen">
+	<project name="kids-bike-fclingo" job="pbs-gen">
 		<runtag machine="komputer" benchmark="kids-bike" tag="fclingo"/>
 	</project>
 
-	<project name="city-bike-fleet-clingo" job="seq-gen">
+	<project name="city-bike-fleet-clingo" job="pbs-gen">
 		<runtag machine="komputer" benchmark="city-bike-fleet" tag="clingo"/>
 	</project>
 
-	<project name="city-bike-fleet-fclingo" job="seq-gen">
+	<project name="city-bike-fleet-fclingo" job="pbs-gen">
 		<runtag machine="komputer" benchmark="city-bike-fleet" tag="fclingo"/>
 	</project>
 
-	<project name="travel-bike-fleet-clingo" job="seq-gen">
+	<project name="travel-bike-fleet-clingo" job="pbs-gen">
 		<runtag machine="komputer" benchmark="travel-bike-fleet" tag="clingo"/>
 	</project>
 
-	<project name="travel-bike-fleet-fclingo" job="seq-gen">
+	<project name="travel-bike-fleet-fclingo" job="pbs-gen">
 		<runtag machine="komputer" benchmark="travel-bike-fleet" tag="fclingo"/>
 	</project>
 
-	<project name="restaurant-clingo" job="seq-gen">
+	<project name="restaurant-clingo" job="pbs-gen">
 		<runtag machine="komputer" benchmark="restaurant" tag="clingo"/>
 	</project>
 
-	<project name="restaurant-fclingo" job="seq-gen">
+	<project name="restaurant-fclingo" job="pbs-gen">
 		<runtag machine="komputer" benchmark="restaurant" tag="fclingo"/>
 	</project>
 </runscript>
