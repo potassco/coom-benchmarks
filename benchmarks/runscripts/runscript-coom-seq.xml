@@ -14,22 +14,22 @@
 	<seqjob name="seq-gen" timeout="300" runs="1" script_mode="timeout" walltime="00:50:00" parallel="1"/>
 
 	<!-- <benchmark name="kids-bike">
-		<folder path="../../dom/kids-bike/instances">
+		<folder path="../domain/kids-bike/instances">
 		</folder>
 	</benchmark> -->
 
 	<benchmark name="city-bike-fleet">
-		<folder path="../benchmarks/city-bike-fleet/instances">
+		<folder path="../domain/city-bike-fleet/instances">
 		</folder>
 	</benchmark>
 
 	<!-- <benchmark name="travel-bike-fleet">
-		<folder path="../../dom/travel-bike-fleet/instances">
+		<folder path="../domain/travel-bike-fleet/instances">
 		</folder>
 	</benchmark>
 
 	<benchmark name="restaurant">
-		<folder path="../../dom/restaurant/instances">
+		<folder path="../domain/restaurant/instances">
 		</folder>
 	</benchmark> -->
 
