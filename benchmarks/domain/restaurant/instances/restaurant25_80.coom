@@ -1,7 +1,7 @@
 product {
-			1..25        BigTable bigTables
-			1..25        SmallTable smallTables
-			1-500    num   totalPlaces
+			1..25	BigTable bigTables
+			1..25	SmallTable smallTables
+			num	1-500	totalPlaces
 			}
 			structure BigTable {
 				3..5 Chair chairs
