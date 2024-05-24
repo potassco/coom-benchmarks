@@ -2,6 +2,7 @@
 
 TEMPLATE=instance.coom
 OUTDIR=instances
+NAME=restaurant
 
 rm -rf $OUTDIR
 mkdir $OUTDIR
@@ -12,7 +13,7 @@ do
     init=$(($numtable*2))
     for totalplaces in $(seq $init 10 $maxplaces)
     do
-        OUTFILE=$OUTDIR/instance${numtable}_${totalplaces}.coom
+        OUTFILE=$OUTDIR/${NAME}${numtable}_${totalplaces}.coom
         sed -e "s/NUMTABLE/${numtable}/g" -e "s/TOTALPLACES/${totalplaces}/g" $TEMPLATE > $OUTFILE
     done
 done

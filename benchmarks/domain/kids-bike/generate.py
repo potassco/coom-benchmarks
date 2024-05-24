@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("--features", "-f", type=int)
 parser.add_argument("--options", "-o", type=int)
 parser.add_argument("--constraint_size", "-c", type=int)
+parser.add_argument("--name", type=str)
 parser.add_argument("--out", type=str)
 
 
@@ -64,7 +65,8 @@ if __name__ == "__main__":
     ]
 
     outfile = os.path.join(
-        args.out, f"instance{args.features}_{args.options}_{args.constraint_size}.coom"
+        args.out,
+        f"{args.name}{args.features}_{args.options}_{args.constraint_size}.coom",
     )
     with open(outfile, "w", encoding="utf-8") as f:
         f.write("\n".join(instance))
