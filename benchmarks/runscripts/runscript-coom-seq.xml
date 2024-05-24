@@ -11,58 +11,19 @@
 
 	<seqjob name="seq-gen" timeout="600" runs="1" script_mode="timeout" walltime="15:00:00" parallel="1"/>
 
-
-	<benchmark name="kids-bike">
+	<benchmark name="coom-benchmarks">
 		<folder path="../domain/kids-bike/instances">
 		</folder>
-	</benchmark>
-
-	<benchmark name="city-bike-fleet">
 		<folder path="../domain/city-bike-fleet/instances">
 		</folder>
-	</benchmark>
-
-	<benchmark name="travel-bike-fleet">
 		<folder path="../domain/travel-bike-fleet/instances">
 		</folder>
-	</benchmark>
-
-	<benchmark name="restaurant">
 		<folder path="../domain/restaurant/instances">
 		</folder>
 	</benchmark>
 
-
-	<project name="kids-bike-clingo" job="seq-gen">
-		<runtag machine="komputer" benchmark="kids-bike" tag="clingo"/>
-	</project>
-
-	<project name="kids-bike-fclingo" job="seq-gen">
-		<runtag machine="komputer" benchmark="kids-bike" tag="fclingo"/>
-	</project>
-
-	<project name="city-bike-fleet-clingo" job="seq-gen">
-		<runtag machine="komputer" benchmark="city-bike-fleet" tag="clingo"/>
-	</project>
-
-	<project name="city-bike-fleet-fclingo" job="seq-gen">
-		<runtag machine="komputer" benchmark="city-bike-fleet" tag="fclingo"/>
-	</project>
-
-	<project name="travel-bike-fleet-clingo" job="seq-gen">
-		<runtag machine="komputer" benchmark="travel-bike-fleet" tag="clingo"/>
-	</project>
-
-	<project name="travel-bike-fleet-fclingo" job="seq-gen">
-		<runtag machine="komputer" benchmark="travel-bike-fleet" tag="fclingo"/>
-	</project>
-
-	<project name="restaurant-clingo" job="seq-gen">
-		<runtag machine="komputer" benchmark="restaurant" tag="clingo"/>
-	</project>
-
-	<project name="restaurant-fclingo" job="seq-gen">
-		<runtag machine="komputer" benchmark="restaurant" tag="fclingo"/>
+	<project name="coom-benchmark-project" job="seq-gen">
+		<runtag machine="komputer" benchmark="coom-benchmarks" tag="*all*"/>
 	</project>
 </runscript>
 

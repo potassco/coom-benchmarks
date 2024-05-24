@@ -1,7 +1,6 @@
 #!/bin/bash
 
-source benchmarks/scripts/vars.env
-
+source scripts/vars.env
 
 cd $BT_DIR
 
