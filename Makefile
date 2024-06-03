@@ -7,7 +7,7 @@ copy-programs:
 copy-runscripts:
 	cp benchmarks/runscripts/* $(bt_dir)/runscripts
 copy-templates:
-	cp benchmarks/templates/coom.pbs $(bt_dir)/templates
+	cp benchmarks/templates/* $(bt_dir)/templates
 clean-output:
 	rm -rf $(bt_dir)/output/
 clean-programs:
@@ -19,6 +19,7 @@ clean-runscripts:
 	rm -f $(bt_dir)/runscripts/runscript-coom-*.xml
 clean-templates:
 	rm -f $(bt_dir)/templates/coom.pbs
+	rm -f $(bt_dir)/templates/seq-generic-single.sh
 clean:
 	make clean-runscripts
 	make clean-programs
