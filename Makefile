@@ -19,7 +19,7 @@ clean-runscripts:
 	rm -f $(bt_dir)/runscripts/runscript-coom-*.xml
 clean-templates:
 	rm -f $(bt_dir)/templates/coom.pbs
-	rm -f $(bt_dir)/templates/seq-generic-single.sh
+	rm -f $(bt_dir)/templates/seq-generic.sh
 clean:
 	make clean-runscripts
 	make clean-programs

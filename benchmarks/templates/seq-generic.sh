@@ -7,7 +7,7 @@ cd "$(dirname $0)"
 
 [[ -e .finished ]] || "{run.root}/programs/runlim" \
 	--output-file=runsolver.watcher --space-limit=16000 \
-	--time-limit={run.timeout} --single \
+	--real-time-limit={run.timeout} \
 	"{run.root}/programs/{run.solver}" {run.args} {run.file} > runsolver.solver
 
 touch .finished

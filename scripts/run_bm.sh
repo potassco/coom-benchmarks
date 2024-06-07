@@ -2,6 +2,7 @@
 
 source scripts/vars.env
 
+echo "Cleaning up old output"
 make clean-output
 make copy-runscripts
 
