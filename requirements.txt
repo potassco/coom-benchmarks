@@ -1,0 +1,4 @@
+numpy
+pandas
+pandas_ods_reader
+matplotlib

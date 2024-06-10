@@ -4,3 +4,5 @@ benchmarks/domain/travel-bike-fleet/instances filter=lfs diff=lfs merge=lfs -tex
 benchmarks/domain/city-bike-fleet/instances filter=lfs diff=lfs merge=lfs -text
 benchmarks/domain/kids-bike/instances filter=lfs diff=lfs merge=lfs -text
 benchmarks/domain/restaurant/instances filter=lfs diff=lfs merge=lfs -text
+benchmarks/plots filter=lfs diff=lfs merge=lfs -text
+benchmarks/results/ filter=lfs diff=lfs merge=lfs -text
