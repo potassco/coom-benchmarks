@@ -4,6 +4,8 @@ bt_dir=benchmarks/benchmark-tool
 
 copy-programs:
 	cp -r benchmarks/programs/* $(bt_dir)/programs
+copy-results:
+	cp -r $(bt_dir)/results benchmarks/
 copy-runscripts:
 	cp benchmarks/runscripts/* $(bt_dir)/runscripts
 copy-templates:
