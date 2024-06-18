@@ -31,6 +31,12 @@ MARKERS = {
     "clingo": "D",
     "fclingo": "o",
 }
+TITLE = {
+    "kidsbike": "Kids Bike",
+    "citybike": "City Bike Fleet",
+    "travelbike": "Travel Bike Fleet",
+    "restaurant": "Restaurant",
+}
 
 
 def clean_df(df):
@@ -77,10 +83,10 @@ def get_subdf(df, domain, solver):
 def get_plot_data(df, domain):
     runtimes = df["time"]
 
-    if domain in ("kidsbike", "restaurant"):
+    if domain in ("kidsbike", "restaurant", "travelbike"):
         y = runtimes.sort_values().to_numpy()
         x = np.arange(len(y))
-    elif domain in ("citybike", "travelbike"):
+    elif domain == "citybike":
         y = runtimes.to_numpy()
         x = np.arange(1, len(y) + 1)
     return x, y
@@ -91,9 +97,9 @@ def plot(dfs, domain):
     outpath = os.path.join(OUTDIR, outfile)
 
     for s in dfs.keys():
-        if domain in ("kidsbike", "restaurant"):
+        if domain in ("kidsbike", "restaurant", "travelbike"):
             marker = "none"
-        elif domain in ("citybike", "travelbike"):
+        elif domain == "citybike":
             marker = MARKERS[s]
 
         x, y = get_plot_data(dfs[s], domain)
@@ -111,12 +117,13 @@ def plot(dfs, domain):
     plt.xlim(min(x))
 
     plt.legend()
-    plt.title(f"{domain}", fontsize=12, fontweight=0)
+    plt.title(f"{TITLE[domain]}", fontsize=12, fontweight=0)
 
-    if domain in ("kidsbike", "restaurant"):
+    if domain in ("kidsbike", "restaurant", "travelbike"):
         plt.xlabel("#Instances solved")
-        plt.ylim(bottom=0, top=500)
-    elif domain in ("citybike", "travelbike"):
+        plt.ylim(bottom=0, top=650)
+        plt.gca().xaxis.get_major_locator().set_params(integer=True)
+    elif domain == "citybike":
         plt.ylim(bottom=0, top=650)
         plt.xlabel("#Bikes")
         plt.xticks(list(range(1, max(x) + 1, 1)))
