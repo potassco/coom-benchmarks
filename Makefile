@@ -14,7 +14,7 @@ clean-output:
 	rm -rf $(bt_dir)/output/
 clean-programs:
 	rm -f $(bt_dir)/programs/runlim
-	rm -f $(bt_dir)/programs/coomsolver*
+	rm -f $(bt_dir)/programs/coomsuite*
 clean-results:
 	rm -rf $(bt_dir)/results/
 clean-runscripts:
