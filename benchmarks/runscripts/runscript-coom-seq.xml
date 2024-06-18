@@ -4,7 +4,7 @@
 
 	<config name="seq-generic" template="templates/seq-generic.sh"/>
 
-	<system name="coomsolver" version="0.1" measures="clasp" config="seq-generic">
+	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
 		<setting name="clingo" cmdline="--models=0 -q --solver clingo" tag="clingo" />
 		<setting name="fclingo" cmdline="--models=0 -q --solver fclingo" tag="fclingo" />
     </system>
