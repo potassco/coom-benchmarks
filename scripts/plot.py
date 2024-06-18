@@ -1,22 +1,11 @@
 #!/usr/bin/env python
 
-# from cProfile import label
-import itertools
-import math
 import os
-import sys
 
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-
-# import seaborn as sns
+import pandas
 from pandas_ods_reader import read_ods
-
-# import scipy
-# from scipy import stats
-# import re
-# import tikzplotlib
 
 RESULTS_DIR = "benchmarks/results"
 ODS_FILE = "evaluated.ods"
@@ -37,6 +26,10 @@ GREENBLUE = "#226367"
 COLORS = {
     "clingo": BLUE,
     "fclingo": RED,
+}
+MARKERS = {
+    "clingo": "D",
+    "fclingo": "o",
 }
 
 
@@ -89,8 +82,7 @@ def get_plot_data(df, domain):
         x = np.arange(len(y))
     elif domain in ("citybike", "travelbike"):
         y = runtimes.to_numpy()
-        print(y)
-        x = np.arange(len(y))
+        x = np.arange(1, len(y) + 1)
     return x, y
 
 
@@ -99,6 +91,11 @@ def plot(dfs, domain):
     outpath = os.path.join(OUTDIR, outfile)
 
     for s in dfs.keys():
+        if domain in ("kidsbike", "restaurant"):
+            marker = "none"
+        elif domain in ("citybike", "travelbike"):
+            marker = MARKERS[s]
+
         x, y = get_plot_data(dfs[s], domain)
         plt.plot(
             x,
@@ -106,23 +103,25 @@ def plot(dfs, domain):
             ls="solid",
             color=COLORS[s],
             lw=1,
-            # marker=approaches_markers[name],
+            marker=marker,
             ms=3,
             label=s,
         )
 
-    plt.xlim(left=0)
-    plt.ylim(bottom=0, top=600)
+    plt.xlim(min(x))
 
     plt.legend()
     plt.title(f"{domain}", fontsize=12, fontweight=0)
-    plt.xlabel("Instances solved")
+
+    if domain in ("kidsbike", "restaurant"):
+        plt.xlabel("#Instances solved")
+        plt.ylim(bottom=0, top=500)
+    elif domain in ("citybike", "travelbike"):
+        plt.ylim(bottom=0, top=650)
+        plt.xlabel("#Bikes")
+        plt.xticks(list(range(1, max(x) + 1, 1)))
+
     plt.ylabel("Runtime (s)")
-    # if args.range is not None:
-    #     tr = [int(i) for i in args.range.split(',')]
-    #     plt.xticks(list(range(tr[0], tr[1], tr[2])))
-    # # plt.xticks(ticks=ticks_num, labels=ticks_label)
-    # # plt.xticks(list(range(0,3000,500)))
 
     plt.savefig(outpath, dpi=300, bbox_inches="tight")
     print(f"Saved {outpath}")
