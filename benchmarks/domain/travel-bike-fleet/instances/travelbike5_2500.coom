@@ -1,6 +1,6 @@
 product {
-    num         0-MAXPRICE	totalPrice
-    1..NUMBIKES Bike		bike
+    num         0-2500	totalPrice
+    1..5 Bike		bike
 }
 
 structure Bike {
