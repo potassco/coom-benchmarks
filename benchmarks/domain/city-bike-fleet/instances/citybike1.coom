@@ -5,17 +5,12 @@ product {
 structure Bike {
 	Wheel			    frontWheel
 	Wheel			    rearWheel
-	// Frame			    frame
 	Carrier			    carrier
 	Color				color
 }
 
 structure Carrier {
 	0..2 Bag	        bags
-}
-
-structure Frame {
-	0..1 Bag  	        bags
 }
 
 structure Bag {
@@ -29,7 +24,7 @@ enumeration Capacity {
 	B10  = ( 10 )
 	B20  = ( 20 )
 	B50  = ( 50 )
-	// B100 = (100 )
+	B100 = (100 )
 }
 
 enumeration Material {

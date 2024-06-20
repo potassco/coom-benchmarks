@@ -1,6 +1,6 @@
 product {
     num         0-2000	totalPrice
-    1..4 Bike		bike
+    4..4 Bike		bike
 }
 
 structure Bike {
@@ -11,13 +11,8 @@ structure Bike {
 	Carrier			carrier
 }
 
-structure Carrier {
-	0..2 Bag	        bag
-}
-
-structure Frame {
-	0..2 Bag  	        bag
-}
+structure Carrier { 0..2 Bag bag }
+structure Frame   {	0..2 Bag bag }
 
 enumeration Bag {
 	attribute num 	volume
