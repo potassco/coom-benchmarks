@@ -5,14 +5,14 @@
 	<config name="seq-generic" template="templates/seq-generic.sh"/>
 
 	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
-		<setting name="clingo" cmdline="--models=1 -q --solver clingo" tag="clingo-n1" pbstemplate="templates/coom.pbs"/>
-		<setting name="fclingo" cmdline="--models=1 -q --solver fclingo" tag="fclingo-n1" pbstemplate="templates/coom.pbs"/>
+		<setting name="clingo-n1" cmdline="--models=1 -q --solver clingo" tag="clingo" pbstemplate="templates/coom.pbs"/>
+		<setting name="fclingo-n1" cmdline="--models=1 -q --solver fclingo" tag="fclingo" pbstemplate="templates/coom.pbs"/>
 
-		<setting name="clingo" cmdline="--models=10 -q --solver clingo" tag="clingo-n10" pbstemplate="templates/coom.pbs"/>
-		<setting name="fclingo" cmdline="--models=10 -q --solver fclingo" tag="fclingo-n10" pbstemplate="templates/coom.pbs"/>
+		<setting name="clingo-n10" cmdline="--models=10 -q --solver clingo" tag="clingo" pbstemplate="templates/coom.pbs"/>
+		<setting name="fclingo-n10" cmdline="--models=10 -q --solver fclingo" tag="fclingo" pbstemplate="templates/coom.pbs"/>
 
-		<setting name="clingo" cmdline="--models=30 -q --solver clingo" tag="clingo-n30" pbstemplate="templates/coom.pbs"/>
-		<setting name="fclingo" cmdline="--models=30 -q --solver fclingo" tag="fclingo-n30" pbstemplate="templates/coom.pbs"/>
+		<setting name="clingo-n30" cmdline="--models=30 -q --solver clingo" tag="clingo" pbstemplate="templates/coom.pbs"/>
+		<setting name="fclingo-n30" cmdline="--models=30 -q --solver fclingo" tag="fclingo" pbstemplate="templates/coom.pbs"/>
     </system>
 
 	<pbsjob name="pbs-gen" timeout="600" runs="1" script_mode="timeout" walltime="01:30:00" cpt="4"/>
