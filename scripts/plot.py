@@ -19,7 +19,7 @@ SOLVER = [
     "clingo-n30",
     "fclingo-n30",
 ]
-DOMAIN = ["citybike", "travelbike", "restaurant"]  # randomcore
+DOMAIN = ["randomcore"]  # citybike", "travelbike", "restaurant"]  # randomcore
 
 
 GREEN = "#77B762"
@@ -87,7 +87,7 @@ def get_subdf(df, domain, solver):
 def get_plot_data(df, domain):
     runtimes = df["time"]
 
-    if domain in ("kidsbike", "restaurant", "travelbike"):
+    if domain in ("randomcore", "restaurant", "travelbike"):
         y = runtimes.sort_values().to_numpy()
         x = np.arange(len(y))
     elif domain == "citybike":
@@ -101,7 +101,7 @@ def plot(dfs, domain):
     outpath = os.path.join(OUTDIR, outfile)
 
     for i, s in enumerate(dfs.keys()):
-        if domain in ("kidsbike", "restaurant", "travelbike"):
+        if domain in ("randomcore", "restaurant", "travelbike"):
             marker = "none"
         elif domain == "citybike":
             marker = MARKERS[i]
@@ -123,7 +123,7 @@ def plot(dfs, domain):
     plt.legend()
     plt.title(f"{TITLE[domain]}", fontsize=12, fontweight=0)
 
-    if domain in ("kidsbike", "restaurant", "travelbike"):
+    if domain in ("randomcore", "restaurant", "travelbike"):
         plt.xlabel("#Instances solved")
         plt.ylim(bottom=0, top=650)
         plt.gca().xaxis.get_major_locator().set_params(integer=True)
