@@ -1,5 +1,5 @@
 product {
-    NUMBIKES..NUMBIKES Bike           bikes
+    40..40 Bike           bikes
 }
 
 structure Bike {

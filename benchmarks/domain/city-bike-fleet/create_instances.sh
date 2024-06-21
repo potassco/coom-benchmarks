@@ -7,8 +7,8 @@ NAME=citybike
 rm -rf $OUTDIR
 mkdir $OUTDIR
 
-for numbikes in $(seq 1 5)
+for numbikes in $(seq 10 10 50)
 do
-    OUTFILE=$OUTDIR/${NAME}${numbikes}.coom
+    OUTFILE=$OUTDIR/${NAME}-n${numbikes}.coom
     sed -e "s/NUMBIKES/${numbikes}/g" $TEMPLATE > $OUTFILE
 done
