@@ -11,8 +11,15 @@ RESULTS_DIR = "benchmarks/results"
 ODS_FILE = "evaluated.ods"
 OUTDIR = "benchmarks/plots"
 
-SOLVER = ["clingo", "fclingo"]
-DOMAIN = ["kidsbike", "citybike", "travelbike", "restaurant"]
+SOLVER = [
+    "clingo-n1",
+    "fclingo-n1",
+    "clingo-n10",
+    "fclingo-n10",
+    "clingo-n30",
+    "fclingo-n30",
+]
+DOMAIN = ["citybike", "travelbike", "restaurant"]  # randomcore
 
 
 GREEN = "#77B762"
@@ -23,16 +30,12 @@ PURPLE_LIGHT = "#9477BF90"
 ORANGE = "#D78C1F"
 YELLOW = "#D7CF1F"
 GREENBLUE = "#226367"
-COLORS = {
-    "clingo": BLUE,
-    "fclingo": RED,
-}
-MARKERS = {
-    "clingo": "D",
-    "fclingo": "o",
-}
+
+COLORS = [GREEN, BLUE, RED, PURPLE, ORANGE, YELLOW]
+MARKERS = ["D", "o", "x", "s", "*", "+"]
+
 TITLE = {
-    "kidsbike": "Kids Bike",
+    "randomcore": "Random COOM core",
     "citybike": "City Bike Fleet",
     "travelbike": "Travel Bike Fleet",
     "restaurant": "Restaurant",
@@ -76,7 +79,8 @@ def clean_df(df):
 
 def get_subdf(df, domain, solver):
     subdf = df.filter(like=domain, axis=0).filter(regex=f"^{solver}", axis=1)
-    subdf.rename(columns=lambda x: x.split("-")[1], inplace=True)
+    # subdf.rename(columns=lambda x: x.split("-")[1], inplace=True)
+    subdf.rename(columns=lambda x: x.replace(f"{solver}-", ""), inplace=True)
     return subdf
 
 
@@ -96,18 +100,18 @@ def plot(dfs, domain):
     outfile = f"{domain}.pdf"
     outpath = os.path.join(OUTDIR, outfile)
 
-    for s in dfs.keys():
+    for i, s in enumerate(dfs.keys()):
         if domain in ("kidsbike", "restaurant", "travelbike"):
             marker = "none"
         elif domain == "citybike":
-            marker = MARKERS[s]
+            marker = MARKERS[i]
 
         x, y = get_plot_data(dfs[s], domain)
         plt.plot(
             x,
             y,
             ls="solid",
-            color=COLORS[s],
+            color=COLORS[i],
             lw=1,
             marker=marker,
             ms=3,
@@ -139,6 +143,7 @@ if __name__ == "__main__":
     os.makedirs(OUTDIR, exist_ok=True)
     ods_path = os.path.join(RESULTS_DIR, ODS_FILE)
     df = read_ods(ods_path)
+
     df = clean_df(df)
 
     for d in DOMAIN:

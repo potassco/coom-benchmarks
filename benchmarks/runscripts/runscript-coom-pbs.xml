@@ -18,7 +18,7 @@
 	<pbsjob name="pbs-gen" timeout="600" runs="1" script_mode="timeout" walltime="01:30:00" cpt="4"/>
 
 	<benchmark name="coom-benchmarks">
-		<folder path="../domain/kids-bike/instances">
+		<folder path="../domain/random-core/instances">
 		</folder>
 		<folder path="../domain/city-bike-fleet/instances">
 		</folder>
