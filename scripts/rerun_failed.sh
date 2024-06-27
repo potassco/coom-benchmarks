@@ -15,12 +15,17 @@ for i in $(find $1 -name "runsolver.watcher" -exec grep -q "runlim error" {} \; 
 done
 
 echo "Generating new run scripts"
-./bgen -e $RUNSCRIPT_PATH
+for rs in $RUNSCRIPT_PATH; do
+    echo "Running ${rs}"
+    ./bgen $rs
+done
 
 echo "Running benchmarks"
 if [ $MODE == "pbs" ]; then
-    echo "Running start.sh file"
-    ./${OUTPUT_DIR}/${PROJECT}/${MACHINE}/start.sh
+    for d in $(ls ./${OUTPUT_DIR}); do
+        echo "Running ${d} start.sh file."
+        ./${OUTPUT_DIR}/${d}/${PROJECT}/${MACHINE}/start.sh
+    done
 else
     echo "Invalid mode"
 fi

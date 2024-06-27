@@ -15,6 +15,7 @@ cd $BT_DIR
 
 echo "Generating run scripts"
 for rs in $RUNSCRIPT_PATH; do
+    echo "Running ${rs}"
     ./bgen $rs
 done
 
@@ -25,6 +26,7 @@ if [ $MODE == "seq" ]; then
 elif [ $MODE == "pbs" ]; then
     echo "Running start.sh file(s)"
     for d in $(ls ./${OUTPUT_DIR}); do
+        echo "Running ${d} start.sh file."
         ./${OUTPUT_DIR}/${d}/${PROJECT}/${MACHINE}/start.sh
     done
 else
