@@ -1,0 +1,23 @@
+<runscript output="output/city">
+
+	<machine name="komputer" cpu="24x8xE5520@2.27GHz" memory="24GB"/>
+
+	<config name="seq-generic" template="templates/seq-generic.sh"/>
+
+	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
+		<setting name="clingo" cmdline="--models=1 -q --solver clingo" tag="clingo" pbstemplate="templates/coom.pbs"/>
+		<setting name="fclingo" cmdline="--models=1 -q --solver fclingo" tag="fclingo" pbstemplate="templates/coom.pbs"/>
+    </system>
+
+	<pbsjob name="pbs-gen" timeout="600" runs="1" script_mode="timeout" walltime="01:30:00" cpt="4"/>
+
+	<benchmark name="coom-benchmarks">
+		<folder path="../domain/city-bike-fleet/instances">
+		</folder>
+	</benchmark>
+
+	<project name="coom-benchmark-project" job="pbs-gen">
+		<runtag machine="komputer" benchmark="coom-benchmarks" tag="*all*"/>
+	</project>
+</runscript>
+

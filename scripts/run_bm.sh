@@ -14,15 +14,19 @@ echo "Entering benchmark-tool directory"
 cd $BT_DIR
 
 echo "Generating run scripts"
-./bgen $RUNSCRIPT_PATH
+for rs in $RUNSCRIPT_PATH; do
+    ./bgen $rs
+done
 
 echo "Running benchmarks"
 if [ $MODE == "seq" ]; then
     echo "Running start.py file"
     ./${OUTPUT_DIR}/${PROJECT}/${MACHINE}/start.py
 elif [ $MODE == "pbs" ]; then
-    echo "Running start.sh file"
-    ./${OUTPUT_DIR}/${PROJECT}/${MACHINE}/start.sh
+    echo "Running start.sh file(s)"
+    for d in $(ls ./${OUTPUT_DIR}); do
+        ./${OUTPUT_DIR}/${d}/${PROJECT}/${MACHINE}/start.sh
+    done
 else
     echo "Invalid mode"
 fi
