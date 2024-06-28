@@ -1,20 +1,25 @@
 #!/usr/bin/env python
 
 import os
-from glob import glob
-from itertools import product
-from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas  # noqa: F401 # pylint: disable=unused-import
+import pandas
 from pandas_ods_reader import read_ods
 
 RESULTS_DIR = "benchmarks/results"
+ODS_FILE = "evaluated.ods"
 OUTDIR = "benchmarks/plots"
 
-SOLVER = ["clingo", "fclingo"]
-# DOMAIN = ["citybike"]  # [citybike", "travelbike", "restaurant", "randomcore"]
+SOLVER = [
+    "clingo-n1",
+    "fclingo-n1",
+    "clingo-n10",
+    "fclingo-n10",
+    "clingo-n30",
+    "fclingo-n30",
+]
+DOMAIN = ["citybike"]  # [citybike", "travelbike", "restaurant", "randomcore"]
 
 
 GREEN = "#77B762"
@@ -26,13 +31,13 @@ ORANGE = "#D78C1F"
 YELLOW = "#D7CF1F"
 GREENBLUE = "#226367"
 
-COLORS = {"core": GREEN, "city": BLUE, "travel": RED, "restaurant": YELLOW}
+COLORS = [GREEN, BLUE, RED, PURPLE, ORANGE, YELLOW]
 MARKERS = ["D", "o", "x", "s", "*", "+"]
 
 TITLE = {
-    "core": "Basic",
-    "city": "City Bike Fleet",
-    "travel": "Travel Bike Fleet",
+    "randomcore": "Random COOM core",
+    "citybike": "City Bike Fleet",
+    "travelbike": "Travel Bike Fleet",
     "restaurant": "Restaurant",
 }
 
@@ -72,56 +77,60 @@ def clean_df(df):
     return df
 
 
-def get_subdf(df, solver):
-    # subdf = df.filter(like=domain, axis=0).filter(regex=f"^{solver}", axis=1)
-    subdf = df.filter(regex=f"^{solver}", axis=1)
+def get_subdf(df, domain, solver):
+    subdf = df.filter(like=domain, axis=0).filter(regex=f"^{solver}", axis=1)
     # subdf.rename(columns=lambda x: x.split("-")[1], inplace=True)
     subdf.rename(columns=lambda x: x.replace(f"{solver}-", ""), inplace=True)
     return subdf
 
 
-def get_plot_data(df, type):
+def get_plot_data(df, domain):
     runtimes = df["time"]
-    if type == "cactus":
+    if domain in ("randomcore", "restaurant", "travelbike"):
         y = runtimes.sort_values().to_numpy()
         x = np.arange(len(y))
-    # elif domain == "citybike":
-    #     y = runtimes.to_numpy()
-    #     # x = np.arange(1, len(y) + 1)
-    #     x = [int(n.replace("citybike-n", "")) for n in df.index.tolist()]
+    elif domain == "citybike":
+        y = runtimes.to_numpy()
+        # x = np.arange(1, len(y) + 1)
+        x = [int(n.replace("citybike-n", "")) for n in df.index.tolist()]
     return x, y
 
 
-def plot(dfs):
-    outpath = os.path.join(OUTDIR, "all.pdf")
+def plot(dfs, domain):
+    outfile = f"{domain}.pdf"
+    outpath = os.path.join(OUTDIR, outfile)
 
-    for sd in dfs.keys():
-        s, d = sd.split("-")
-        x, y = get_plot_data(dfs[sd], type="cactus")
+    for i, s in enumerate(dfs.keys()):
+        if domain in ("randomcore", "restaurant", "travelbike", "all"):
+            marker = "none"
+        elif domain == "citybike":
+            marker = MARKERS[i]
+
+        x, y = get_plot_data(dfs[s], domain)
         plt.plot(
             x,
             y,
-            ls="-" if s == "clingo" else "--",
-            color=COLORS[d],
+            ls="solid",
+            color=COLORS[i],
             lw=1,
-            # marker=marker,
+            marker=marker,
             ms=3,
-            label=sd,
+            label=s,
         )
 
-    plt.xlim(min(x), 15)
+    plt.xlim(min(x))
 
     plt.legend()
-    plt.title("Cactus plot of all benchmarks", fontsize=12, fontweight=0)
+    plt.title(f"{TITLE[domain]}", fontsize=12, fontweight=0)
 
-    # if domain in ("randomcore", "restaurant", "travelbike"):
-    plt.xlabel("#Instances solved")
-    plt.ylim(bottom=0, top=650)
-    plt.gca().xaxis.get_major_locator().set_params(integer=True)
-    # elif domain == "citybike":
-    #     plt.ylim(bottom=0, top=650)
-    #     plt.xlabel("#Bikes")
-    #     plt.xticks(x)
+    if domain in ("randomcore", "restaurant", "travelbike"):
+        plt.xlabel("#Instances solved")
+        plt.ylim(bottom=0, top=650)
+        plt.gca().xaxis.get_major_locator().set_params(integer=True)
+    elif domain == "citybike":
+        plt.ylim(bottom=0, top=650)
+        plt.xlabel("#Bikes")
+        plt.xticks(x)
 
     plt.ylabel("Runtime (s)")
 
@@ -132,12 +141,14 @@ def plot(dfs):
 
 if __name__ == "__main__":
     os.makedirs(OUTDIR, exist_ok=True)
+    ods_path = os.path.join(RESULTS_DIR, ODS_FILE)
+    df = read_ods(ods_path)
 
-    ods_paths = glob(f"{RESULTS_DIR}/*.ods")
-    dfs = {Path(p).stem: clean_df(read_ods(p)) for p in ods_paths}
+    df = clean_df(df)
+    print(df)
+    # plot(df,"all")
 
-    all_dfs = {
-        f"{s}-{d}": get_subdf(dfs[d], solver=s) for s, d in product(SOLVER, dfs.keys())
-    }
-
-    plot(all_dfs)
+    # for d in DOMAIN:
+    #     sub_dfs = {s: get_subdf(df, domain=d, solver=s) for s in SOLVER}
+    #     print(sub_dfs)
+    #     plot(sub_dfs, d)
