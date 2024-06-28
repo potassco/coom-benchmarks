@@ -112,7 +112,7 @@ def plot(dfs):
     plt.xlim(min(x), 15)
 
     plt.legend()
-    plt.title("Cactus plot of all benchmarks", fontsize=12, fontweight=0)
+    plt.title("Benchmarks", fontsize=12, fontweight=0)
 
     # if domain in ("randomcore", "restaurant", "travelbike"):
     plt.xlabel("#Instances solved")

@@ -1,10 +1,10 @@
 product {
-    num         0-7000	totalPrice
-    14..14 Bike		bike
+    num         0-3000	totalPrice
+    15..15 Bike		bike
 }
 
 structure Bike {
-    num		0-500	price
+    num		0-240	price
 	Wheel			frontWheel
 	Wheel			rearWheel
 	Frame			frame
@@ -18,20 +18,20 @@ enumeration Bag {
 	attribute num 	volume
     attribute num	price
 
-	B10  = ( 10 20 )
-	B20  = ( 20 40 )
-	B50  = ( 50 70 )
-	B100 = ( 100 100 )
+	B10  = ( 10 10 )
+	B20  = ( 20 20 )
+	B50  = ( 50 30 )
+	B100 = ( 100 40 )
 }
 
 enumeration Wheel {
 	attribute	num/inch	size
     attribute   num/€       price
 
-	W22	= (	 22	80 )
-	W24	= (	 24	100 )
-	W26	= (	 26	120 )
-	W28	= (	 28	150 )
+	W22	= (	 22	10 )
+	W24	= (	 24	20 )
+	W26	= (	 26	30 )
+	W28	= (	 28	40 )
 }
 
 
