@@ -27,7 +27,7 @@ YELLOW = "#D7CF1F"
 GREENBLUE = "#226367"
 
 COLORS = {"core": GREEN, "city": BLUE, "travel": RED, "restaurant": YELLOW}
-MARKERS = ["D", "o", "x", "s", "*", "+"]
+MARKERS = {"core": "D", "city": "o", "travel": "x", "restaurant": "s"}  # , "*", "+"]
 
 TITLE = {
     "core": "Basic",
@@ -83,8 +83,8 @@ def get_subdf(df, solver):
 def get_plot_data(df, type):
     runtimes = df["time"]
     if type == "cactus":
-        y = runtimes.sort_values().to_numpy()
-        x = np.arange(len(y))
+        y = np.insert(runtimes.sort_values().to_numpy(), 0, 0)
+        x = np.arange(len(y + 1)) * (100 / (len(y) - 1))
     # elif domain == "citybike":
     #     y = runtimes.to_numpy()
     #     # x = np.arange(1, len(y) + 1)
@@ -104,7 +104,7 @@ def plot(dfs):
             ls="-" if s == "clingo" else "--",
             color=COLORS[d],
             lw=1,
-            # marker=marker,
+            # marker=MARKERS[d],
             ms=3,
             label=sd,
         )
@@ -115,13 +115,13 @@ def plot(dfs):
     plt.title("Benchmarks", fontsize=12, fontweight=0)
 
     # if domain in ("randomcore", "restaurant", "travelbike"):
-    plt.xlabel("#Instances solved")
-    plt.ylim(bottom=0, top=650)
-    plt.gca().xaxis.get_major_locator().set_params(integer=True)
+    plt.xlabel("% of instances solved")
+    plt.ylim(bottom=0, top=500)
+    plt.xticks(np.arange(0, 110, 10))
+    # plt.gca().xaxis.get_major_locator().set_params(integer=True)
     # elif domain == "citybike":
     #     plt.ylim(bottom=0, top=650)
     #     plt.xlabel("#Bikes")
-    #     plt.xticks(x)
 
     plt.ylabel("Runtime (s)")
 
