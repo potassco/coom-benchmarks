@@ -18,33 +18,13 @@
 	<project name="coom-benchmark-project" job="pbs-gen">
 		<runspec machine="komputer" system="coomsuite" version="0.1" benchmark="coom-benchmarks" setting="clingo">
 			<class id="0">
-				<instance id="0">
+				<instance id="3">
 					<run number="1">
 						<measure name="error" type="float" val="0"/>
 						<measure name="memout" type="float" val="0"/>
 						<measure name="models" type="float" val="1.0"/>
 						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="5.92"/>
-						<measure name="timeout" type="float" val="0"/>
-					</run>
-				</instance>
-				<instance id="2">
-					<run number="1">
-						<measure name="error" type="float" val="0"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="models" type="float" val="1.0"/>
-						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="3.07"/>
-						<measure name="timeout" type="float" val="0"/>
-					</run>
-				</instance>
-				<instance id="4">
-					<run number="1">
-						<measure name="error" type="float" val="0"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="models" type="float" val="1.0"/>
-						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="3.13"/>
+						<measure name="time" type="float" val="3.09"/>
 						<measure name="timeout" type="float" val="0"/>
 					</run>
 				</instance>
@@ -58,27 +38,13 @@
 						<measure name="timeout" type="float" val="0"/>
 					</run>
 				</instance>
-				<instance id="3">
+				<instance id="4">
 					<run number="1">
 						<measure name="error" type="float" val="0"/>
 						<measure name="memout" type="float" val="0"/>
 						<measure name="models" type="float" val="1.0"/>
 						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="3.09"/>
-						<measure name="timeout" type="float" val="0"/>
-					</run>
-				</instance>
-			</class>
-		</runspec>
-		<runspec machine="komputer" system="coomsuite" version="0.1" benchmark="coom-benchmarks" setting="fclingo">
-			<class id="0">
-				<instance id="0">
-					<run number="1">
-						<measure name="error" type="float" val="0"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="models" type="float" val="1.0"/>
-						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="21.75"/>
+						<measure name="time" type="float" val="3.13"/>
 						<measure name="timeout" type="float" val="0"/>
 					</run>
 				</instance>
@@ -88,17 +54,31 @@
 						<measure name="memout" type="float" val="0"/>
 						<measure name="models" type="float" val="1.0"/>
 						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="129.98"/>
+						<measure name="time" type="float" val="3.07"/>
 						<measure name="timeout" type="float" val="0"/>
 					</run>
 				</instance>
-				<instance id="4">
+				<instance id="0">
 					<run number="1">
 						<measure name="error" type="float" val="0"/>
 						<measure name="memout" type="float" val="0"/>
 						<measure name="models" type="float" val="1.0"/>
 						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="348.35"/>
+						<measure name="time" type="float" val="5.92"/>
+						<measure name="timeout" type="float" val="0"/>
+					</run>
+				</instance>
+			</class>
+		</runspec>
+		<runspec machine="komputer" system="coomsuite" version="0.1" benchmark="coom-benchmarks" setting="fclingo">
+			<class id="0">
+				<instance id="3">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="1.0"/>
+						<measure name="status" type="string" val="SATISFIABLE"/>
+						<measure name="time" type="float" val="229.22"/>
 						<measure name="timeout" type="float" val="0"/>
 					</run>
 				</instance>
@@ -112,13 +92,33 @@
 						<measure name="timeout" type="float" val="0"/>
 					</run>
 				</instance>
-				<instance id="3">
+				<instance id="4">
 					<run number="1">
 						<measure name="error" type="float" val="0"/>
 						<measure name="memout" type="float" val="0"/>
 						<measure name="models" type="float" val="1.0"/>
 						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="229.22"/>
+						<measure name="time" type="float" val="348.35"/>
+						<measure name="timeout" type="float" val="0"/>
+					</run>
+				</instance>
+				<instance id="2">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="1.0"/>
+						<measure name="status" type="string" val="SATISFIABLE"/>
+						<measure name="time" type="float" val="129.98"/>
+						<measure name="timeout" type="float" val="0"/>
+					</run>
+				</instance>
+				<instance id="0">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="1.0"/>
+						<measure name="status" type="string" val="SATISFIABLE"/>
+						<measure name="time" type="float" val="21.75"/>
 						<measure name="timeout" type="float" val="0"/>
 					</run>
 				</instance>

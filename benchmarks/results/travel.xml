@@ -23,35 +23,17 @@
 	<project name="coom-benchmark-project" job="pbs-gen">
 		<runspec machine="komputer" system="coomsuite" version="0.1" benchmark="coom-benchmarks" setting="clingo">
 			<class id="0">
-				<instance id="6">
-					<run number="1">
-						<measure name="error" type="float" val="0"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="models" type="float" val="0.0"/>
-						<measure name="status" type="string" val="UNKNOWN"/>
-						<measure name="time" type="float" val="600"/>
-						<measure name="timeout" type="float" val="1"/>
-					</run>
-				</instance>
-				<instance id="4">
-					<run number="1">
-						<measure name="error" type="float" val="1"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="time" type="float" val="600"/>
-						<measure name="timeout" type="float" val="1"/>
-					</run>
-				</instance>
-				<instance id="1">
-					<run number="1">
-						<measure name="error" type="float" val="0"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="models" type="float" val="0.0"/>
-						<measure name="status" type="string" val="UNKNOWN"/>
-						<measure name="time" type="float" val="600"/>
-						<measure name="timeout" type="float" val="1"/>
-					</run>
-				</instance>
 				<instance id="0">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="0.0"/>
+						<measure name="status" type="string" val="UNKNOWN"/>
+						<measure name="time" type="float" val="600"/>
+						<measure name="timeout" type="float" val="1"/>
+					</run>
+				</instance>
+				<instance id="2">
 					<run number="1">
 						<measure name="error" type="float" val="0"/>
 						<measure name="memout" type="float" val="0"/>
@@ -63,13 +45,25 @@
 				</instance>
 				<instance id="5">
 					<run number="1">
-						<measure name="error" type="float" val="1"/>
+						<measure name="error" type="float" val="0"/>
 						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="0.0"/>
+						<measure name="status" type="string" val="UNKNOWN"/>
 						<measure name="time" type="float" val="600"/>
 						<measure name="timeout" type="float" val="1"/>
 					</run>
 				</instance>
-				<instance id="9">
+				<instance id="8">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="0.0"/>
+						<measure name="status" type="string" val="UNKNOWN"/>
+						<measure name="time" type="float" val="600"/>
+						<measure name="timeout" type="float" val="1"/>
+					</run>
+				</instance>
+				<instance id="1">
 					<run number="1">
 						<measure name="error" type="float" val="0"/>
 						<measure name="memout" type="float" val="0"/>
@@ -89,14 +83,6 @@
 						<measure name="timeout" type="float" val="1"/>
 					</run>
 				</instance>
-				<instance id="2">
-					<run number="1">
-						<measure name="error" type="float" val="1"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="time" type="float" val="600"/>
-						<measure name="timeout" type="float" val="1"/>
-					</run>
-				</instance>
 				<instance id="7">
 					<run number="1">
 						<measure name="error" type="float" val="0"/>
@@ -107,7 +93,27 @@
 						<measure name="timeout" type="float" val="1"/>
 					</run>
 				</instance>
-				<instance id="8">
+				<instance id="9">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="0.0"/>
+						<measure name="status" type="string" val="UNKNOWN"/>
+						<measure name="time" type="float" val="600"/>
+						<measure name="timeout" type="float" val="1"/>
+					</run>
+				</instance>
+				<instance id="4">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="0.0"/>
+						<measure name="status" type="string" val="UNKNOWN"/>
+						<measure name="time" type="float" val="600"/>
+						<measure name="timeout" type="float" val="1"/>
+					</run>
+				</instance>
+				<instance id="6">
 					<run number="1">
 						<measure name="error" type="float" val="0"/>
 						<measure name="memout" type="float" val="0"/>
@@ -121,36 +127,6 @@
 		</runspec>
 		<runspec machine="komputer" system="coomsuite" version="0.1" benchmark="coom-benchmarks" setting="fclingo">
 			<class id="0">
-				<instance id="6">
-					<run number="1">
-						<measure name="error" type="float" val="0"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="models" type="float" val="1.0"/>
-						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="14.95"/>
-						<measure name="timeout" type="float" val="0"/>
-					</run>
-				</instance>
-				<instance id="4">
-					<run number="1">
-						<measure name="error" type="float" val="0"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="models" type="float" val="1.0"/>
-						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="9.89"/>
-						<measure name="timeout" type="float" val="0"/>
-					</run>
-				</instance>
-				<instance id="1">
-					<run number="1">
-						<measure name="error" type="float" val="0"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="models" type="float" val="1.0"/>
-						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="4.32"/>
-						<measure name="timeout" type="float" val="0"/>
-					</run>
-				</instance>
 				<instance id="0">
 					<run number="1">
 						<measure name="error" type="float" val="0"/>
@@ -158,36 +134,6 @@
 						<measure name="models" type="float" val="1.0"/>
 						<measure name="status" type="string" val="SATISFIABLE"/>
 						<measure name="time" type="float" val="4.41"/>
-						<measure name="timeout" type="float" val="0"/>
-					</run>
-				</instance>
-				<instance id="5">
-					<run number="1">
-						<measure name="error" type="float" val="0"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="models" type="float" val="1.0"/>
-						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="10.16"/>
-						<measure name="timeout" type="float" val="0"/>
-					</run>
-				</instance>
-				<instance id="9">
-					<run number="1">
-						<measure name="error" type="float" val="0"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="models" type="float" val="1.0"/>
-						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="20.34"/>
-						<measure name="timeout" type="float" val="0"/>
-					</run>
-				</instance>
-				<instance id="3">
-					<run number="1">
-						<measure name="error" type="float" val="0"/>
-						<measure name="memout" type="float" val="0"/>
-						<measure name="models" type="float" val="1.0"/>
-						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="6.44"/>
 						<measure name="timeout" type="float" val="0"/>
 					</run>
 				</instance>
@@ -201,13 +147,13 @@
 						<measure name="timeout" type="float" val="0"/>
 					</run>
 				</instance>
-				<instance id="7">
+				<instance id="5">
 					<run number="1">
 						<measure name="error" type="float" val="0"/>
 						<measure name="memout" type="float" val="0"/>
 						<measure name="models" type="float" val="1.0"/>
 						<measure name="status" type="string" val="SATISFIABLE"/>
-						<measure name="time" type="float" val="14.49"/>
+						<measure name="time" type="float" val="10.16"/>
 						<measure name="timeout" type="float" val="0"/>
 					</run>
 				</instance>
@@ -218,6 +164,66 @@
 						<measure name="models" type="float" val="1.0"/>
 						<measure name="status" type="string" val="SATISFIABLE"/>
 						<measure name="time" type="float" val="20.65"/>
+						<measure name="timeout" type="float" val="0"/>
+					</run>
+				</instance>
+				<instance id="1">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="1.0"/>
+						<measure name="status" type="string" val="SATISFIABLE"/>
+						<measure name="time" type="float" val="4.32"/>
+						<measure name="timeout" type="float" val="0"/>
+					</run>
+				</instance>
+				<instance id="3">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="1.0"/>
+						<measure name="status" type="string" val="SATISFIABLE"/>
+						<measure name="time" type="float" val="6.44"/>
+						<measure name="timeout" type="float" val="0"/>
+					</run>
+				</instance>
+				<instance id="7">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="1.0"/>
+						<measure name="status" type="string" val="SATISFIABLE"/>
+						<measure name="time" type="float" val="14.49"/>
+						<measure name="timeout" type="float" val="0"/>
+					</run>
+				</instance>
+				<instance id="9">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="1.0"/>
+						<measure name="status" type="string" val="SATISFIABLE"/>
+						<measure name="time" type="float" val="20.34"/>
+						<measure name="timeout" type="float" val="0"/>
+					</run>
+				</instance>
+				<instance id="4">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="1.0"/>
+						<measure name="status" type="string" val="SATISFIABLE"/>
+						<measure name="time" type="float" val="9.89"/>
+						<measure name="timeout" type="float" val="0"/>
+					</run>
+				</instance>
+				<instance id="6">
+					<run number="1">
+						<measure name="error" type="float" val="0"/>
+						<measure name="memout" type="float" val="0"/>
+						<measure name="models" type="float" val="1.0"/>
+						<measure name="status" type="string" val="SATISFIABLE"/>
+						<measure name="time" type="float" val="14.95"/>
 						<measure name="timeout" type="float" val="0"/>
 					</run>
 				</instance>
