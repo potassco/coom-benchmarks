@@ -1,7 +1,7 @@
 product {
-	0..100	BigTable bigTables
-	0..100	SmallTable smallTables
-	num	1-700	totalPlaces
+	0..500	BigTable bigTables
+	0..500	SmallTable smallTables
+	num	1-12000	totalPlaces
 }
 
 structure BigTable { 3..5 Chair chairs }
@@ -9,7 +9,7 @@ structure SmallTable { 1..2 Chair chairs }
 structure Chair {}
 
 behavior {
-	require totalPlaces = 500
+	require totalPlaces = 1000
 
 	imply totalPlaces = count(bigTables.chairs) + count(smallTables.chairs)
 }
