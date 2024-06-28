@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DOMAIN=$1
+
 source scripts/vars.env
 
 echo "Re-running failed instances"
@@ -15,17 +17,11 @@ for i in $(find $1 -name "runsolver.watcher" -exec grep -q "runlim error" {} \; 
 done
 
 echo "Generating new run scripts"
-for rs in $RUNSCRIPT_PATH; do
-    echo "Running ${rs}"
-    ./bgen $rs
-done
+./bgen $RUNSCRIPT_PATH
 
 echo "Running benchmarks"
 if [ $MODE == "pbs" ]; then
-    for d in $(ls ./${OUTPUT_DIR}); do
-        echo "Running ${d} start.sh file."
-        ./${OUTPUT_DIR}/${d}/${PROJECT}/${MACHINE}/start.sh
-    done
+    ./${OUTPUT_DIR}/${DOMAIN}/${PROJECT}/${MACHINE}/start.sh
 else
     echo "Invalid mode"
 fi
