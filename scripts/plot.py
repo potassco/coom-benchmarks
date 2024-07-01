@@ -8,6 +8,8 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas  # noqa: F401 # pylint: disable=unused-import
+
+# import tikzplotlib
 from pandas_ods_reader import read_ods
 
 RESULTS_DIR = "benchmarks/results"
@@ -30,9 +32,9 @@ COLORS = {"core": GREEN, "city": BLUE, "travel": RED, "restaurant": YELLOW}
 MARKERS = {"core": "D", "city": "o", "travel": "x", "restaurant": "s"}  # , "*", "+"]
 
 TITLE = {
-    "core": "Basic",
-    "city": "City Bike Fleet",
-    "travel": "Travel Bike Fleet",
+    "core": "Core",
+    "city": "City",
+    "travel": "Travel",
     "restaurant": "Restaurant",
 }
 
@@ -76,8 +78,7 @@ def get_subdf(df, solver):
     # subdf = df.filter(like=domain, axis=0).filter(regex=f"^{solver}", axis=1)
     subdf = df.filter(regex=f"^{solver}", axis=1)
     # subdf.rename(columns=lambda x: x.split("-")[1], inplace=True)
-    subdf.rename(columns=lambda x: x.replace(f"{solver}-", ""), inplace=True)
-    return subdf
+    return subdf.rename(columns=lambda x: x.replace(f"{solver}-", ""))
 
 
 def get_plot_data(df, type):
@@ -92,13 +93,18 @@ def get_plot_data(df, type):
     return x, y
 
 
+def get_label(solver, domain):
+    return f"{TITLE[domain]}-{solver}"
+
+
 def plot(dfs):
     outpath = os.path.join(OUTDIR, "all.pdf")
 
+    plots = {}
     for sd in dfs.keys():
         s, d = sd.split("-")
         x, y = get_plot_data(dfs[sd], type="cactus")
-        plt.plot(
+        plots[sd] = plt.plot(
             x,
             y,
             ls="-" if s == "clingo" else "--",
@@ -111,12 +117,24 @@ def plot(dfs):
 
     plt.xlim(min(x), 15)
 
-    plt.legend()
+    # clingo_legend = plt.legend(
+    #     handles=[k for k in dfs.keys() if k.split("-")[0] == "clingo"],
+    #     loc="upper right",
+    # )
+    # plt.gca().add_artist(clingo_legend)
+
+    # plt.legend(
+    #     handles=[k for k in dfs.keys() if k.split("-")[0] == "fclingo"],
+    #     loc="upper right",
+    # )
+
+    plt.legend(loc="upper right")
+
     plt.title("Benchmarks", fontsize=12, fontweight=0)
 
     # if domain in ("randomcore", "restaurant", "travelbike"):
     plt.xlabel("% of instances solved")
-    plt.ylim(bottom=0, top=500)
+    plt.ylim(bottom=0, top=1100)
     plt.xticks(np.arange(0, 110, 10))
     # plt.gca().xaxis.get_major_locator().set_params(integer=True)
     # elif domain == "citybike":
@@ -124,6 +142,8 @@ def plot(dfs):
     #     plt.xlabel("#Bikes")
 
     plt.ylabel("Runtime (s)")
+
+    # tikzplotlib.save("plot.tex")
 
     plt.savefig(outpath, dpi=300, bbox_inches="tight")
     print(f"Saved {outpath}")
@@ -134,8 +154,10 @@ if __name__ == "__main__":
     os.makedirs(OUTDIR, exist_ok=True)
 
     ods_paths = glob(f"{RESULTS_DIR}/*.ods")
-    dfs = {Path(p).stem: clean_df(read_ods(p)) for p in ods_paths}
-
+    dfs = {
+        Path(p).stem: clean_df(read_ods(p)) for p in ods_paths if "restaurant" not in p
+    }
+    print(dfs)
     all_dfs = {
         f"{s}-{d}": get_subdf(dfs[d], solver=s) for s, d in product(SOLVER, dfs.keys())
     }
