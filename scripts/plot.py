@@ -16,8 +16,7 @@ RESULTS_DIR = "benchmarks/results"
 OUTDIR = "benchmarks/plots"
 
 SOLVER = ["clingo", "fclingo"]
-# DOMAIN = ["citybike"]  # [citybike", "travelbike", "restaurant", "randomcore"]
-
+DOMAIN = ["core", "city", "travel"]
 
 GREEN = "#77B762"
 BLUE = "#4477CC"
@@ -28,13 +27,13 @@ ORANGE = "#D78C1F"
 YELLOW = "#D7CF1F"
 GREENBLUE = "#226367"
 
-COLORS = {"core": GREEN, "city": BLUE, "travel": RED, "restaurant": YELLOW}
-MARKERS = {"core": "D", "city": "o", "travel": "x", "restaurant": "s"}  # , "*", "+"]
+COLOR = {"core": GREEN, "city": BLUE, "travel": RED, "restaurant": YELLOW}
+MARKER = {"core": "D", "city": "o", "travel": "x", "restaurant": "s"}  # , "*", "+"]
 
-TITLE = {
+LABEL = {
     "core": "Core",
-    "city": "City",
-    "travel": "Travel",
+    "city": "CityBikeFleet",
+    "travel": "TravelBikeFleet",
     "restaurant": "Restaurant",
 }
 
@@ -104,37 +103,48 @@ def plot(dfs):
     for sd in dfs.keys():
         s, d = sd.split("-")
         x, y = get_plot_data(dfs[sd], type="cactus")
-        plots[sd] = plt.plot(
+        (plots[sd],) = plt.plot(
             x,
             y,
             ls="-" if s == "clingo" else "--",
-            color=COLORS[d],
+            color=COLOR[d],
             lw=1,
-            # marker=MARKERS[d],
+            # marker=MARKER[d],
             ms=3,
-            label=sd,
+            label=(sd),
         )
 
     plt.xlim(min(x), 15)
 
-    # clingo_legend = plt.legend(
-    #     handles=[k for k in dfs.keys() if k.split("-")[0] == "clingo"],
-    #     loc="upper right",
-    # )
-    # plt.gca().add_artist(clingo_legend)
+    clingo_legend = plt.legend(
+        handles=[plots[f"clingo-{d}"] for d in DOMAIN],
+        labels=[LABEL[d] for d in DOMAIN],
+        loc="upper right",
+        prop={"style": "italic"},
+        title="clingo",
+        title_fontproperties={"weight": "bold"},
+        alignment="left",
+    )
+    plt.gca().add_artist(clingo_legend)
 
-    # plt.legend(
-    #     handles=[k for k in dfs.keys() if k.split("-")[0] == "fclingo"],
-    #     loc="upper right",
-    # )
+    plt.legend(
+        handles=[plots[f"fclingo-{d}"] for d in DOMAIN],
+        labels=[LABEL[d] for d in DOMAIN],
+        loc="upper right",
+        bbox_to_anchor=(1, 0.75),
+        prop={"style": "italic"},
+        title="fclingo",
+        title_fontproperties={"weight": "bold"},
+        alignment="left",
+    )
 
-    plt.legend(loc="upper right")
+    # plt.legend(loc="upper right")
 
     plt.title("Benchmarks", fontsize=12, fontweight=0)
 
     # if domain in ("randomcore", "restaurant", "travelbike"):
     plt.xlabel("% of instances solved")
-    plt.ylim(bottom=0, top=1100)
+    plt.ylim(bottom=0, top=800)
     plt.xticks(np.arange(0, 110, 10))
     # plt.gca().xaxis.get_major_locator().set_params(integer=True)
     # elif domain == "citybike":
@@ -157,7 +167,6 @@ if __name__ == "__main__":
     dfs = {
         Path(p).stem: clean_df(read_ods(p)) for p in ods_paths if "restaurant" not in p
     }
-    print(dfs)
     all_dfs = {
         f"{s}-{d}": get_subdf(dfs[d], solver=s) for s, d in product(SOLVER, dfs.keys())
     }
