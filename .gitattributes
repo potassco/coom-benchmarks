@@ -6,3 +6,4 @@ benchmarks/domain/random-core/instances filter=lfs diff=lfs merge=lfs -text
 benchmarks/domain/restaurant/instances filter=lfs diff=lfs merge=lfs -text
 benchmarks/plots filter=lfs diff=lfs merge=lfs -text
 benchmarks/results/ filter=lfs diff=lfs merge=lfs -text
+benchmarks/results-old/ filter=lfs diff=lfs merge=lfs -text
