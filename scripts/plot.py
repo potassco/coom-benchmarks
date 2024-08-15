@@ -148,7 +148,7 @@ def plot(dfs):
 
     # plt.legend(loc="upper right")
     # plt.gca().yaxis._set_scale("log")
-    plt.title("Benchmarks", fontsize=12, fontweight=0)
+    # plt.title("Benchmarks", fontsize=12, fontweight=0)
 
     # if domain in ("randomcore", "restaurant", "travelbike"):
     plt.xlabel("% of instances solved")
