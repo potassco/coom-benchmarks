@@ -8,8 +8,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas  # noqa: F401 # pylint: disable=unused-import
-
-# import tikzplotlib
+import tikzplotlib
 from pandas_ods_reader import read_ods
 
 RESULTS_DIR = "benchmarks/results"
@@ -28,12 +27,7 @@ YELLOW = "#D7CF1F"
 GREENBLUE = "#226367"
 
 COLOR = {"core": GREEN, "city": BLUE, "travel": RED, "restaurant": YELLOW}
-MARKER = {
-    "core": "D",
-    "city": "o",
-    "travel": "x",
-    "restaurant": "s"
-}  # , "*", "+"]
+MARKER = {"core": "D", "city": "o", "travel": "x", "restaurant": "s"}  # , "*", "+"]
 
 LABEL = {
     "core": "Core",
@@ -48,14 +42,13 @@ def clean_df(df):
     stats_set.discard("")
 
     # Drop min max median
-    df.drop(df.columns[-3 * len(stats_set):], axis=1, inplace=True)
+    df.drop(df.columns[-3 * len(stats_set) :], axis=1, inplace=True)
 
     # Remove last computed values
     df.drop(df.tail(9).index, inplace=True)
 
     # Rename instances
-    df[df.columns[0]] = df[df.columns[0]].apply(
-        lambda x: x[2:].replace(".coom", ""))
+    df[df.columns[0]] = df[df.columns[0]].apply(lambda x: x[2:].replace(".coom", ""))
 
     # Make instances names index of dataframe
     df.index = df.loc[:, df.columns[0]].tolist()
@@ -65,8 +58,7 @@ def clean_df(df):
 
     # Rename columns
     solver = [
-        c.split("/")[-1] for i, c in enumerate(df.columns)
-        if i % len(stats_set) == 0
+        c.split("/")[-1] for i, c in enumerate(df.columns) if i % len(stats_set) == 0
     ]
     df.columns = list(np.repeat(solver, len(stats_set)))
     df.columns = [f"{c}-{s}" for c, s in zip(df.columns, list(df.iloc[0]))]
@@ -110,7 +102,7 @@ def plot(dfs):
     for sd in dfs.keys():
         s, d = sd.split("-")
         x, y = get_plot_data(dfs[sd], type="cactus")
-        (plots[sd], ) = plt.plot(
+        (plots[sd],) = plt.plot(
             x,
             y,
             ls="-" if s == "clingo" else "--",
@@ -139,7 +131,7 @@ def plot(dfs):
         handles=[plots[f"fclingo-{d}"] for d in DOMAIN],
         labels=[LABEL[d] for d in DOMAIN],
         loc="center",
-        bbox_to_anchor=(.5, .6),
+        bbox_to_anchor=(0.5, 0.6),
         prop={"style": "italic"},
         title="fclingo",
         title_fontproperties={"weight": "bold"},
@@ -162,7 +154,7 @@ def plot(dfs):
 
     plt.ylabel("Runtime (s)")
 
-    # tikzplotlib.save("plot.tex")
+    # tikzplotlib.save(outpath)
 
     plt.savefig(outpath, dpi=1200, bbox_inches="tight")
     print(f"Saved {outpath}")
@@ -174,12 +166,10 @@ if __name__ == "__main__":
 
     ods_paths = glob(f"{RESULTS_DIR}/*.ods")
     dfs = {
-        Path(p).stem: clean_df(read_ods(p))
-        for p in ods_paths if "restaurant" not in p
+        Path(p).stem: clean_df(read_ods(p)) for p in ods_paths if "restaurant" not in p
     }
     all_dfs = {
-        f"{s}-{d}": get_subdf(dfs[d], solver=s)
-        for s, d in product(SOLVER, dfs.keys())
+        f"{s}-{d}": get_subdf(dfs[d], solver=s) for s, d in product(SOLVER, dfs.keys())
     }
 
     plot(all_dfs)

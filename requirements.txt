@@ -1,4 +1,6 @@
+benchmarktool @ git+https://github.com/potassco/benchmark-tool.git@c1474694e939abcc959144f83c4e493c31972096
 numpy
 pandas
 pandas_ods_reader
 matplotlib
+tikzplotlib
