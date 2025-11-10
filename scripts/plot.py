@@ -14,7 +14,7 @@ from pandas_ods_reader import read_ods
 RESULTS_DIR = "benchmarks/results"
 OUTDIR = "benchmarks/plots"
 
-SOLVER = ["clingo", "fclingo"]
+SOLVER = ["clingo", "flingo"]
 DOMAIN = ["core", "city", "travel"]
 
 GREEN = "#77B762"
@@ -128,12 +128,12 @@ def plot(dfs):
     plt.gca().add_artist(clingo_legend)
 
     plt.legend(
-        handles=[plots[f"fclingo-{d}"] for d in DOMAIN],
+        handles=[plots[f"flingo-{d}"] for d in DOMAIN],
         labels=[LABEL[d] for d in DOMAIN],
         loc="center",
         bbox_to_anchor=(0.5, 0.6),
         prop={"style": "italic"},
-        title="fclingo",
+        title="flingo",
         title_fontproperties={"weight": "bold"},
         alignment="left",
     )

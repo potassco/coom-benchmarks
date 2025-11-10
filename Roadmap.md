@@ -4,7 +4,7 @@
 - Three COOM language fragments in increasing complexity
 - Corresponding ASP fact format and ANTLR4 parser for COOM to ASP
     - Unit tests for parser
-- Three corresponding encodings for the language fragments for clingo and fclingo
+- Three corresponding encodings for the language fragments for clingo and flingo
 - Basic Python package to parse and solve COOM/ASP instances
 - Two possible benchmark sets which are scalable: Restaurant and bike fleet
 - Encodings from denkbares (correspond to current language fragments?)
@@ -76,11 +76,11 @@ The following COOM language keywords are allowed additionally:
 - Paths starting with `root.foo` are not supported
 - Arithmetics with undefined terms will give UNSAT
 
-#### fclingo
-- Currently no division. Is this supported in fclingo?
-- fclingo only supports linear constraints, so multiplication is only allowed
+#### flingo
+- Currently no division. Is this supported in flingo?
+- flingo only supports linear constraints, so multiplication is only allowed
   if one of the terms is a  constant number
-- Only if attributes are marked as numeric, fclingo will use treat them as such.
+- Only if attributes are marked as numeric, flingo will use treat them as such.
   Outside of tables it is not possible to compare non-numeric with numeric attributes.
 
 

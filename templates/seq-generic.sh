@@ -1,13 +1,12 @@
 #!/bin/bash
-# http://www.cril.univ-artois.fr/~roussel/runsolver/
+# https://github.com/arminbiere/runlim
 
 cd "$(dirname $0)"
 
-#top -n 1 -b > top.txt
-
 [[ -e .finished ]] || "{run.root}/programs/runlim" \
-	--output-file=runsolver.watcher --space-limit=16000 \
+	--space-limit={run.memout} \
+	--output-file=runsolver.watcher \
 	--real-time-limit={run.timeout} \
-	"{run.root}/programs/{run.solver}" {run.args} {run.file} > runsolver.solver
+	"{run.root}/programs/{run.solver}" {run.args} {run.files} {run.encodings} > runsolver.solver
 
 touch .finished

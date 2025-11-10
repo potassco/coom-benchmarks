@@ -13,11 +13,11 @@ OUTDIR = "benchmarks/plots"
 
 SOLVER = [
     "clingo-n1",
-    "fclingo-n1",
+    "flingo-n1",
     "clingo-n10",
-    "fclingo-n10",
+    "flingo-n10",
     "clingo-n30",
-    "fclingo-n30",
+    "flingo-n30",
 ]
 DOMAIN = ["citybike"]  # [citybike", "travelbike", "restaurant", "randomcore"]
 

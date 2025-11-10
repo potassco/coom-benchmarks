@@ -6,7 +6,7 @@
 
 	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
 		<setting name="clingo" cmdline="--models=1 -q --solver clingo" tag="clingo" pbstemplate="templates/coom.pbs"/>
-		<setting name="fclingo" cmdline="--models=1 -q --solver fclingo" tag="fclingo" pbstemplate="templates/coom.pbs"/>
+		<setting name="flingo" cmdline="--models=1 -q --solver flingo" tag="flingo" pbstemplate="templates/coom.pbs"/>
     </system>
 
 	<pbsjob name="pbs-gen" timeout="1200" runs="1" script_mode="timeout" walltime="01:30:00" cpt="4"/>

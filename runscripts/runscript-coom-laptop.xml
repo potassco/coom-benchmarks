@@ -1,0 +1,29 @@
+<runscript output="output">
+
+	<machine name="laptop" cpu="IntelCoreUltra7-265Ux14" memory="32GB"/>
+
+	<config name="seq-generic" template="templates/seq-generic.sh"/>
+
+	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
+		<setting name="clingo"  cmdline="--models=1 -q --solver clingo" tag="clingo" />
+		<setting name="flingo" cmdline="--models=1 -q --solver flingo" tag="flingo" />
+    </system>
+
+	<seqjob name="seq-generic" timeout="60s" runs="1" parallel="4"/>
+
+	<benchmark name="coom-benchmarks">
+		<folder path="benchmarks/kids-bike/instances">
+		</folder>
+		<folder path="benchmarks/city-bike-fleet/instances">
+		</folder>
+		<folder path="benchmarks/travel-bike-fleet/instances">
+		</folder>
+		<folder path="benchmarks/restaurant/instances">
+		</folder>
+	</benchmark>
+
+	<project name="coom-benchmark-project" job="seq-generic">
+		<runtag machine="laptop" benchmark="coom-benchmarks" tag="*all*"/>
+	</project>
+</runscript>
+

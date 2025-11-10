@@ -6,7 +6,7 @@
 
 	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
 		<setting name="clingo" cmdline="--models=1 -q --solver clingo" tag="clingo" />
-		<setting name="fclingo" cmdline="--models=1 -q --solver fclingo" tag="fclingo" />
+		<setting name="flingo" cmdline="--models=1 -q --solver flingo" tag="flingo" />
     </system>
 
 	<seqjob name="seq-gen" timeout="600" runs="1" script_mode="timeout" walltime="15:00:00" parallel="1"/>
