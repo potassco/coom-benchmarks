@@ -51,6 +51,12 @@ LABEL = {
     "restaurant": "Restaurant",
     "box": "Box",
 }
+LINE = {
+    "clingo": "-",
+    "flingo": "--",
+    "clingo-cautious": "-",
+    "clingo-brave": "--",
+}
 
 
 def clean_df(df):
@@ -91,13 +97,6 @@ def clean_df(df):
     return pd.DataFrame(index=instances, columns=columns, data=data)
 
 
-def get_subdf(df, solver):
-    # subdf = df.filter(like=domain, axis=0).filter(regex=f"^{solver}", axis=1)
-    subdf = df.filter(regex=f"^{solver}", axis=1)
-    # subdf.rename(columns=lambda x: x.split("-")[1], inplace=True)
-    return subdf.rename(columns=lambda x: x.replace(f"{solver}-", ""))
-
-
 def get_plot_data(df, type):
     if type == "cactus":
         y = np.insert(df.sort_values().to_numpy(), 0, 0)
@@ -107,10 +106,6 @@ def get_plot_data(df, type):
     #     # x = np.arange(1, len(y) + 1)
     #     x = [int(n.replace("citybike-n", "")) for n in df.index.tolist()]
     return x, y
-
-
-def get_label(solver, domain):
-    return f"{TITLE[domain]}-{solver}"
 
 
 def plot(df, pairs, outfile, type="cactus"):
@@ -123,7 +118,7 @@ def plot(df, pairs, outfile, type="cactus"):
         (plots[name],) = plt.plot(
             x,
             y,
-            ls="-" if s == "clingo" else "--",
+            ls=LINE[s],
             color=COLOR[d],
             lw=1,
             marker=MARKER[d],
@@ -134,28 +129,51 @@ def plot(df, pairs, outfile, type="cactus"):
 
     plt.xlim(min(x), 15)
 
-    clingo_legend = plt.legend(
-        handles=[plots[f"clingo-{d}"] for s, d in pairs if s == "clingo"],
-        labels=[LABEL[d] for s, d in pairs if s == "clingo"],
-        loc="upper center",
-        prop={"style": "italic"},
-        title="clingo",
-        title_fontproperties={"weight": "bold"},
-        alignment="left",
-    )
-    plt.gca().add_artist(clingo_legend)
+    if outfile == "singlemodel.pdf":
+        clingo_legend = plt.legend(
+            handles=[plots[f"{s}-{d}"] for s, d in pairs if s == "clingo"],
+            labels=[LABEL[d] for s, d in pairs if s == "clingo"],
+            loc="upper center",
+            prop={"style": "italic"},
+            title="clingo",
+            title_fontproperties={"weight": "bold"},
+            alignment="left",
+        )
+        plt.gca().add_artist(clingo_legend)
 
-    plt.legend(
-        handles=[plots[f"flingo-{d}"] for s, d in pairs if s == "flingo"],
-        labels=[LABEL[d] for s, d in pairs if s == "flingo"],
-        loc="center",
-        bbox_to_anchor=(0.5, 0.6),
-        prop={"style": "italic"},
-        title="flingo",
-        title_fontproperties={"weight": "bold"},
-        alignment="left",
-    )
+        plt.legend(
+            handles=[plots[f"{s}-{d}"] for s, d in pairs if s == "flingo"],
+            labels=[LABEL[d] for s, d in pairs if s == "flingo"],
+            loc="center",
+            bbox_to_anchor=(0.5, 0.55),
+            prop={"style": "italic"},
+            title="flingo",
+            title_fontproperties={"weight": "bold"},
+            alignment="left",
+        )
 
+    if outfile == "cautiousbrave.pdf":
+        cautious_legend = plt.legend(
+            handles=[plots[f"{s}-{d}"] for s, d in pairs if s == "clingo-cautious"],
+            labels=[LABEL[d] for s, d in pairs if s == "clingo-cautious"],
+            loc="upper center",
+            prop={"style": "italic"},
+            title="clingo cautious",
+            title_fontproperties={"weight": "bold"},
+            alignment="left",
+        )
+        plt.gca().add_artist(cautious_legend)
+
+        plt.legend(
+            handles=[plots[f"{s}-{d}"] for s, d in pairs if s == "clingo-brave"],
+            labels=[LABEL[d] for s, d in pairs if s == "clingo-brave"],
+            loc="center",
+            bbox_to_anchor=(0.5, 0.54),
+            prop={"style": "italic"},
+            title="clingo brave",
+            title_fontproperties={"weight": "bold"},
+            alignment="left",
+        )
     # plt.legend(loc="upper right")
     # plt.gca().yaxis._set_scale("log")
     # plt.title("Benchmarks", fontsize=12, fontweight=0)
@@ -201,8 +219,19 @@ if __name__ == "__main__":
         type="cactus",
     )
 
-    # all_dfs = {
-    #     f"{s}-{d}": get_subdf(dfs[d], solver=s) for s, d in product(SOLVER, dfs.keys())
-    # }
-
-    # plot(all_dfs)
+    # Plot clingo cautious and brave
+    plot(
+        results,
+        [
+            ("clingo-brave", "box"),
+            ("clingo-brave", "citybike"),
+            ("clingo-brave", "restaurant"),
+            ("clingo-brave", "travelbike"),
+            ("clingo-cautious", "box"),
+            ("clingo-cautious", "citybike"),
+            ("clingo-cautious", "restaurant"),
+            ("clingo-cautious", "travelbike"),
+        ],
+        "cautiousbrave.pdf",
+        type="cactus",
+    )
