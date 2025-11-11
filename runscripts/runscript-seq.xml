@@ -1,6 +1,6 @@
 <runscript output="output">
 
-	<machine name="laptop" cpu="IntelCoreUltra7-265Ux14" memory="32GB"/>
+	<machine name="cluster" cpu="24x8xE5520@2.27GHz" memory="24GB"/>
 
 	<config name="seq-generic" template="templates/seq-generic.sh"/>
 
@@ -11,7 +11,7 @@
 		<setting name="flingo"  	    cmdline="-q --solver flingo  --models=1 " 		  tag="flingo" />
     </system>
 
-	<seqjob name="seq-generic" timeout="20s" runs="1" parallel="4"/>
+	<seqjob name="seq-gen" timeout="600" runs="1" script_mode="timeout" walltime="15:00:00" parallel="1"/>
 
 	<benchmark name="linear">
 		<folder path="benchmarks/random-core/instances">
@@ -24,13 +24,12 @@
 		</folder>
 	</benchmark>
 
-
 	<benchmark name="non-linear">
 		<folder path="benchmarks/box/instances">
 		</folder>
 	</benchmark>
 
-	<project name="coom-benchmark-project" job="seq-generic">
+	<project name="coom-benchmarks" job="seq-gen">
 		<runtag machine="laptop" benchmark="linear" tag="*all*"/>
 		<runtag machine="laptop" benchmark="non-linear" tag="clingo"/>
 	</project>

@@ -9,10 +9,12 @@ pip install -r requirements.txt
 
 ## How to run (on laptop for debugging)
 
+Replace `laptop` by `cluster` for runing on cluster.
+
 1. Generate the benchmark folder structure and scripts
 
 ```sh
-btool gen runscripts/runscript-coom-laptop.xml
+btool gen runscripts/runscript-laptop.xml
 ```
 
 2. Run the benchmarks
@@ -30,11 +32,10 @@ btool verify output/coom-benchmark-project/laptop/results
 3. Evaluate and convert the results
 
 ```sh
-btool eval runscripts/runscript-coom-laptop.xml | btool conv results/all.ods
+btool eval runscripts/runscript-laptop.xml | btool conv results/all.ods
 ```
+4. Plot results
 
-
-<!-- ```sh
-./benchmarks/scripts/run_bm.sh
-./benchmarks/scripts/evaluate.sh
-``` -->
+```sh
+./plot.py
+```
