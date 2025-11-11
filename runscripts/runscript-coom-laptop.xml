@@ -5,14 +5,16 @@
 	<config name="seq-generic" template="templates/seq-generic.sh"/>
 
 	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
-		<setting name="clingo"  cmdline="--models=1 -q --solver clingo" tag="clingo" />
-		<setting name="flingo" cmdline="--models=1 -q --solver flingo" tag="flingo" />
+		<setting name="clingo"  		cmdline="-q --solver clingo --models=1 " 		  tag="clingo" />
+		<setting name="clingo-brave"    cmdline="-q --solver clingo --enum-mode=brave"    tag="clingo" />
+		<setting name="clingo-cautious" cmdline="-q --solver clingo --enum-mode=cautious" tag="clingo" />
+		<setting name="flingo"  	    cmdline="-q --solver flingo  --models=1 " 		  tag="flingo" />
     </system>
 
-	<seqjob name="seq-generic" timeout="60s" runs="1" parallel="4"/>
+	<seqjob name="seq-generic" timeout="20s" runs="1" parallel="4"/>
 
-	<benchmark name="coom-benchmarks">
-		<folder path="benchmarks/kids-bike/instances">
+	<benchmark name="linear">
+		<folder path="benchmarks/random-core/instances">
 		</folder>
 		<folder path="benchmarks/city-bike-fleet/instances">
 		</folder>
@@ -22,8 +24,15 @@
 		</folder>
 	</benchmark>
 
+
+	<benchmark name="non-linear">
+		<folder path="benchmarks/box/instances">
+		</folder>
+	</benchmark>
+
 	<project name="coom-benchmark-project" job="seq-generic">
-		<runtag machine="laptop" benchmark="coom-benchmarks" tag="*all*"/>
+		<runtag machine="laptop" benchmark="linear" tag="*all*"/>
+		<runtag machine="laptop" benchmark="non-linear" tag="clingo"/>
 	</project>
 </runscript>
 

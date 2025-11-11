@@ -2,5 +2,5 @@ benchmarktool @ git+https://github.com/potassco/benchmark-tool.git@c1474694e939a
 numpy
 pandas
 pandas_ods_reader
-matplotlib
+matplotlib==3.7
 tikzplotlib

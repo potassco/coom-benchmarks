@@ -15,7 +15,7 @@ do
     for ratio in 2 4 6
     do
         totalplaces=$((numtable*ratio))
-        OUTFILE=$OUTDIR/${NAME}${numtable}_${totalplaces}.coom
+        OUTFILE=$OUTDIR/${NAME}-${numtable}_${totalplaces}.coom
         sed -e "s/NUMTABLE/${numtable}/g" -e "s/TOTALPLACES/${totalplaces}/g" $TEMPLATE > $OUTFILE
     done
 done

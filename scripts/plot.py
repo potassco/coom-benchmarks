@@ -7,12 +7,12 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas  # noqa: F401 # pylint: disable=unused-import
+import pandas as pd
 import tikzplotlib
 from pandas_ods_reader import read_ods
 
-RESULTS_DIR = "benchmarks/results"
-OUTDIR = "benchmarks/plots"
+RESULTS = "results/all.ods"
+OUTDIR = "plots"
 
 SOLVER = ["clingo", "flingo"]
 DOMAIN = ["core", "city", "travel"]
@@ -38,38 +38,58 @@ LABEL = {
 
 
 def clean_df(df):
+    # Remove last computed values
+    df.drop(df.tail(9).index, inplace=True)
+
+    # Get stats
     stats_set = set(df.iloc[0][:])
     stats_set.discard("")
+    stats_set.discard(None)
 
     # Drop min max median
     df.drop(df.columns[-3 * len(stats_set) :], axis=1, inplace=True)
 
-    # Remove last computed values
-    df.drop(df.tail(9).index, inplace=True)
+    stats = df.iloc[0, 1 : len(stats_set) + 1].values
 
-    # Rename instances
-    df[df.columns[0]] = df[df.columns[0]].apply(lambda x: x[2:].replace(".coom", ""))
+    # Get solvers and reasoning modes
+    solvers = [
+        c.split("/")[-1] for i, c in enumerate(df.columns) if i % len(stats) == 1
+    ]
+
+    # Get instances
+    instances = [i.replace("./", "") for i in df.iloc[1:, 0]]
+
+    # Create multi index for columns
+    columns = pd.MultiIndex(
+        levels=[solvers, stats],
+        codes=[
+            np.repeat(range(len(solvers)), len(stats)).tolist(),
+            list(range(len(stats))) * len(solvers),
+        ],
+    )
+
+    # Get data
+    data = df.iloc[1:, 1:].values  # needed? convert_dtypes()
+
+    # # Remove first column
+    # df.drop(df.columns[0], axis=1, inplace=True)
+
+    # # Get columns
+    # solvers = [
+    #     c.split("/")[-1] for i, c in enumerate(df.columns) if i % len(stats) == 0
+    # ]
+
+    # Get instance names
+    # df[df.columns[0]] = df[df.columns[0]].apply(lambda x: x[2:].replace(".coom", ""))
+    # df[df.columns[0]] = df[df.columns[0]].apply(lambda x: x[2:].replace("./", ""))
 
     # Make instances names index of dataframe
-    df.index = df.loc[:, df.columns[0]].tolist()
+    # df.index = df.loc[:, df.columns[0]].tolist()
 
-    # Remove first column
-    df.drop(df.columns[0], axis=1, inplace=True)
+    # df.columns = list(np.repeat(solvers, len(stats)))
+    # df.columns = [f"{c}-{s}" for c, s in zip(df.columns, list(df.iloc[0]))]
 
-    # Rename columns
-    solver = [
-        c.split("/")[-1] for i, c in enumerate(df.columns) if i % len(stats_set) == 0
-    ]
-    df.columns = list(np.repeat(solver, len(stats_set)))
-    df.columns = [f"{c}-{s}" for c, s in zip(df.columns, list(df.iloc[0]))]
-
-    # Remove unused out values
-    df.drop(df.index[0], inplace=True)
-
-    # Convert datatypes
-    df = df.convert_dtypes()
-
-    return df
+    return pd.DataFrame(index=instances, columns=columns, data=data)
 
 
 def get_subdf(df, solver):
@@ -164,12 +184,12 @@ def plot(dfs):
 if __name__ == "__main__":
     os.makedirs(OUTDIR, exist_ok=True)
 
-    ods_paths = glob(f"{RESULTS_DIR}/*.ods")
-    dfs = {
-        Path(p).stem: clean_df(read_ods(p)) for p in ods_paths if "restaurant" not in p
-    }
-    all_dfs = {
-        f"{s}-{d}": get_subdf(dfs[d], solver=s) for s, d in product(SOLVER, dfs.keys())
-    }
+    # ods_paths = glob(f"{RESULTS_DIR}/all.ods")
+    results = clean_df(read_ods(RESULTS))
+    print(results)
 
-    plot(all_dfs)
+    # all_dfs = {
+    #     f"{s}-{d}": get_subdf(dfs[d], solver=s) for s, d in product(SOLVER, dfs.keys())
+    # }
+
+    # plot(all_dfs)
