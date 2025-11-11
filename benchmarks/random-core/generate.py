@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
     outfile = os.path.join(
         args.out,
-        f"{args.name}{args.features}_{args.options}_{args.constraint_size}.coom",
+        f"{args.name}-{args.features}_{args.options}_{args.constraint_size}.coom",
     )
     with open(outfile, "w", encoding="utf-8") as f:
         f.write("\n".join(instance))
