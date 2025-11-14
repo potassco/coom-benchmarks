@@ -1,0 +1,37 @@
+<runscript output="output">
+
+	<machine name="cluster" cpu="24x8xE5520@2.27GHz" memory="24GB"/>
+
+	<config name="seq-generic" template="templates/seq-generic.sh"/>
+
+	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
+		<setting name="clingo"  		cmdline="-q --solver clingo --models=1 " 		  tag="clingo" />
+		<setting name="clingo-brave"    cmdline="-q --solver clingo --enum-mode=brave"    tag="clingo" />
+		<setting name="clingo-cautious" cmdline="-q --solver clingo --enum-mode=cautious" tag="clingo" />
+		<setting name="flingo"  	    cmdline="-q --solver flingo  --models=1 " 		  tag="flingo" />
+    </system>
+
+	<seqjob name="seq-gen" timeout="600" runs="1" script_mode="timeout" walltime="15:00:00" parallel="1"/>
+
+	<benchmark name="linear">
+		<folder path="benchmarks/random-core/instances">
+		</folder>
+		<folder path="benchmarks/city-bike-fleet/instances">
+		</folder>
+		<folder path="benchmarks/travel-bike-fleet/instances">
+		</folder>
+		<folder path="benchmarks/restaurant/instances">
+		</folder>
+	</benchmark>
+
+	<benchmark name="non-linear">
+		<folder path="benchmarks/box/instances">
+		</folder>
+	</benchmark>
+
+	<project name="coom-benchmarks" job="seq-gen">
+		<runtag machine="laptop" benchmark="linear" tag="*all*"/>
+		<runtag machine="laptop" benchmark="non-linear" tag="clingo"/>
+	</project>
+</runscript>
+

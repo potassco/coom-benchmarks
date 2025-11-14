@@ -1,3 +1,0 @@
-[submodule "benchmarks/benchmark-tool"]
-	path = benchmarks/benchmark-tool
-	url = git@github.com:nrueh/benchmark-tool.git

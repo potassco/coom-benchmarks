@@ -1,15 +1,41 @@
 # COOM Benchmarks
 Benchmark sets in COOM language.
 
-## Prerequesites
+## Installation
 
-Install `lxml`
 ```sh
-pip install lxml
+pip install -r requirements.txt
 ```
 
-## How to run
+## How to run (on laptop for debugging)
+
+Replace `laptop` by `cluster` for runing on cluster.
+
+1. Generate the benchmark folder structure and scripts
+
 ```sh
-./benchmarks/scripts/run_bm.sh
-./benchmarks/scripts/evaluate.sh
+btool gen runscripts/runscript-laptop.xml
+```
+
+2. Run the benchmarks
+
+```sh
+ ./output/coom-benchmark-project/laptop/start.py
+```
+
+4. Verify results
+
+```sh
+btool verify output/coom-benchmark-project/laptop/results
+```
+
+3. Evaluate and convert the results
+
+```sh
+btool eval runscripts/runscript-laptop.xml | btool conv results/all.ods
+```
+4. Plot results
+
+```sh
+./plot.py
 ```

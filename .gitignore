@@ -40,3 +40,6 @@ _autosummary
 
 # Runlim binary
 runlim
+
+# Output
+output/
