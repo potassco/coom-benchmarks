@@ -1,5 +1,7 @@
-# COOM Benchmarks
-Benchmark sets in COOM language.
+# COOM Suite Benchmarks
+
+This repository contains benchmarks for the COOM Suite.
+The instances can be found in the [benchmarks](benchmarks) folder.
 
 ## Installation
 

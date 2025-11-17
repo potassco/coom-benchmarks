@@ -8,10 +8,10 @@
 		<setting name="clingo"  		cmdline="-q --solver clingo --models=1 " 		  tag="clingo" disttemplate="templates/coom.dist" />
 		<setting name="clingo-brave"    cmdline="-q --solver clingo --enum-mode=brave"    tag="clingo" disttemplate="templates/coom.dist" />
 		<setting name="clingo-cautious" cmdline="-q --solver clingo --enum-mode=cautious" tag="clingo" disttemplate="templates/coom.dist" />
-		<setting name="flingo"  	    cmdline="-q --solver flingo  --models=1 " 		  tag="flingo" disttemplate="templates/coom.dist" />
+		<setting name="flingo"  	    cmdline="-q --solver flingo --models=1 " 		  tag="flingo" disttemplate="templates/coom.dist" />
     </system>
 
-	<distjob name="dist-gen" timeout="1200s" runs="1" script_mode="timeout" walltime="4h 30m 00s" cpt="4"/>
+	<distjob name="dist-gen" timeout="1200s" runs="1" script_mode="timeout" walltime="6h 00m 00s" cpt="4"/>
 
 	<benchmark name="linear">
 		<folder path="benchmarks/random-core/instances">
