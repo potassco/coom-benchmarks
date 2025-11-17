@@ -5,10 +5,10 @@
 	<config name="seq-generic" template="templates/seq-generic.sh"/>
 
 	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
-		<setting name="clingo"  		cmdline="-q --solver clingo --models=1 " 		  tag="clingo" disttemplate="templates/coom.pbs" />
-		<setting name="clingo-brave"    cmdline="-q --solver clingo --enum-mode=brave"    tag="clingo" disttemplate="templates/coom.pbs" />
-		<setting name="clingo-cautious" cmdline="-q --solver clingo --enum-mode=cautious" tag="clingo" disttemplate="templates/coom.pbs" />
-		<setting name="flingo"  	    cmdline="-q --solver flingo  --models=1 " 		  tag="flingo" disttemplate="templates/coom.pbs" />
+		<setting name="clingo"  		cmdline="-q --solver clingo --models=1 " 		  tag="clingo" disttemplate="templates/coom.dist" />
+		<setting name="clingo-brave"    cmdline="-q --solver clingo --enum-mode=brave"    tag="clingo" disttemplate="templates/coom.dist" />
+		<setting name="clingo-cautious" cmdline="-q --solver clingo --enum-mode=cautious" tag="clingo" disttemplate="templates/coom.dist" />
+		<setting name="flingo"  	    cmdline="-q --solver flingo  --models=1 " 		  tag="flingo" disttemplate="templates/coom.dist" />
     </system>
 
 	<distjob name="dist-gen" timeout="1200s" runs="1" script_mode="timeout" walltime="4h 30m 00s" cpt="4"/>
