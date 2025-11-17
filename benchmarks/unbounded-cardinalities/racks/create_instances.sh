@@ -1,36 +1,46 @@
 #!/bin/bash
 
-OUTDIR=instances
+MODELDIR=models
+INSTANCEDIR=instances
 
-rm -rf $OUTDIR
-mkdir $OUTDIR
+rm -rf $MODELDIR
+mkdir $MODELDIR
 
-INSTANCE=instance-simple.coom
-USER=user-input-simple.coom
+rm -rf $INSTANCEDIR
+mkdir $INSTANCEDIR
+
+# Simple model benchmarks
+TEMPLATE=model-simple.coom
 NAME=racks-simple
 
 for max in 10 20 30; do
-    OUTFILE=$OUTDIR/${NAME}_${max}.coom
-    sed -e "s/MAX/${max}/g" $INSTANCE > $OUTFILE
+    modelName=${NAME}-${max}
+    modelFile=$MODELDIR/${modelName}.coom
+    sed -e "s/MAX/${max}/g" $TEMPLATE > $modelFile
 
     steps=10
     step=$((max / steps))
     for ((i = 0; i < steps; i++)); do
         numElements=$((1 + i*step))
-        OUTFILE=$OUTDIR/user-input-${NAME}_${max}_${numElements}.coom
-        sed -e "s/NUMELEMENTS/${numElements}/g" $USER > $OUTFILE
+        userFile=$INSTANCEDIR/${modelName}_user-input-${numElements}.coom
+        echo "set numA[0] = ${numElements}" > $userFile
+        echo -e "set numB[0] = ${numElements}" >> $userFile
     done
 done
 
-INSTANCE=instance-complex.coom
-USER=user-input-complex.coom
+# Complex model benchmarks
+TEMPLATE=model-complex.coom
 NAME=racks-complex
 
 max=10
-OUTFILE=$OUTDIR/${NAME}_${max}.coom
-sed -e "s/MAX/${max}/g" $INSTANCE > $OUTFILE
+modelName=${NAME}-${max}
+modelFile=$MODELDIR/${modelName}.coom
+sed -e "s/MAX/${max}/g" $TEMPLATE > $modelFile
 
 for numElements in 1 2 3 4 5 6 7 8 9 10; do
-    OUTFILE=$OUTDIR/user-input-${NAME}_${max}_${numElements}.coom
-    sed -e "s/NUMELEMENTS/${numElements}/g" $USER > $OUTFILE
+    userFile=$INSTANCEDIR/${modelName}_user-input-${numElements}.coom
+        echo "set numA[0] = ${numElements}" > $userFile
+        echo -e "set numB[0] = ${numElements}" >> $userFile
+        echo -e "set numC[0] = ${numElements}" >> $userFile
+        echo -e "set numD[0] = ${numElements}" >> $userFile
 done

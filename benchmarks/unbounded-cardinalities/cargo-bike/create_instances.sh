@@ -1,11 +1,25 @@
 #!/bin/bash
 
-OUTDIR=instances
+MODELDIR=models
+INSTANCEDIR=instances
+NAME=cargobike
 
-rm -rf $OUTDIR
+rm -rf $MODELDIR
+mkdir $MODELDIR
 
-for template in simple complex; do
+rm -rf $INSTANCEDIR
+mkdir $INSTANCEDIR
+
+for model in simple complex; do
+    template=model-${model}.coom
+
     for range in 100 200 300 400 500; do
-        python generate.py --range $range --instances 20 --out $OUTDIR --template $template
+
+        # Model
+        modelName=${NAME}-${model}-${range}
+        modelFile=$MODELDIR/$modelName.coom
+        sed -e "s/MAX/${range}/g" $template > $modelFile
+
+        python generate.py --range $range --instances 20 --out $INSTANCEDIR --model $modelName
     done
 done

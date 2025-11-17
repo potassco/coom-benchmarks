@@ -1,18 +1,18 @@
 #!/bin/bash
 
-TEMPLATE=instance.coom
+TEMPLATE=model.coom
 OUTDIR=instances
 NAME=travelbike
 
 rm -rf $OUTDIR
 mkdir $OUTDIR
 
-MAX_PER_BIKE=500
+# MAX_PER_BIKE=500
 
-for numbikes in $(seq 1 1 15); do
+for numBikes in $(seq 1 1 15); do
     # for maxprice in 300 500; do
-    MAXPRICE_TOTAL=$((200*numbikes))
-    OUTFILE=$OUTDIR/${NAME}-${numbikes}.coom
-    sed -e "s/NUMBIKES/${numbikes}/g" -e "s/MAXPRICE/${MAXPRICE_TOTAL}/g" $TEMPLATE > $OUTFILE
+    maxPrice=$((200*numBikes))
+    OUTFILE=$OUTDIR/${NAME}-${numBikes}.coom
+    sed -e "s/NUMBIKES/${numBikes}/g" -e "s/MAXPRICE/${maxPrice}/g" $TEMPLATE > $OUTFILE
     # done
 done

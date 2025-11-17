@@ -39,7 +39,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # OUTDIR = os.path.join(INSTANCE_DIR, f"{args.features}_{args.options}")
-    os.makedirs(args.out, exist_ok=True)
+    # os.makedirs(args.out, exist_ok=True)
 
     FEATURES = "\n".join([f"Feat{i} feat{i}" for i in range(args.features)])
     OPTIONS = " ".join([f"F{i}" for i in range(args.options)])
@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
     outfile = os.path.join(
         args.out,
-        f"{args.name}-{args.features}_{args.options}_{args.constraint_size}.coom",
+        f"{args.name}-{args.features}-{args.options}-{args.constraint_size}.coom",
     )
     with open(outfile, "w", encoding="utf-8") as f:
         f.write("\n".join(instance))
