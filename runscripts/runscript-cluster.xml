@@ -5,13 +5,13 @@
 	<config name="seq-generic" template="templates/seq-generic.sh"/>
 
 	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
-		<setting name="clingo"  		cmdline="-q --solver clingo --models=1 " 		  tag="clingo" pbstemplate="templates/coom.pbs" />
-		<setting name="clingo-brave"    cmdline="-q --solver clingo --enum-mode=brave"    tag="clingo" pbstemplate="templates/coom.pbs" />
-		<setting name="clingo-cautious" cmdline="-q --solver clingo --enum-mode=cautious" tag="clingo" pbstemplate="templates/coom.pbs" />
-		<setting name="flingo"  	    cmdline="-q --solver flingo  --models=1 " 		  tag="flingo" pbstemplate="templates/coom.pbs" />
+		<setting name="clingo"  		cmdline="-q --solver clingo --models=1 " 		  tag="clingo" disttemplate="templates/coom.pbs" />
+		<setting name="clingo-brave"    cmdline="-q --solver clingo --enum-mode=brave"    tag="clingo" disttemplate="templates/coom.pbs" />
+		<setting name="clingo-cautious" cmdline="-q --solver clingo --enum-mode=cautious" tag="clingo" disttemplate="templates/coom.pbs" />
+		<setting name="flingo"  	    cmdline="-q --solver flingo  --models=1 " 		  tag="flingo" disttemplate="templates/coom.pbs" />
     </system>
 
-	<pbsjob name="pbs-gen" timeout="1200" runs="1" script_mode="timeout" walltime="01:30:00" cpt="4"/>
+	<distjob name="dist-gen" timeout="1200s" runs="1" script_mode="timeout" walltime="4h 30m 00s" cpt="4"/>
 
 	<benchmark name="linear">
 		<folder path="benchmarks/random-core/instances">
@@ -29,7 +29,7 @@
 		</folder>
 	</benchmark>
 
-	<project name="coom-benchmarks" job="pbs-gen">
+	<project name="coom-benchmarks" job="dist-gen">
 		<runtag machine="cluster" benchmark="linear" tag="*all*"/>
 		<runtag machine="cluster" benchmark="non-linear" tag="clingo"/>
 	</project>

@@ -11,7 +11,7 @@
 		<setting name="flingo"  	    cmdline="-q --solver flingo  --models=1 " 		  tag="flingo" />
     </system>
 
-	<seqjob name="seq-gen" timeout="600" runs="1" script_mode="timeout" walltime="15:00:00" parallel="1"/>
+	<seqjob name="seq-gen" timeout="300s" runs="1" parallel="4"/>
 
 	<benchmark name="linear">
 		<folder path="benchmarks/random-core/instances">

@@ -4,7 +4,7 @@
 #SBATCH --time={walltime}        # walltime
 #SBATCH --cpus-per-task={cpt}    # number of processor cores (i.e. tasks)
 #SBATCH --partition={partition}
-#SBATCH --exclusive
+{dist_options}                  # additional dist options (specified via runscript setting)
 
 # Good Idea to stop operation on first error.
 set -e
@@ -12,12 +12,11 @@ set -e
 # Load environment modules for your application here.
 source ~/.bashrc
 
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
 
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv virtualenv-init -)"
 
-pyenv deactivate
-pyenv activate coom
+conda activate coom
 
 
 # Run jobs
