@@ -10,13 +10,13 @@
 
 	<seqjob name="seq-generic" timeout="5s" runs="1" parallel="4"/>
 
-	<benchmark name="restaurant">
-		<folder path="benchmarks/restaurant/instances">
+	<benchmark name="box">
+		<folder path="benchmarks/box/instances">
 		</folder>
 	</benchmark>
 
 	<project name="coom-benchmarks" job="seq-generic">
-		<runtag machine="laptop" benchmark="restaurant" tag="*all*"/>
+		<runtag machine="laptop" benchmark="box" tag="*all*"/>
 	</project>
 </runscript>
 

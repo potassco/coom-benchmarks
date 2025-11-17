@@ -1,7 +1,8 @@
 // Box example
 // Provided by Andreas Falkner
 // adapted from Blumöhr et al.: Variant Configuration with SAP
-ple does not work with flingo
+
+// If using area and volume features, the example does not work with flingo
 // as there is a (non-linear) multiplication between two variables.
 
 // Could be modeled differently using floats, higher ranges, etc.
@@ -10,7 +11,7 @@ product {
     1..1 Box body
     0..1 Box lid
 
-    num /ccm 0-VOLUME requestedVolume
+    num /ccm 0-MAXVOLUME requestedVolume
 }
 
 structure Box {

@@ -11,13 +11,14 @@ product {
     1..1 Box body
     0..1 Box lid
 
-    num /ccm 0-2197 requestedVolume
+    num /ccm 0-3375 requestedVolume
 }
 
 structure Box {
-    num /mm 0-130        length
-    num /mm 0-130        width
-    num /mm 0-130        height
+// If using area and volume features, the exam
+    num /mm 0-150        length
+    num /mm 0-150        width
+    num /mm 0-150        height
 
     Color color
     Material material

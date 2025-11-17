@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TEMPLATE=instance.coom
+TEMPLATE=model.coom
 MODELDIR=models
 INSTANCEDIR=instances
 NAME=restaurant
@@ -27,6 +27,5 @@ do
         requiredplaces=$((numtable*ratio))
         USERFILE=$INSTANCEDIR/${NAME}-${numtable}_user-input-${requiredplaces}.coom
         echo "set totalPlaces[0] = ${requiredplaces}" > $USERFILE
-        # sed -e "s/NUMTABLE/${numtable}/g" -e "s/TOTALPLACES/${requiredplaces}/g" $TEMPLATE
     done
 done
