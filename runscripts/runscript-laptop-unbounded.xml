@@ -1,0 +1,30 @@
+<runscript output="output">
+
+	<machine name="laptop" cpu="IntelCoreUltra7-265Ux14" memory="32GB"/>
+
+	<config name="seq-generic" template="templates/seq-generic.sh"/>
+
+	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
+		<setting name="linear"  	 	   cmdline="-q --solver clingo --bounds=linear" 		  		 tag="clingo" />
+		<setting name="linear-multi" 	   cmdline="-q --solver clingo --bounds=linear 	    --multishot" tag="clingo" />
+		<setting name="exponential"  	   cmdline="-q --solver clingo --bounds=exponential" 			 tag="clingo" />
+		<setting name="exponential-multi"  cmdline="-q --solver clingo --bounds=exponential --multishot" tag="clingo" />
+    </system>
+
+	<seqjob name="seq-generic" timeout="20s" runs="1" parallel="4"/>
+
+	<benchmark name="unbounded">
+		<folder path="benchmarks/unbounded-cardinalities/cargo-bike/instances">
+		</folder>
+		<folder path="benchmarks/unbounded-cardinalities/house/instances">
+		</folder>
+		<folder path="benchmarks/unbounded-cardinalities/racks/instances">
+		</folder>
+	</benchmark>
+
+
+	<project name="coom-benchmarks" job="seq-generic">
+		<runtag machine="laptop" benchmark="linear" tag="*all*"/>
+	</project>
+</runscript>
+
