@@ -16,7 +16,7 @@ source ~/.bashrc
 
 # eval "$(pyenv virtualenv-init -)"
 
-conda activate coom
+# conda activate coom
 
 
 # Run jobs

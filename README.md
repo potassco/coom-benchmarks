@@ -32,7 +32,7 @@ btool verify output/coom-benchmark-project/laptop/results
 3. Evaluate and convert the results
 
 ```sh
-btool eval runscripts/runscript-laptop.xml | btool conv results/all.ods
+btool eval runscripts/runscript-laptop.xml | btool conv -o results/all.ods
 ```
 4. Plot results
 

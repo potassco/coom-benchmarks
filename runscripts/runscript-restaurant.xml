@@ -1,0 +1,22 @@
+<runscript output="output">
+
+	<machine name="laptop" cpu="IntelCoreUltra7-265Ux14" memory="32GB"/>
+
+	<config name="seq-generic" template="templates/seq-generic.sh"/>
+
+	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
+		<setting name="clingo"  		cmdline="-q --solver clingo --models=1 " 		  tag="clingo" />
+    </system>
+
+	<seqjob name="seq-generic" timeout="5s" runs="1" parallel="4"/>
+
+	<benchmark name="restaurant">
+		<folder path="benchmarks/restaurant/instances">
+		</folder>
+	</benchmark>
+
+	<project name="coom-benchmarks" job="seq-generic">
+		<runtag machine="laptop" benchmark="restaurant" tag="*all*"/>
+	</project>
+</runscript>
+
