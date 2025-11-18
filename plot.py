@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from argparse import ArgumentParser
 import os
 
 import matplotlib.pyplot as plt
@@ -9,13 +9,6 @@ import pandas as pd
 # import tikzplotlib
 from pandas_ods_reader import read_ods
 
-# from glob import glob
-# from itertools import product
-# from pathlib import Path
-
-
-RESULTS = "results/all.ods"
-OUTDIR = "results/plots"
 
 SOLVER = ["clingo", "flingo"]
 DOMAIN = ["core", "citybike", "travelbike", "restaurant", "box"]
@@ -58,6 +51,10 @@ LINE = {
     "clingo-brave": "--",
 }
 
+parser = ArgumentParser(prog="COOMBenchmarkPlotter", description="Plots COOM Benchmarks")
+parser.add_argument("--ods", type=str, help="Path to input .ods file")
+parser.add_argument("--outdir", type=str, help="Path to output directory")
+args = parser.parse_args()
 
 def clean_df(df):
     # Remove last computed values
@@ -109,12 +106,14 @@ def get_plot_data(df, type):
 
 
 def plot(df, pairs, outfile, type="cactus"):
-    outpath = os.path.join(OUTDIR, outfile)
-
+    outpath = os.path.join(args.outdir, outfile)
+    max_y = 0
     plots = {}
     for s, d in pairs:
         name = f"{s}-{d}"
         x, y = get_plot_data(df[s, "time"][d], type)
+        max_y = max(y) if max(y) > max_y else max_y
+
         (plots[name],) = plt.plot(
             x,
             y,
@@ -179,8 +178,9 @@ def plot(df, pairs, outfile, type="cactus"):
     # plt.title("Benchmarks", fontsize=12, fontweight=0)
 
     # if domain in ("randomcore", "restaurant", "travelbike"):
+
     plt.xlabel("% of instances solved")
-    plt.ylim(bottom=0, top=20)
+    plt.ylim(bottom=0, top=max_y/3*2)
     plt.xticks(np.arange(0, 110, 10))
 
     # plt.gca().xaxis.get_major_locator().set_params(integer=True)
@@ -198,10 +198,10 @@ def plot(df, pairs, outfile, type="cactus"):
 
 
 if __name__ == "__main__":
-    os.makedirs(OUTDIR, exist_ok=True)
+    os.makedirs(args.outdir, exist_ok=True)
 
     # ods_paths = glob(f"{RESULTS_DIR}/all.ods")
-    results = clean_df(read_ods(RESULTS))
+    results = clean_df(read_ods(args.ods))
 
     # Plot clingo and flingo for getting single model
     plot(
