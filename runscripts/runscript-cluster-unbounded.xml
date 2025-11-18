@@ -1,0 +1,31 @@
+<runscript output="output">
+
+	<machine name="cluster" cpu="24x8xE5520@2.27GHz" memory="24GB"/>
+
+	<config name="seq-generic" template="templates/seq-generic.sh"/>
+
+	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
+		<setting name="linear-clingo"		cmdline="-q --solver clingo --bounds=linear" 		  		 	tag="single" disttemplate="templates/coom.dist" />
+		<setting name="exponential-clingo"	cmdline="-q --solver clingo --bounds=exponential" 			 	tag="single" disttemplate="templates/coom.dist" />
+		<setting name="linear-flingo"  	 	cmdline="-q --solver flingo --bounds=linear" 		  		 	tag="single" disttemplate="templates/coom.dist" />
+		<setting name="exponential-flingo" 	cmdline="-q --solver flingo --bounds=exponential" 			 	tag="single" disttemplate="templates/coom.dist" />
+		<setting name="linear-multi" 	   	cmdline="-q --solver clingo --bounds=linear 	 --multishot" 	tag="multi"  disttemplate="templates/coom.dist" />
+		<setting name="exponential-multi"  	cmdline="-q --solver clingo --bounds=exponential --multishot" 	tag="multi"  disttemplate="templates/coom.dist" />
+    </system>
+
+	<distjob name="dist-gen" timeout="1200s" runs="1" script_mode="timeout" walltime="6h 00m 00s" cpt="4"/>
+
+	<benchmark name="unbounded">
+		<folder path="benchmarks/unbounded-cardinalities/cargo-bike/instances">
+		</folder>
+		<folder path="benchmarks/unbounded-cardinalities/house/instances">
+		</folder>
+		<folder path="benchmarks/unbounded-cardinalities/racks/instances">
+		</folder>
+	</benchmark>
+
+	<project name="coom-benchmarks" job="dist-gen">
+		<runtag machine="cluster" benchmark="unbounded" tag="single"/>
+	</project>
+</runscript>
+
