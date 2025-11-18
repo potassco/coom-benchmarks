@@ -5,13 +5,15 @@
 	<config name="seq-generic" template="templates/seq-generic.sh"/>
 
 	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
-		<setting name="linear"  	 	   cmdline="-q --solver clingo --bounds=linear" 		  		 tag="clingo" />
-		<setting name="linear-multi" 	   cmdline="-q --solver clingo --bounds=linear 	    --multishot" tag="clingo" />
-		<setting name="exponential"  	   cmdline="-q --solver clingo --bounds=exponential" 			 tag="clingo" />
-		<setting name="exponential-multi"  cmdline="-q --solver clingo --bounds=exponential --multishot" tag="clingo" />
+		<setting name="linear-clingo"		cmdline="-q --solver clingo --bounds=linear" 		  		 	tag="single" />
+		<setting name="exponential-clingo"	cmdline="-q --solver clingo --bounds=exponential" 			 	tag="single" />
+		<setting name="linear-flingo"  	 	cmdline="-q --solver flingo --bounds=linear" 		  		 	tag="single" />
+		<setting name="exponential-flingo" 	cmdline="-q --solver flingo --bounds=exponential" 			 	tag="single" />
+		<setting name="linear-multi" 	   	cmdline="-q --solver clingo --bounds=linear 	 --multishot" 	tag="multi" />
+		<setting name="exponential-multi"  	cmdline="-q --solver clingo --bounds=exponential --multishot" 	tag="multi" />
     </system>
 
-	<seqjob name="seq-generic" timeout="20s" runs="1" parallel="4"/>
+	<seqjob name="seq-generic" timeout="10s" runs="1" parallel="4"/>
 
 	<benchmark name="unbounded">
 		<folder path="benchmarks/unbounded-cardinalities/cargo-bike/instances">
@@ -24,7 +26,7 @@
 
 
 	<project name="coom-benchmarks" job="seq-generic">
-		<runtag machine="laptop" benchmark="linear" tag="*all*"/>
+		<runtag machine="laptop" benchmark="unbounded" tag="single"/>
 	</project>
 </runscript>
 
