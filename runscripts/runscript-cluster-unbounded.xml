@@ -25,7 +25,7 @@
 	</benchmark>
 
 	<project name="coom-benchmarks" job="dist-gen">
-		<runtag machine="cluster" benchmark="unbounded" tag="single"/>
+		<runtag machine="cluster" benchmark="unbounded" tag="*all*"/>
 	</project>
 </runscript>
 

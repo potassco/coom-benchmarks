@@ -1,3 +1,6 @@
+// House configuration problem
+// Friedrich et al.: (Re)configuration based on model generation (2011)
+
 product {
                 num  0-10    numRooms
     2  Person             person
