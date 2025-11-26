@@ -1,3 +1,6 @@
+// Hardware racks problem
+// Falkner et al.: OOASP: Connecting Object-Oriented and Logic Programming (2015)
+
 product {
     0..* Rack      rack
          num  0-10 numA

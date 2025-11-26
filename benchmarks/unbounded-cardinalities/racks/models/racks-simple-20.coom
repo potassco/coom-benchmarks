@@ -1,3 +1,6 @@
+// Hardware racks problem
+// Falkner et al.: OOASP: Connecting Object-Oriented and Logic Programming (2015)
+
 product {
     0..*  Frame    frame
           num 0-20 numA

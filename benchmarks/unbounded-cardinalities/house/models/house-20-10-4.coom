@@ -1,11 +1,14 @@
+// House configuration problem
+// Friedrich et al.: (Re)configuration based on model generation (2011)
+
 product {
-                num  0-MAXROOMS    numRooms
-    NUMPERSONS  Person             person
+                num  0-20    numRooms
+    4  Person             person
 }
 
 structure Person {
-          num   0-MAXTHINGS    numLongThings
-          num   0-MAXTHINGS    numShortThings
+          num   0-10    numLongThings
+          num   0-10    numShortThings
     0..*  Room                 room
 }
 

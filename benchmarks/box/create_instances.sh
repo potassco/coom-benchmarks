@@ -13,18 +13,18 @@ mkdir $INSTANCEDIR
 
 for side in $(seq 50 25 150)
 do
-    maxvolume=$((($side**3)/1000))
+    maxVolume=$((($side**3)/1000))
 
     # Model
-    MODELNAME=${NAME}-s${side}
-    MODELFILE=$MODELDIR/$MODELNAME.coom
-    sed -e "s/SIDE/${side}/g" -e "s/MAXVOLUME/${maxvolume}/g" $TEMPLATE > $MODELFILE
+    modelName=${NAME}-s${side}
+    modelFile=$MODELDIR/$modelName.coom
+    sed -e "s/SIDE/${side}/g" -e "s/MAXVOLUME/${maxVolume}/g" $TEMPLATE > $modelFile
 
     # for totalplaces in $(seq $init 100 $maxplaces)
     for ratio in 2 4 6 8
     do
-        requiredvolume=$((maxvolume*ratio/10))
-        USERFILE=$INSTANCEDIR/${MODELNAME}_user-input-${requiredvolume}.coom
-        echo "set requestedVolume[0] = ${requiredvolume}" > $USERFILE
+        requiredvolume=$((maxVolume*ratio/10))
+        userFile=$INSTANCEDIR/${modelName}_user-input-${requiredvolume}.coom
+        echo "set requestedVolume[0] = ${requiredvolume}" > $userFile
     done
 done
