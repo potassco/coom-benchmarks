@@ -5,17 +5,19 @@
 	<config name="seq-generic" template="templates/seq-generic.sh"/>
 
 	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
-		<setting name="clingo-base"  				cmdline="-q --solver clingo --models=1 " 		  				tag="clingo basic" />
-		<setting name="flingo-base"  	    		cmdline="-q --solver flingo --models=1 " 		  				tag="flingo basic" />
-		<setting name="constraint-handler-base"  	cmdline="-q --solver constraint-handler --models=1 " 		  	tag="constrainthandler basic" />
-		<setting name="clingo-brave"    			cmdline="-q --solver clingo --enum-mode=brave"    				tag="clingo basic brave" />
-		<setting name="clingo-cautious" 			cmdline="-q --solver clingo --enum-mode=cautious" 				tag="clingo basic cautious" />
-		<setting name="clingo-bounds-linear"		cmdline="-q --solver clingo --bounds=linear" 		  		 	tag="clingo bounds" />
-		<setting name="clingo-bounds-exponential"	cmdline="-q --solver clingo --bounds=exponential" 			 	tag="clingo bounds" />
-		<setting name="flingo-bounds-linear"  	 	cmdline="-q --solver flingo --bounds=linear" 		  		 	tag="flingo bounds" />
-		<setting name="flingo-bounds-exponential" 	cmdline="-q --solver flingo --bounds=exponential" 			 	tag="flingo bounds" />
-		<setting name="multishot-linear" 	   		cmdline="-q --solver clingo --bounds=linear 	 --multishot" 	tag="clingo bounds multi" />
-		<setting name="multishot-exponential"  		cmdline="-q --solver clingo --bounds=exponential --multishot" 	tag="clingo bounds multi" />
+		<setting name="clingo-base"  							cmdline="-q --solver clingo --models=1 " 		  				tag="clingo basic" />
+		<setting name="flingo-base"  	    					cmdline="-q --solver flingo --models=1 " 		  				tag="flingo basic" />
+		<setting name="constraint-handler-base"  				cmdline="-q --solver constraint-handler --models=1 " 		  	tag="constraint-handler basic" />
+		<setting name="clingo-brave"    						cmdline="-q --solver clingo --enum-mode=brave"    				tag="clingo basic brave" />
+		<setting name="clingo-cautious" 						cmdline="-q --solver clingo --enum-mode=cautious" 				tag="clingo basic cautious" />
+		<setting name="clingo-bounds-linear"					cmdline="-q --solver clingo --bounds=linear" 		  		 	tag="clingo bounds" />
+		<setting name="clingo-bounds-exponential"				cmdline="-q --solver clingo --bounds=exponential" 			 	tag="clingo bounds" />
+		<setting name="flingo-bounds-linear"  	 				cmdline="-q --solver flingo --bounds=linear" 		  		 	tag="flingo bounds" />
+		<setting name="flingo-bounds-exponential" 				cmdline="-q --solver flingo --bounds=exponential" 			 	tag="flingo bounds" />
+		<setting name="constraint-handler-bounds-linear"		cmdline="-q --solver constraint-handler --bounds=linear" 		tag="constraint-handler bounds" />
+		<setting name="constraint-handler-bounds-exponential"	cmdline="-q --solver constraint-handler --bounds=exponential" 	tag="constraint-handler bounds" />
+		<setting name="multishot-linear" 	   					cmdline="-q --solver clingo --bounds=linear 	 --multishot" 	tag="clingo bounds multi" />
+		<setting name="multishot-exponential"  					cmdline="-q --solver clingo --bounds=exponential --multishot" 	tag="clingo bounds multi" />
     </system>
 
 	<seqjob name="seq-gen" timeout="10" runs="1" parallel="4"/>
