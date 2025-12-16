@@ -1,0 +1,6 @@
+set assemblyHeight[0] = 2500
+set passageHeight[0] = 2000
+set inputWidth[0] = 3500
+set length[0] = 2000
+
+set cover[0] = _AcrylStandardFremd

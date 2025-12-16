@@ -1,0 +1,74 @@
+// "Shadow Master" Blinds example
+// Provided by denkbares GmbH
+
+product {
+			num/mm 			assemblyHeight
+			num/mm			passageHeight
+			num.#/mm		inputWidth
+			num/mm			length
+			num.####/rad	inclination
+			num.#/mm		orderWidth
+			num.##/qm		area
+			num.##/kg		weight
+
+	0..1	Pole			poleLeft
+	0..1 	Pole			poleRight
+
+			Cover			cover // this feature alone makes the grounding large, discrete enumeration but depending on range of numeric attributes
+}
+
+
+structure Pole {
+	num.##/mm			height
+	num.##/mm 0-4000	distance
+	num.##/mm			overhang
+	PoleType			poleType
+}
+
+enumeration PoleType {
+	_Fixed
+	_HeightAdjustable
+	_DoublePole
+}
+
+enumeration Cover {
+	attribute	num/gramm	weight
+
+	_AcrylLumera		= (	   1495	)
+	_AcrylPerfora		= (	   1238	)
+	_AcrylAllWeather	= (	   2600	)
+	_AcrylStandardFremd	= (	    800	)
+	_AcrylUniQuer		= (	    599	)
+	_AcrylUniQuerFremd	= (	    673	)
+	_KombiAcryl			= (	   2598	)
+	_KombiSoltis		= (	   2293	)
+	_Satinee			= (	   1487	)
+	_Screen				= (	   2499	)
+}
+
+behavior Pole {
+	imply overhang = (root.inputWidth - distance)
+
+	imply height = (root.passageHeight + (tan(root.inclination) * overhang))
+
+	require overhang > 105
+
+	require distance < 4000
+
+	require height > 1000
+
+	require height < 3200
+
+	condition height > 2200
+	require poleType != _DoublePole
+}
+
+behavior {
+	imply inclination = atan(((125 - inputWidth) / ((assemblyHeight - 8.82) + (90 - passageHeight)))) + acos((48.4985 / sqrt(((((assemblyHeight - 8.82) + (90 - passageHeight)) ^ 2) + ((125 - inputWidth) ^ 2)))))
+
+	imply orderWidth = inputWidth + (tan(inclination) * 80)
+
+	imply area = length * (orderWidth / 1000000)
+
+	imply weight = area * (cover.weight / 1000)
+}
