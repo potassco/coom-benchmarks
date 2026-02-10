@@ -2,9 +2,9 @@
 
 	<machine name="laptop" cpu="IntelCoreUltra7-265Ux14" memory="32GB"/>
 
-	<config name="seq-generic" template="templates/seq-generic.sh"/>
+	<config name="coom-seq" template="templates/coom-seq.sh"/>
 
-	<system name="coomsuite" version="0.1" measures="clasp" config="seq-generic">
+	<system name="coomsuite" version="1.0.0" measures="clasp" config="coom-seq">
 		<setting name="clingo-base"  							cmdline="-q --solver clingo --models=1 " 		  				tag="clingo basic" />
 		<setting name="flingo-base"  	    					cmdline="-q --solver flingo --models=1 " 		  				tag="flingo basic" />
 		<setting name="constraint-handler-base"  				cmdline="-q --solver constraint-handler --models=1 " 		  	tag="constraint-handler basic" />
@@ -30,6 +30,8 @@
 		<folder path="benchmarks/travel-bike-fleet/instances">
 		</folder>
 		<folder path="benchmarks/restaurant/instances">
+		</folder>
+		<folder path="benchmarks/space-collider/models">
 		</folder>
 	</benchmark>
 

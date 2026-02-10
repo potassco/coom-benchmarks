@@ -1,4 +1,5 @@
-potassco-benchmark-tool @ git+https://github.com/potassco/benchmark-tool.git # @714df024867dc3508172c2fd3a11548c4c644732
+potassco-benchmark-tool@git+https://github.com/potassco/benchmark-tool@06039694aa546bc4cc5fb8292aaa7658a7531d01
+coomsuite
 matplotlib
 pandas
 pandas_ods_reader

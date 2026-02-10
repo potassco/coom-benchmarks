@@ -12,13 +12,6 @@ set -e
 # Load environment modules for your application here.
 source ~/.bashrc
 
-# eval "$(pyenv init -)"
-
-# eval "$(pyenv virtualenv-init -)"
-
-# conda activate coom
-
-
 # Run jobs
 jobs="{jobs}"
 echo running jobs@$(hostname)...

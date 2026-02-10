@@ -1,0 +1,1239 @@
+{
+    "Ship_Dog_Compact_Height": {
+        "Fusion_Reactor_Compact_Level": {
+            "Reading_Lamp_Luxury_Flavor": {
+                "Cookie_Oven_Shared_Sound": {
+                    "A_Fusion_Reactor_Compact_Vegan": "A_No",
+                    "A_Signal_Quarantine_Control_Assembly": "A_none",
+                    "@id": "$ref{Cookie_Oven_Shared_Sound:0}",
+                    "A_Adventure_Pool_Aux_Trigger": "A_none"
+                },
+                "@id": "$ref{Reading_Lamp_Luxury_Flavor:0}"
+            },
+            "@id": "$ref{Fusion_Reactor_Compact_Level:0}",
+            "Winter_Tire_Heavy_Sound": {
+                "Winter_Tire_Heavy_Tech": {
+                    "A_Makeup_Mirror_Shared_Position": "A_none",
+                    "@id": "$ref{Winter_Tire_Heavy_Tech:0}",
+                    "A_Hat_Stand_Luxury_Color": "A_none"
+                },
+                "Cookie_Oven_Shared_Level": {
+                    "A_Winter_Tire_Personal_Level": "A_none",
+                    "@id": "$ref{Cookie_Oven_Shared_Level:0}",
+                    "A_Ship_Dog_Compact_Flavor": "A_none",
+                    "A_Adventure_Pool_Aux_Height": "A_none"
+                },
+                "@id": "$ref{Winter_Tire_Heavy_Sound:0}"
+            },
+            "Hat_Stand_Shared_Scent": {
+                "Mouthwash_Aux_Level": {
+                    "A_Barf_Bag_Auto_Trigger": "A_none",
+                    "A_Makeup_Mirror_Luxury_Width": "A_none",
+                    "A_Alarm_System_Personal_Trigger": "A_none",
+                    "A_Waffle_Iron_Personal_Sound": "A_none",
+                    "@id": "$ref{Mouthwash_Aux_Level:0}",
+                    "A_Waffle_Iron_Luxury_Level": "A_none",
+                    "A_Ship_Dog_Aux_Color": "A_none"
+                },
+                "Cookie_Oven_Shared_Material": {
+                    "A_V_Belt_Heavy_Color": "A_Black",
+                    "A_Mouthwash_Personal_Tech": "A_Interstellar_Grade",
+                    "@id": "$ref{Cookie_Oven_Shared_Material:0}",
+                    "A_Alarm_System_Primary_Tech": "A_Interstellar_Grade"
+                },
+                "Hat_Stand_Shared_Width": {
+                    "A_Ship_Dog_Compact_Level": "A_none",
+                    "A_Dog_Leash_Compact_Material": "A_Obsidian_Glass",
+                    "A_Winter_Garden_Auto_Height": "A_none",
+                    "@id": "$ref{Hat_Stand_Shared_Width:0}",
+                    "A_Mouthwash_Shared_Position": "A_none",
+                    "A_Winter_Tire_Luxury_Flavor": "A_none"
+                },
+                "Reading_Lamp_Heavy_Trigger": {
+                    "A_Winter_Garden_Luxury_Vegan": "A_none",
+                    "@id": "$ref{Reading_Lamp_Heavy_Trigger:0}"
+                },
+                "@id": "$ref{Hat_Stand_Shared_Scent:0}",
+                "Winter_Tire_Heavy_Trigger": {
+                    "A_Door_Handle_Luxury_Material": "A_NanoCeramic",
+                    "@id": "$ref{Winter_Tire_Heavy_Trigger:0}",
+                    "A_Barf_Bag_Experimental_Width": "A_none"
+                }
+            },
+            "Reading_Lamp_Luxury_Scent": {
+                "@id": "$ref{Reading_Lamp_Luxury_Scent:0}",
+                "Reading_Lamp_Luxury_Sound": {
+                    "@id": "$ref{Reading_Lamp_Luxury_Sound:0}",
+                    "A_NoseHair_Trimmer_Auto_Trigger": "A_None"
+                }
+            }
+        },
+        "Mouthwash_Aux_Scent": {
+            "Reading_Lamp_Luxury_Tech": {
+                "@id": "$ref{Reading_Lamp_Luxury_Tech:0}",
+                "Range_Hood_Primary_Tech": {
+                    "A_Fusion_Reactor_Heavy_Color": "A_Solar_Orange",
+                    "A_V_Belt_Shared_Scent": "A_none",
+                    "A_Range_Hood_Aux_Color": "A_White",
+                    "A_NoseHair_Trimmer_Aux_Depth": "A_90cm",
+                    "A_Makeup_Mirror_Auto_Trigger": "A_None",
+                    "A_Fusion_Reactor_Aux_Trigger": "A_Standard",
+                    "@id": "$ref{Range_Hood_Primary_Tech:0}",
+                    "A_Barf_Bag_Compact_Position": "A_Magnetic_Mount",
+                    "A_Barf_Bag_Compact_Sound": "A_none",
+                    "A_Range_Hood_Personal_Scent": "A_Jasmine",
+                    "A_Cookie_Oven_Experimental_Width": "A_none"
+                }
+            },
+            "Winter_Tire_Personal_Material": {
+                "Winter_Tire_Primary_Depth": {
+                    "A_Adventure_Pool_Compact_Vegan": "A_Non_Vegan",
+                    "A_Dog_Leash_Aux_Position": "A_none",
+                    "@id": "$ref{Winter_Tire_Primary_Depth:0}"
+                },
+                "@id": "$ref{Winter_Tire_Personal_Material:0}",
+                "Winter_Tire_Personal_Trigger": {
+                    "A_Gravity_Field_Shared_Scent": "A_Ionized_Air",
+                    "A_Door_Handle_Experimental_Scent": "A_none",
+                    "@id": "$ref{Winter_Tire_Personal_Trigger:0}"
+                }
+            },
+            "Reading_Lamp_Personal_Level": {
+                "Reading_Lamp_Personal_Position": {
+                    "@id": "$ref{Reading_Lamp_Personal_Position:0}",
+                    "A_Dog_Leash_Experimental_Tech": "A_IonFlux_Defunctionator"
+                },
+                "@id": "$ref{Reading_Lamp_Personal_Level:0}"
+            },
+            "Fusion_Reactor_Compact_Scent": {
+                "Winter_Tire_Luxury_Position": {
+                    "A_Door_Handle_Shared_Position": "A_none",
+                    "@id": "$ref{Winter_Tire_Luxury_Position:0}",
+                    "A_Range_Hood_Aux_Tech": "A_none"
+                },
+                "Reading_Lamp_Compact_Sound": {
+                    "A_Adventure_Pool_Primary_Scent": "A_Jasmine",
+                    "A_Waffle_Iron_Heavy_Vegan": "A_Yes",
+                    "A_Barf_Bag_Primary_Material": "A_Stainless_Steel",
+                    "A_Barf_Bag_Personal_Depth": "A_none",
+                    "A_Door_Handle_Compact_Position": "A_none",
+                    "A_Winter_Garden_Aux_Vegan": "A_none",
+                    "A_Gravity_Field_Heavy_Material": "A_NanoCeramic",
+                    "A_Reading_Lamp_Compact_Tech": "A_Electro_Assisted",
+                    "A_NoseHair_Trimmer_Primary_Tech": "A_none",
+                    "A_Mouthwash_Heavy_Vegan": "A_No",
+                    "A_Alarm_System_Aux_Level": "A_Ultra",
+                    "A_V_Belt_Primary_Vegan": "A_No",
+                    "@id": "$ref{Reading_Lamp_Compact_Sound:0}"
+                },
+                "@id": "$ref{Fusion_Reactor_Compact_Scent:0}",
+                "Mouthwash_Experimental_Trigger": {
+                    "A_Range_Hood_Personal_Tech": "A_none",
+                    "A_Hat_Stand_Luxury_Level": "A_none",
+                    "A_Mouthwash_Shared_Scent": "A_none",
+                    "A_Barf_Bag_Heavy_Tech": "A_none",
+                    "A_Waffle_Iron_Auto_Flavor": "A_none",
+                    "@id": "$ref{Mouthwash_Experimental_Trigger:0}",
+                    "A_Winter_Tire_Compact_Scent": "A_none"
+                },
+                "Dog_Leash_Aux_Trigger": {
+                    "A_Waffle_Iron_Heavy_Sound": "A_none",
+                    "@id": "$ref{Dog_Leash_Aux_Trigger:0}",
+                    "A_Winter_Garden_Shared_Width": "A_none",
+                    "A_Reading_Lamp_Aux_Sound": "A_none"
+                }
+            },
+            "Dog_Leash_Auto_Sound": {
+                "Range_Hood_Shared_Level": {
+                    "A_Door_Handle_Shared_Color": "A_Black",
+                    "A_V_Belt_Compact_Flavor": "A_Rose",
+                    "A_Ship_Dog_Personal_Height": "A_50cm",
+                    "A_Alarm_System_Primary_Material": "A_none",
+                    "A_Cookie_Oven_Primary_Scent": "A_Pine_Fresh",
+                    "A_Winter_Garden_Luxury_Material": "A_none",
+                    "A_Winter_Tire_Auto_Sound": "A_none",
+                    "A_Fusion_Reactor_Compact_Trigger": "A_Existential",
+                    "A_Barf_Bag_Compact_Depth": "A_50cm",
+                    "A_Ship_Dog_Luxury_Vegan": "A_none",
+                    "@id": "$ref{Range_Hood_Shared_Level:0}"
+                },
+                "Reading_Lamp_Luxury_Trigger": {
+                    "A_Gravity_Field_Personal_Scent": "A_none",
+                    "@id": "$ref{Reading_Lamp_Luxury_Trigger:0}"
+                },
+                "@id": "$ref{Dog_Leash_Auto_Sound:0}",
+                "Dog_Leash_Auto_Trigger": {
+                    "@id": "$ref{Dog_Leash_Auto_Trigger:0}",
+                    "A_Waffle_Iron_Aux_Flavor": "A_Minty",
+                    "A_Fusion_Reactor_Heavy_Sound": "A_Buzzing",
+                    "A_Barf_Bag_Personal_Tech": "A_none"
+                }
+            },
+            "@id": "$ref{Mouthwash_Aux_Scent:0}",
+            "Makeup_Mirror_Auto_Depth": {
+                "NoseHair_Trimmer_Auto_Tech": {
+                    "A_V_Belt_Luxury_Vegan": "A_Non_Vegan",
+                    "A_Fusion_Reactor_Auto_Position": "A_Tilting",
+                    "A_Gravimetry_Survey_Telemetry_Controller": "A_SubspaceDepressurizerGravimetrySurveyTelemetryController",
+                    "A_Barf_Bag_Personal_Position": "A_Fixed",
+                    "A_Berthing_Command_Authorization_Router": "A_RuggedizedOptimizationBerthingCommandAuthorizationRouter",
+                    "A_Adventure_Pool_Primary_Level": "A_Ultra",
+                    "@id": "$ref{NoseHair_Trimmer_Auto_Tech:0}",
+                    "A_Barf_Bag_Personal_Scent": "A_Ionized_Air"
+                },
+                "NoseHair_Trimmer_Aux_Height": {
+                    "A_Cookie_Oven_Compact_Sound": "A_none",
+                    "A_Adventure_Pool_Aux_Width": "A_none",
+                    "A_Hat_Stand_Auto_Trigger": "A_Very_Low",
+                    "A_Additive_Manufacturing_Communications_Relay": "A_ResonantDust_ScreenAdditiveManufacturingCommunicationsRelay",
+                    "A_Gravity_Field_Aux_Trigger": "A_none",
+                    "@id": "$ref{NoseHair_Trimmer_Aux_Height:0}",
+                    "A_Winter_Garden_Compact_Vegan": "A_none",
+                    "A_EVA_Planning_Defense_Regulator": "A_none"
+                },
+                "Range_Hood_Auto_Scent": {
+                    "A_Ship_Dog_Heavy_Scent": "A_none",
+                    "A_Reading_Lamp_Experimental_Tech": "A_none",
+                    "A_Mouthwash_Primary_Position": "A_none",
+                    "A_Barf_Bag_Auto_Width": "A_none",
+                    "@id": "$ref{Range_Hood_Auto_Scent:0}",
+                    "A_Door_Handle_Primary_Scent": "A_none",
+                    "A_Gravity_Field_Auto_Position": "A_Floating",
+                    "A_Winter_Garden_Personal_Trigger": "A_none",
+                    "A_Adventure_Pool_Compact_Flavor": "A_Cedarwood"
+                },
+                "@id": "$ref{Makeup_Mirror_Auto_Depth:0}",
+                "NoseHair_Trimmer_Aux_Width": {
+                    "A_Makeup_Mirror_Shared_Sound": "A_none",
+                    "A_Reading_Lamp_Shared_Color": "A_Black",
+                    "A_V_Belt_Personal_Vegan": "A_No",
+                    "A_Hat_Stand_Personal_Height": "A_none",
+                    "A_Fusion_Reactor_Auto_Sound": "A_Whirring",
+                    "A_Ship_Dog_Luxury_Depth": "A_none",
+                    "@id": "$ref{NoseHair_Trimmer_Aux_Width:0}",
+                    "A_Hat_Stand_Personal_Vegan": "A_Non_Vegan"
+                },
+                "Range_Hood_Auto_Flavor": {
+                    "A_Alarm_System_Compact_Position": "A_Rotating",
+                    "A_Hat_Stand_Primary_Vegan": "A_Non_Vegan",
+                    "A_Door_Handle_Shared_Height": "A_30cm",
+                    "A_Hat_Stand_Primary_Width": "A_90cm",
+                    "A_Alarm_System_Personal_Scent": "A_Odorless",
+                    "A_NoseHair_Trimmer_Auto_Sound": "A_none",
+                    "@id": "$ref{Range_Hood_Auto_Flavor:0}",
+                    "A_Ship_Dog_Auto_Vegan": "A_Non_Vegan",
+                    "A_Barf_Bag_Heavy_Material": "A_NanoCeramic"
+                }
+            }
+        },
+        "Reading_Lamp_Aux_Position": {
+            "NoseHair_Trimmer_Auto_Scent": {
+                "A_Range_Hood_Shared_Flavor": "A_Synthetic_Strawberry",
+                "A_Range_Hood_Aux_Position": "A_Adjustable",
+                "A_Makeup_Mirror_Compact_Color": "A_Neon_Purple",
+                "A_Mouthwash_Aux_Position": "A_Auto_Align",
+                "A_Gravity_Field_Compact_Level": "A_Ultra",
+                "@id": "$ref{NoseHair_Trimmer_Auto_Scent:0}",
+                "A_Adventure_Pool_Luxury_Width": "A_25cm",
+                "A_Range_Hood_Heavy_Depth": "A_50cm"
+            },
+            "@id": "$ref{Reading_Lamp_Aux_Position:0}"
+        },
+        "Barf_Bag_Compact_Tech": {
+            "Mouthwash_Personal_Flavor": {
+                "Makeup_Mirror_Aux_Width": {
+                    "A_Mouthwash_Compact_Scent": "A_Lavender",
+                    "A_Gravity_Field_Primary_Depth": "A_30cm",
+                    "A_Alarm_System_Luxury_Level": "A_Extreme",
+                    "@id": "$ref{Makeup_Mirror_Aux_Width:0}",
+                    "A_Reading_Lamp_Primary_Trigger": "A_Existential",
+                    "A_Reading_Lamp_Compact_Level": "A_Very_Low"
+                },
+                "@id": "$ref{Mouthwash_Personal_Flavor:0}",
+                "Ship_Dog_Compact_Color": {
+                    "A_Mouthwash_Shared_Material": "A_Obsidian_Glass",
+                    "A_Makeup_Mirror_Auto_Color": "A_Matte_Black",
+                    "A_Makeup_Mirror_Heavy_Vegan": "A_Yes",
+                    "A_Mouthwash_Aux_Trigger": "A_Existential",
+                    "A_Fusion_Reactor_Personal_Width": "A_40cm",
+                    "A_Gravity_Field_Shared_Vegan": "A_No",
+                    "A_Hat_Stand_Auto_Depth": "A_90cm",
+                    "A_Gravity_Field_Auto_Vegan": "A_No",
+                    "A_Reading_Lamp_Personal_Flavor": "A_none",
+                    "A_Hat_Stand_Heavy_Color": "A_Red",
+                    "A_Mouthwash_Compact_Position": "A_Floating",
+                    "A_Fusion_Reactor_Luxury_Trigger": "A_Calm",
+                    "A_Range_Hood_Primary_Position": "A_none",
+                    "A_V_Belt_Heavy_Depth": "A_none",
+                    "@id": "$ref{Ship_Dog_Compact_Color:0}",
+                    "A_Fusion_Reactor_Personal_Sound": "A_Bass_Heavy",
+                    "A_Hat_Stand_Aux_Vegan": "A_Yes",
+                    "A_Makeup_Mirror_Heavy_Trigger": "A_Calm"
+                },
+                "Door_Handle_Aux_Flavor": {
+                    "A_Fusion_Reactor_Shared_Position": "A_Adjustable",
+                    "@id": "$ref{Door_Handle_Aux_Flavor:0}",
+                    "A_Alarm_System_Heavy_Position": "A_Auto_Align",
+                    "A_Reading_Lamp_Auto_Level": "A_Medium"
+                },
+                "Makeup_Mirror_Aux_Material": {
+                    "A_NoseHair_Trimmer_Heavy_Vegan": "A_Yes",
+                    "A_Mouthwash_Aux_Vegan": "A_Non_Vegan",
+                    "A_Gravity_Field_Primary_Material": "A_Titanium",
+                    "A_Makeup_Mirror_Personal_Vegan": "A_Vegan",
+                    "@id": "$ref{Makeup_Mirror_Aux_Material:0}",
+                    "A_Door_Handle_Heavy_Position": "A_Auto_Align"
+                },
+                "Ship_Dog_Experimental_Sound": {
+                    "A_Makeup_Mirror_Compact_Sound": "A_none",
+                    "A_Hat_Stand_Auto_Flavor": "A_none",
+                    "A_Adventure_Pool_Primary_Depth": "A_none",
+                    "A_Dog_Leash_Primary_Material": "A_none",
+                    "A_Ship_Dog_Primary_Trigger": "A_none",
+                    "A_Barf_Bag_Primary_Position": "A_none",
+                    "A_Gravity_Field_Aux_Position": "A_Adjustable",
+                    "A_Dog_Leash_Compact_Trigger": "A_none",
+                    "A_V_Belt_Aux_Color": "A_none",
+                    "A_Winter_Tire_Shared_Material": "A_Carbon_Fiber",
+                    "A_Fusion_Reactor_Luxury_Level": "A_none",
+                    "A_Alarm_System_Auto_Position": "A_none",
+                    "A_Dog_Leash_Compact_Width": "A_none",
+                    "A_NoseHair_Trimmer_Compact_Depth": "A_50cm",
+                    "A_Barf_Bag_Auto_Sound": "A_none",
+                    "@id": "$ref{Ship_Dog_Experimental_Sound:0}",
+                    "A_Winter_Tire_Shared_Vegan": "A_none",
+                    "A_Dog_Leash_Shared_Trigger": "A_none",
+                    "A_V_Belt_Primary_Material": "A_none",
+                    "A_V_Belt_Luxury_Material": "A_none"
+                },
+                "Hat_Stand_Compact_Width": {
+                    "A_Makeup_Mirror_Aux_Scent": "A_none",
+                    "@id": "$ref{Hat_Stand_Compact_Width:0}",
+                    "A_Adventure_Pool_Luxury_Tech": "A_none",
+                    "A_Gravity_Field_Auto_Material": "A_none",
+                    "A_Winter_Garden_Shared_Vegan": "A_none"
+                }
+            },
+            "Reading_Lamp_Primary_Tech": {
+                "Ship_Dog_Personal_Flavor": {
+                    "A_Adventure_Pool_Aux_Flavor": "A_none",
+                    "@id": "$ref{Ship_Dog_Personal_Flavor:0}"
+                },
+                "Ship_Dog_Luxury_Position": {
+                    "@id": "$ref{Ship_Dog_Luxury_Position:0}",
+                    "A_Hat_Stand_Personal_Width": "A_none"
+                },
+                "Ship_Dog_Luxury_Height": {
+                    "A_NoseHair_Trimmer_Primary_Color": "A_none",
+                    "@id": "$ref{Ship_Dog_Luxury_Height:0}"
+                },
+                "Ship_Dog_Heavy_Level": {
+                    "A_Door_Handle_Primary_Level": "A_none",
+                    "@id": "$ref{Ship_Dog_Heavy_Level:0}"
+                },
+                "Barf_Bag_Experimental_Tech": {
+                    "A_Fusion_Reactor_Personal_Level": "A_none",
+                    "@id": "$ref{Barf_Bag_Experimental_Tech:0}",
+                    "A_Door_Handle_Primary_Trigger": "A_none"
+                },
+                "Barf_Bag_Heavy_Depth": {
+                    "A_Mouthwash_Experimental_Tech": "A_none",
+                    "A_Adventure_Pool_Heavy_Height": "A_none",
+                    "@id": "$ref{Barf_Bag_Heavy_Depth:0}"
+                },
+                "Ship_Dog_Luxury_Tech": {
+                    "@id": "$ref{Ship_Dog_Luxury_Tech:0}",
+                    "A_V_Belt_Aux_Sound": "A_none"
+                },
+                "Barf_Bag_Experimental_Flavor": {
+                    "A_Reading_Lamp_Auto_Vegan": "A_none",
+                    "@id": "$ref{Barf_Bag_Experimental_Flavor:0}",
+                    "A_Mouthwash_Shared_Vegan": "A_none"
+                },
+                "Barf_Bag_Experimental_Level": {
+                    "A_Ship_Dog_Compact_Sound": "A_none",
+                    "@id": "$ref{Barf_Bag_Experimental_Level:0}",
+                    "A_Waffle_Iron_Shared_Vegan": "A_none"
+                },
+                "Mouthwash_Primary_Sound": {
+                    "A_Range_Hood_Experimental_Width": "A_none",
+                    "A_Waffle_Iron_Compact_Trigger": "A_none",
+                    "@id": "$ref{Mouthwash_Primary_Sound:0}",
+                    "A_Fusion_Reactor_Personal_Vegan": "A_none",
+                    "A_Reading_Lamp_Personal_Height": "A_none",
+                    "A_Mouthwash_Auto_Tech": "A_none",
+                    "A_Mouthwash_Aux_Color": "A_none"
+                },
+                "Ship_Dog_Luxury_Trigger": {
+                    "@id": "$ref{Ship_Dog_Luxury_Trigger:0}",
+                    "A_Range_Hood_Auto_Height": "A_none"
+                },
+                "Ship_Dog_Luxury_Color": {
+                    "@id": "$ref{Ship_Dog_Luxury_Color:0}",
+                    "A_Mouthwash_Compact_Width": "A_none"
+                },
+                "@id": "$ref{Reading_Lamp_Primary_Tech:0}",
+                "Mouthwash_Primary_Depth": {
+                    "A_Reading_Lamp_Aux_Flavor": "A_none",
+                    "A_Hat_Stand_Heavy_Flavor": "A_none",
+                    "A_Hat_Stand_Compact_Tech": "A_none",
+                    "A_Range_Hood_Primary_Material": "A_none",
+                    "A_Mouthwash_Primary_Vegan": "A_none",
+                    "@id": "$ref{Mouthwash_Primary_Depth:0}",
+                    "A_Range_Hood_Aux_Trigger": "A_none"
+                },
+                "Barf_Bag_Experimental_Depth": {
+                    "A_Door_Handle_Compact_Height": "A_none",
+                    "A_Hat_Stand_Compact_Material": "A_none",
+                    "@id": "$ref{Barf_Bag_Experimental_Depth:0}"
+                }
+            },
+            "@id": "$ref{Barf_Bag_Compact_Tech:0}"
+        },
+        "Makeup_Mirror_Auto_Level": {
+            "Winter_Tire_Primary_Position": {
+                "Mouthwash_Heavy_Height": {
+                    "A_Winter_Garden_Compact_Level": "A_High",
+                    "A_Waffle_Iron_Compact_Vegan": "A_none",
+                    "A_Gravity_Field_Shared_Color": "A_White",
+                    "A_Fusion_Reactor_Luxury_Scent": "A_Burnt_Ozone",
+                    "@id": "$ref{Mouthwash_Heavy_Height:0}",
+                    "A_Gravity_Field_Primary_Sound": "A_none",
+                    "A_Mouthwash_Personal_Trigger": "A_Noticeable"
+                },
+                "Dog_Leash_Luxury_Color": {
+                    "A_Waffle_Iron_Aux_Position": "A_none",
+                    "A_Cookie_Oven_Auto_Depth": "A_50cm",
+                    "@id": "$ref{Dog_Leash_Luxury_Color:0}",
+                    "A_Cookie_Oven_Aux_Depth": "A_none"
+                },
+                "@id": "$ref{Winter_Tire_Primary_Position:0}"
+            },
+            "Winter_Tire_Shared_Tech": {
+                "Dog_Leash_Luxury_Material": {
+                    "A_Dog_Leash_Heavy_Trigger": "A_None",
+                    "A_Hat_Stand_Primary_Flavor": "A_Synthetic_Strawberry",
+                    "@id": "$ref{Dog_Leash_Luxury_Material:0}",
+                    "A_Range_Hood_Primary_Height": "A_40cm"
+                },
+                "Makeup_Mirror_Auto_Sound": {
+                    "A_Winter_Tire_Aux_Sound": "A_Soft",
+                    "A_Fusion_Reactor_Heavy_Material": "A_none",
+                    "A_Dog_Leash_Luxury_Height": "A_none",
+                    "A_V_Belt_Personal_Depth": "A_none",
+                    "A_Reading_Lamp_Auto_Position": "A_Floating",
+                    "@id": "$ref{Makeup_Mirror_Auto_Sound:0}"
+                },
+                "@id": "$ref{Winter_Tire_Shared_Tech:0}"
+            },
+            "Reading_Lamp_Primary_Flavor": {
+                "@id": "$ref{Reading_Lamp_Primary_Flavor:0}",
+                "Winter_Tire_Shared_Trigger": {
+                    "A_Range_Hood_Auto_Sound": "A_none",
+                    "A_Waffle_Iron_Shared_Position": "A_none",
+                    "@id": "$ref{Winter_Tire_Shared_Trigger:0}"
+                }
+            },
+            "@id": "$ref{Makeup_Mirror_Auto_Level:0}",
+            "Mouthwash_Heavy_Material": {
+                "Winter_Tire_Shared_Depth": {
+                    "A_Fusion_Reactor_Aux_Position": "A_Tilting",
+                    "A_Range_Hood_Shared_Color": "A_Black",
+                    "@id": "$ref{Winter_Tire_Shared_Depth:0}"
+                },
+                "Reading_Lamp_Heavy_Level": {
+                    "A_Mouthwash_Shared_Color": "A_White",
+                    "A_Makeup_Mirror_Primary_Position": "A_Fixed",
+                    "A_Range_Hood_Experimental_Vegan": "A_none",
+                    "A_Dog_Leash_Luxury_Trigger": "A_none",
+                    "A_NoseHair_Trimmer_Auto_Vegan": "A_Vegan",
+                    "A_Fusion_Reactor_Aux_Vegan": "A_No",
+                    "A_Mouthwash_Auto_Flavor": "A_none",
+                    "A_Barf_Bag_Luxury_Position": "A_none",
+                    "A_Range_Hood_Aux_Height": "A_60cm",
+                    "@id": "$ref{Reading_Lamp_Heavy_Level:0}",
+                    "A_Mouthwash_Compact_Depth": "A_60cm",
+                    "A_Ship_Dog_Primary_Vegan": "A_Vegan",
+                    "A_Waffle_Iron_Aux_Vegan": "A_none"
+                },
+                "Winter_Tire_Shared_Flavor": {
+                    "A_Dog_Leash_Compact_Depth": "A_none",
+                    "@id": "$ref{Winter_Tire_Shared_Flavor:0}"
+                },
+                "Winter_Tire_Primary_Scent": {
+                    "A_Fusion_Reactor_Shared_Scent": "A_Jasmine",
+                    "A_Cookie_Oven_Personal_Scent": "A_Burnt_Ozone",
+                    "@id": "$ref{Winter_Tire_Primary_Scent:0}"
+                },
+                "@id": "$ref{Mouthwash_Heavy_Material:0}",
+                "Makeup_Mirror_Auto_Material": {
+                    "A_Ship_Dog_Aux_Tech": "A_none",
+                    "A_Mouthwash_Heavy_Position": "A_Floating",
+                    "A_Ship_Dog_Auto_Trigger": "A_none",
+                    "@id": "$ref{Makeup_Mirror_Auto_Material:0}",
+                    "A_Barf_Bag_Heavy_Position": "A_none",
+                    "A_Ship_Dog_Primary_Flavor": "A_Jasmine"
+                },
+                "Range_Hood_Aux_Level": {
+                    "A_Range_Hood_Shared_Width": "A_90cm",
+                    "A_Cookie_Oven_Compact_Vegan": "A_Animal_Derived",
+                    "A_Range_Hood_Primary_Color": "A_none",
+                    "A_Barf_Bag_Heavy_Scent": "A_Burnt_Ozone",
+                    "A_Alarm_System_Luxury_Trigger": "A_Neural_Optimized",
+                    "@id": "$ref{Range_Hood_Aux_Level:0}",
+                    "A_Barf_Bag_Heavy_Vegan": "A_Animal_Derived",
+                    "A_Alarm_System_Personal_Vegan": "A_Not_Cruelty_Free",
+                    "A_Winter_Garden_Primary_Vegan": "A_none"
+                }
+            },
+            "Dog_Leash_Heavy_Material": {
+                "Range_Hood_Aux_Depth": {
+                    "A_Ship_Dog_Primary_Depth": "A_120cm",
+                    "A_Waffle_Iron_Experimental_Vegan": "A_Yes",
+                    "A_Ship_Dog_Compact_Material": "A_Obsidian_Glass",
+                    "A_Hat_Stand_Heavy_Trigger": "A_none",
+                    "A_Range_Hood_Primary_Trigger": "A_Mild",
+                    "A_V_Belt_Luxury_Depth": "A_none",
+                    "@id": "$ref{Range_Hood_Aux_Depth:0}",
+                    "A_Barf_Bag_Luxury_Width": "A_30cm",
+                    "A_Hat_Stand_Experimental_Vegan": "A_Vegan"
+                },
+                "Mouthwash_Heavy_Color": {
+                    "A_Winter_Garden_Heavy_Depth": "A_none",
+                    "A_Barf_Bag_Aux_Position": "A_none",
+                    "A_Range_Hood_Personal_Vegan": "A_Yes",
+                    "@id": "$ref{Mouthwash_Heavy_Color:0}",
+                    "A_Ship_Dog_Compact_Trigger": "A_none",
+                    "A_V_Belt_Auto_Vegan": "A_none",
+                    "A_Hat_Stand_Experimental_Width": "A_none"
+                },
+                "@id": "$ref{Dog_Leash_Heavy_Material:0}",
+                "Fusion_Reactor_Compact_Tech": {
+                    "A_Range_Hood_Aux_Scent": "A_none",
+                    "A_Ship_Dog_Heavy_Position": "A_Auto_Align",
+                    "A_V_Belt_Primary_Scent": "A_Oceanic",
+                    "@id": "$ref{Fusion_Reactor_Compact_Tech:0}",
+                    "A_Ship_Dog_Compact_Tech": "A_AI_Assisted"
+                }
+            }
+        },
+        "Door_Handle_Compact_Depth": {
+            "Ship_Dog_Primary_Level": {
+                "Range_Hood_Experimental_Depth": {
+                    "A_Quantum_Comfort_Set": "A_Quantum_Polymer",
+                    "A_Dog_Leash_Heavy_Position": "A_Floating",
+                    "A_Cookie_Oven_Primary_Vegan": "A_Non_Vegan",
+                    "A_Cookie_Oven_Heavy_Scent": "A_Eucalyptus",
+                    "A_NoseHair_Trimmer_Luxury_Tech": "A_Mechanical",
+                    "A_Dog_Leash_Experimental_Vegan": "A_Plant_Based",
+                    "@id": "$ref{Range_Hood_Experimental_Depth:0}",
+                    "A_Interstellar_Style": "A_Black",
+                    "A_Cookie_Oven_Luxury_Depth": "A_20cm"
+                },
+                "@id": "$ref{Ship_Dog_Primary_Level:0}"
+            },
+            "Barf_Bag_Luxury_Color": {
+                "Reading_Lamp_Personal_Material": {
+                    "A_Adventure_Pool_Compact_Tech": "A_Standard",
+                    "A_Gravity_Field_Primary_Color": "A_Gloss_Black",
+                    "A_Mission_Role_Module": "A_Nano_CoatedPlanningAnalystforEVAPlanningMission",
+                    "A_Cookie_Oven_Auto_Scent": "A_Oceanic",
+                    "A_Alarm_System_Heavy_Color": "A_Yellow_Lilac_Speckled",
+                    "A_Alarm_System_Primary_Vegan": "A_Non_Vegan",
+                    "A_Waffle_Iron_Luxury_Material": "A_Quantum_Polymer",
+                    "A_Communications_EVA_Support_Calibrator": "A_Low_NoiseCommunicationsEVASupportSynchronizerCalibrator",
+                    "A_Stealth_Transit_Stabilizer": "A_Noise_CancelingLocalizationStealthTransitStabilizer",
+                    "A_Guidance_Optimization_Interface": "A_CryogenicParityGuidanceOptimizationInterface",
+                    "@id": "$ref{Reading_Lamp_Personal_Material:0}",
+                    "A_Guidance_Optimization_Telemetry_Cartridge": "A_AblativeComparatorGuidanceOptimizationTelemetryCartridge",
+                    "A_Power_Mission_Planning_Cartridge": "A_ModularConstructionPowerMissionPlanningCartridge",
+                    "A_Guidance_Life_Support_Relay": "A_Time_SyncedGuidanceLifeSupportPlanningRelay"
+                },
+                "@id": "$ref{Barf_Bag_Luxury_Color:0}",
+                "Makeup_Mirror_Compact_Height": {
+                    "A_Mapping_Interpreter_Assembly": "A_Dark_MatterMappingInterpreterInterfaceAssembly",
+                    "A_Dog_Leash_Personal_Flavor": "A_Vanilla",
+                    "A_Adventure_Pool_Compact_Depth": "A_20cm",
+                    "A_Adventure_Pool_Compact_Level": "A_Boosted",
+                    "@id": "$ref{Makeup_Mirror_Compact_Height:0}",
+                    "A_Cookie_Oven_Heavy_Position": "A_Adjustable"
+                }
+            },
+            "@id": "$ref{Door_Handle_Compact_Depth:0}",
+            "Ship_Dog_Personal_Position": {
+                "Door_Handle_Compact_Material": {
+                    "A_Alarm_System_Compact_Tech": "A_AI_Assisted",
+                    "A_Winter_Garden_Compact_Position": "A_Fixed",
+                    "A_Core_System_Mood": "A_Deluxe",
+                    "@id": "$ref{Door_Handle_Compact_Material:0}"
+                },
+                "@id": "$ref{Ship_Dog_Personal_Position:0}"
+            }
+        },
+        "Fusion_Reactor_Personal_Depth": {
+            "Alarm_System_Auto_Tech": {
+                "@id": "$ref{Alarm_System_Auto_Tech:0}",
+                "Mouthwash_Heavy_Scent": {
+                    "A_Waffle_Iron_Personal_Flavor": "A_Citrus",
+                    "A_Hat_Stand_Luxury_Depth": "A_20cm",
+                    "A_Fusion_Reactor_Primary_Vegan": "A_No",
+                    "A_NoseHair_Trimmer_Personal_Tech": "A_Galactic_Grade",
+                    "A_Winter_Tire_Compact_Material": "A_Titanium",
+                    "@id": "$ref{Mouthwash_Heavy_Scent:0}",
+                    "A_Makeup_Mirror_Shared_Trigger": "A_Mild"
+                },
+                "Dog_Leash_Personal_Scent": {
+                    "A_Makeup_Mirror_Compact_Vegan": "A_Yes",
+                    "@id": "$ref{Dog_Leash_Personal_Scent:0}",
+                    "A_Alarm_System_Shared_Level": "A_High",
+                    "A_Range_Hood_Compact_Width": "A_none"
+                }
+            },
+            "Ship_Dog_Auto_Depth": {
+                "Dog_Leash_Primary_Flavor": {
+                    "A_Winter_Tire_Compact_Height": "A_90cm",
+                    "A_Alarm_System_Personal_Sound": "A_Gurgling",
+                    "@id": "$ref{Dog_Leash_Primary_Flavor:0}",
+                    "A_Alarm_System_Auto_Flavor": "A_Citrus"
+                },
+                "@id": "$ref{Ship_Dog_Auto_Depth:0}"
+            },
+            "Dog_Leash_Primary_Level": {
+                "Fusion_Reactor_Primary_Depth": {
+                    "A_V_Belt_Heavy_Vegan": "A_none",
+                    "A_Waffle_Iron_Heavy_Level": "A_none",
+                    "A_V_Belt_Shared_Position": "A_none",
+                    "@id": "$ref{Fusion_Reactor_Primary_Depth:0}",
+                    "A_Cookie_Oven_Experimental_Vegan": "A_Yes"
+                },
+                "Mouthwash_Luxury_Depth": {
+                    "A_Makeup_Mirror_Auto_Position": "A_none",
+                    "A_Cookie_Oven_Aux_Vegan": "A_Vegan",
+                    "A_Dog_Leash_Auto_Vegan": "A_Animal_Derived",
+                    "A_Mouthwash_Heavy_Level": "A_none",
+                    "A_Mouthwash_Compact_Vegan": "A_Vegan",
+                    "@id": "$ref{Mouthwash_Luxury_Depth:0}",
+                    "A_Barf_Bag_Primary_Sound": "A_Chiming"
+                },
+                "@id": "$ref{Dog_Leash_Primary_Level:0}",
+                "NoseHair_Trimmer_Heavy_Flavor": {
+                    "A_Adventure_Pool_Primary_Width": "A_45cm",
+                    "A_Fusion_Reactor_Heavy_Scent": "A_none",
+                    "A_Ice_Mining_Maintenance_Regulator": "A_DeflectiveAssemblerIceMiningMaintenanceRegulator",
+                    "A_Waffle_Iron_Personal_Tech": "A_none",
+                    "@id": "$ref{NoseHair_Trimmer_Heavy_Flavor:0}",
+                    "A_Waffle_Iron_Primary_Vegan": "A_none",
+                    "A_Makeup_Mirror_Luxury_Position": "A_Floating",
+                    "A_Winter_Garden_Shared_Trigger": "A_none"
+                }
+            },
+            "@id": "$ref{Fusion_Reactor_Personal_Depth:0}",
+            "Reading_Lamp_Shared_Trigger": {
+                "Dog_Leash_Personal_Color": {
+                    "A_Waffle_Iron_Personal_Position": "A_none",
+                    "@id": "$ref{Dog_Leash_Personal_Color:0}",
+                    "A_Door_Handle_Aux_Level": "A_none",
+                    "A_Alarm_System_Auto_Height": "A_none"
+                },
+                "@id": "$ref{Reading_Lamp_Shared_Trigger:0}"
+            }
+        },
+        "Range_Hood_Personal_Sound": {
+            "A_Cookie_Oven_Auto_Level": "A_Ultra",
+            "A_Cookie_Oven_Auto_Position": "A_Auto_Align",
+            "A_Gravity_Field_Auto_Flavor": "A_Synthetic_Strawberry",
+            "A_Dog_Leash_Heavy_Tech": "A_Interstellar_Grade",
+            "A_NoseHair_Trimmer_Aux_Scent": "A_Lavender",
+            "A_Dog_Leash_Aux_Scent": "A_Burnt_Ozone",
+            "A_Cookie_Oven_Auto_Color": "A_Yellow_Lilac_Speckled",
+            "@id": "$ref{Range_Hood_Personal_Sound:0}",
+            "A_Dog_Leash_Auto_Flavor": "A_Void",
+            "A_Hat_Stand_Personal_Level": "A_Medium"
+        },
+        "Cookie_Oven_Primary_Material": {
+            "Reading_Lamp_Aux_Color": {
+                "A_NoseHair_Trimmer_Luxury_Level": "A_Deluxe",
+                "@id": "$ref{Reading_Lamp_Aux_Color:0}"
+            },
+            "Reading_Lamp_Auto_Sound": {
+                "@id": "$ref{Reading_Lamp_Auto_Sound:0}",
+                "A_Makeup_Mirror_Shared_Height": "A_180cm"
+            },
+            "Reading_Lamp_Aux_Height": {
+                "@id": "$ref{Reading_Lamp_Aux_Height:0}",
+                "A_Gravity_Field_Shared_Depth": "180cm"
+            },
+            "@id": "$ref{Cookie_Oven_Primary_Material:0}"
+        },
+        "Winter_Tire_Compact_Level": {
+            "Cookie_Oven_Primary_Trigger": {
+                "Reading_Lamp_Heavy_Tech": {
+                    "A_Gravity_Field_Compact_Position": "A_Tilting",
+                    "@id": "$ref{Reading_Lamp_Heavy_Tech:0}"
+                },
+                "Cookie_Oven_Shared_Depth": {
+                    "A_Door_Handle_Aux_Position": "A_none",
+                    "A_Dog_Leash_Luxury_Position": "A_Swiveling",
+                    "A_V_Belt_Heavy_Level": "A_none",
+                    "@id": "$ref{Cookie_Oven_Shared_Depth:0}"
+                },
+                "@id": "$ref{Cookie_Oven_Primary_Trigger:0}",
+                "Winter_Tire_Experimental_Depth": {
+                    "A_Waffle_Iron_Aux_Trigger": "A_Mild",
+                    "@id": "$ref{Winter_Tire_Experimental_Depth:0}",
+                    "A_V_Belt_Aux_Vegan": "A_none"
+                }
+            },
+            "@id": "$ref{Winter_Tire_Compact_Level:0}",
+            "Winter_Tire_Heavy_Height": {
+                "Mouthwash_Aux_Height": {
+                    "A_Adventure_Pool_Aux_Scent": "A_Odorless",
+                    "A_Adventure_Pool_Aux_Level": "A_Low",
+                    "@id": "$ref{Mouthwash_Aux_Height:0}",
+                    "A_Door_Handle_Aux_Material": "A_BioPlasteel"
+                },
+                "Ship_Dog_Aux_Trigger": {
+                    "A_Adventure_Pool_Aux_Material": "A_Porcelain",
+                    "A_Dog_Leash_Aux_Flavor": "A_none",
+                    "A_Dog_Leash_Auto_Level": "A_none",
+                    "@id": "$ref{Ship_Dog_Aux_Trigger:0}",
+                    "A_Ship_Dog_Aux_Sound": "A_Quantum_Chirp"
+                },
+                "@id": "$ref{Winter_Tire_Heavy_Height:0}"
+            }
+        },
+        "Ship_Dog_Primary_Position": {
+            "Barf_Bag_Luxury_Depth": {
+                "Ship_Dog_Primary_Sound": {
+                    "A_Cookie_Oven_Heavy_Trigger": "A_Standard",
+                    "@id": "$ref{Ship_Dog_Primary_Sound:0}"
+                },
+                "@id": "$ref{Barf_Bag_Luxury_Depth:0}",
+                "Barf_Bag_Luxury_Level": {
+                    "A_Habitat_Hygiene_Module": "A_BiostaticHabitatHygieneUnitModule",
+                    "A_Alarm_System_Auto_Color": "A_Arctic_White",
+                    "@id": "$ref{Barf_Bag_Luxury_Level:0}"
+                }
+            },
+            "@id": "$ref{Ship_Dog_Primary_Position:0}"
+        },
+        "NoseHair_Trimmer_Shared_Depth": {
+            "Barf_Bag_Compact_Color": {
+                "Ship_Dog_Heavy_Tech": {
+                    "A_Fusion_Reactor_Aux_Width": "A_none",
+                    "A_Door_Handle_Auto_Position": "A_none",
+                    "A_Makeup_Mirror_Auto_Vegan": "A_none",
+                    "A_Waffle_Iron_Compact_Depth": "A_none",
+                    "A_Cookie_Oven_Aux_Position": "A_none",
+                    "A_Fusion_Reactor_Auto_Level": "A_Very_Low",
+                    "A_Dog_Leash_Aux_Width": "A_none",
+                    "A_Door_Handle_Auto_Material": "A_none",
+                    "A_Barf_Bag_Compact_Height": "A_180cm",
+                    "A_Barf_Bag_Auto_Position": "A_none",
+                    "A_Cookie_Oven_Heavy_Color": "A_none",
+                    "A_Cookie_Oven_Personal_Width": "A_none",
+                    "A_Winter_Garden_Aux_Level": "A_none",
+                    "A_Fusion_Reactor_Compact_Flavor": "A_Void",
+                    "A_Fusion_Reactor_Auto_Vegan": "A_none",
+                    "@id": "$ref{Ship_Dog_Heavy_Tech:0}",
+                    "A_Barf_Bag_Personal_Vegan": "A_No",
+                    "A_Ship_Dog_Personal_Width": "A_none",
+                    "A_Winter_Tire_Aux_Height": "A_none",
+                    "A_Range_Hood_Compact_Scent": "A_none",
+                    "A_Makeup_Mirror_Personal_Trigger": "A_none",
+                    "A_Hat_Stand_Personal_Trigger": "A_none",
+                    "A_Alarm_System_Primary_Depth": "A_120cm",
+                    "A_Winter_Garden_Heavy_Tech": "A_IonFlux_Defunctionator",
+                    "A_Reading_Lamp_Auto_Tech": "A_none",
+                    "A_Makeup_Mirror_Aux_Position": "A_none",
+                    "A_Ship_Dog_Experimental_Vegan": "A_No",
+                    "A_Cookie_Oven_Heavy_Material": "A_none",
+                    "A_Dog_Leash_Experimental_Sound": "A_none",
+                    "A_Door_Handle_Primary_Height": "A_none",
+                    "A_Fusion_Reactor_Heavy_Level": "A_none",
+                    "A_Barf_Bag_Shared_Position": "A_Locking",
+                    "A_Fusion_Reactor_Luxury_Tech": "A_Mechanical"
+                },
+                "@id": "$ref{Barf_Bag_Compact_Color:0}",
+                "Reading_Lamp_Personal_Depth": {
+                    "A_Alarm_System_Aux_Width": "A_none",
+                    "A_Range_Hood_Heavy_Material": "A_none",
+                    "A_Gravity_Field_Heavy_Position": "A_none",
+                    "A_Dog_Leash_Primary_Tech": "A_none",
+                    "A_Cookie_Oven_Auto_Vegan": "A_none",
+                    "A_Door_Handle_Compact_Vegan": "A_none",
+                    "A_Barf_Bag_Luxury_Vegan": "A_Non_Vegan",
+                    "A_NoseHair_Trimmer_Primary_Vegan": "A_none",
+                    "A_Gravity_Field_Compact_Depth": "A_none",
+                    "A_Cookie_Oven_Aux_Tech": "A_Mechanical",
+                    "A_Waffle_Iron_Shared_Sound": "A_none",
+                    "@id": "$ref{Reading_Lamp_Personal_Depth:0}",
+                    "A_Door_Handle_Shared_Scent": "A_none",
+                    "A_Waffle_Iron_Heavy_Position": "A_none"
+                }
+            },
+            "Ship_Dog_Heavy_Depth": {
+                "@id": "$ref{Ship_Dog_Heavy_Depth:0}",
+                "Barf_Bag_Aux_Color": {
+                    "A_Mouthwash_Auto_Position": "A_none",
+                    "@id": "$ref{Barf_Bag_Aux_Color:0}",
+                    "A_Cookie_Oven_Personal_Trigger": "A_Mild"
+                }
+            },
+            "@id": "$ref{NoseHair_Trimmer_Shared_Depth:0}",
+            "Door_Handle_Auto_Width": {
+                "Ship_Dog_Compact_Depth": {
+                    "@id": "$ref{Ship_Dog_Compact_Depth:0}",
+                    "A_NoseHair_Trimmer_Luxury_Scent": "A_none"
+                },
+                "@id": "$ref{Door_Handle_Auto_Width:0}",
+                "Hat_Stand_Compact_Trigger": {
+                    "A_Ship_Dog_Auto_Material": "A_none",
+                    "A_Barf_Bag_Aux_Width": "A_none",
+                    "@id": "$ref{Hat_Stand_Compact_Trigger:0}",
+                    "A_Makeup_Mirror_Luxury_Flavor": "A_none",
+                    "A_Barf_Bag_Auto_Level": "A_none"
+                },
+                "Alarm_System_Personal_Tech": {
+                    "A_Mouthwash_Luxury_Vegan": "A_none",
+                    "@id": "$ref{Alarm_System_Personal_Tech:0}",
+                    "A_Door_Handle_Heavy_Level": "A_Deluxe"
+                }
+            },
+            "Ship_Dog_Experimental_Depth": {
+                "Alarm_System_Primary_Color": {
+                    "A_Fusion_Reactor_Compact_Depth": "A_180cm",
+                    "@id": "$ref{Alarm_System_Primary_Color:0}",
+                    "A_V_Belt_Auto_Material": "A_none"
+                },
+                "@id": "$ref{Ship_Dog_Experimental_Depth:0}"
+            },
+            "Ship_Dog_Experimental_Flavor": {
+                "Alarm_System_Primary_Height": {
+                    "A_Alarm_System_Aux_Material": "A_none",
+                    "@id": "$ref{Alarm_System_Primary_Height:0}",
+                    "A_Gravity_Field_Primary_Level": "A_none"
+                },
+                "@id": "$ref{Ship_Dog_Experimental_Flavor:0}"
+            },
+            "Barf_Bag_Auto_Color": {
+                "@id": "$ref{Barf_Bag_Auto_Color:0}",
+                "Barf_Bag_Auto_Flavor": {
+                    "A_Reading_Lamp_Shared_Scent": "A_none",
+                    "A_Gravity_Field_Auto_Trigger": "A_None",
+                    "@id": "$ref{Barf_Bag_Auto_Flavor:0}"
+                },
+                "Door_Handle_Aux_Depth": {
+                    "A_V_Belt_Experimental_Flavor": "A_Vanilla",
+                    "A_V_Belt_Compact_Width": "A_10cm",
+                    "@id": "$ref{Door_Handle_Aux_Depth:0}",
+                    "A_Waffle_Iron_Shared_Depth": "A_none"
+                }
+            },
+            "Alarm_System_Shared_Scent": {
+                "Ship_Dog_Experimental_Height": {
+                    "A_Alarm_System_Luxury_Position": "A_none",
+                    "@id": "$ref{Ship_Dog_Experimental_Height:0}"
+                },
+                "Alarm_System_Shared_Tech": {
+                    "A_Door_Handle_Aux_Vegan": "A_Vegan",
+                    "@id": "$ref{Alarm_System_Shared_Tech:0}",
+                    "A_Cookie_Oven_Primary_Sound": "A_none"
+                },
+                "@id": "$ref{Alarm_System_Shared_Scent:0}"
+            }
+        },
+        "Dog_Leash_Luxury_Scent": {
+            "Fusion_Reactor_Heavy_Tech": {
+                "Reading_Lamp_Luxury_Depth": {
+                    "A_Reading_Lamp_Compact_Scent": "A_Jasmine",
+                    "A_Adventure_Pool_Compact_Trigger": "A_Very_High",
+                    "A_Makeup_Mirror_Auto_Tech": "A_none",
+                    "A_Winter_Garden_Primary_Trigger": "A_Noticeable",
+                    "A_Door_Handle_Auto_Vegan": "A_none",
+                    "A_Door_Handle_Luxury_Flavor": "A_none",
+                    "A_Gravity_Field_Heavy_Depth": "A_180cm",
+                    "A_Hat_Stand_Heavy_Vegan": "A_Non_Vegan",
+                    "A_Dog_Leash_Experimental_Scent": "A_Pine_Fresh",
+                    "A_Gravity_Field_Primary_Position": "A_none",
+                    "A_Ship_Dog_Primary_Height": "A_30cm",
+                    "@id": "$ref{Reading_Lamp_Luxury_Depth:0}",
+                    "A_Mouthwash_Auto_Scent": "A_Ionized_Air",
+                    "A_Mouthwash_Primary_Scent": "A_Ionized_Air"
+                },
+                "Dog_Leash_Luxury_Sound": {
+                    "A_Ship_Dog_Personal_Trigger": "A_Very_Low",
+                    "@id": "$ref{Dog_Leash_Luxury_Sound:0}",
+                    "A_Gravity_Field_Luxury_Flavor": "A_none",
+                    "A_Hat_Stand_Aux_Material": "A_Obsidian_Glass"
+                },
+                "Reading_Lamp_Primary_Sound": {
+                    "A_NoseHair_Trimmer_Luxury_Vegan": "A_none",
+                    "@id": "$ref{Reading_Lamp_Primary_Sound:0}"
+                },
+                "@id": "$ref{Fusion_Reactor_Heavy_Tech:0}",
+                "Fusion_Reactor_Heavy_Trigger": {
+                    "A_Waffle_Iron_Primary_Width": "A_120cm",
+                    "A_Mouthwash_Heavy_Depth": "A_none",
+                    "A_Makeup_Mirror_Aux_Flavor": "A_Synthetic_Strawberry",
+                    "@id": "$ref{Fusion_Reactor_Heavy_Trigger:0}",
+                    "A_Hat_Stand_Shared_Trigger": "A_none"
+                }
+            },
+            "@id": "$ref{Dog_Leash_Luxury_Scent:0}",
+            "Winter_Tire_Shared_Width": {
+                "NoseHair_Trimmer_Compact_Color": {
+                    "A_Mouthwash_Experimental_Level": "A_Deluxe",
+                    "A_Cookie_Oven_Primary_Tech": "A_Quantum_Enhanced",
+                    "A_Fusion_Reactor_Personal_Scent": "A_Ionized_Air",
+                    "A_Range_Hood_Heavy_Sound": "A_Quantum_Chirp",
+                    "@id": "$ref{NoseHair_Trimmer_Compact_Color:0}",
+                    "A_Dog_Leash_Experimental_Height": "A_40cm",
+                    "A_Adventure_Pool_Luxury_Color": "A_Green",
+                    "A_Dog_Leash_Personal_Sound": "A_Soft"
+                },
+                "Reading_Lamp_Shared_Height": {
+                    "A_Door_Handle_Luxury_Trigger": "A_none",
+                    "@id": "$ref{Reading_Lamp_Shared_Height:0}"
+                },
+                "@id": "$ref{Winter_Tire_Shared_Width:0}"
+            },
+            "Reading_Lamp_Shared_Position": {
+                "Alarm_System_Auto_Depth": {
+                    "A_Gravity_Field_Personal_Flavor": "A_none",
+                    "@id": "$ref{Alarm_System_Auto_Depth:0}",
+                    "A_Winter_Tire_Shared_Position": "A_none"
+                },
+                "@id": "$ref{Reading_Lamp_Shared_Position:0}"
+            }
+        },
+        "NoseHair_Trimmer_Heavy_Level": {
+            "Ship_Dog_Aux_Width": {
+                "Fusion_Reactor_Shared_Trigger": {
+                    "A_Reading_Lamp_Compact_Height": "A_none",
+                    "A_Winter_Garden_Compact_Sound": "A_none",
+                    "A_Winter_Garden_Aux_Position": "A_none",
+                    "A_Makeup_Mirror_Aux_Trigger": "A_Intense",
+                    "@id": "$ref{Fusion_Reactor_Shared_Trigger:0}"
+                },
+                "Gravity_Field_Aux_Flavor": {
+                    "A_V_Belt_Auto_Level": "A_none",
+                    "A_Reading_Lamp_Compact_Position": "A_none",
+                    "A_Winter_Garden_Heavy_Position": "A_none",
+                    "A_NoseHair_Trimmer_Compact_Vegan": "A_Plant_Based",
+                    "@id": "$ref{Gravity_Field_Aux_Flavor:0}"
+                },
+                "Range_Hood_Compact_Depth": {
+                    "A_Makeup_Mirror_Compact_Trigger": "A_Enabled",
+                    "A_Gravity_Field_Aux_Sound": "A_Bass_Heavy",
+                    "A_Mouthwash_Experimental_Vegan": "A_No",
+                    "A_Winter_Tire_Luxury_Vegan": "A_none",
+                    "@id": "$ref{Range_Hood_Compact_Depth:0}",
+                    "A_NoseHair_Trimmer_Shared_Width": "A_none",
+                    "A_Makeup_Mirror_Compact_Depth": "A_none",
+                    "A_Gravity_Field_Primary_Vegan": "A_No",
+                    "A_Hat_Stand_Aux_Position": "A_none"
+                },
+                "Gravity_Field_Luxury_Scent": {
+                    "A_Winter_Garden_Heavy_Vegan": "A_none",
+                    "A_NoseHair_Trimmer_Shared_Tech": "A_Neural_Optimized",
+                    "A_V_Belt_Luxury_Height": "A_none",
+                    "@id": "$ref{Gravity_Field_Luxury_Scent:0}",
+                    "A_Winter_Garden_Shared_Flavor": "A_none"
+                },
+                "Gravity_Field_Compact_Height": {
+                    "A_Winter_Garden_Compact_Height": "A_none",
+                    "A_Hat_Stand_Luxury_Position": "A_Auto_Align",
+                    "A_Winter_Garden_Compact_Material": "A_none",
+                    "A_Winter_Tire_Auto_Level": "A_none",
+                    "@id": "$ref{Gravity_Field_Compact_Height:0}"
+                },
+                "Mouthwash_Luxury_Width": {
+                    "A_V_Belt_Shared_Material": "A_none",
+                    "A_Gravity_Field_Compact_Material": "A_none",
+                    "A_Winter_Garden_Aux_Scent": "A_none",
+                    "A_Waffle_Iron_Personal_Vegan": "A_none",
+                    "@id": "$ref{Mouthwash_Luxury_Width:0}",
+                    "A_Winter_Garden_Heavy_Trigger": "A_none",
+                    "A_Waffle_Iron_Luxury_Vegan": "A_none"
+                },
+                "Dog_Leash_Shared_Material": {
+                    "A_Door_Handle_Aux_Width": "A_none",
+                    "A_Barf_Bag_Heavy_Trigger": "A_none",
+                    "@id": "$ref{Dog_Leash_Shared_Material:0}",
+                    "A_Hat_Stand_Experimental_Trigger": "A_none"
+                },
+                "Alarm_System_Compact_Trigger": {
+                    "A_Winter_Garden_Compact_Depth": "A_none",
+                    "A_Gravity_Field_Personal_Height": "A_none",
+                    "@id": "$ref{Alarm_System_Compact_Trigger:0}"
+                },
+                "Mouthwash_Luxury_Flavor": {
+                    "A_Ship_Dog_Heavy_Vegan": "A_none",
+                    "A_Range_Hood_Shared_Vegan": "A_none",
+                    "A_Reading_Lamp_Luxury_Vegan": "A_none",
+                    "A_Range_Hood_Experimental_Level": "A_none",
+                    "@id": "$ref{Mouthwash_Luxury_Flavor:0}",
+                    "A_Waffle_Iron_Primary_Tech": "A_Electro_Assisted",
+                    "A_Reading_Lamp_Aux_Vegan": "A_none"
+                },
+                "Fusion_Reactor_Primary_Height": {
+                    "A_Dog_Leash_Compact_Level": "A_Ultra",
+                    "A_Dog_Leash_Experimental_Depth": "A_60cm",
+                    "A_Mouthwash_Personal_Position": "A_Adjustable",
+                    "@id": "$ref{Fusion_Reactor_Primary_Height:0}",
+                    "A_Reading_Lamp_Aux_Width": "A_40cm"
+                },
+                "Alarm_System_Experimental_Tech": {
+                    "A_Door_Handle_Compact_Scent": "A_none",
+                    "A_Dog_Leash_Personal_Material": "A_none",
+                    "@id": "$ref{Alarm_System_Experimental_Tech:0}"
+                },
+                "Alarm_System_Heavy_Depth": {
+                    "A_Range_Hood_Auto_Material": "A_Titanium",
+                    "@id": "$ref{Alarm_System_Heavy_Depth:0}",
+                    "A_Winter_Tire_Experimental_Width": "A_30cm"
+                },
+                "Gravity_Field_Compact_Flavor": {
+                    "A_Cookie_Oven_Luxury_Width": "A_none",
+                    "A_Gravity_Field_Auto_Width": "A_none",
+                    "A_Dog_Leash_Luxury_Width": "A_180cm",
+                    "A_Reading_Lamp_Primary_Scent": "A_none",
+                    "@id": "$ref{Gravity_Field_Compact_Flavor:0}"
+                },
+                "NoseHair_Trimmer_Luxury_Color": {
+                    "A_Cookie_Oven_Shared_Vegan": "A_Animal_Derived",
+                    "A_Range_Hood_Auto_Vegan": "A_none",
+                    "A_Ship_Dog_Personal_Level": "A_none",
+                    "A_Cookie_Oven_Compact_Material": "A_Brushed_Aluminum",
+                    "A_Ship_Dog_Shared_Tech": "A_IonFlux_Defunctionator",
+                    "@id": "$ref{NoseHair_Trimmer_Luxury_Color:0}",
+                    "A_Winter_Tire_Compact_Width": "A_none",
+                    "A_Cookie_Oven_Shared_Trigger": "A_Mild"
+                },
+                "@id": "$ref{Ship_Dog_Aux_Width:0}",
+                "Gravity_Field_Auto_Height": {
+                    "A_Waffle_Iron_Personal_Height": "A_none",
+                    "A_Makeup_Mirror_Compact_Flavor": "A_none",
+                    "A_Gravity_Field_Aux_Level": "A_High",
+                    "A_Reading_Lamp_Luxury_Level": "A_none",
+                    "@id": "$ref{Gravity_Field_Auto_Height:0}"
+                },
+                "Makeup_Mirror_Aux_Level": {
+                    "A_Alarm_System_Heavy_Scent": "A_Burnt_Ozone",
+                    "A_Winter_Tire_Aux_Level": "A_none",
+                    "A_Makeup_Mirror_Luxury_Depth": "A_none",
+                    "A_Winter_Tire_Personal_Flavor": "A_none",
+                    "@id": "$ref{Makeup_Mirror_Aux_Level:0}",
+                    "A_Barf_Bag_Luxury_Sound": "A_none"
+                },
+                "Gravity_Field_Heavy_Sound": {
+                    "A_Door_Handle_Auto_Level": "A_none",
+                    "A_Mouthwash_Compact_Flavor": "A_Neutral",
+                    "@id": "$ref{Gravity_Field_Heavy_Sound:0}",
+                    "A_Fusion_Reactor_Compact_Width": "A_none",
+                    "A_Ship_Dog_Auto_Position": "A_none"
+                }
+            },
+            "Alarm_System_Heavy_Trigger": {
+                "Ship_Dog_Auto_Height": {
+                    "A_Reading_Lamp_Personal_Color": "A_Yellow_Lilac_Speckled",
+                    "@id": "$ref{Ship_Dog_Auto_Height:0}"
+                },
+                "Alarm_System_Luxury_Color": {
+                    "A_Fusion_Reactor_Auto_Depth": "A_none",
+                    "@id": "$ref{Alarm_System_Luxury_Color:0}",
+                    "A_Ship_Dog_Shared_Sound": "A_Silent"
+                },
+                "@id": "$ref{Alarm_System_Heavy_Trigger:0}"
+            },
+            "Alarm_System_Heavy_Flavor": {
+                "Gravity_Field_Luxury_Width": {
+                    "A_V_Belt_Auto_Sound": "A_none",
+                    "A_Cookie_Oven_Personal_Color": "A_Silver",
+                    "A_Range_Hood_Personal_Level": "A_Very_Low",
+                    "@id": "$ref{Gravity_Field_Luxury_Width:0}",
+                    "A_Reading_Lamp_Heavy_Width": "A_none"
+                },
+                "@id": "$ref{Alarm_System_Heavy_Flavor:0}",
+                "Gravity_Field_Luxury_Sound": {
+                    "A_Winter_Garden_Heavy_Material": "A_NanoCeramic",
+                    "A_Alarm_System_Shared_Depth": "A_none",
+                    "A_Range_Hood_Auto_Position": "A_Fixed",
+                    "A_Winter_Tire_Heavy_Position": "A_none",
+                    "@id": "$ref{Gravity_Field_Luxury_Sound:0}"
+                }
+            },
+            "Alarm_System_Heavy_Tech": {
+                "Gravity_Field_Personal_Sound": {
+                    "A_Ship_Dog_Personal_Scent": "A_none",
+                    "A_Waffle_Iron_Personal_Level": "A_Medium",
+                    "A_Barf_Bag_Compact_Trigger": "A_Intense",
+                    "@id": "$ref{Gravity_Field_Personal_Sound:0}",
+                    "A_Winter_Tire_Primary_Vegan": "A_Vegan"
+                },
+                "@id": "$ref{Alarm_System_Heavy_Tech:0}",
+                "Range_Hood_Compact_Tech": {
+                    "A_Winter_Tire_Primary_Trigger": "A_none",
+                    "A_Gravity_Field_Shared_Width": "A_120cm",
+                    "A_Makeup_Mirror_Personal_Color": "A_none",
+                    "A_Hat_Stand_Primary_Position": "A_Auto_Align",
+                    "A_V_Belt_Compact_Tech": "A_Interstellar_Grade",
+                    "A_Makeup_Mirror_Heavy_Scent": "A_none",
+                    "@id": "$ref{Range_Hood_Compact_Tech:0}",
+                    "A_V_Belt_Experimental_Scent": "A_Ionized_Air",
+                    "A_Makeup_Mirror_Heavy_Material": "A_none"
+                }
+            },
+            "Alarm_System_Luxury_Width": {
+                "Dog_Leash_Shared_Sound": {
+                    "A_Reading_Lamp_Primary_Vegan": "A_none",
+                    "A_Range_Hood_Primary_Level": "A_Medium",
+                    "A_Waffle_Iron_Primary_Level": "A_none",
+                    "@id": "$ref{Dog_Leash_Shared_Sound:0}"
+                },
+                "Hat_Stand_Compact_Scent": {
+                    "A_Waffle_Iron_Heavy_Tech": "A_none",
+                    "A_Range_Hood_Compact_Position": "A_none",
+                    "@id": "$ref{Hat_Stand_Compact_Scent:0}",
+                    "A_NoseHair_Trimmer_Aux_Color": "A_none",
+                    "A_Fusion_Reactor_Primary_Color": "A_none"
+                },
+                "@id": "$ref{Alarm_System_Luxury_Width:0}"
+            },
+            "NoseHair_Trimmer_Primary_Level": {
+                "Alarm_System_Luxury_Depth": {
+                    "A_Fusion_Reactor_Aux_Height": "A_none",
+                    "A_Cookie_Oven_Shared_Width": "A_none",
+                    "@id": "$ref{Alarm_System_Luxury_Depth:0}"
+                },
+                "Ship_Dog_Auto_Width": {
+                    "A_Alarm_System_Aux_Trigger": "A_none",
+                    "@id": "$ref{Ship_Dog_Auto_Width:0}"
+                },
+                "Hat_Stand_Aux_Scent": {
+                    "A_Cookie_Oven_Luxury_Vegan": "A_No",
+                    "A_Door_Handle_Shared_Flavor": "A_Vanilla",
+                    "@id": "$ref{Hat_Stand_Aux_Scent:0}",
+                    "A_Ship_Dog_Aux_Level": "A_Low",
+                    "A_Range_Hood_Primary_Vegan": "A_Yes"
+                },
+                "Hat_Stand_Compact_Color": {
+                    "A_Ship_Dog_Experimental_Level": "A_Medium",
+                    "A_Waffle_Iron_Shared_Height": "A_120cm",
+                    "A_Cookie_Oven_Aux_Width": "A_none",
+                    "A_Cookie_Oven_Personal_Tech": "A_none",
+                    "@id": "$ref{Hat_Stand_Compact_Color:0}"
+                },
+                "Ship_Dog_Auto_Level": {
+                    "A_Winter_Tire_Heavy_Flavor": "A_none",
+                    "@id": "$ref{Ship_Dog_Auto_Level:0}"
+                },
+                "Dog_Leash_Shared_Scent": {
+                    "A_Door_Handle_Auto_Tech": "A_none",
+                    "A_Hat_Stand_Experimental_Scent": "A_none",
+                    "A_Barf_Bag_Primary_Level": "A_none",
+                    "@id": "$ref{Dog_Leash_Shared_Scent:0}"
+                },
+                "@id": "$ref{NoseHair_Trimmer_Primary_Level:0}",
+                "Gravity_Field_Primary_Scent": {
+                    "A_Door_Handle_Experimental_Color": "A_Solar_Orange",
+                    "A_Door_Handle_Primary_Position": "A_Fixed",
+                    "@id": "$ref{Gravity_Field_Primary_Scent:0}",
+                    "A_Alarm_System_Aux_Color": "A_Obsidian_Black",
+                    "A_Door_Handle_Shared_Trigger": "A_Standard"
+                }
+            },
+            "Ship_Dog_Aux_Position": {
+                "Alarm_System_Luxury_Sound": {
+                    "A_Gravity_Field_Auto_Color": "A_Gloss_Black",
+                    "@id": "$ref{Alarm_System_Luxury_Sound:0}",
+                    "A_Makeup_Mirror_Primary_Vegan": "A_No"
+                },
+                "@id": "$ref{Ship_Dog_Aux_Position:0}"
+            },
+            "@id": "$ref{NoseHair_Trimmer_Heavy_Level:0}"
+        },
+        "Reading_Lamp_Aux_Tech": {
+            "Reading_Lamp_Aux_Trigger": {
+                "Reading_Lamp_Heavy_Depth": {
+                    "A_Debris_Mitigation_Fluidics_Cartridge": "A_Hull_IntegratedPurifierDebrisMitigationFluidicsCartridge",
+                    "@id": "$ref{Reading_Lamp_Heavy_Depth:0}"
+                },
+                "@id": "$ref{Reading_Lamp_Aux_Trigger:0}"
+            },
+            "@id": "$ref{Reading_Lamp_Aux_Tech:0}"
+        },
+        "Door_Handle_Compact_Trigger": {
+            "A_Winter_Garden_Aux_Tech": "A_Mechanical",
+            "A_Ship_Dog_Experimental_Tech": "A_IonFlux_Defunctionator",
+            "@id": "$ref{Door_Handle_Compact_Trigger:0}",
+            "A_Door_Handle_Personal_Height": "A_120cm"
+        },
+        "@id": "$ref{Ship_Dog_Compact_Height:0}",
+        "Reading_Lamp_Personal_Sound": {
+            "Winter_Tire_Primary_Flavor": {
+                "Fusion_Reactor_Compact_Sound": {
+                    "A_Door_Handle_Heavy_Depth": "A_40cm",
+                    "A_Waffle_Iron_Luxury_Tech": "A_Very_Low",
+                    "A_Cookie_Oven_Shared_Position": "A_Floating",
+                    "A_Winter_Garden_Auto_Vegan": "A_Yes",
+                    "@id": "$ref{Fusion_Reactor_Compact_Sound:0}"
+                },
+                "Reading_Lamp_Personal_Tech": {
+                    "@id": "$ref{Reading_Lamp_Personal_Tech:0}",
+                    "A_Waffle_Iron_Personal_Scent": "A_none"
+                },
+                "@id": "$ref{Winter_Tire_Primary_Flavor:0}"
+            },
+            "@id": "$ref{Reading_Lamp_Personal_Sound:0}"
+        },
+        "Mouthwash_Primary_Tech": {
+            "Ship_Dog_Shared_Level": {
+                "@id": "$ref{Ship_Dog_Shared_Level:0}",
+                "Ship_Dog_Shared_Position": {
+                    "@id": "$ref{Ship_Dog_Shared_Position:0}",
+                    "A_Winter_Tire_Shared_Scent": "A_Pine_Fresh"
+                }
+            },
+            "V_Belt_Auto_Tech": {
+                "V_Belt_Aux_Depth": {
+                    "@id": "$ref{V_Belt_Aux_Depth:0}",
+                    "A_Range_Hood_Experimental_Scent": "A_Ionized_Air"
+                },
+                "@id": "$ref{V_Belt_Auto_Tech:0}"
+            },
+            "V_Belt_Aux_Position": {
+                "@id": "$ref{V_Belt_Aux_Position:0}",
+                "Barf_Bag_Luxury_Material": {
+                    "A_Range_Hood_Shared_Scent": "A_Pine_Fresh",
+                    "A_Range_Hood_Auto_Tech": "A_Electro_Assisted",
+                    "@id": "$ref{Barf_Bag_Luxury_Material:0}"
+                }
+            },
+            "@id": "$ref{Mouthwash_Primary_Tech:0}",
+            "Ship_Dog_Primary_Width": {
+                "@id": "$ref{Ship_Dog_Primary_Width:0}",
+                "Ship_Dog_Shared_Depth": {
+                    "A_Barf_Bag_Shared_Trigger": "A_none",
+                    "@id": "$ref{Ship_Dog_Shared_Depth:0}"
+                }
+            },
+            "Ship_Dog_Shared_Width": {
+                "V_Belt_Auto_Depth": {
+                    "A_Makeup_Mirror_Compact_Position": "A_none",
+                    "@id": "$ref{V_Belt_Auto_Depth:0}"
+                },
+                "@id": "$ref{Ship_Dog_Shared_Width:0}"
+            },
+            "V_Belt_Auto_Flavor": {
+                "V_Belt_Auto_Position": {
+                    "@id": "$ref{V_Belt_Auto_Position:0}",
+                    "A_Hat_Stand_Aux_Level": "A_none"
+                },
+                "@id": "$ref{V_Belt_Auto_Flavor:0}"
+            }
+        }
+    },
+    "@id": "${root}"
+}

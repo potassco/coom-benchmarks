@@ -1,0 +1,51 @@
+product {
+    num         0-1000	maxPrice
+	num			0-MAXVOLUME	requestedVolume
+    0..5 Bike		bike
+}
+
+structure Bike {
+    num		0-250	price
+	Wheel			frontWheel
+	Wheel			rearWheel
+	Frame			frame
+	Carrier			carrier
+}
+
+structure Carrier { 0..3 Bag bag }
+structure Frame   {	0..2 Bag bag }
+
+enumeration Bag {
+	attribute num 	volume
+    attribute num	price
+
+	B5  = ( 5 7 )
+	B10 = ( 10 14 )
+	B25 = ( 25 21 )
+	B50 = ( 50 28 )
+}
+
+enumeration Wheel {
+	attribute	num	 size
+    attribute   num  price
+
+	W22	= (	 22	10 )
+	W24	= (	 24	20 )
+	W26	= (	 26	30 )
+	W28	= (	 28	40 )
+}
+
+
+behavior {
+    require sum(bike.price) <= maxPrice
+
+	require requestedVolume <= sum(frame.bag.volume) + sum(carrier.bag.volume)
+}
+
+behavior Bike {
+    require count(carrier.bag) + count(frame.bag) <= 2
+
+    require frontWheel.size = rearWheel.size
+
+    imply price = frontWheel.price + rearWheel.price + sum(carrier.bag.price) + sum(frame.bag.price)
+}
