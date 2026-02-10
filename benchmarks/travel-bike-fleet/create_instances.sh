@@ -17,7 +17,7 @@ do
     maxVolume=$((200*maxBikes))
     modelName=${NAME}-max${maxBikes}
     modelFile=$MODELDIR/$modelName.coom
-    sed -e "s/MAXBIKES/${maxBikes}/g" -e "s/MAXPRICE/${maxPrice}/g" $TEMPLATE > $modelFile
+    sed -e "s/MAXBIKES/${maxBikes}/g" -e "s/MAXPRICE/${maxPrice}/g" -e "s/MAXVOLUME/${maxVolume}/g" $TEMPLATE > $modelFile
 
     for i in {1..10}
     do

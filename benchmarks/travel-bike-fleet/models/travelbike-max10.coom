@@ -1,6 +1,6 @@
 product {
     num         0-2000	maxPrice
-	num			0-MAXVOLUME	requestedVolume
+	num			0-2000	requestedVolume
     0..10 Bike		bike
 }
 
