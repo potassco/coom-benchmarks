@@ -1,5 +1,5 @@
 potassco-benchmark-tool@git+https://github.com/potassco/benchmark-tool@06039694aa546bc4cc5fb8292aaa7658a7531d01
-coomsuite
+coomsuite==1.0.0
 matplotlib
 pandas
 pandas_ods_reader
