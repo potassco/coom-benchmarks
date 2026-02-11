@@ -5,10 +5,10 @@
 	<config name="coom-seq" template="templates/coom-seq.sh"/>
 
 	<system name="coomsuite" version="1.0.0" measures="clasp" config="coom-seq">
-		<setting name="clingo-base"  	cmdline="-q --solver clingo --models=1 " 		  	tag="clingo basic" 			disttemplate="templates/coom.dist"/>
-		<setting name="flingo-base"  	cmdline="-q --solver flingo --models=1 " 		  	tag="flingo basic" 			disttemplate="templates/coom.dist"/>
-		<setting name="clingo-brave"    cmdline="-q --solver clingo --enum-mode=brave"    	tag="clingo basic brave" 	disttemplate="templates/coom.dist"/>
-		<setting name="clingo-cautious" cmdline="-q --solver clingo --enum-mode=cautious" 	tag="clingo basic cautious" disttemplate="templates/coom.dist"/>
+		<setting name="clingo-base"  	cmdline="-q --solver clingo --models=1 " 		  	tag="clingo basic" 			dist_template="templates/coom.dist"/>
+		<setting name="flingo-base"  	cmdline="-q --solver flingo --models=1 " 		  	tag="flingo basic" 			dist_template="templates/coom.dist"/>
+		<setting name="clingo-brave"    cmdline="-q --solver clingo --enum-mode=brave"    	tag="clingo basic brave" 	dist_template="templates/coom.dist"/>
+		<setting name="clingo-cautious" cmdline="-q --solver clingo --enum-mode=cautious" 	tag="clingo basic cautious" dist_template="templates/coom.dist"/>
     </system>
 
 	<distjob name="dist-gen" timeout="1200s" runs="1" script_mode="timeout" walltime="12h 00m 00s" cpt="4"/>
