@@ -32,8 +32,8 @@
 	</benchmark>
 
 	<project name="coom-benchmarks" job="dist-gen">
-		<runtag machine="laptop" benchmark="base" 			tag="clingo basic | flingo basic"/>
-		<runtag machine="laptop" benchmark="num-non-linear" tag="clingo basic"/>
+		<runtag machine="cluster" benchmark="base" 			tag="clingo basic | flingo basic"/>
+		<runtag machine="cluster" benchmark="num-non-linear" tag="clingo basic"/>
 	</project>
 </runscript>
 
