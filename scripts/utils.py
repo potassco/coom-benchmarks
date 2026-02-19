@@ -24,6 +24,7 @@ COLOR = {
     "citybike": COLORS["blue"],
     "travelbike": COLORS["red"],
     "restaurant": COLORS["yellow"],
+    "spacecollider": COLORS["lightpurple"],
     "box": COLORS["orange"],
     "cargobike": COLORS["green"],
     "racks": COLORS["blue"],
@@ -34,6 +35,7 @@ MARKER = {
     "citybike": "o",
     "travelbike": "x",
     "restaurant": "s",
+    "spacecollider": "-",
     "box": "*",
     "cargobike": "D",
     "racks": "o",
@@ -45,6 +47,7 @@ LABEL = {
     "citybike": "CityBikeFleet",
     "travelbike": "TravelBikeFleet",
     "restaurant": "Restaurant",
+    "spacecollier": "SpaceCollider",
     "box": "Box",
     "cargobike": "CargoBike",
     "racks": "Racks",
@@ -68,37 +71,39 @@ PAIRS = {
         ("clingo-base", "box"),
         ("clingo-base", "citybike"),
         ("clingo-base", "restaurant"),
+        ("clingo-base", "spacecollider"),
         ("clingo-base", "travelbike"),
         ("flingo-base", "citybike"),
         ("flingo-base", "restaurant"),
+        ("flingo-base", "spacecollider"),
         ("flingo-base", "travelbike"),
     ],
     "consequences": list(
         product(
             ["clingo-brave", "clingo-cautious"],
-            ["box", "citybike", "restaurant", "travelbike"],
+            ["box", "citybike", "restaurant", "spacecollider", "travelbike"],
         )
     ),
-    "unbounded-linear": list(
-        product(
-            [
-                "clingo-bounds-linear",
-                "flingo-bounds-linear",
-                "multishot-linear",
-            ],
-            ["cargobike", "racks", "house"],
-        )
-    ),
-    "unbounded-exponential": list(
-        product(
-            [
-                "clingo-bounds-exponential",
-                "flingo-bounds-exponential",
-                "multishot-exponential",
-            ],
-            ["cargobike", "racks", "house"],
-        )
-    ),
+    # "unbounded-linear": list(
+    #     product(
+    #         [
+    #             "clingo-bounds-linear",
+    #             "flingo-bounds-linear",
+    #             "multishot-linear",
+    #         ],
+    #         ["cargobike", "racks", "house"],
+    #     )
+    # ),
+    # "unbounded-exponential": list(
+    #     product(
+    #         [
+    #             "clingo-bounds-exponential",
+    #             "flingo-bounds-exponential",
+    #             "multishot-exponential",
+    #         ],
+    #         ["cargobike", "racks", "house"],
+    #     )
+    # ),
 }
 
 
@@ -110,7 +115,7 @@ def clean_df(df):
     df.drop(df.tail(9).index, inplace=True)
 
     # Get stats
-    stats_set = set(df.iloc[0][:])
+    stats_set = set(df.iloc[0][1:])
     stats_set.discard("")
     stats_set.discard(None)
 
@@ -127,7 +132,8 @@ def clean_df(df):
     # Get instances
     instances = [i.replace("./", "").split("-") for i in df.iloc[1:, 0]]
     instances = MultiIndex.from_tuples(instances)
-
+    print(instances)
+    exit()
     # Create multi index for columns
     columns = MultiIndex(
         levels=[solvers, stats],
@@ -136,7 +142,6 @@ def clean_df(df):
             list(range(len(stats))) * len(solvers),
         ],
     )
-
     # Get data
     data = df.iloc[1:, 1:].values  # needed? convert_dtypes()
 

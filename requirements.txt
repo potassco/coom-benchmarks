@@ -2,4 +2,4 @@ potassco-benchmark-tool@git+https://github.com/potassco/benchmark-tool@06039694a
 coomsuite==1.0.0
 matplotlib
 pandas
-pandas_ods_reader
+openpyxl

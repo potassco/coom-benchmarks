@@ -5,14 +5,18 @@ from argparse import ArgumentParser
 
 import matplotlib.pyplot as plt
 import numpy as np
-from pandas_ods_reader.main import read_ods
+
+# from pandas_ods_reader.main import read_ods
+from pandas import read_excel
 from utils import COLOR, LINE, MARKER, PAIRS, clean_df, get_plot_data, make_legend
 
 OUTDIR = "results/plots"
 parser = ArgumentParser(
     prog="COOMBenchmarkPlotter", description="Plots COOM Benchmarks"
 )
-parser.add_argument("--ods", type=str, required=True, help="Path to input .ods file")
+parser.add_argument(
+    "--input", "-i", type=str, required=True, help="Path to input .xlsx file"
+)
 # parser.add_argument("--name", type=str, required=True, help="Name of plot")
 args = parser.parse_args()
 
@@ -73,7 +77,8 @@ def plot(df, plotname, style="cactus"):
 if __name__ == "__main__":
     os.makedirs(OUTDIR, exist_ok=True)
 
-    results = clean_df(read_ods(args.ods))
-
-    for n in "base", "consequences", "unbounded-linear", "unbounded-exponential":
+    results = clean_df(read_excel(args.input))
+    print(results)
+    exit()
+    for n in "base", "consequences":  # , "unbounded-linear", "unbounded-exponential":
         plot(results, n, style="cactus")
