@@ -35,7 +35,7 @@ MARKER = {
     "citybike": "o",
     "travelbike": "x",
     "restaurant": "s",
-    "spacecollider": "-",
+    "spacecollider": "<",
     "box": "*",
     "cargobike": "D",
     "racks": "o",
@@ -47,7 +47,7 @@ LABEL = {
     "citybike": "CityBikeFleet",
     "travelbike": "TravelBikeFleet",
     "restaurant": "Restaurant",
-    "spacecollier": "SpaceCollider",
+    "spacecollider": "SpaceCollider",
     "box": "Box",
     "cargobike": "CargoBike",
     "racks": "Racks",
@@ -130,10 +130,9 @@ def clean_df(df):
     ]
 
     # Get instances
-    instances = [i.replace("./", "").split("-") for i in df.iloc[1:, 0]]
+    instances = [i.replace("./", "").split("-", 1) for i in df.iloc[1:, 0]]
     instances = MultiIndex.from_tuples(instances)
-    print(instances)
-    exit()
+
     # Create multi index for columns
     columns = MultiIndex(
         levels=[solvers, stats],

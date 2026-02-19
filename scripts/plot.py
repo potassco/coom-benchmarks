@@ -36,7 +36,10 @@ def plot(df, plotname, style="cactus"):
     plots = {}
     for s, d in pairs:
         name = f"{s}-{d}"
-        x, y = get_plot_data(df[s, "time"][d], style)
+        try:
+            x, y = get_plot_data(df[s, "time"][d], style)
+        except KeyError as e:
+            print(f'Warning: Domain "{d}" not contained in data')
         min_x = min(x) if min(x) > min_x else min_x
         max_y = max(y) if max(y) > max_y else max_y
 
@@ -78,7 +81,6 @@ if __name__ == "__main__":
     os.makedirs(OUTDIR, exist_ok=True)
 
     results = clean_df(read_excel(args.input))
-    print(results)
-    exit()
+
     for n in "base", "consequences":  # , "unbounded-linear", "unbounded-exponential":
         plot(results, n, style="cactus")
