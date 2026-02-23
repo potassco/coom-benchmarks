@@ -13,8 +13,8 @@ mkdir $INSTANCEDIR
 
 for maxBikes in 5 10 15 20
 do
-    maxPrice=$((200*maxBikes))
-    maxVolume=$((200*maxBikes))
+    maxPrice=$((100*maxBikes))
+    maxVolume=$((100*maxBikes))
     modelName=${NAME}-max${maxBikes}
     modelFile=$MODELDIR/$modelName.coom
     sed -e "s/MAXBIKES/${maxBikes}/g" -e "s/MAXPRICE/${maxPrice}/g" -e "s/MAXVOLUME/${maxVolume}/g" $TEMPLATE > $modelFile

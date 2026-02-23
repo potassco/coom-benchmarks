@@ -1,11 +1,11 @@
 product {
-    num         0-2000	maxPrice
-	num			0-2000	requestedVolume
+    num         0-1000	maxPrice
+	num			0-1000	requestedVolume
     0..10 Bike		bike
 }
 
 structure Bike {
-    num		0-250	price
+    num		0-100	price
 	Wheel			frontWheel
 	Wheel			rearWheel
 	Frame			frame
@@ -19,20 +19,20 @@ enumeration Bag {
 	attribute num 	volume
     attribute num	price
 
-	B5  = ( 5 7 )
-	B10 = ( 10 14 )
-	B25 = ( 25 21 )
-	B50 = ( 50 28 )
+	B5  = ( 5 3 )
+	B10 = ( 10 6 )
+	B25 = ( 25 8 )
+	B50 = ( 50 12 )
 }
 
 enumeration Wheel {
 	attribute	num	 size
     attribute   num  price
 
-	W22	= (	 22	10 )
-	W24	= (	 24	20 )
-	W26	= (	 26	30 )
-	W28	= (	 28	40 )
+	W22	= (	 22	5 )
+	W24	= (	 24	10 )
+	W26	= (	 26	20 )
+	W28	= (	 28	25 )
 }
 
 
