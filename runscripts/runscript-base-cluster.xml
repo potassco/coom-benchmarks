@@ -16,24 +16,24 @@
 	<benchmark name="base">
 		<!-- <folder path="benchmarks/random-core/instances">
 		</folder> -->
-		<folder path="benchmarks/city-bike-fleet/instances">
-		</folder>
+		<!-- <folder path="benchmarks/city-bike-fleet/instances">
+		</folder> -->
 		<folder path="benchmarks/travel-bike-fleet/instances">
 		</folder>
 		<!-- <folder path="benchmarks/restaurant/instances">
 		</folder> -->
-		<folder path="benchmarks/space-collider/models">
-		</folder>
+		<!-- <folder path="benchmarks/space-collider/models">
+		</folder> -->
 	</benchmark>
 
-	<benchmark name="num-non-linear">
+	<!-- <benchmark name="num-non-linear">
 		<folder path="benchmarks/box/instances">
 		</folder>
-	</benchmark>
+	</benchmark> -->
 
 	<project name="coom-benchmarks" job="dist-gen">
 		<runtag machine="cluster" benchmark="base" 			tag="clingo basic | flingo basic"/>
-		<runtag machine="cluster" benchmark="num-non-linear" tag="clingo basic"/>
+		<!-- <runtag machine="cluster" benchmark="num-non-linear" tag="clingo basic"/> -->
 	</project>
 </runscript>
 
