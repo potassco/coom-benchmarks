@@ -27,19 +27,20 @@ def plot(df, plotname, style="cactus"):
     """
 
     # Get solver-domain data pairs
-    pairs = PAIRS[plotname]
-
+    pairs = []
     min_x = 0
     max_y = 0
 
     # Get subplots
     plots = {}
-    for s, d in pairs:
+    for s, d in PAIRS[plotname]:
         name = f"{s}-{d}"
         try:
             x, y = get_plot_data(df[s, "time"][d], style)
-        except KeyError as e:
+        except KeyError:
             print(f'Warning: Domain "{d}" not contained in data')
+            continue
+        pairs.append((s, d))
         min_x = min(x) if min(x) > min_x else min_x
         max_y = max(y) if max(y) > max_y else max_y
 
