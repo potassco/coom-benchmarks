@@ -66,7 +66,7 @@ do
     cp $USERFILE4 $USERFILE5
     for special in $(seq 0 20 $(($numseats-1)))
     do
-        echo "set seat[${j}].type[0] = Special" >> $USERFILE5
+        echo "set seat[${special}].type[0] = Special" >> $USERFILE5
     done
 
     # User Action 6: Maximization (skip for now)
@@ -74,5 +74,5 @@ do
     # User Action 7: Set Handrail type to Premium
     USERFILE7=$INSTANCEDIR/${modelName}_user-input-7.coom
     cp $USERFILE5 $USERFILE7
-    echo "set handrail[0].type[0] = Premium" >> $USERFILE7
+    echo "set handrail[0] = Premium" >> $USERFILE7
 done

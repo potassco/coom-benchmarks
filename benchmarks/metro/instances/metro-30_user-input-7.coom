@@ -60,7 +60,7 @@ add seat[56]
 add seat[57]
 add seat[58]
 add seat[59]
-set seat[].type[0] = Special
-set seat[].type[0] = Special
-set seat[].type[0] = Special
-set handrail[0].type[0] = Premium
+set seat[0].type[0] = Special
+set seat[20].type[0] = Special
+set seat[40].type[0] = Special
+set handrail[0] = Premium

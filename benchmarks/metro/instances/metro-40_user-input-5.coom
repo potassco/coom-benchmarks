@@ -80,7 +80,7 @@ add seat[76]
 add seat[77]
 add seat[78]
 add seat[79]
-set seat[].type[0] = Special
-set seat[].type[0] = Special
-set seat[].type[0] = Special
-set seat[].type[0] = Special
+set seat[0].type[0] = Special
+set seat[20].type[0] = Special
+set seat[40].type[0] = Special
+set seat[60].type[0] = Special

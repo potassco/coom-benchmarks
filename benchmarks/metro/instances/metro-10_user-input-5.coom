@@ -20,4 +20,4 @@ add seat[16]
 add seat[17]
 add seat[18]
 add seat[19]
-set seat[].type[0] = Special
+set seat[0].type[0] = Special

@@ -40,5 +40,5 @@ add seat[36]
 add seat[37]
 add seat[38]
 add seat[39]
-set seat[].type[0] = Special
-set seat[].type[0] = Special
+set seat[0].type[0] = Special
+set seat[20].type[0] = Special
