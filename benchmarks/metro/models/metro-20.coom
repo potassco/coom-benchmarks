@@ -2,12 +2,14 @@
 // Falkner et al.: Solver Requirements for Interactive Configuration (2020)
 
 product {
-    num /mm 50000-100000     length
-    num 50-1000              num_passengers
-    num 0-1000               standing_room
+    num 20000-40000     length
+    num 100-400         num_passengers
+    num 0-400               standing_room
 
-    0..1    HandRail    handrail
-    0..400   Seat        seat
+    0..1        HandRail        handrail
+    0..160  Seat            seat
+
+                Color           seat_color // auxiliary attribute to define color for non-special seats
 }
 
 enumeration HandRail { Standard Premium}
@@ -18,7 +20,7 @@ structure Seat {
 }
 
 enumeration SeatType { Standard Premium Special}
-enumeration Color { Blue Red White }
+enumeration Color    { Blue Red White }
 
 behavior {
     explanation "If there is standing room, a handrail is required."
@@ -40,24 +42,29 @@ behavior {
     // explanation "The color of all seats must be the same, except for special seats." // How to implement? Default (see below)? Or set a "global" type that restricts all seat types?
     // condition seat.type != Special
     // require seat.color = seat.color
+    // require allequal(s.color for s in seat if seat.type != Special)
+
+    explanation "By default the seats are blue"
+    default seat_color = Blue
+
+    // explanation "Users prefer to maximize load factor (number of passengers per length)" // How to implement?
+    // maximize num_passengers
 }
 
 behavior Seat {
     explanation "Seats of type Special must be red."
     condition type = Special
     require color = Red
+
+    explanation "Seats which are not of type Special must have the same colors"
+    condition type != Special
+    require color = root.seat_color
+
+    explanation "By default the seat type is Standard"
+    default type = Standard
 }
 
-// // Defaults (not implemented currently)
-// behavior {
-//     default seat.type = Standard
-
-//     default handrail = Standard
-
-//     default seat.color = Blue
-
-//     explanation "All seats have to have the same color (except special seats)"
-//     default seat.color = seat.color
-
-//     explanation "Users prefer to maximize load factor (number of passengers per length)" // How to implement?
-// }
+behavior Handrail{
+    explanation "The default handrail type is Standard"
+    default type = Standard
+}
