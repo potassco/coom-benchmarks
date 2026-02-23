@@ -1,4 +1,4 @@
-potassco-benchmark-tool@git+https://github.com/potassco/benchmark-tool@06039694aa546bc4cc5fb8292aaa7658a7531d01
+potassco-benchmark-tool@git+https://github.com/potassco/benchmark-tool@1d75da03dabe425bfdbf06b52645c3c7ae4a7254
 coomsuite==1.0.0
 matplotlib
 pandas
