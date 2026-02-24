@@ -1,0 +1,8 @@
+add elements[0]
+set elements[0].type[0]=A
+add elements[1]
+set elements[1].type[0]=B
+add elements[2]
+set elements[2].type[0]=C
+add elements[3]
+set elements[3].type[0]=D
