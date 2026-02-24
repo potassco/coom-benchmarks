@@ -16,10 +16,10 @@
 	<benchmark name="base">
 		<!-- <folder path="benchmarks/random-core/instances">
 		</folder> -->
-		<!-- <folder path="benchmarks/city-bike-fleet/instances">
-		</folder> -->
-		<!-- <folder path="benchmarks/travel-bike-fleet/instances">
-		</folder> -->
+		<folder path="benchmarks/city-bike-fleet/instances">
+		</folder>
+		<folder path="benchmarks/travel-bike-fleet/instances">
+		</folder>
 		<!-- <folder path="benchmarks/restaurant/instances">
 		</folder> -->
 		<!-- <folder path="benchmarks/space-collider/models">
