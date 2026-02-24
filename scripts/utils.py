@@ -76,17 +76,23 @@ PAIRS = {
         ("clingo-base", "travelbike"),
         ("clingo-base", "restaurant"),
         ("clingo-base", "metro"),
-        ("clingo-base", "spacecollider"),
+        # ("clingo-base", "spacecollider"),
         ("flingo-base", "citybike"),
         ("flingo-base", "travelbike"),
         ("flingo-base", "restaurant"),
         ("flingo-base", "metro"),
-        ("flingo-base", "spacecollider"),
+        # ("flingo-base", "spacecollider"),
     ],
     "consequences": list(
         product(
             ["clingo-brave", "clingo-cautious"],
-            ["box", "citybike", "travelbike", "restaurant", "metro", "spacecollider"],
+            [
+                "box",
+                "citybike",
+                "travelbike",
+                "restaurant",
+                "metro",
+            ],  # , "spacecollider"],
         )
     ),
     # "unbounded-linear": list(
