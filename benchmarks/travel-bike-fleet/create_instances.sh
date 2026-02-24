@@ -1,18 +1,32 @@
 #!/bin/bash
 
 TEMPLATE=model.coom
-OUTDIR=instances
+MODELDIR=models
+INSTANCEDIR=instances
 NAME=travelbike
 
-rm -rf $OUTDIR
-mkdir $OUTDIR
+rm -rf $MODELDIR
+mkdir $MODELDIR
 
-# MAX_PER_BIKE=500
+rm -rf $INSTANCEDIR
+mkdir $INSTANCEDIR
 
-for numBikes in $(seq 1 1 15); do
-    # for maxprice in 300 500; do
-    maxPrice=$((200*numBikes))
-    OUTFILE=$OUTDIR/${NAME}-${numBikes}.coom
-    sed -e "s/NUMBIKES/${numBikes}/g" -e "s/MAXPRICE/${maxPrice}/g" $TEMPLATE > $OUTFILE
-    # done
+for maxBikes in 5 10 15 20
+do
+    maxPrice=$((100*maxBikes))
+    maxVolume=$((100*maxBikes))
+    modelName=${NAME}-max${maxBikes}
+    modelFile=$MODELDIR/$modelName.coom
+    sed -e "s/MAXBIKES/${maxBikes}/g" -e "s/MAXPRICE/${maxPrice}/g" -e "s/MAXVOLUME/${maxVolume}/g" $TEMPLATE > $modelFile
+
+    for i in {1..10}
+    do
+        userVolume=$((1 + $RANDOM % $maxVolume))
+        userPrice=$((1 + $RANDOM % $maxPrice))
+
+        userFile=$INSTANCEDIR/${modelName}_user-input-p${userPrice}-v${userVolume}.coom
+
+        echo "set maxPrice[0] = ${userPrice}" >> $userFile
+        echo "set requestedVolume[0] = ${userVolume}" >> $userFile
+    done
 done

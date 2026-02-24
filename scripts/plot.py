@@ -5,14 +5,18 @@ from argparse import ArgumentParser
 
 import matplotlib.pyplot as plt
 import numpy as np
-from pandas_ods_reader.main import read_ods
+
+# from pandas_ods_reader.main import read_ods
+from pandas import read_excel
 from utils import COLOR, LINE, MARKER, PAIRS, clean_df, get_plot_data, make_legend
 
 OUTDIR = "results/plots"
 parser = ArgumentParser(
     prog="COOMBenchmarkPlotter", description="Plots COOM Benchmarks"
 )
-parser.add_argument("--ods", type=str, required=True, help="Path to input .ods file")
+parser.add_argument(
+    "--input", "-i", type=str, required=True, help="Path to input .xlsx file"
+)
 # parser.add_argument("--name", type=str, required=True, help="Name of plot")
 args = parser.parse_args()
 
@@ -23,16 +27,20 @@ def plot(df, plotname, style="cactus"):
     """
 
     # Get solver-domain data pairs
-    pairs = PAIRS[plotname]
-
+    pairs = []
     min_x = 0
     max_y = 0
 
     # Get subplots
     plots = {}
-    for s, d in pairs:
+    for s, d in PAIRS[plotname]:
         name = f"{s}-{d}"
-        x, y = get_plot_data(df[s, "time"][d], style)
+        try:
+            x, y = get_plot_data(df[s, "time"][d], style)
+        except KeyError:
+            print(f'Warning: Domain "{d}" not contained in data')
+            continue
+        pairs.append((s, d))
         min_x = min(x) if min(x) > min_x else min_x
         max_y = max(y) if max(y) > max_y else max_y
 
@@ -73,7 +81,7 @@ def plot(df, plotname, style="cactus"):
 if __name__ == "__main__":
     os.makedirs(OUTDIR, exist_ok=True)
 
-    results = clean_df(read_ods(args.ods))
+    results = clean_df(read_excel(args.input))
 
-    for n in "base", "consequences", "unbounded-linear", "unbounded-exponential":
+    for n in "base", "consequences":  # , "unbounded-linear", "unbounded-exponential":
         plot(results, n, style="cactus")
