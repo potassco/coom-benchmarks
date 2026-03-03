@@ -7,7 +7,6 @@
 - Three corresponding encodings for the language fragments for clingo and flingo
 - Basic Python package to parse and solve COOM/ASP instances
 - Two possible benchmark sets which are scalable: Restaurant and bike fleet
-- Encodings from denkbares (correspond to current language fragments?)
 
 ## Supported COOM language fragments
 - better names for the three instances/language fragments?
