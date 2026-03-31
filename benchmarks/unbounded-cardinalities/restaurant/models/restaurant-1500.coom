@@ -1,0 +1,13 @@
+product {
+	0..*	BigTable bigTables
+	0..*	SmallTable smallTables
+	num	1-10500	totalPlaces
+}
+
+structure BigTable { 3..5 Chair chairs }
+structure SmallTable { 1..2 Chair chairs }
+structure Chair {}
+
+behavior {
+	imply totalPlaces = count(bigTables.chairs) + count(smallTables.chairs)
+}
