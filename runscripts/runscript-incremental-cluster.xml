@@ -18,6 +18,8 @@
 	<distjob name="dist-gen" timeout="1200s" runs="1" script_mode="timeout" walltime="12h 00m 00s" cpt="4"/>
 
 	<benchmark name="base">
+		<folder path="benchmarks/city-bike-fleet/instances">
+		</folder>
 		<folder path="benchmarks/travel-bike-fleet/instances">
 		</folder>
 		<folder path="benchmarks/restaurant/instances">
@@ -26,6 +28,8 @@
 
 	<benchmark name="unbounded">
 		<folder path="benchmarks/unbounded-cardinalities/cargo-bike/instances">
+		</folder>
+		<folder path="benchmarks/unbounded-cardinalities/city-bike-fleet/instances">
 		</folder>
 		<folder path="benchmarks/unbounded-cardinalities/travel-bike-fleet/instances">
 		</folder>
