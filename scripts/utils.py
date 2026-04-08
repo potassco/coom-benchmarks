@@ -2,21 +2,33 @@
 Utility functions for plotting benchmarks
 """
 
-from itertools import product
-
 import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame, MultiIndex
 
 COLORS = {
     "green": "#77B762",
+    "lightgreen": "#C4F0B5",
     "blue": "#4477CC",
+    "lightblue": "#809CCD",
     "red": "#CF3A19",
     "purple": "#5C4B84",
     "lightpurple": "#9477BF90",
     "orange": "#D78C1F",
     "yellow": "#D7CF1F",
     "greenblue": "#226367",
+}
+LABEL = {
+    "core": "Core",
+    "citybike": "CityBikeFleet",
+    "travelbike": "TravelBikeFleet",
+    "restaurant": "Restaurant",
+    "spacecollider": "SpaceCollider",
+    "metro": "Metro",
+    "box": "Box",
+    "cargobike": "CargoBike",
+    "racks": "Racks",
+    "house": "House",
 }
 
 COLOR = {
@@ -44,18 +56,7 @@ MARKER = {
     "house": "x",
 }  # , "+"]
 
-LABEL = {
-    "core": "Core",
-    "citybike": "CityBikeFleet",
-    "travelbike": "TravelBikeFleet",
-    "restaurant": "Restaurant",
-    "spacecollider": "SpaceCollider",
-    "metro": "Metro",
-    "box": "Box",
-    "cargobike": "CargoBike",
-    "racks": "Racks",
-    "house": "House",
-}
+
 LINE = {
     "clingo-base": "-",
     "flingo-base": "--",
@@ -67,54 +68,6 @@ LINE = {
     "clingo-bounds-exponential": "-",
     "flingo-bounds-exponential": "--",
     "multishot-exponential": "-.",
-}
-
-PAIRS = {
-    "base": [
-        ("clingo-base", "box"),
-        ("clingo-base", "citybike"),
-        ("clingo-base", "travelbike"),
-        ("clingo-base", "restaurant"),
-        ("clingo-base", "metro"),
-        # ("clingo-base", "spacecollider"),
-        ("flingo-base", "citybike"),
-        ("flingo-base", "travelbike"),
-        ("flingo-base", "restaurant"),
-        ("flingo-base", "metro"),
-        # ("flingo-base", "spacecollider"),
-    ],
-    "consequences": list(
-        product(
-            ["clingo-brave", "clingo-cautious"],
-            [
-                "box",
-                "citybike",
-                "travelbike",
-                "restaurant",
-                "metro",
-            ],  # , "spacecollider"],
-        )
-    ),
-    # "unbounded-linear": list(
-    #     product(
-    #         [
-    #             "clingo-bounds-linear",
-    #             "flingo-bounds-linear",
-    #             "multishot-linear",
-    #         ],
-    #         ["cargobike", "racks", "house"],
-    #     )
-    # ),
-    # "unbounded-exponential": list(
-    #     product(
-    #         [
-    #             "clingo-bounds-exponential",
-    #             "flingo-bounds-exponential",
-    #             "multishot-exponential",
-    #         ],
-    #         ["cargobike", "racks", "house"],
-    #     )
-    # ),
 }
 
 
@@ -142,6 +95,10 @@ def clean_df(df):
 
     # Get instances
     instances = [i.replace("./", "").split("-", 1) for i in df.iloc[1:, 0]]
+    for i in instances:
+        if i[0] == "citybike_user":
+            i[0] = "citybike"
+            i[1] = "user_" + i[1]
     instances = MultiIndex.from_tuples(instances)
 
     # Create multi index for columns
@@ -163,7 +120,7 @@ def get_plot_data(df, style="cactus"):
     Returns the plot data as two arrays: one for the x and y axis, respectively
     """
     if style == "cactus":
-        y = np.insert(df.sort_values().to_numpy(), 0, 0)
+        y = np.insert(df.dropna().sort_values().to_numpy(), 0, 0)
         x = np.arange(len(y + 1)) * (100 / (len(y) - 1))
     else:
         raise ValueError("Unknown plot style.")
