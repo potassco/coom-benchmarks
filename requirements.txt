@@ -1,5 +1,5 @@
-potassco-benchmark-tool@git+https://github.com/potassco/benchmark-tool@1d75da03dabe425bfdbf06b52645c3c7ae4a7254
-coomsuite==1.1.0
+potassco-benchmark-tool
+coomsuite
 matplotlib
 pandas
 openpyxl
