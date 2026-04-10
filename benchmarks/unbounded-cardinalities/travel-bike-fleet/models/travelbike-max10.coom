@@ -1,7 +1,7 @@
 product {
     num         0-1000	maxPrice
 	num			0-1000	requestedVolume
-    0..* Bike		bike
+    0..* Bike		bikes
 }
 
 structure Bike {
@@ -37,9 +37,9 @@ enumeration Wheel {
 
 
 behavior {
-    require sum(bike.price) <= maxPrice
+    require sum(bikes.price) <= maxPrice
 
-	require requestedVolume <= sum(frame.bag.volume) + sum(carrier.bag.volume)
+	require requestedVolume <= sum(bikes.frame.bag.volume) + sum(bikes.carrier.bag.volume)
 }
 
 behavior Bike {
