@@ -3,28 +3,25 @@
 	<machine name="laptop" cpu="IntelCoreUltra7-265Ux14" memory="32GB"/>
 
 	<config name="coom-seq" template="templates/coom-seq.sh"/>
-	<config name="coom-seq-unbounded" template="templates/coom-seq-unbounded.sh"/>
 
-	<system name="coomsuite" version="1.1.0" measures="clasp" config="coom-seq">
-		<setting name="singleshot"					cmdline="-q --models=1 "										tag="singleshot">
+	<system name="coomsuite" version="1.1.0" measures="clasp" config="coom-seq" cmdline="-q">
+		<setting name="singleshot"					cmdline="--models=1 "										tag="singleshot">
 			<variable cmd="--solver {}" value="clingo;flingo" />
 		</setting>
-    </system>
 
-	<system name="coomsuite-unbounded" version="1.1.0" measures="clasp" config="coom-seq-unbounded">
-		<setting name="incremental-linear"			cmdline="-q --bounds=linear" 		  		 					tag="incremental linear" 		>
+		<setting name="incremental-linear"			cmdline="--bounds=linear" 		  		 					tag="incremental linear" 		>
 			<variable cmd="--solver {}" value="clingo;flingo" />
 			<variable cmd="--step {}" value="1;2;5;10;20" />
 		</setting>
-		<setting name="incremental-exponential"		cmdline="-q --bounds=exponential" 			 					tag="incremental exponential"	>
+		<setting name="incremental-exponential"		cmdline="--bounds=exponential" 			 					tag="incremental exponential"	>
 			<variable cmd="--solver {}" value="clingo;flingo" />
 			<variable cmd="--step {}" value="2;3;4" />
 		</setting>
 
-		<setting name="multishot-linear"			cmdline="-q --solver clingo --bounds=linear 	 --multishot" 	tag="incremental linear multi" 		>
+		<setting name="multishot-linear"			cmdline="--solver clingo --bounds=linear 	 --multishot" 	tag="incremental linear multi" 		>
 					<variable cmd="--step {}" value="1;2;5;10;20" />
 		</setting>
-		<setting name="multishot-exponential"  		cmdline="-q --solver clingo --bounds=exponential --multishot" 	tag="incremental exponential multi"	>
+		<setting name="multishot-exponential"  		cmdline="--solver clingo --bounds=exponential --multishot" 	tag="incremental exponential multi"	>
 					<variable cmd="--step {}" value="2;3;4" />
 		</setting>
     </system>
@@ -48,7 +45,7 @@
 	</benchmark>
 
 	<project name="coom-benchmarks-incremental" job="seq-gen">
-		<runtag machine="laptop" benchmark="base" 				tag="singleshot"/>
+		<runtag machine="laptop" benchmark="base" 				tag="singleshot | incremental"/>
 		<runtag machine="laptop" benchmark="unbounded-only" 	tag="incremental"/>
 	</project>
 </runscript>

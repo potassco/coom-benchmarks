@@ -5,26 +5,24 @@
 	<config name="coom-seq" template="templates/coom-seq.sh"/>
 	<config name="coom-seq-unbounded" template="templates/coom-seq-unbounded.sh"/>
 
-	<system name="coomsuite" version="1.1.0" measures="clasp" config="coom-seq">
-		<setting name="singleshot"					cmdline="-q --models=1 "										tag="singleshot" 						dist_template="templates/coom.dist">
+	<system name="coomsuite" version="1.1.0" measures="clasp" config="coom-seq" cmdline="-q">
+		<setting name="singleshot"					cmdline="--models=1 "										tag="singleshot" 						dist_template="templates/coom.dist">
 			<variable cmd="--solver {}" value="clingo;flingo" />
 		</setting>
-    </system>
 
-	<system name="coomsuite-unbounded" version="1.1.0" measures="clasp" config="coom-seq-unbounded">
-		<setting name="incremental-linear"			cmdline="-q --bounds=linear" 		  		 					tag="incremental linear" 				dist_template="templates/coom.dist">
+		<setting name="incremental-linear"			cmdline="--bounds=linear" 		  		 					tag="incremental linear" 				dist_template="templates/coom.dist">
 			<variable cmd="--solver {}" value="clingo;flingo" />
-			<variable cmd="--step {}" value="1;2;5;10;20" />
+			<variable cmd="--step {}" value="1;2;4;8;16" />
 		</setting>
-		<setting name="incremental-exponential"		cmdline="-q --bounds=exponential" 			 					tag="incremental exponential"			dist_template="templates/coom.dist">
+		<setting name="incremental-exponential"		cmdline="--bounds=exponential" 			 					tag="incremental exponential"			dist_template="templates/coom.dist">
 			<variable cmd="--solver {}" value="clingo;flingo" />
 			<variable cmd="--step {}" value="2;3;4" />
 		</setting>
 
-		<setting name="multishot-linear"			cmdline="-q --solver clingo --bounds=linear 	 --multishot" 	tag="incremental linear multi" 			dist_template="templates/coom.dist">
-					<variable cmd="--step {}" value="1;2;5;10;20" />
+		<setting name="multishot-linear"			cmdline="--solver clingo --bounds=linear 	 --multishot" 	tag="incremental linear multi" 			dist_template="templates/coom.dist">
+					<variable cmd="--step {}" value="1;2;4;8;16" />
 		</setting>
-		<setting name="multishot-exponential"  		cmdline="-q --solver clingo --bounds=exponential --multishot" 	tag="incremental exponential multi" 	dist_template="templates/coom.dist">
+		<setting name="multishot-exponential"  		cmdline="--solver clingo --bounds=exponential --multishot" 	tag="incremental exponential multi" 	dist_template="templates/coom.dist">
 					<variable cmd="--step {}" value="2;3;4" />
 		</setting>
     </system>
@@ -48,8 +46,7 @@
 	</benchmark>
 
 	<project name="coom-benchmarks-incremental" job="dist-gen">
-		<runtag machine="cluster" benchmark="base" 				tag="singleshot"/>
-		<runtag machine="cluster" benchmark="base"				tag="incremental"/>
+		<runtag machine="cluster" benchmark="base" 				tag="singleshot | incremental"/>
 		<runtag machine="cluster" benchmark="unbounded-only"	tag="incremental"/>
 	</project>
 </runscript>
