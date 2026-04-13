@@ -57,14 +57,14 @@ MARKER = {
 
 
 LINE = {
-    "clingo-base": "-.",
-    "flingo-base": "-.",
-    "clingo-bounds-linear": "-",
-    "flingo-bounds-linear": "-",
-    "clingo-bounds-exponential": "--",
-    "flingo-bounds-exponential": "--",
-    "multishot-linear": "-",
-    "multishot-exponential": "--",
+    "clingo-base": "-",
+    "flingo-base": "-",
+    "clingo-bounds-linear": "--",
+    "flingo-bounds-linear": "--",
+    "clingo-bounds-exponential": ":",
+    "flingo-bounds-exponential": ":",
+    "multishot-linear": "--",
+    "multishot-exponential": ":",
 }
 
 
@@ -137,7 +137,9 @@ if __name__ == "__main__":
     os.makedirs(OUTDIR, exist_ok=True)
 
     results = clean_df(read_excel(args.input))
-    # print(results)
-    # exit()
+
     for name in ["restaurant", "citybike", "travelbike", "cargobike"]:
+        if name != "travelbike":
+            continue
         plot(results, name, style="cactus")
+    # plot(results, "travelbike", style="cactus")
