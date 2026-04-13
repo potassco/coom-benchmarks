@@ -1,5 +1,5 @@
 potassco-benchmark-tool
 coomsuite
 matplotlib
-pandas==3.0.0
+pandas
 openpyxl

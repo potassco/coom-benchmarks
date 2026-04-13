@@ -7,8 +7,9 @@
 	<system name="coomsuite" version="1.0.0" measures="clasp" config="coom-seq">
 		<setting name="clingo-base"  							cmdline="-q --solver clingo --models=1 " 		  				tag="clingo basic" />
 		<setting name="flingo-base"  	    					cmdline="-q --solver flingo --models=1 " 		  				tag="flingo basic" />
-		<setting name="clingo-brave"    						cmdline="-q --solver clingo --enum-mode=brave"    				tag="clingo basic brave" />
-		<setting name="clingo-cautious" 						cmdline="-q --solver clingo --enum-mode=cautious" 				tag="clingo basic cautious" />
+		<setting name="consequences"	cmdline="-q"    																		tag="clingo basic" >
+			<variable cmd="--enum-mode {}" value="cautious;brave" />
+		</setting>
     </system>
 
 	<seqjob name="seq-gen" timeout="10" runs="1" parallel="4"/>
@@ -32,7 +33,7 @@
 	</benchmark>
 
 	<project name="coom-benchmarks" job="seq-gen">
-		<runtag machine="laptop" benchmark="base" 			tag="clingo basic | flingo basic"/>
+		<runtag machine="laptop" benchmark="base" 			tag="basic"/>
 		<runtag machine="laptop" benchmark="num-non-linear" tag="clingo basic"/>
 	</project>
 </runscript>

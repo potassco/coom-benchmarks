@@ -3,43 +3,52 @@
 	<machine name="cluster" cpu="24x8xE5520@2.27GHz" memory="24GB"/>
 
 	<config name="coom-seq" template="templates/coom-seq.sh"/>
+	<config name="coom-seq-unbounded" template="templates/coom-seq-unbounded.sh"/>
 
-	<system name="coomsuite" version="1.0.0" measures="clasp" config="coom-seq">
-		<setting name="clingo-base"  							cmdline="-q --solver clingo --models=1 " 		  				tag="clingo basic" 				dist_template="templates/coom.dist"/>
-		<setting name="flingo-base"  	    					cmdline="-q --solver flingo --models=1 " 		  				tag="flingo basic" 				dist_template="templates/coom.dist"/>
-		<setting name="clingo-bounds-linear"					cmdline="-q --solver clingo --bounds=linear" 		  		 	tag="clingo bounds" 			dist_template="templates/coom.dist"/>
-		<setting name="clingo-bounds-exponential"				cmdline="-q --solver clingo --bounds=exponential" 			 	tag="clingo bounds" 			dist_template="templates/coom.dist"/>
-		<setting name="flingo-bounds-linear"  	 				cmdline="-q --solver flingo --bounds=linear" 		  		 	tag="flingo bounds" 			dist_template="templates/coom.dist"/>
-		<setting name="flingo-bounds-exponential" 				cmdline="-q --solver flingo --bounds=exponential" 			 	tag="flingo bounds" 			dist_template="templates/coom.dist"/>
-		<setting name="multishot-linear" 	   					cmdline="-q --solver clingo --bounds=linear 	 --multishot" 	tag="clingo bounds multi" 		dist_template="templates/coom.dist"/>
-		<setting name="multishot-exponential"  					cmdline="-q --solver clingo --bounds=exponential --multishot" 	tag="clingo bounds multi" 		dist_template="templates/coom.dist"/>
+	<system name="coomsuite" version="1.1.0" measures="clasp" config="coom-seq">
+		<setting name="singleshot"					cmdline="-q --models=1 "										tag="singleshot" 						dist_template="templates/coom.dist">
+			<variable cmd="--solver {}" value="clingo;flingo" />
+		</setting>
+    </system>
+
+	<system name="coomsuite-unbounded" version="1.1.0" measures="clasp" config="coom-seq-unbounded">
+		<setting name="incremental-linear"			cmdline="-q --bounds=linear" 		  		 					tag="incremental linear" 				dist_template="templates/coom.dist">
+			<variable cmd="--solver {}" value="clingo;flingo" />
+			<variable cmd="--step {}" value="1;2;5;10;20" />
+		</setting>
+		<setting name="incremental-exponential"		cmdline="-q --bounds=exponential" 			 					tag="incremental exponential"			dist_template="templates/coom.dist">
+			<variable cmd="--solver {}" value="clingo;flingo" />
+			<variable cmd="--step {}" value="2;3;4" />
+		</setting>
+
+		<setting name="multishot-linear"			cmdline="-q --solver clingo --bounds=linear 	 --multishot" 	tag="incremental linear multi" 			dist_template="templates/coom.dist">
+					<variable cmd="--step {}" value="1;2;5;10;20" />
+		</setting>
+		<setting name="multishot-exponential"  		cmdline="-q --solver clingo --bounds=exponential --multishot" 	tag="incremental exponential multi" 	dist_template="templates/coom.dist">
+					<variable cmd="--step {}" value="2;3;4" />
+		</setting>
     </system>
 
 	<distjob name="dist-gen" timeout="1200s" runs="1" script_mode="timeout" walltime="12h 00m 00s" cpt="4"/>
 
 	<benchmark name="base">
-		<!-- <folder path="benchmarks/city-bike-fleet/instances">
-		</folder> -->
+		<folder path="benchmarks/city-bike-fleet/instances">
+		</folder>
 		<folder path="benchmarks/travel-bike-fleet/instances">
 		</folder>
-		<!-- <folder path="benchmarks/restaurant/instances">
-		</folder> -->
+		<folder path="benchmarks/restaurant/instances">
+		</folder>
 	</benchmark>
 
-	<benchmark name="unbounded">
-		<!-- <folder path="benchmarks/unbounded-cardinalities/cargo-bike/instances">
+	<benchmark name="unbounded-only">
+		<folder path="benchmarks/cargo-bike/instances">
 		</folder>
-		<folder path="benchmarks/unbounded-cardinalities/city-bike-fleet/instances">
-		</folder> -->
-		<folder path="benchmarks/unbounded-cardinalities/travel-bike-fleet/instances">
-		</folder>
-		<!-- <folder path="benchmarks/unbounded-cardinalities/restaurant/instances">
-		</folder> -->
 	</benchmark>
 
-	<project name="coom-benchmarks" job="dist-gen">
-		<runtag machine="cluster" benchmark="base" 				tag="clingo basic | flingo basic"/>
-		<runtag machine="cluster" benchmark="unbounded" 		tag="bounds"/>
+	<project name="coom-benchmarks-incremental" job="dist-gen">
+		<runtag machine="cluster" benchmark="base" 				tag="singleshot"/>
+		<runtag machine="cluster" benchmark="base"				tag="incremental"/>
+		<runtag machine="cluster" benchmark="unbounded-only"	tag="incremental"/>
 	</project>
 </runscript>
 
