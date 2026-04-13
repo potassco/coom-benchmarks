@@ -43,6 +43,8 @@
 	<benchmark name="unbounded-only">
 		<folder path="benchmarks/cargo-bike/instances">
 		</folder>
+		<folder path="benchmarks/cargo-bike-nested/instances">
+		</folder>
 	</benchmark>
 
 	<project name="coom-benchmarks-incremental" job="dist-gen">

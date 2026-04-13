@@ -3,14 +3,13 @@
 TEMPLATE=model.coom
 MODELDIR=models-unbounded
 INSTANCEDIR=instances
-NAME=cargobike
+NAME=cargobike-nested
 
 rm -rf $MODELDIR
 mkdir $MODELDIR
 
 rm -rf $INSTANCEDIR
 mkdir $INSTANCEDIR
-
 
 for range in 100 200 300 400 500; do
 
@@ -21,3 +20,4 @@ for range in 100 200 300 400 500; do
 
     python generate.py --range $range --instances 5 --out $INSTANCEDIR --model $modelName
 done
+
