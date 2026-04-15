@@ -27,6 +27,7 @@ LABEL = {
     "metro": "Metro",
     "box": "Box",
     "cargobike": "CargoBike",
+    "cargobike-nested": "CargoBikePockets",
     "racks": "Racks",
     "house": "House",
 }
@@ -96,9 +97,9 @@ def clean_df(df):
     # Get instances
     instances = [i.replace("./", "").split("-", 1) for i in df.iloc[1:, 0]]
     for i in instances:
-        if i[0] == "citybike_user":
-            i[0] = "citybike"
-            i[1] = "user_" + i[1]
+        if i[0] == "cargobike" and i[1].startswith("nested"):
+            i[0] = "cargobike-nested"
+            i[1] = i[1].split("-", 1)[1]
     instances = MultiIndex.from_tuples(instances)
 
     # Create multi index for columns

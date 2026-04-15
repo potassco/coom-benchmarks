@@ -2,7 +2,6 @@
 
 import os
 from argparse import ArgumentParser
-from itertools import product
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -11,7 +10,7 @@ import numpy as np
 from pandas import read_excel
 from utils import COLORS, LABEL, clean_df, get_plot_data, make_legend
 
-OUTDIR = "results/plots/incremental"
+OUTDIR = "results/plots/incremental/steps"
 parser = ArgumentParser(
     prog="COOMBenchmarkPlotter", description="Plots COOM Benchmarks"
 )
@@ -22,37 +21,31 @@ parser.add_argument(
 args = parser.parse_args()
 
 SOLVER = ["clingo", "flingo"]
-MODE = ["singleshot", "incremental", "multishot"]
 ALGORITHM = ["linear", "exponential"]
 STEP = {"linear": [1, 2, 4, 8, 16], "exponential": [2, 3, 4]}
 
-
 COLOR = {
-    "clingo": {
-        "singleshot": COLORS["lightgreen"],
-        "incremental": COLORS["green"],
-        "multishot": COLORS["red"],
-    },
-    "flingo": {"singleshot": COLORS["lightblue"], "incremental": COLORS["blue"]},
+    "1": COLORS["green"],
+    "2": COLORS["blue"],
+    "3": COLORS["green"],
+    "4": COLORS["red"],
+    "8": COLORS["yellow"],
+    "16": COLORS["purple"],
 }
 
 LINE = {
-    "singleshot": "-",
-    "linear": "--",
-    "exponential": ":",
+    "clingo": {
+        "linear": "-",
+        "exponential": "--",
+    },
+    "flingo": {
+        "linear": "-.",
+        "exponential": ":",
+    },
 }
 
-# LINE_STEP = {
-#     "1": "-",
-#     "2": "--",
-#     "3": ":",
-#     "4": "-.",
-#     "8": ""
-#     "16":
-# }
 
-
-def plot(df, domain, style="cactus"):
+def plot(df, domain, mode, style="cactus"):
     """
     Plots the specified plot.
     """
@@ -62,21 +55,12 @@ def plot(df, domain, style="cactus"):
     # Get subplots
     plots = {}
     for run in df.columns.levels[0]:
-        solver = "flingo" if "flingo" in run else "clingo"
-        mode = run.split("_")[0].split("-")[0].strip()
-        if "cargobike" in domain and mode == "singleshot":
+        if mode not in run:
             continue
+        solver = "flingo" if "flingo" in run else "clingo"
 
-        if mode in ["incremental", "multishot"]:
-            algorithm = "exponential" if "exponential" in run else "linear"
-            step = run.split("_")[-1]
-            if (algorithm == "linear" and step != "1") or (
-                algorithm == "exponential" and step != "2"
-            ):
-                continue
-        else:
-            algorithm = "singleshot"
-            step = None
+        algorithm = "exponential" if "exponential" in run else "linear"
+        step = run.split("_")[-1]
 
         try:
             x, y = get_plot_data(df[run, "time"][domain], style)
@@ -91,8 +75,8 @@ def plot(df, domain, style="cactus"):
         (plots[run],) = plt.plot(
             x,
             y,
-            ls=LINE[algorithm],
-            color=COLOR[solver][mode],
+            ls=LINE[solver][algorithm],
+            color=COLOR[step],
             lw=1,
             # marker=MARKER[domain],
             markevery=0.2,
@@ -124,7 +108,7 @@ def plot(df, domain, style="cactus"):
 
     # tikzplotlib.save(outpath)
 
-    outfile = os.path.join(OUTDIR, f"incremental-{domain}.pdf")
+    outfile = os.path.join(OUTDIR, f"{mode}-{domain}.pdf")
     plt.savefig(outfile, dpi=1200, bbox_inches="tight")
     print(f"Saved {outfile}")
     plt.clf()
@@ -135,11 +119,14 @@ if __name__ == "__main__":
 
     results = clean_df(read_excel(args.input))
 
-    for name in [
+    for domain in [
         "restaurant",
         "citybike",
         "travelbike",
         "cargobike",
         "cargobike-nested",
     ]:
-        plot(results, name, style="cactus")
+        for mode in ["multishot", "incremental"]:
+            if "cargobike" in domain and mode == "singleshot":
+                continue
+            plot(results, domain, mode, style="cactus")
