@@ -4,7 +4,7 @@ Utility functions for plotting benchmarks
 
 import matplotlib.pyplot as plt
 import numpy as np
-from pandas import DataFrame, MultiIndex
+from pandas import DataFrame, MultiIndex, notna
 
 COLORS = {
     "green": "#77B762",
@@ -269,3 +269,19 @@ def make_legend(plots, pairs, plotname):
         )
 
     return plots
+
+
+def highlight_group_minima(row):
+    """Highlight minima independently for each first-level column group."""
+    styles = [""] * len(row)
+    for group in row.index.get_level_values(0).unique():
+        positions = [i for i, col in enumerate(row.index) if col[0] == group]
+        values = row.iloc[positions]
+        minimum = values.min(skipna=True)
+
+        if notna(minimum):
+            for pos, value in zip(positions, values):
+                if value == minimum:
+                    styles[pos] = "textbf:--rwrap;"
+
+    return styles

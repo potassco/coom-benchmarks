@@ -42,15 +42,6 @@ LINE = {
     "exponential": ":",
 }
 
-# LINE_STEP = {
-#     "1": "-",
-#     "2": "--",
-#     "3": ":",
-#     "4": "-.",
-#     "8": ""
-#     "16":
-# }
-
 
 def plot(df, domain, style="cactus"):
     """
@@ -137,7 +128,6 @@ if __name__ == "__main__":
 
     for name in [
         "restaurant",
-        "citybike",
         "travelbike",
         "cargobike",
         "cargobike-nested",
