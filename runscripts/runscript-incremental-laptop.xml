@@ -15,14 +15,14 @@
 		</setting>
 		<setting name="incremental-exponential"		cmdline="--bounds=exponential" 			 					tag="incremental exponential"	>
 			<variable cmd="--solver {}" value="clingo;flingo" />
-			<variable cmd="--step {}" value="2;3;4" />
+			<variable cmd="--step {}" value="1.33;1.66;2;2.33;2.66" />
 		</setting>
 
 		<setting name="multishot-linear"			cmdline="--solver clingo --bounds=linear 	 --multishot" 	tag="incremental linear multi" 		>
 					<variable cmd="--step {}" value="1;2;5;10;20" />
 		</setting>
 		<setting name="multishot-exponential"  		cmdline="--solver clingo --bounds=exponential --multishot" 	tag="incremental exponential multi"	>
-					<variable cmd="--step {}" value="2;3;4" />
+					<variable cmd="--step {}" value="1.33;1.66;2;2.33;2.66" />
 		</setting>
     </system>
 
