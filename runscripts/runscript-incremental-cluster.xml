@@ -27,11 +27,11 @@
 		</setting>
     </system>
 
-	<distjob name="dist-gen" timeout="1200s" runs="1" script_mode="timeout" walltime="12h 00m 00s" cpt="4"/>
+	<distjob name="dist-gen" timeout="600s" runs="1" script_mode="timeout" walltime="12h 00m 00s" cpt="4"/>
 
 	<benchmark name="base">
-		<folder path="benchmarks/city-bike-fleet/instances">
-		</folder>
+		<!-- <folder path="benchmarks/city-bike-fleet/instances">
+		</folder> -->
 		<folder path="benchmarks/travel-bike-fleet/instances">
 		</folder>
 		<folder path="benchmarks/restaurant/instances">
@@ -39,8 +39,8 @@
 	</benchmark>
 
 	<benchmark name="unbounded-only">
-		<folder path="benchmarks/cargo-bike/instances">
-		</folder>
+		<!-- <folder path="benchmarks/cargo-bike/instances">
+		</folder> -->
 		<folder path="benchmarks/cargo-bike-nested/instances">
 		</folder>
 	</benchmark>
