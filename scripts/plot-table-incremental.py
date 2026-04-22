@@ -10,7 +10,7 @@ import numpy as np
 from pandas import DataFrame, MultiIndex, read_excel
 from utils import COLORS, LABEL, clean_df, get_plot_data, highlight_group_minima
 
-OUTDIR = "results/plots/incremental"
+OUTDIR = "results/plots/incremental-exp"
 parser = ArgumentParser(
     prog="COOMBenchmarkPlotter", description="Plots COOM Benchmarks"
 )
@@ -41,7 +41,19 @@ LINE = {
     "exponential": ":",
 }
 
-COL_FORMAT = {"linear": "l|lllll|lllll|lllll", "exponential": "l|lll|lll|lll"}
+FORMAT = {
+    "linear": {"option": "\\code{--step}", "column_format": "l|lllll|lllll|lllll"},
+    "exponential": {
+        "option": "\\code{--base}",
+        "columns_format": "l|llllll|llllll|llllll",
+    },
+}
+
+
+def format_param(p: str, algorithm: str):
+    if algorithm == "linear":
+        return int(p)
+    return float(p)
 
 
 def create_avg_table(data):
@@ -53,6 +65,8 @@ def create_avg_table(data):
 
     for algorithm in ALGORITHM:
         columns = [c for c in avg.columns if algorithm in c]
+        if columns == []:
+            continue
 
         multi_columns = MultiIndex.from_tuples(
             [(s, c) for c in columns for s in SOLVER if s in c]
@@ -63,7 +77,9 @@ def create_avg_table(data):
         )
 
         current_df.rename(
-            columns=lambda c: int(c.split("_")[-1]), level=1, inplace=True
+            columns=lambda c: format_param(c.split("_")[-1], algorithm),
+            level=1,
+            inplace=True,
         )
         # Keep first-level order as-is and sort only second-level values per group.
         first_level_order = list(dict.fromkeys(current_df.columns.get_level_values(0)))
@@ -73,22 +89,23 @@ def create_avg_table(data):
             for level_1 in sorted(current_df[level_0].columns)
         ]
         current_df = current_df.loc[:, MultiIndex.from_tuples(sorted_columns)]
-        current_df.rename_axis(columns=["", "\\code{--step}"], inplace=True)
+        current_df.rename_axis(columns=["", FORMAT[algorithm]["option"]], inplace=True)
 
         styled = (
             current_df.style.format(precision=0, na_rep="-")
+            .format_index(precision=2, axis=1)
             .apply(highlight_group_minima, axis=1)
             .highlight_min(axis=1, props="underline:--rwrap;")
         )
 
         latex_out = styled.to_latex(
-            column_format=COL_FORMAT[algorithm],
+            column_format=FORMAT[algorithm]["columns_format"],
             position="ht",
             position_float="centering",
             hrules=True,
             clines="all;data",
             label=f"tab:results:{algorithm}",
-            caption=f"Benchmark results of step parameters for {algorithm} search algorithm",
+            caption=f"Average runtimes (in seconds) for {FORMAT[algorithm]["option"]} parameters of {algorithm} search algorithm",
             multicol_align="c",
         )
 
@@ -124,8 +141,10 @@ def get_label(solver, mode, algorithm, step):
     if mode == "singleshot":
         return f"{solver}-{mode}"
     else:
-        mode = "inc" if mode == "incremental" else "multi"
+        mode = "inc" if mode == "incremental" else "multishot"
         algorithm = "lin" if algorithm == "linear" else "exp"
+        if mode == "multishot":
+            return f"{mode}-{algorithm}{step}"
         return f"{solver}-{mode}-{algorithm}{step}"
 
 
@@ -199,13 +218,16 @@ if __name__ == "__main__":
     results = clean_df(read_excel(args.input))
 
     # Drop City Bike
-    results.drop(index="citybike", level=0, inplace=True)
+    try:
+        results.drop(index="citybike", level=0, inplace=True)
+    except KeyError:
+        pass
 
     time_only = results.xs("time", axis=1, level=1)
 
     # Create tables
     create_avg_table(time_only)
-
+    exit()
     # Create plots
     domains = set([i[0] for i in time_only.index])
     # bug with time_only.index.levels, citybike still appears...
