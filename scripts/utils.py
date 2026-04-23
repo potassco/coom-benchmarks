@@ -2,6 +2,8 @@
 Utility functions for plotting benchmarks
 """
 
+from os import path
+
 import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame, MultiIndex, notna

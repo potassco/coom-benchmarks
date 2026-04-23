@@ -10,7 +10,7 @@ import numpy as np
 from pandas import DataFrame, MultiIndex, read_excel
 from utils import COLORS, LABEL, clean_df, get_plot_data, highlight_group_minima
 
-OUTDIR = "results/plots/incremental-exp"
+OUTDIR = "results/plots/incremental"
 parser = ArgumentParser(
     prog="COOMBenchmarkPlotter", description="Plots COOM Benchmarks"
 )
@@ -42,10 +42,13 @@ LINE = {
 }
 
 FORMAT = {
-    "linear": {"option": "\\code{--step}", "column_format": "l|lllll|lllll|lllll"},
+    "linear": {
+        "option": "\\code{--step}",
+        "column_format": "l|llllllllll",
+    },
     "exponential": {
         "option": "\\code{--base}",
-        "columns_format": "l|llllll|llllll|llllll",
+        "column_format": "l|lllllllllll",
     },
 }
 
@@ -56,64 +59,80 @@ def format_param(p: str, algorithm: str):
     return float(p)
 
 
-def create_avg_table(data):
+def create_avg_table(data, algorithm, solver):
     """
     Creates tables for the averages of each algorithm and parameter
     """
-    avg = data.groupby(level=0).mean()
-    avg.rename(index=LABEL, inplace=True)
+    columns = [c for c in data.columns if algorithm in c and solver in c]
+    if columns == []:
+        return
 
-    for algorithm in ALGORITHM:
-        columns = [c for c in avg.columns if algorithm in c]
-        if columns == []:
-            continue
+    current_df = data[columns].rename(
+        columns=lambda c: format_param(c.split("_")[-1], algorithm),
+        # level=1,
+        # inplace=True,
+    )
+    current_df.sort_index(axis="columns", inplace=True)
 
-        multi_columns = MultiIndex.from_tuples(
-            [(s, c) for c in columns for s in SOLVER if s in c]
+    # current_df.rename_axis(columns=["", FORMAT[algorithm]["option"]], inplace=True)
+
+    styled = (
+        current_df.style.format(precision=0, na_rep="-").format_index(
+            precision=2, axis=1
         )
+        # .apply(highlight_group_minima, axis=1)
+        .highlight_min(axis=1, props="textbf:--rwrap;")
+    )
 
-        current_df = DataFrame(
-            index=avg.index, columns=multi_columns, data=avg.loc[:, columns].values
-        )
+    latex_out = styled.to_latex(
+        column_format=FORMAT[algorithm]["column_format"],
+        position="ht",
+        position_float="centering",
+        hrules=True,
+        clines="all;data",
+        label=f"tab:results:{algorithm}",
+        caption=f"Average runtimes (in seconds) for {FORMAT[algorithm]["option"]} parameters of {algorithm} search algorithm for {solver}",
+        multicol_align="c",
+    )
 
-        current_df.rename(
-            columns=lambda c: format_param(c.split("_")[-1], algorithm),
-            level=1,
-            inplace=True,
-        )
-        # Keep first-level order as-is and sort only second-level values per group.
-        first_level_order = list(dict.fromkeys(current_df.columns.get_level_values(0)))
-        sorted_columns = [
-            (level_0, level_1)
-            for level_0 in first_level_order
-            for level_1 in sorted(current_df[level_0].columns)
-        ]
-        current_df = current_df.loc[:, MultiIndex.from_tuples(sorted_columns)]
-        current_df.rename_axis(columns=["", FORMAT[algorithm]["option"]], inplace=True)
+    outfile = os.path.join(OUTDIR, f"incremental-{algorithm}-{solver}.tex")
 
-        styled = (
-            current_df.style.format(precision=0, na_rep="-")
-            .format_index(precision=2, axis=1)
-            .apply(highlight_group_minima, axis=1)
-            .highlight_min(axis=1, props="underline:--rwrap;")
-        )
+    with open(outfile, "w", encoding="utf-8") as f:
+        f.write(latex_out)
+    print(f"Saved {outfile}")
 
-        latex_out = styled.to_latex(
-            column_format=FORMAT[algorithm]["columns_format"],
-            position="ht",
-            position_float="centering",
-            hrules=True,
-            clines="all;data",
-            label=f"tab:results:{algorithm}",
-            caption=f"Average runtimes (in seconds) for {FORMAT[algorithm]["option"]} parameters of {algorithm} search algorithm",
-            multicol_align="c",
-        )
 
-        outfile = os.path.join(OUTDIR, f"incremental-{algorithm}.tex")
+def create_avg_param_boxplots(data, domain):
+    """
+    Plots averages of parameters for incremental approaches
+    """
+    avg = data.mean()
+    # avg.rename(index=LABEL, inplace=True)
 
-        with open(outfile, "w", encoding="utf-8") as f:
-            f.write(latex_out)
-        print(f"Saved {outfile}")
+    labels = [(a, s) for s in SOLVER for a in ALGORITHM]
+
+    # labels.sort()
+    columns = [[c for c in avg.index if (a in c and s in c)] for (a, s) in labels]
+    x = [avg[c].to_numpy() for c in columns]
+
+    plt.boxplot(
+        x,
+        tick_labels=[f"{a}\n{s}" for (a, s) in labels],
+        # patch_artist=True,
+        showmeans=True,
+        meanline=True,
+    )
+
+    # Set axis labels
+    plt.ylabel("Runtime (s)")
+
+    # Set axis limits
+    plt.ylim(bottom=0, top=600)
+
+    outfile = os.path.join(OUTDIR, f"incremental-{domain}-params.pdf")
+    plt.savefig(outfile, dpi=1200, bbox_inches="tight")
+    print(f"Saved {outfile}")
+    plt.clf()
 
 
 def get_best_runs(data, runs):
@@ -148,7 +167,7 @@ def get_label(solver, mode, algorithm, step):
         return f"{solver}-{mode}-{algorithm}{step}"
 
 
-def create_plots(data, domain, style="cactus"):
+def create_cactus_plots(data, domain):
     """
     Plots the specified plot.
     """
@@ -165,12 +184,12 @@ def create_plots(data, domain, style="cactus"):
 
     for run in runs:
         solver, mode, algorithm, step = get_parameters(run)
-        x, y = get_plot_data(data[run], style)
+        x, y = get_plot_data(data[run], "cactus")
 
         # min_x = min(x) if min(x) > min_x else min_x
         # max_y = max(y) if max(y) > max_y else max_y
 
-        (plots[run],) = plt.plot(
+        plt.plot(
             x,
             y,
             ls=LINE[algorithm],
@@ -199,7 +218,7 @@ def create_plots(data, domain, style="cactus"):
 
     # Set axis limits
     plt.xlim(0, 100)
-    plt.ylim(bottom=0, top=800)  # max_y / 3 * 2)
+    plt.ylim(bottom=0, top=500)  # max_y / 3 * 2)
 
     # Set x-axis ticks
     plt.xticks(np.arange(0, 110, 10))
@@ -225,12 +244,19 @@ if __name__ == "__main__":
 
     time_only = results.xs("time", axis=1, level=1)
 
+    avg = time_only.groupby(level=0).mean()
+    avg.rename(index=LABEL, inplace=True)
+
     # Create tables
-    create_avg_table(time_only)
-    exit()
-    # Create plots
+    for a in ALGORITHM:
+        for s in SOLVER:
+            create_avg_table(avg, a, s)
+
     domains = set([i[0] for i in time_only.index])
     # bug with time_only.index.levels, citybike still appears...
 
-    for domain in list(domains):
-        create_plots(time_only.loc[domain], domain, style="cactus")
+    # Create plots
+    for d in list(domains):
+        current_df = time_only.loc[d]
+        create_avg_param_boxplots(current_df, d)
+        create_cactus_plots(current_df, d)

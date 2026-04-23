@@ -1,0 +1,20 @@
+\begin{table}[ht]
+\centering
+\caption{Benchmark results of step parameters for exponential search algorithm}
+\label{tab:results:exponential}
+\begin{tabular}{l|lll|lll|lll}
+\toprule
+ & \multicolumn{3}{c}{clingo} & \multicolumn{3}{c}{flingo} & \multicolumn{3}{c}{multishot} \\
+\code{--step} & 2 & 3 & 4 & 2 & 3 & 4 & 2 & 3 & 4 \\
+\midrule
+CargoBike & \textbf{408} & 507 & 457 & \textbf{3} & 4 & 4 & \textbf{\underline{2}} & 2 & 4 \\
+\cline{1-10}
+CargoBikePockets & \textbf{447} & 505 & 581 & \textbf{28} & 33 & 57 & \textbf{\underline{6}} & 8 & 55 \\
+\cline{1-10}
+Restaurant & \textbf{\underline{412}} & 487 & 456 & \textbf{793} & 836 & 890 & \textbf{1010} & 1053 & 1047 \\
+\cline{1-10}
+TravelBikeFleet & \textbf{782} & 860 & 829 & \textbf{\underline{341}} & 486 & 394 & \textbf{661} & 900 & 900 \\
+\cline{1-10}
+\bottomrule
+\end{tabular}
+\end{table}
