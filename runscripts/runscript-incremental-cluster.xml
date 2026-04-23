@@ -12,18 +12,18 @@
 
 		<setting name="incremental-linear"			cmdline="--bounds=linear" 		  		 					tag="incremental linear" 				dist_template="templates/coom.dist">
 			<variable cmd="--solver {}" value="clingo;flingo" />
-			<variable cmd="--step {}" value="1;2;4;8;16" />
+			<variable cmd="--step {}" value="1;2;3;4;6;8;12;16;24;32" />
 		</setting>
 		<setting name="incremental-exponential"		cmdline="--bounds=exponential" 			 					tag="incremental exponential"			dist_template="templates/coom.dist">
 			<variable cmd="--solver {}" value="clingo;flingo" />
-			<variable cmd="--base {}" value="1.2;1.4;1.6;1.8;2;2.2;2.4;2.6" />
+			<variable cmd="--base {}" value="1.25;1.33;1.5;1.66;1.75;2;2.25;2.33;2.5;2.66;2.75" />
 		</setting>
 
 		<setting name="multishot-linear"			cmdline="--solver clingo --bounds=linear 	 --multishot" 	tag="incremental linear multi" 			dist_template="templates/coom.dist">
-					<variable cmd="--step {}" value="1;2;4;8;16" />
+					<variable cmd="--step {}" value="1;2;3;4;6;8;12;16;24;32" />
 		</setting>
 		<setting name="multishot-exponential"  		cmdline="--solver clingo --bounds=exponential --multishot" 	tag="incremental exponential multi" 	dist_template="templates/coom.dist">
-					<variable cmd="--base {}" value="1.2;1.4;1.6;1.8;2;2.2;2.4;2.6" />
+					<variable cmd="--base {}" value="1.25;1.33;1.5;1.66;1.75;2;2.25;2.33;2.5;2.66;2.75" />
 		</setting>
     </system>
 
