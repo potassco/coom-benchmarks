@@ -189,7 +189,7 @@ def create_cactus_plots(data, domain):
         # min_x = min(x) if min(x) > min_x else min_x
         # max_y = max(y) if max(y) > max_y else max_y
 
-        plt.plot(
+        (plots[run],) = plt.plot(
             x,
             y,
             ls=LINE[algorithm],
