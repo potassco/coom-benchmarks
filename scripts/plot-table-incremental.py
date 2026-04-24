@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # from pandas_ods_reader.main import read_ods
-from pandas import DataFrame, MultiIndex, read_excel
-from utils import COLORS, LABEL, clean_df, get_plot_data, highlight_group_minima
+from pandas import read_excel
+from utils import COLORS, LABEL, clean_df, get_plot_data
 
 OUTDIR = "results/plots/incremental"
 parser = ArgumentParser(
@@ -90,7 +90,7 @@ def create_avg_table(data, algorithm, solver):
         position_float="centering",
         hrules=True,
         clines="all;data",
-        label=f"tab:results:{algorithm}",
+        label=f"tab:results:{algorithm}:{solver}",
         caption=f"Average runtimes (in seconds) for {FORMAT[algorithm]["option"]} parameters of {algorithm} search algorithm for {solver}",
         multicol_align="c",
     )
@@ -127,7 +127,7 @@ def create_avg_param_boxplots(data, domain):
     plt.ylabel("Runtime (s)")
 
     # Set axis limits
-    plt.ylim(bottom=0, top=600)
+    plt.ylim(bottom=0, top=625)
 
     outfile = os.path.join(OUTDIR, f"incremental-{domain}-params.pdf")
     plt.savefig(outfile, dpi=1200, bbox_inches="tight")
@@ -247,10 +247,10 @@ if __name__ == "__main__":
     avg = time_only.groupby(level=0).mean()
     avg.rename(index=LABEL, inplace=True)
 
-    # Create tables
-    for a in ALGORITHM:
-        for s in SOLVER:
-            create_avg_table(avg, a, s)
+    # # Create tables
+    # for a in ALGORITHM:
+    #     for s in SOLVER:
+    #         create_avg_table(avg, a, s)
 
     domains = set([i[0] for i in time_only.index])
     # bug with time_only.index.levels, citybike still appears...
@@ -259,4 +259,4 @@ if __name__ == "__main__":
     for d in list(domains):
         current_df = time_only.loc[d]
         create_avg_param_boxplots(current_df, d)
-        create_cactus_plots(current_df, d)
+        # create_cactus_plots(current_df, d)
