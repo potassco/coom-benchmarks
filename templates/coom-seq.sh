@@ -15,11 +15,15 @@ runner=( "{root}/programs/runlim" \
 instance={files}
 
 if [[ $instance == *"user-input"* ]]; then
+  if [[ "{setting_cmd}" == *"--bounds"* ]]; then
+    model=$(echo $instance | sed "s/instances/models-unbounded/" | sed "s/_user-input.*/\.coom/")
+  else
     model=$(echo $instance | sed "s/instances/models/" | sed "s/_user-input.*/\.coom/")
-    userinput=$instance
+  fi
+  userinput=$instance
 else
-    model=$instance
-    userinput=""
+  model=$instance
+  userinput=""
 fi
 
 input=(  )

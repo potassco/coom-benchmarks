@@ -1,0 +1,53 @@
+<runscript output="output">
+
+	<machine name="cluster" cpu="24x8xE5520@2.27GHz" memory="24GB"/>
+
+	<config name="coom-seq" template="templates/coom-seq.sh"/>
+	<config name="coom-seq-unbounded" template="templates/coom-seq-unbounded.sh"/>
+
+	<system name="coomsuite" version="1.1.2" measures="clasp" config="coom-seq" cmdline="-q">
+		<setting name="singleshot"					cmdline="--models=1 "										tag="singleshot" 						dist_template="templates/coom.dist">
+			<variable cmd="--solver {}" value="clingo;flingo" />
+		</setting>
+
+		<setting name="incremental-linear"			cmdline="--bounds=linear" 		  		 					tag="incremental linear" 				dist_template="templates/coom.dist">
+			<variable cmd="--solver {}" value="clingo;flingo" />
+			<variable cmd="--step {}" value="1;2;3;4;6;8;12;16;24;32" />
+		</setting>
+		<setting name="incremental-exponential"		cmdline="--bounds=exponential" 			 					tag="incremental exponential"			dist_template="templates/coom.dist">
+			<variable cmd="--solver {}" value="clingo;flingo" />
+			<variable cmd="--base {}" value="1.25;1.33;1.5;1.66;1.75;2;2.25;2.33;2.5;2.66;2.75" />
+		</setting>
+
+		<setting name="multishot-linear"			cmdline="--solver clingo --bounds=linear 	 --multishot" 	tag="incremental linear multi" 			dist_template="templates/coom.dist">
+					<variable cmd="--step {}" value="1;2;3;4;6;8;12;16;24;32" />
+		</setting>
+		<setting name="multishot-exponential"  		cmdline="--solver clingo --bounds=exponential --multishot" 	tag="incremental exponential multi" 	dist_template="templates/coom.dist">
+					<variable cmd="--base {}" value="1.25;1.33;1.5;1.66;1.75;2;2.25;2.33;2.5;2.66;2.75" />
+		</setting>
+    </system>
+
+	<distjob name="dist-gen" timeout="600s" runs="1" script_mode="timeout" walltime="12h 00m 00s" cpt="4"/>
+
+	<benchmark name="base">
+		<!-- <folder path="benchmarks/city-bike-fleet/instances">
+		</folder> -->
+		<folder path="benchmarks/travel-bike-fleet/instances">
+		</folder>
+		<folder path="benchmarks/restaurant/instances">
+		</folder>
+	</benchmark>
+
+	<benchmark name="unbounded-only">
+		<!-- <folder path="benchmarks/cargo-bike/instances">
+		</folder> -->
+		<folder path="benchmarks/cargo-bike-nested/instances">
+		</folder>
+	</benchmark>
+
+	<project name="coom-benchmarks-incremental" job="dist-gen">
+		<runtag machine="cluster" benchmark="base" 				tag="singleshot | incremental"/>
+		<runtag machine="cluster" benchmark="unbounded-only"	tag="incremental"/>
+	</project>
+</runscript>
+

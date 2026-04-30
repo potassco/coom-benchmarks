@@ -1,0 +1,18 @@
+\begin{table}[ht]
+\centering
+\caption{Average runtimes (in seconds) for \code{--step} parameters of linear search algorithm}
+\label{tab:results:linear}
+\begin{tabular}{l|llllllllll|llllllllll|llllllllll}
+\toprule
+ & \multicolumn{10}{c}{clingo} & \multicolumn{10}{c}{flingo} & \multicolumn{10}{c}{multishot} \\
+\code{--step} & 1 & 2 & 3 & 4 & 6 & 8 & 12 & 16 & 24 & 32 & 1 & 2 & 3 & 4 & 6 & 8 & 12 & 16 & 24 & 32 & 1 & 2 & 3 & 4 & 6 & 8 & 12 & 16 & 24 & 32 \\
+\midrule
+CargoBikePockets & 249 & 246 & 245 & 253 & \textbf{244} & 246 & 252 & 369 & 434 & 475 & 29 & 24 & \textbf{21} & 23 & 22 & 22 & 28 & 31 & 40 & 50 & \textbf{\underline{3}} & 3 & 3 & 4 & 5 & 5 & 6 & 7 & 11 & 20 \\
+\cline{1-31}
+Restaurant & 450 & 410 & 391 & 381 & 363 & 343 & 311 & 311 & 286 & \textbf{\underline{279}} & 477 & 461 & 459 & 450 & 443 & 429 & 422 & 401 & 400 & \textbf{396} & 497 & 500 & 496 & 489 & 487 & \textbf{486} & 497 & 510 & 525 & 499 \\
+\cline{1-31}
+TravelBikeFleet & \textbf{425} & 432 & 452 & 462 & 487 & 544 & 600 & 600 & 600 & 600 & 157 & \textbf{\underline{156}} & 217 & 176 & 211 & 180 & 244 & 372 & 254 & 402 & \textbf{350} & 415 & 600 & 600 & 600 & 600 & 600 & 600 & 600 & 600 \\
+\cline{1-31}
+\bottomrule
+\end{tabular}
+\end{table}

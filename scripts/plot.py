@@ -1,14 +1,14 @@
 #!/usr/bin/env python
-
 import os
 from argparse import ArgumentParser
+from itertools import product
 
 import matplotlib.pyplot as plt
 import numpy as np
 
 # from pandas_ods_reader.main import read_ods
 from pandas import read_excel
-from utils import COLOR, LINE, MARKER, PAIRS, clean_df, get_plot_data, make_legend
+from utils import COLOR, LINE, MARKER, clean_df, get_plot_data, make_legend
 
 OUTDIR = "results/plots"
 parser = ArgumentParser(
@@ -19,6 +19,35 @@ parser.add_argument(
 )
 # parser.add_argument("--name", type=str, required=True, help="Name of plot")
 args = parser.parse_args()
+
+
+PAIRS = {
+    "base": [
+        ("clingo-base", "box"),
+        ("clingo-base", "citybike"),
+        ("clingo-base", "travelbike"),
+        ("clingo-base", "restaurant"),
+        ("clingo-base", "metro"),
+        # ("clingo-base", "spacecollider"),
+        ("flingo-base", "citybike"),
+        ("flingo-base", "travelbike"),
+        ("flingo-base", "restaurant"),
+        ("flingo-base", "metro"),
+        # ("flingo-base", "spacecollider"),
+    ],
+    "consequences": list(
+        product(
+            ["clingo-brave", "clingo-cautious"],
+            [
+                "box",
+                "citybike",
+                "travelbike",
+                "restaurant",
+                "metro",
+            ],  # , "spacecollider"],
+        )
+    ),
+}
 
 
 def plot(df, plotname, style="cactus"):

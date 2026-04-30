@@ -2,21 +2,36 @@
 Utility functions for plotting benchmarks
 """
 
-from itertools import product
+from os import path
 
 import matplotlib.pyplot as plt
 import numpy as np
-from pandas import DataFrame, MultiIndex
+from pandas import DataFrame, MultiIndex, notna
 
 COLORS = {
     "green": "#77B762",
+    "lightgreen": "#C4F0B5",
     "blue": "#4477CC",
+    "lightblue": "#809CCD",
     "red": "#CF3A19",
     "purple": "#5C4B84",
     "lightpurple": "#9477BF90",
     "orange": "#D78C1F",
     "yellow": "#D7CF1F",
     "greenblue": "#226367",
+}
+LABEL = {
+    "core": "Core",
+    "citybike": "CityBikeFleet",
+    "travelbike": "TravelBikeFleet",
+    "restaurant": "Restaurant",
+    "spacecollider": "SpaceCollider",
+    "metro": "Metro",
+    "box": "Box",
+    "cargobike": "CargoBike",
+    "cargobike-nested": "CargoBikePockets",
+    "racks": "Racks",
+    "house": "House",
 }
 
 COLOR = {
@@ -44,18 +59,7 @@ MARKER = {
     "house": "x",
 }  # , "+"]
 
-LABEL = {
-    "core": "Core",
-    "citybike": "CityBikeFleet",
-    "travelbike": "TravelBikeFleet",
-    "restaurant": "Restaurant",
-    "spacecollider": "SpaceCollider",
-    "metro": "Metro",
-    "box": "Box",
-    "cargobike": "CargoBike",
-    "racks": "Racks",
-    "house": "House",
-}
+
 LINE = {
     "clingo-base": "-",
     "flingo-base": "--",
@@ -67,54 +71,6 @@ LINE = {
     "clingo-bounds-exponential": "-",
     "flingo-bounds-exponential": "--",
     "multishot-exponential": "-.",
-}
-
-PAIRS = {
-    "base": [
-        ("clingo-base", "box"),
-        ("clingo-base", "citybike"),
-        ("clingo-base", "travelbike"),
-        ("clingo-base", "restaurant"),
-        ("clingo-base", "metro"),
-        # ("clingo-base", "spacecollider"),
-        ("flingo-base", "citybike"),
-        ("flingo-base", "travelbike"),
-        ("flingo-base", "restaurant"),
-        ("flingo-base", "metro"),
-        # ("flingo-base", "spacecollider"),
-    ],
-    "consequences": list(
-        product(
-            ["clingo-brave", "clingo-cautious"],
-            [
-                "box",
-                "citybike",
-                "travelbike",
-                "restaurant",
-                "metro",
-            ],  # , "spacecollider"],
-        )
-    ),
-    # "unbounded-linear": list(
-    #     product(
-    #         [
-    #             "clingo-bounds-linear",
-    #             "flingo-bounds-linear",
-    #             "multishot-linear",
-    #         ],
-    #         ["cargobike", "racks", "house"],
-    #     )
-    # ),
-    # "unbounded-exponential": list(
-    #     product(
-    #         [
-    #             "clingo-bounds-exponential",
-    #             "flingo-bounds-exponential",
-    #             "multishot-exponential",
-    #         ],
-    #         ["cargobike", "racks", "house"],
-    #     )
-    # ),
 }
 
 
@@ -142,6 +98,10 @@ def clean_df(df):
 
     # Get instances
     instances = [i.replace("./", "").split("-", 1) for i in df.iloc[1:, 0]]
+    for i in instances:
+        if i[0] == "cargobike" and i[1].startswith("nested"):
+            i[0] = "cargobike-nested"
+            i[1] = i[1].split("-", 1)[1]
     instances = MultiIndex.from_tuples(instances)
 
     # Create multi index for columns
@@ -163,7 +123,7 @@ def get_plot_data(df, style="cactus"):
     Returns the plot data as two arrays: one for the x and y axis, respectively
     """
     if style == "cactus":
-        y = np.insert(df.sort_values().to_numpy(), 0, 0)
+        y = np.insert(df.dropna().sort_values().to_numpy(), 0, 0)
         x = np.arange(len(y + 1)) * (100 / (len(y) - 1))
     else:
         raise ValueError("Unknown plot style.")
@@ -311,3 +271,19 @@ def make_legend(plots, pairs, plotname):
         )
 
     return plots
+
+
+def highlight_group_minima(row):
+    """Highlight minima independently for each first-level column group."""
+    styles = [""] * len(row)
+    for group in row.index.get_level_values(0).unique():
+        positions = [i for i, col in enumerate(row.index) if col[0] == group]
+        values = row.iloc[positions]
+        minimum = values.min(skipna=True)
+
+        if notna(minimum):
+            for pos, value in zip(positions, values):
+                if value == minimum:
+                    styles[pos] = "textbf:--rwrap;"
+
+    return styles
