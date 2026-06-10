@@ -205,7 +205,7 @@ def create_cactus_plots(data, domain):
             y,
             ls=LINE[algorithm],
             color=COLOR[solver][mode],
-            lw=1,
+            lw=1.5,
             # marker=MARKER[domain],
             markevery=0.2,
             ms=3,
