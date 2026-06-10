@@ -10,6 +10,17 @@ import numpy as np
 from pandas import read_excel
 from utils import COLOR, LINE, MARKER, clean_df, get_plot_data, make_legend
 
+plt.rcParams.update(
+    {
+        "font.size": 14,
+        "axes.labelsize": 16,
+        "xtick.labelsize": 13,
+        "ytick.labelsize": 13,
+        "legend.fontsize": 12,
+        "legend.title_fontsize": 13,
+    }
+)
+
 OUTDIR = "results/plots"
 parser = ArgumentParser(
     prog="COOMBenchmarkPlotter", description="Plots COOM Benchmarks"

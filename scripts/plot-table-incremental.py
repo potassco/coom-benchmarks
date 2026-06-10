@@ -10,6 +10,17 @@ import numpy as np
 from pandas import read_excel
 from utils import COLORS, LABEL, clean_df, get_plot_data
 
+plt.rcParams.update(
+    {
+        "font.size": 13,
+        "axes.labelsize": 13,
+        "xtick.labelsize": 12,
+        "ytick.labelsize": 12,
+        "legend.fontsize": 12,
+        "legend.title_fontsize": 12,
+    }
+)
+
 OUTDIR = "results/plots/incremental"
 parser = ArgumentParser(
     prog="COOMBenchmarkPlotter", description="Plots COOM Benchmarks"
@@ -205,7 +216,7 @@ def create_cactus_plots(data, domain):
     plt.legend(
         handles=plots.values(),
         # labels=list(plots.keys()),
-        # loc="upper center",
+        loc="upper left",
         prop={"style": "italic"},
         # title="clingo-base",
         title_fontproperties={"weight": "bold"},
@@ -259,4 +270,4 @@ if __name__ == "__main__":
     for d in list(domains):
         current_df = time_only.loc[d]
         create_avg_param_boxplots(current_df, d)
-        # create_cactus_plots(current_df, d)
+        create_cactus_plots(current_df, d)
