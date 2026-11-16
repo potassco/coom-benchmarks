@@ -4,14 +4,14 @@
 
 	<config name="coom-seq" template="templates/coom-seq.sh"/>
 
-	<system name="coomsuite" version="1.1.0" measures="clasp" config="coom-seq" cmdline="-q">
+	<system name="coomsuite" version="1.1.2" measures="clasp" config="coom-seq" cmdline="-q">
 		<setting name="singleshot"					cmdline="--models=1 "										tag="singleshot">
 			<variable cmd="--solver {}" value="clingo;flingo" />
 		</setting>
 
 		<setting name="incremental-linear"			cmdline="--bounds=linear" 		  		 					tag="incremental linear" 		>
 			<variable cmd="--solver {}" value="clingo;flingo" />
-			<variable cmd="--step {}" value="1;2;5;10;20" />
+			<variable cmd="--step {}" value="1;2;3;4;6;8;12;16;24;32" />
 		</setting>
 		<setting name="incremental-exponential"		cmdline="--bounds=exponential" 			 					tag="incremental exponential"	>
 			<variable cmd="--solver {}" value="clingo;flingo" />
@@ -19,7 +19,7 @@
 		</setting>
 
 		<setting name="multishot-linear"			cmdline="--solver clingo --bounds=linear 	 --multishot" 	tag="incremental linear multi" 		>
-					<variable cmd="--step {}" value="1;2;5;10;20" />
+					<variable cmd="--step {}" value="1;2;3;4;6;8;12;16;24;32" />
 		</setting>
 		<setting name="multishot-exponential"  		cmdline="--solver clingo --bounds=exponential --multishot" 	tag="incremental exponential multi"	>
 					<variable cmd="--step {}" value="1.33;1.66;2;2.33;2.66" />
@@ -29,8 +29,8 @@
 	<seqjob name="seq-gen" timeout="10" runs="1" parallel="4"/>
 
 	<benchmark name="base">
-		<folder path="benchmarks/city-bike-fleet/instances">
-		</folder>
+		<!-- <folder path="benchmarks/city-bike-fleet/instances">
+		</folder> -->
 		<folder path="benchmarks/travel-bike-fleet/instances">
 		</folder>
 		<folder path="benchmarks/restaurant/instances">
@@ -38,8 +38,8 @@
 	</benchmark>
 
 	<benchmark name="unbounded-only">
-		<folder path="benchmarks/cargo-bike/instances">
-		</folder>
+		<!-- <folder path="benchmarks/cargo-bike/instances">
+		</folder> -->
 		<folder path="benchmarks/cargo-bike-nested/instances">
 		</folder>
 	</benchmark>

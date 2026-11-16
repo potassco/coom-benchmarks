@@ -1,0 +1,49 @@
+<runscript output="output">
+
+	<machine name="laptop" cpu="IntelCoreUltra7-265Ux14" memory="32GB"/>
+
+	<config name="coom-seq" template="templates/coom-seq.sh"/>
+
+	<system name="coomsuite" version="1.2.0" measures="clasp" config="coom-seq" cmdline="-q">
+		<setting name="multishot-linear"			cmdline="--solver clingo --bounds=linear 	  --multishot"	tag="incremental linear multi" 		>
+					<variable cmd="--step {}" value="2" />
+					<variable cmd="--grounding {}" value="stepwise;jump-extend;jump-full" />
+		</setting>
+		<setting name="multishot-exponential"  		cmdline="--solver clingo --bounds=exponential --multishot" 	tag="incremental exponential multi"	>
+					<variable cmd="--step {}" value="2" />
+					<variable cmd="--grounding {}" value="stepwise;jump-extend;jump-full" />
+		</setting>
+		<setting name="multishot-linear-fix-externals"		cmdline="--solver clingo --bounds=linear 	  --multishot --fix-externals"	tag="incremental linear multi" 		>
+					<variable cmd="--step {}" value="2" />
+					<variable cmd="--grounding {}" value="stepwise;jump-extend;jump-full" />
+		</setting>
+		<setting name="multishot-exponential-fix-externals"	cmdline="--solver clingo --bounds=exponential --multishot --fix-externals" 	tag="incremental exponential multi"	>
+					<variable cmd="--step {}" value="2" />
+					<variable cmd="--grounding {}" value="stepwise;jump-extend;jump-full" />
+		</setting>
+    </system>
+
+	<seqjob name="seq-gen" timeout="10" runs="1" parallel="4"/>
+
+	<benchmark name="base">
+		<!-- <folder path="benchmarks/city-bike-fleet/instances">
+		</folder> -->
+		<folder path="benchmarks/travel-bike-fleet/instances">
+		</folder>
+		<folder path="benchmarks/restaurant/instances">
+		</folder>
+	</benchmark>
+
+	<benchmark name="unbounded-only">
+		<!-- <folder path="benchmarks/cargo-bike/instances">
+		</folder> -->
+		<folder path="benchmarks/cargo-bike-nested/instances">
+		</folder>
+	</benchmark>
+
+	<project name="coom-benchmarks-new-multishot" job="seq-gen">
+		<runtag machine="laptop" benchmark="base" 				tag="multi"/>
+		<runtag machine="laptop" benchmark="unbounded-only" 	tag="multi"/>
+	</project>
+</runscript>
+

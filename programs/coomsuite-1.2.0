@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# source .venv/coomsuite-1.2.0/bin/activate
+exec coomsuite solve "$@"
+# deactivate
